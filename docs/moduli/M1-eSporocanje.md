@@ -102,11 +102,14 @@ Vmesnik določa:
 - potrditev prevzema zahteve in stanje dostave po že opredeljenih statusih pošiljanja (čaka, predano poštnemu strežniku, neuspešno); predaja strežniku ne dokazuje prejema ali branja;
 - omejene ponovne poskuse;
 - preklic zahteve ter zastarelih opomnikov;
+- preverjanje veljavnosti zahteve neposredno pred pošiljanjem: ni preklicana ali nadomeščena in opomnik je še potreben; ob nedosegljivem preverjanju opomnik ostane zadržan;
 - ponovno preverjanje upravičenja tik pred dejanskim pošiljanjem.
 
 M1 obdela tako zahtevo kot obvestilo brez javno objavljene vsebine. Vsebino, odločitve in stanje postopka ohrani klicoči modul; potrditev seznanitve v M1 ne ustvari odločitve v drugem modulu. Modula ne bereta tabel drug drugega.
 
 Delitev odgovornosti pri opomnikih: klicoči modul odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic prav tako sproži klicoči modul. M1 izvaja pošiljanje, tihi čas, ponovne poskuse in prikaz napak; o prejemnikih in rokih opominjanja pri teh zahtevah ne odloča. Opomniki za zahtevano seznanitev lastnih obvestil M1 ostanejo v M1.
+
+Klicoči modul ob oddaji odziva, spremembi, preklicu ali izteku potrebe sproži preklic povezanih opomnikov. M1 pred pošiljanjem preveri še aktualno potrebo prek dogovorjenega vmesnika klicočega modula; samo preverjanje upravičenja ne zadostuje. Preklic je varen pri ponovitvah. Pogodba opredeli tudi tekmovanje med odzivom in pošiljanjem: e-pošte, ki je že predana strežniku, ni mogoče priklicati, vendar njena povezava pokaže aktualno stanje postopka.
 
 Do uskladitve z ekipo M2 se povezava preverja z nadomestnim testnim vmesnikom.
 
@@ -142,7 +145,7 @@ Samodejno prevajanje je predmet ločene odločitve o podatkovnih tokovih, kakovo
 
 ## Glavni zasloni
 
-- Starš: seznam obvestil, filter po otroku, jasno ločene manjkajoče potrditve in neodprte vsebine.
+- Upravičena oseba: seznam obvestil, filter po otroku oziroma lastnih obvestilih dijaka, jasno ločene manjkajoče potrditve in neodprte vsebine.
 - Starš: vsebina, različica, priloge, rok, obseg potrditve in potrdilo.
 - Starš: jezik, kanal, papirna pot in nastavitve e-poštnih potrdil.
 - Zaposleni: osnutek, izbira prejemnikov, predogled in objava.
@@ -200,6 +203,8 @@ Pred uvedbo se določijo upravljanje skrivnosti, posodobitve, zaščita skrbniš
 | Priloga je zlonamerna ali preverjanje ne deluje | Priloga ostane zadržana in ni dostopna |
 | Obvestilo se objavi v tihem času | E-pošta čaka do konca tihega časa; nujno pošiljanje zahteva pravico in razlog |
 | Drug modul pošlje isto zahtevo dvakrat ali jo prekliče | Ena logična dostava; zastareli opomniki so odpovedani |
+| Odziv prispe med čakanjem opomnika | Preklic in preverjanje aktualne potrebe preprečita nadaljnje zastarelo pošiljanje; že predana e-pošta vodi na aktualno stanje |
+| Polnoletni dijak odpre in potrdi lastno obvestilo | Dostop in potrditev sledita njegovemu upravičenju; starš nima dostopa brez ustreznega pooblastila |
 | Obvestilo se izroči na papirju | Evidenca vsebuje način, različico, zaposlenega in čas |
 | Sistem se obnovi iz kopije | Obnovljeni podatki so uporabni in pravila brisanja ponovno veljajo |
 | Uporaba na telefonu, s tipkovnico in bralnikom zaslona | Osnovni postopki so izvedljivi; preveri se zahtevana dostopnost |

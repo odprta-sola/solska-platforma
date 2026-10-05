@@ -20,6 +20,10 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D09 | Vzdrževanje, podpora in namestnik | Odprto | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema | Predlog v specifikaciji M1 | Tehnični nosilec in pilotna šola |
 
+## Predlog dodatne odločitve
+
+D15 — Licenca dokumentacije in pravice besedil. Status: odprto; izbira licence še ni potrjena. Nosilec potrditve: nosilec projekta in avtorji. Predlog je določiti pogoje ponovne uporabe, predelave in navedbe avtorstva za javno dokumentacijo ločeno od predvidene licence kode EUPL 1.2. Po potrditvi se odločitev vključi v register in navodila za sodelovanje.
+
 ## Stanje sodelovanja
 
 Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Podatek je potrdil pobudnik Mitja Pirih. Datum prvotne odločitve in zapis dogovora tu nista določena. Ko bo pisna potrditev na voljo, se zabeležita datum in sklic na ustrezno gradivo; javna objava se omeji na podatke, primerne za objavo.
