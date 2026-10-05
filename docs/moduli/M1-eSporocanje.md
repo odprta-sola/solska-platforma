@@ -17,10 +17,13 @@ Izven obsega so soglasja in privolitve (M2), govorilne ure, odsotnosti, prehrana
 
 | Vloga | Dovoljena opravila | Omejitev |
 | --- | --- | --- |
-| Starš oziroma upravičeni skrbnik | Dostop do obvestil, prilog, potrditev in lastnih nastavitev | Samo za učence s preverjeno veljavno povezavo |
+| Upravičena oseba (starš oziroma skrbnik; pri polnoletnem dijaku dijak) | Dostop do obvestil, prilog, potrditev in lastnih nastavitev | Samo za učence s preverjeno veljavno povezavo oziroma lastno upravičenje |
 | Učitelj oziroma razrednik | Priprava obvestil, objava, pregled odzivov in opomniki | Samo za dodeljene oddelke ali skupine |
 | Vodstvo oziroma tajništvo | Objave za več oddelkov, obravnava napak in papirne poti | Obseg glede na dodeljena pooblastila |
 | Skrbnik | Uvoz, upravljanje dostopov, tehnični izvozi in hramba | Tehnična vloga ne daje samodejnega pooblastila za rutinsko branje vsebin |
+| Pooblaščeni pregledovalec | Pregled dnevnika, potrditev in izvozov | Namen pregleda in pooblastilo se evidentirata |
+
+Kdo je upravičena oseba, določi šola skladno z veljavno zakonodajo in svojimi pravili; modul o upravičenosti ne odloča. Pri polnoletnem dijaku šola določi, ali so prejemniki dijak, starš ali oba. Besedilo v nadaljevanju za krajšo rabo pogosto govori o staršu.
 
 Dostop se preverja pri vsakem obvestilu, prilogi in izvozu. Ob spremembi zaposlitve, nadomeščanja ali povezave s skrbnikom se pravice pravočasno spremenijo. Zgodovinski dostop se določa po potrjeni politiki šole; trenutni oddelek ne sme samodejno odpreti starih obvestil.
 
@@ -87,6 +90,22 @@ Pri zahtevani seznanitvi se opominjajo tisti, ki niso potrdili aktualne zahtevan
 
 Pošiljanje uporablja trajno čakalno vrsto, omejene ponovne poskuse in preprečevanje podvojitev. Po izpadu se delo nadaljuje. Skrbnik vidi obstala opravila, zaposleni pa napake pri svojih prejemnikih. Odsotnost zaznane zavrnitve ne pomeni dokazanega prejema.
 
+### Minimalni vmesnik za druge module
+
+Prvi modul, ki obveščanje potrebuje, je M2 eSoglasja. Pilot M1 zato vključuje minimalni, dokumentirani vmesnik za zahteve drugih modulov. Razširjen vmesnik z naprednimi funkcijami ostaja poznejša faza.
+
+Vmesnik določa:
+
+- različico pogodbe in pooblastilo klicočega modula;
+- identifikator zahteve za preprečevanje podvojitev;
+- samo potrebne prejemnike (stalni identifikatorji), splošno besedilo in zaščiten sklic na vsebino v klicočem modulu, brez kopij podatkov;
+- potrditev prevzema zahteve in stanje dostave;
+- omejene ponovne poskuse;
+- preklic zahteve ter zastarelih opomnikov;
+- ponovno preverjanje upravičenja tik pred dejanskim pošiljanjem.
+
+M1 obdela tako zahtevo kot obvestilo brez javno objavljene vsebine. Vsebino, odločitve in stanje postopka ohrani klicoči modul; potrditev seznanitve v M1 ne ustvari odločitve v drugem modulu. Modula ne bereta tabel drug drugega. Do uskladitve z ekipo M2 se povezava preverja z nadomestnim testnim vmesnikom.
+
 ### Papirna pot
 
 Upravičena oseba lahko izbere papirno pot. Šola ustvari vsebino za izročitev in ločen interni seznam za razdelitev, da seznam učencev ni priložen vsaki kopiji.
@@ -109,7 +128,7 @@ Po uspešnem pilotu so predvideni:
 
 - potisna obvestila;
 - povezava s skupnim jedrom, ArnesAAI in SI-PASS;
-- vmesnik za obveščanje iz drugih modulov;
+- razširjen vmesnik za obveščanje iz drugih modulov (osnovni minimalni vmesnik je del pilota);
 - avtomatiziran prehod v novo šolsko leto;
 - naprednejše upravljanje prevodov in skupin.
 
@@ -174,6 +193,9 @@ Pred uvedbo se določijo upravljanje skrivnosti, posodobitve, zaščita skrbniš
 | Obvestilo se bistveno spremeni | Stara potrditev ostane pri stari različici, nova zahteva novo potrditev |
 | Poštna storitev odpove in pozneje okreva | Opravila se nadaljujejo, napake so vidne, podvojitve so omejene |
 | Uvoz vsebuje napačne povezave | Napake so prikazane, obstoječa evidenca ostane celovita |
+| Priloga je zlonamerna ali preverjanje ne deluje | Priloga ostane zadržana in ni dostopna |
+| Obvestilo se objavi v tihem času | E-pošta čaka do konca tihega časa; nujno pošiljanje zahteva pravico in razlog |
+| Drug modul pošlje isto zahtevo dvakrat ali jo prekliče | Ena logična dostava; zastareli opomniki so odpovedani |
 | Obvestilo se izroči na papirju | Evidenca vsebuje način, različico, zaposlenega in čas |
 | Sistem se obnovi iz kopije | Obnovljeni podatki so uporabni in pravila brisanja ponovno veljajo |
 | Uporaba na telefonu, s tipkovnico in bralnikom zaslona | Osnovni postopki so izvedljivi; preveri se zahtevana dostopnost |
@@ -201,5 +223,7 @@ Razvojni izdelek in dovoljenje za produkcijsko uporabo sta ločena mejnika. Prod
 6. Katero gostovanje, poštna storitev in sistem kopij bodo uporabljeni?
 7. Kakšen obseg in obremenitev mora prestati prevzemni preizkus?
 8. Kako se potrdi licenca EUPL 1.2 in uredijo prispevki avtorjev?
+9. Kdo je lastnik minimalnega vmesnika za druge module in kdaj ga uskladita ekipi M1 in M2?
+10. Kdo so prejemniki obvestil pri polnoletnih dijakih?
 
 Odločitve se zabeležijo z datumom in odgovorno osebo. Ta osnutek ne potrjuje sodelovanja ali obveznosti posamezne šole.
