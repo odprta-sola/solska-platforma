@@ -109,7 +109,7 @@ Odtisi dokumentov lahko pomagajo preverjati celovitost, vendar sami ne dokazujej
 
 ## Spremembe, preklic in nadaljnja obravnava
 
-Starš lahko privolitev prekliče za posamezen namen po jasno dostopni poti. Preklic se zabeleži kot nov dogodek in takoj spremeni stanje v M2. Uporabnik vidi potrdilo; prvotna odločitev ostane v zgodovini po potrjenem roku hrambe.
+Starš oziroma drug upravičeni odločevalec lahko privolitev prekliče za posamezen namen po jasno dostopni poti. Preklic mora biti enako preprost kot oddaja privolitve ([GDPR, člen 7(3)](https://eur-lex.europa.eu/legal-content/SL/TXT/?uri=CELEX:32016R0679)); pot ne sme uvajati dodatnega obveznega utemeljevanja ali nepotrebnih formalnosti. Konkretno izvedbo potrdi pravni in uporabniški pregled. Preklic se zabeleži kot nov dogodek in takoj spremeni stanje v M2. Uporabnik vidi potrdilo; prvotna odločitev ostane v zgodovini po potrjenem roku hrambe.
 
 Sprememba organizacijskega soglasja ni samodejno enaka preklicu privolitve. Dovoljene spremembe, roke in način obravnave določa konkretni postopek. Če neposredna sprememba ni omogočena, je na voljo jasna pot zahteve za obravnavo; ni prikazana lažna uspešna sprememba.
 
@@ -131,11 +131,11 @@ M2 pošlje M1 zahtevo za obvestilo, opomnik, potrdilo ali obvestilo o spremembi.
 
 Vmesnik določi različico pogodbe, pooblastila, identifikator zahteve, potrditve prevzema, ponovne poskuse in preprečevanje podvojitev. Odločitev se shrani neodvisno od trenutne razpoložljivosti M1; obveščanje čaka v trajni vrsti. Ob preklicu se zastareli opomniki odpovejo, upravičenje pa preveri tudi pred dejanskim pošiljanjem.
 
-Minimalni vmesnik za obveščanje iz drugih modulov je del pilota M1 ([razdelek v M1](M1-eSporocanje.md#minimalni-vmesnik-za-druge-module)). Mentor in tehnični nosilec ga skupaj uskladita z ekipama M1 in M2. Do uskladitve se povezava v prototipu preverja z nadomestnim testnim vmesnikom; produkcijski pilot potrebuje delujoč pregledan kanal.
+Minimalni vmesnik za obveščanje iz drugih modulov je del pilota M1 ([razdelek v M1](M1-eSporocanje.md#minimalni-vmesnik-za-druge-module)). Mentor in skupni tehnični nosilec ga skupaj uskladita z ekipama M1 in M2. Do uskladitve se povezava v prototipu preverja z nadomestnim testnim vmesnikom; produkcijski pilot potrebuje delujoč pregledan kanal.
 
 M2 ne zahteva dokončanega celotnega jedra platforme. Samostojna namestitev pomeni uporabo skupnih gradnikov in dogovorjenega kanala obveščanja, ne podvajanja varnostnih funkcij.
 
-Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (expires_at); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
+Za opomnike M2 velja skupno pravilo [veljavnosti opomnikov v M1](M1-eSporocanje.md#veljavnost-opomnikov), vključno s poljem `expires_at`, zadržanjem, potekom in minimalnim odgovorom preverjanja potrebe. Ob pripravi pogodbe vmesnika D12 se pravilo preseli v dokument vmesnika; do takrat je M1 edini vir tega pravila.
 
 Pri polnoletstvu med šolskim letom šola potrdi aktualne odločevalce in čas začetka novih pravil ter posodobi preverjena upravičenja. M2 ponovno presodi odprte postopke in potrebo po novi izjavi. Stare odločitve staršev ostanejo v zgodovini; ne štejejo samodejno kot nova odločitev dijaka. Nadaljnje oddaje, dostopi in opomniki sledijo novim pravilom. Nosilec tega postopka je pilotna šola ob potrebnem pravnem pregledu.
 
@@ -188,7 +188,7 @@ Večjezični podatkovni model je predviden od začetka. Potrebni jeziki pilotne 
 
 ## Tehnična zasnova in zanesljivost
 
-M2 ima logično ločeno shrambo in dokumentiran API. Tehnologijo izbereta tehnični nosilec in mentor skladno s skupno arhitekturo. Namestitev je ponovljiva; uporablja vzdrževane knjižnice, varno komunikacijo, upravljanje skrivnosti in zaščito shrambe ter kopij.
+M2 ima logično ločeno shrambo in dokumentiran API. Tehnologijo izbereta skupni tehnični nosilec in mentor skladno s skupno arhitekturo. Namestitev je ponovljiva; uporablja vzdrževane knjižnice, varno komunikacijo, upravljanje skrivnosti in zaščito shrambe ter kopij.
 
 Oddaja preveri aktualno različico, upravičenje in dovoljeno dejanje. Spremembe stanja in dokazni zapis se shranijo skupaj, z zaščito pred podvojenimi ter sočasnimi zahtevami. Napake obveščanja ne izgubijo odločitve. Sistemski čas in prikaz časov sta usklajena; časovni pas prikaza je Europe/Ljubljana.
 
@@ -271,3 +271,7 @@ To je možnost organizacije, ne imenovanje ekip. En lastnik odločitve o skupnem
 10. Kako se potrdijo licenca, pravice prispevkov, infrastruktura in merila obremenitve?
 
 Odločitve se evidentirajo z datumom, odgovorno osebo in različico. Združitev specifikacije v main ne potrjuje pravne ustreznosti postopka ali produkcijske uvedbe.
+
+### Dodatni preizkus preklica
+
+Upravičeni odločevalec najde in izvede preklic posamezne privolitve po poti, ki je enako preprosta kot njena oddaja, tudi pri zaključenem ali umaknjenem obrazcu. Preizkus preveri dostopnost poti, nepotrebne korake in jasno potrditev preklica; konkretna merila potrdita pilotna šola in pravni pregled.

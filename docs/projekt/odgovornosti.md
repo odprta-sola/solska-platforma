@@ -18,6 +18,7 @@ To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obvezno
 | Razvijalci | Izvedejo potrjeni obseg in dokumentacijo na testnih podatkih | Ob začetku razvoja |
 | Predstavnik pilotne šole | Določi procese, prejemnike in uporabniški prevzem | Pred potrditvijo pilota |
 | Pooblaščena oseba za varstvo podatkov | Svetuje pri obdelavi, hrambi in potrebi po oceni učinka | Pred produkcijo |
+| Skrbnik repozitorija in drugi skrbnik | Upravljata repozitorij in zagotavljata nadomeščanje pri zasebnih varnostnih prijavah; dostopi se preverijo | Pred prvo kodo oziroma vključitvijo zunanjih ekip (D09, D14) |
 | Skrbnik namestitve | Upravlja dostop, infrastrukturo, kopije in posodobitve | Pred produkcijo |
 | Vzdrževalec in namestnik | Odpravlja napake, spremlja odvisnosti in zagotavlja nadaljevanje po zaključku mature | Pred produkcijo |
 
@@ -25,7 +26,7 @@ Mentor vsake ekipe vodi učni razrez, dijake in pregled svojega izdelka. Nosilec
 
 ## Potrjevanje
 
-Mentor potrjuje izvedljivost učnega izdelka. Tehnični nosilec pregleda tehnično ustreznost. Pilotna šola potrjuje uporabo v svojem procesu in produkcijsko uvedbo po opravljenih preverjanjih.
+Mentor potrjuje izvedljivost učnega izdelka. Skupni tehnični nosilec pregleda tehnično ustreznost. Pilotna šola potrjuje uporabo v svojem procesu in produkcijsko uvedbo po opravljenih preverjanjih.
 
 Merge v GitHubu je tehničen dogodek. Potrditev dokumenta mora navesti različico oziroma commit, datum, obseg odločitve in odgovorno osebo. GitHub ni nadomestilo za potreben dogovor med zavodoma.
 
