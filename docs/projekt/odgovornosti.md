@@ -3,15 +3,17 @@
 Status: osnutek za dogovor  
 Datum: 5. oktober 2026
 
-OŠ Vojke Šmuc Izola in GEPŠ Piran sta se odločili za sodelovanje v projektu. Ta dokument je predlog konkretne razdelitve dela; odgovorne osebe, namestniki in razpoložljiv čas se še določijo.
+Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo.
+
+To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obveznosti šol. Imena, namestnike in razpoložljiv čas se potrdijo v dogovoru sodelujočih.
 
 | Vloga | Odgovornost | Kdaj mora biti določena |
 | --- | --- | --- |
-| Vodstvo sodelujočega zavoda | Konkretizira dogovorjeno sodelovanje ter potrdi vire in uvedbo na svoji šoli | Vire pred razvojem, uvedbo pred produkcijo |
+| Vodstvo sodelujočega zavoda | Potrdi obseg sodelovanja, vire in uvedbo na svoji šoli | Vire pred razvojem, uvedbo pred produkcijo |
 | Koordinator projekta | Usklajuje gradivo, vprašanja, mejnike in sodelovanje | Pred začetkom razvoja |
 | Mentor | Oceni učni obseg, vodi dijake in preverja izdelek | Pred potrditvijo maturitetne teme |
 | Tehnični nosilec | Potrjuje arhitekturo, skupne gradnike in strokovni pregled | Pred začetkom razvoja |
-| Razvijalci | Izvedejo dogovorjeni obseg in dokumentacijo na testnih podatkih | Ob začetku razvoja |
+| Razvijalci | Izvedejo potrjeni obseg in dokumentacijo na testnih podatkih | Ob začetku razvoja |
 | Predstavnik pilotne šole | Določi procese, prejemnike in uporabniški prevzem | Pred potrditvijo pilota |
 | Pooblaščena oseba za varstvo podatkov | Svetuje pri obdelavi, hrambi in potrebi po oceni učinka | Pred produkcijo |
 | Skrbnik namestitve | Upravlja dostop, infrastrukturo, kopije in posodobitve | Pred produkcijo |
