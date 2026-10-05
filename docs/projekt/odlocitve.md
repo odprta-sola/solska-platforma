@@ -20,9 +20,9 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D09 | Vzdrževanje, podpora in namestnik | Odprto | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema | Predlog v specifikaciji M1 | Tehnični nosilec in pilotna šola |
 
-## Dogovorjeno sodelovanje
+## Stanje sodelovanja
 
-OŠ Vojke Šmuc Izola in GEPŠ Piran sta se odločili za sodelovanje v projektu. Podatek je 5. oktobra 2026 potrdil pobudnik Mitja Pirih. Datum prvotne odločitve in zapis dogovora tu nista določena. Obseg pilota, konkretne odgovornosti in produkcijska uvedba ostajajo predmet ločenih odločitev.
+Pobudo sta podprli vodstvi OŠ Vojke Šmuc Izola in GEPŠ Piran (ravnateljica pobudo podpira, GEPŠ je zamisel sprejel z zanimanjem in jo bo predstavil Skupnosti elektrotehniških in računalniških šol). To je izjava pobudnika Mitje Pirih z dne 5. oktobra 2026, podprta z zapisi sestanka z dne 1. oktobra 2026; formalni dogovor o sodelovanju še ni sklenjen in pisna potrditev vodstev v repozitoriju ni evidentirana. Ko bo na voljo, se v tem razdelku zabeležita datum in povezava na potrditev. Obseg pilota, konkretne odgovornosti in produkcijska uvedba ostajajo predmet ločenih odločitev.
 
 ## Evidentirana dejstva
 

@@ -18,4 +18,4 @@ Za mentorjev prvi pregled so najpomembnejši povzetek, specifikacija M1 in odgov
 
 ## Podporno gradivo
 
-[Anketa staršev](raziskave/anketa-starsi.md) dokumentira uporabniške potrebe, rezultate in njihove omejitve. Odločitev za nadaljevanje temelji na dogovorjenem sodelovanju obeh šol.
+[Anketa staršev](raziskave/anketa-starsi.md) dokumentira uporabniške potrebe, rezultate in njihove omejitve. Kratek povzetek rezultatov je v [povzetku projekta](projekt/povzetek.md).

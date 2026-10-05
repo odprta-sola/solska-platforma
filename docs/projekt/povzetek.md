@@ -2,14 +2,14 @@
 
 Različica: V6, javni osnutek  
 Datum: 5. oktober 2026  
-Status: osnutek dokumenta za pregled; sodelovanje obeh šol je dogovorjeno  
+Status: za pregled, brez potrditve zavodov  
 Izhodišče: projektni povzetek V5 z dne 1. oktobra 2026
 
 ## Namen in stanje
 
 Odprta šola je pobuda za modularno odprtokodno rešitev elektronskega poslovanja šol. Nastala je ob sodelovanju pobudnika z OŠ Vojke Šmuc Izola in GEPŠ Piran. Po sestanku 1. oktobra 2026 je v pripravi prvi modul eSporočanje in dogovor o razvoju z mentorji ter morebitnimi drugimi šolami.
 
-Pobudnik je Mitja Pirih, v vlogi starša in strokovnega svetovalca. OŠ Vojke Šmuc Izola in GEPŠ Piran sta se odločili za sodelovanje v projektu. Obseg pilota, razdelitev odgovornosti, roki in pogoji produkcijske uvedbe se še usklajujejo. Odločitev za sodelovanje ne pomeni potrditve vsakega delovnega dokumenta ali posamezne finančne obveznosti.
+Pobudnik je Mitja Pirih, v vlogi starša in strokovnega svetovalca. Pobudo sta podprli vodstvi OŠ Vojke Šmuc Izola in GEPŠ Piran, formalni dogovor o sodelovanju pa še ni sklenjen. Predlagana organizacija sodelovanja ni formalno potrjena. Omemba šol ne pomeni, da sta odobrili ta javni osnutek ali prevzeli razvojne in finančne obveznosti; obseg pilota, razdelitev odgovornosti, roki in pogoji produkcijske uvedbe se še usklajujejo.
 
 Organizacija GitHub odprta-sola in javni repozitorij solska-platforma sta vzpostavljena. Obstaja osnutek specifikacije M1. Produkcijska aplikacija še ni na voljo.
 
@@ -19,9 +19,11 @@ Organizacija GitHub odprta-sola in javni repozitorij solska-platforma sta vzpost
 
 Projekt ima tudi učni namen: razvoj omejenih modulov lahko postane maturitetna naloga. Učni izdelek, strokovni prevzem in produkcijska uvedba so ločeni mejniki.
 
-## Uporabniške potrebe
+## Povpraševanje in omejitve ankete
 
-Anketa staršev na OŠ Vojke Šmuc je opozorila na pomen preproste uporabe, varstva osebnih podatkov, obstoječega komunikacijskega kanala in ohranitve papirne možnosti. Te ugotovitve pomagajo oblikovati uporabniško izkušnjo; izhodišče za nadaljevanje projekta je odločitev obeh šol za sodelovanje. Podrobni rezultati in omejitve ostajajo v [podpornem poročilu ankete](../raziskave/anketa-starsi.md).
+V spletni anketi na OŠ Vojke Šmuc (22. september–1. oktober 2026, 251 odgovorov) bi elektronsko potrjevanje uporabljalo 236 odgovorov (94,0 %). Starši so izpostavili preprosto uporabo, varstvo osebnih podatkov, obstoječi kanal eAsistent in ohranitev papirne možnosti; 14 od 15 odklonilnih odgovorov daje prednost papirju.
+
+Anketa je samoizbirna in spletna, število različnih družin in odzivnost nista potrjena. Rezultat podpira nadaljnji preizkus elektronskega poslovanja, ne dokazuje pa sprejemljivosti konkretne rešitve. Podrobni rezultati in omejitve so v [poročilu ankete](../raziskave/anketa-starsi.md).
 
 ## Predlog prvega pilota
 
@@ -85,7 +87,7 @@ Pred vključevanjem kode se uredijo licenca in pravice prispevkov. Predvidena li
 ## Naslednji koraki
 
 1. Mentor pregleda obseg M1 in oceni izvedljivost ter roke.
-2. Zavoda konkretizirata dogovorjeno sodelovanje, razdelitev dela in odgovorne osebe.
+2. Zavoda skleneta dogovor o sodelovanju in uskladita razdelitev dela ter odgovorne osebe.
 3. Potrdijo se minimalna arhitektura, jeziki, politika dostopov in infrastruktura.
 4. Uredijo se licence in prispevki avtorjev.
 5. Razvojni prototip se preveri na testnih podatkih.
@@ -97,8 +99,8 @@ Kratkoročno preverjanje možnosti obstoječega ponudnika eAsistent lahko poteka
 
 - V5, poslan ravnateljema v PDF, ostane zgodovinsko izhodišče.
 - V6 je nova javna različica brez osebnih kontaktov in podrobnih internih zapisov.
-- Navedena je odločitev obeh šol za sodelovanje; izvedbeni dogovori ostajajo odprti.
-- Anketa je v povzetku omejena na uporabniške potrebe; podrobna razlaga in popravki so v podpornem poročilu.
+- Stanje sodelovanja je opisano kot podpora pobudi; formalni dogovor in izvedbeni dogovori ostajajo odprti.
+- Rezultati ankete so v povzetku skrčeni na ključne ugotovitve z omejitvami; podrobna razlaga in popravki so v poročilu ankete.
 - Ločeni so prototip, produkcijski pilot in poznejše funkcije.
 - Ocenjena zahtevnost in stroški so predmet preverjanja.
 - Natančneje so opredeljene skupne komponente, dostopi, odgovornosti in podatkovne poti.
