@@ -14,7 +14,9 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 
 [Osnutek specifikacije M1 eSporočanje](moduli/M1-eSporocanje.md) opredeli obvestila, potrditev seznanitve, opomnike, papirno pot ter minimalni vmesnik za druge module. Obseg pilota potrebuje mentorjev pregled.
 
-Za mentorjev prvi pregled so najpomembnejši povzetek, specifikacija M1 in odgovornosti. Tehnologija in razrez dela ostajata predmet dogovora.
+[Osnutek specifikacije M2 eSoglasja](moduli/M2-eSoglasja.md) opredeli obrazce, odločitve, preklic, dokazne zapise in povezavo z M1. Postopek pilota ter pravila potrebujejo mentorjev, vsebinski in pravni pregled.
+
+Za mentorjev prvi pregled so najpomembnejši povzetek, specifikaciji M1 in M2 ter odgovornosti. Tehnologija in razrez dela ostajata predmet dogovora.
 
 ## Podporno gradivo
 
