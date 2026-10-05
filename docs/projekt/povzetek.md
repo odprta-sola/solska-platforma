@@ -2,14 +2,14 @@
 
 Različica: V6, javni osnutek  
 Datum: 5. oktober 2026  
-Status: javni osnutek dokumenta za pregled; sodelovanje šol je potrjeno po navedbi pobudnika  
+Status: javni osnutek dokumenta za pregled; sodelovanje šol je navedeno po izjavi pobudnika  
 Izhodišče: projektni povzetek V5 z dne 1. oktobra 2026
 
 ## Namen in stanje
 
 Odprta šola je pobuda za modularno odprtokodno rešitev elektronskega poslovanja šol. Nastala je ob sodelovanju pobudnika z OŠ Vojke Šmuc Izola in GEPŠ Piran. Po sestanku 1. oktobra 2026 je v pripravi prvi modul eSporočanje in dogovor o razvoju z mentorji ter morebitnimi drugimi šolami.
 
-Pobudnik je Mitja Pirih, v vlogi starša in strokovnega svetovalca. Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Omemba šol ne pomeni, da sta odobrili ta javni osnutek ali prevzeli razvojne in finančne obveznosti; obseg pilota, razdelitev odgovornosti, roki in pogoji produkcijske uvedbe se še usklajujejo.
+Pobudnik je Mitja Pirih, v vlogi starša in strokovnega svetovalca. Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Omemba šol ne pomeni, da sta odobrili ta javni osnutek ali prevzeli razvojne in finančne obveznosti.
 
 Organizacija GitHub odprta-sola in javni repozitorij solska-platforma sta vzpostavljena. Obstaja osnutek specifikacije M1. Produkcijska aplikacija še ni na voljo.
 
