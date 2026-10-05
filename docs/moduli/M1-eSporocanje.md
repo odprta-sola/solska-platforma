@@ -99,12 +99,16 @@ Vmesnik določa:
 - različico pogodbe in pooblastilo klicočega modula;
 - identifikator zahteve za preprečevanje podvojitev;
 - samo potrebne prejemnike (stalni identifikatorji), splošno besedilo in zaščiten sklic na vsebino v klicočem modulu, brez kopij podatkov;
-- potrditev prevzema zahteve in stanje dostave;
+- potrditev prevzema zahteve in stanje dostave po že opredeljenih statusih pošiljanja (čaka, predano poštnemu strežniku, neuspešno); predaja strežniku ne dokazuje prejema ali branja;
 - omejene ponovne poskuse;
 - preklic zahteve ter zastarelih opomnikov;
 - ponovno preverjanje upravičenja tik pred dejanskim pošiljanjem.
 
-M1 obdela tako zahtevo kot obvestilo brez javno objavljene vsebine. Vsebino, odločitve in stanje postopka ohrani klicoči modul; potrditev seznanitve v M1 ne ustvari odločitve v drugem modulu. Modula ne bereta tabel drug drugega. Do uskladitve z ekipo M2 se povezava preverja z nadomestnim testnim vmesnikom.
+M1 obdela tako zahtevo kot obvestilo brez javno objavljene vsebine. Vsebino, odločitve in stanje postopka ohrani klicoči modul; potrditev seznanitve v M1 ne ustvari odločitve v drugem modulu. Modula ne bereta tabel drug drugega.
+
+Delitev odgovornosti pri opomnikih: klicoči modul odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic prav tako sproži klicoči modul. M1 izvaja pošiljanje, tihi čas, ponovne poskuse in prikaz napak; o prejemnikih in rokih opominjanja pri teh zahtevah ne odloča. Opomniki za zahtevano seznanitev lastnih obvestil M1 ostanejo v M1.
+
+Do uskladitve z ekipo M2 se povezava preverja z nadomestnim testnim vmesnikom.
 
 ### Papirna pot
 
