@@ -60,11 +60,11 @@ Moduli imajo dokumentirane vmesnike in ne dostopajo do tabel drugih modulov. Sam
 
 Za pilot je predlagana ločena namestitev posamezne šole. Arnes je kandidat za infrastrukturo, vendar je treba pred potrditvijo preveriti storitve, pogoje in odgovornosti upravljanja. SI-PASS in ArnesAAI sta predvideni prihodnji povezavi, ne že potrjeni integraciji.
 
-Gostovanje pri šoli ne izključuje zunanjih podatkovnih poti. E-pošto, kopije, podporo in zunanje prijave je treba dokumentirati. Tehnologijo z mentorjem potrdi tehnični nosilec. [Arhitekturna izhodišča](../arhitektura/izhodisca.md) ostajajo osnutek.
+Gostovanje pri šoli ne izključuje zunanjih podatkovnih poti. E-pošto, kopije, podporo in zunanje prijave je treba dokumentirati. Tehnologijo z mentorjem potrdi skupni tehnični nosilec. [Arhitekturna izhodišča](../arhitektura/izhodisca.md) ostajajo osnutek.
 
 ## Vodenje in vzdrževanje
 
-Pred začetkom razvoja se določijo mentor, tehnični nosilec, šola pilota in nosilec prevzema. Pred produkcijo se določita vzdrževalec in njegova zamenjava ter postopek podpore, posodobitev in incidentov.
+Pred začetkom razvoja se določijo mentor, skupni tehnični nosilec, šola pilota in nosilec prevzema. Pred produkcijo se določita vzdrževalec in njegova zamenjava ter postopek podpore, posodobitev in incidentov.
 
 Razvoj poteka na izmišljenih podatkih. Dostop do produkcije je ločen od sodelovanja v javnem repozitoriju. Pooblaščena oseba za varstvo podatkov sodeluje pri presoji obdelave in potrebi po oceni učinka. Podrobnosti so v [predlogu odgovornosti](odgovornosti.md).
 
