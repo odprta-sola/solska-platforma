@@ -111,13 +111,15 @@ Delitev odgovornosti pri opomnikih: klicoči modul odloči, koga in do kdaj opom
 
 Klicoči modul ob oddaji odziva, spremembi, preklicu ali izteku potrebe sproži preklic povezanih opomnikov. M1 pred pošiljanjem preveri še aktualno potrebo prek dogovorjenega vmesnika klicočega modula; samo preverjanje upravičenja ne zadostuje. Preklic je varen pri ponovitvah. Pogodba opredeli tudi tekmovanje med odzivom in pošiljanjem: e-pošte, ki je že predana strežniku, ni mogoče priklicati, vendar njena povezava pokaže aktualno stanje postopka.
 
-#### Veljavnost opomnikov
+Do uskladitve z ekipo M2 se povezava preverja z nadomestnim testnim vmesnikom.
 
-Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (polje `expires_at`); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
+#### Spremembe upravičenj ob polnoletstvu
 
 Ob polnoletstvu dijaka med šolskim letom šola zagotovi spremembo upravičenj z določenim začetkom veljavnosti. Modul ponovno preveri prejemnike, dostope in odprte zahteve; preteklih potrditev ne prepiše. Nova dejanja sledijo aktualnim, za postopek potrjenim pravilom. Sam datum rojstva brez potrjenih pravil ni avtomatsko dovoljenje za dostop starša.
 
-Do uskladitve z ekipo M2 se povezava preverja z nadomestnim testnim vmesnikom.
+#### Veljavnost opomnikov
+
+Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (polje `expires_at`); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
 
 ### Papirna pot
 
@@ -224,9 +226,9 @@ Merijo se čas priprave obvestil, težave pri prijavi, manjkajoče potrditve, na
 
 ## Organizacija dela in ocena zahtevnosti
 
-Omejen prototip je lahko primeren za maturitetno nalogo. Celotni produkcijski obseg ni označen kot naloga nizke zahtevnosti. Ocena 150–250 ur se pred potrditvijo preveri z razrezom nalog in jasno ločitvijo dela dijakov, mentorja ter tehničnega nosilca.
+Omejen prototip je lahko primeren za maturitetno nalogo. Celotni produkcijski obseg ni označen kot naloga nizke zahtevnosti. Ocena 150–250 ur se pred potrditvijo preveri z razrezom nalog in jasno ločitvijo dela dijakov, mentorja ter skupnega tehničnega nosilca.
 
-Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Ocena loči delo dijakov, mentorja in tehničnega nosilca. Razvrstitev v tem dokumentu je izhodiščni predlog za pregled. Rezultat pregleda se zabeleži v tabeli funkcij z oceno ur, odvisnostmi, predlagano fazo in nosilcem izvedbe; obseg pilota nato potrdita mentor in pilotna šola.
+Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Ocena loči delo dijakov, mentorja in skupnega tehničnega nosilca. Razvrstitev v tem dokumentu je izhodiščni predlog za pregled. Rezultat pregleda se zabeleži v tabeli funkcij z oceno ur, odvisnostmi, predlagano fazo in nosilcem izvedbe; obseg pilota nato potrdita mentor in pilotna šola.
 
 Razvojni izdelek in dovoljenje za produkcijsko uporabo sta ločena mejnika. Produkcijsko vzdrževanje mora imeti nosilca tudi po zaključku šolskega leta.
 

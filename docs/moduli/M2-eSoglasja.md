@@ -219,6 +219,7 @@ Pred produkcijo se določijo posodobitve, nadzor, incidenti, obnovitev in spreje
 | Avtor poskusi odobriti lastno različico | Odobritev je zavrnjena brez zabeležene izjeme |
 | Objavljeni obrazec se bistveno spremeni | Stare odločitve ne veljajo samodejno za novo različico |
 | Zahteva za oddajo se ponovi ali prispe sočasno | Ni izgube odzivov ali podvojenih logičnih oddaj |
+| Preklic veljavne privolitve pri odprtem, zaključenem ali umaknjenem obrazcu | Pot je enako preprosta kot oddaja; brez nepotrebnih korakov, jasno dostopna in s potrditvijo preklica. Konkretna merila potrdita pilotna šola in pravni pregled |
 | Privolitev za namen je preklicana | Novo stanje je takoj vidno; ustvari se potrdilo in potrebna naloga |
 | Odziv prispe, ko opomnik čaka | M2 sproži preklic, M1 preveri aktualno potrebo; zastareli opomnik se ne pošlje |
 | Zaključeno zbiranje odgovorov pri veljavni privolitvi | Preklic ostane dostopen in ustvari nov dokazni dogodek |
@@ -245,7 +246,7 @@ Uspeh se meri s časom izpolnjevanja, težavami pri prijavi, napačnimi ali neja
 
 ## Mentorjeva ocena in razdelitev dela
 
-Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Loči delo dijakov, mentorja in tehničnega nosilca. Ocena ur M1 se ne prenese avtomatično na M2.
+Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Loči delo dijakov, mentorja in skupnega tehničnega nosilca. Ocena ur M1 se ne prenese avtomatično na M2.
 
 Rezultat se zabeleži v tabeli funkcij z urami, odvisnostmi, fazo in nosilcem izvedbe. Obseg produkcijskega pilota potrdita mentor in pilotna šola po potrebnih strokovnih pregledih.
 
@@ -271,7 +272,3 @@ To je možnost organizacije, ne imenovanje ekip. En lastnik odločitve o skupnem
 10. Kako se potrdijo licenca, pravice prispevkov, infrastruktura in merila obremenitve?
 
 Odločitve se evidentirajo z datumom, odgovorno osebo in različico. Združitev specifikacije v main ne potrjuje pravne ustreznosti postopka ali produkcijske uvedbe.
-
-### Dodatni preizkus preklica
-
-Upravičeni odločevalec najde in izvede preklic posamezne privolitve po poti, ki je enako preprosta kot njena oddaja, tudi pri zaključenem ali umaknjenem obrazcu. Preizkus preveri dostopnost poti, nepotrebne korake in jasno potrditev preklica; konkretna merila potrdita pilotna šola in pravni pregled.
