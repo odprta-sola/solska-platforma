@@ -1,0 +1,39 @@
+# Arhitekturna izhodišča
+
+Status: predlog za pregled z mentorjem  
+Datum: 5. oktober 2026
+
+## Samostojni modul in skupno jedro
+
+Samostojnost pomeni, da je M1 uporabna namestitev brez ostalih modulov. Ne pomeni, da dijaki ponovno razvijejo prijavo, kriptografijo ali upravljanje pravic.
+
+Skupne vzdrževane komponente zagotavljajo identitete, povezave z učenci, šifrante in osnovne varnostne funkcije. V samostojni namestitvi so vključene lokalno; poznejše jedro jih lahko zagotavlja kot skupne storitve.
+
+Vsak modul upravlja svoj podatkovni model. Moduli se povezujejo prek dokumentiranih API in dogodkov. Ločena logična podatkovna shramba ne zahteva ločenega fizičnega strežnika za vsak modul.
+
+## Minimalni dogovori pred razvojem
+
+| Področje | Potrebna odločitev |
+| --- | --- |
+| Identitete | Stabilni identifikatorji in preslikava lokalnih računov v prihodnje jedro |
+| Povezave | Kdo preverja upravičenje do podatkov učenca in kdaj preneha |
+| API | Avtentikacija, preverjanje dovoljenj, različice in obravnava napak |
+| Dogodki | Enoličen identifikator, ponovitve in preprečevanje dvojnih posledic |
+| Čas | Časi dogodkov v UTC, prikaz in urniki v Europe/Ljubljana |
+| Zgodovina | Različice obvestil in nespremenjene povezave potrditev |
+| Izvoz | Vsebina, priponke, metapodatki in dokumentirana shema |
+| Namestitev | Ponovljiv paket, skrivnosti zunaj kode, posodobitve in obnova |
+
+## Predlog izvedbe M1
+
+Spletna aplikacija z mobilnim vmesnikom, podatkovna baza, trajna čakalna vrsta za e-pošto, zaščitena shramba prilog in dnevnik dogodkov. Tehnologijo potrdita mentor in tehnični nosilec; Django je kandidat iz izhodiščnega opisa, ne zahteva.
+
+Prvi pilot ne zahteva javnega integracijskega API za vse prihodnje module. Potrebuje jasne notranje meje in podatkovni model, ki omogoča nadaljnje povezovanje.
+
+## Meje okolij
+
+Razvoj in testi uporabljajo izmišljen nabor podatkov. Produkcija ima ločene poverilnice in pooblaščene skrbnike. Javni repozitorij ne vsebuje podatkovnih baz, kontaktnih seznamov, podpisnih ključev ali produkcijskih kopij.
+
+## Odprte odločitve
+
+Gostovanje, poštna storitev, tehnologija, prijavna komponenta, velikost pilota, cilji obnovitve in načrt prehoda na jedro se zabeležijo v registru odločitev. Pred potrditvijo se ne razvija nepotrebna infrastruktura za vse prihodnje module.
