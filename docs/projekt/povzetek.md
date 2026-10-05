@@ -2,14 +2,14 @@
 
 Različica: V6, javni osnutek  
 Datum: 5. oktober 2026  
-Status: za pregled, brez potrditve zavodov  
+Status: javni osnutek dokumenta za pregled; sodelovanje šol je potrjeno po navedbi pobudnika  
 Izhodišče: projektni povzetek V5 z dne 1. oktobra 2026
 
 ## Namen in stanje
 
 Odprta šola je pobuda za modularno odprtokodno rešitev elektronskega poslovanja šol. Nastala je ob sodelovanju pobudnika z OŠ Vojke Šmuc Izola in GEPŠ Piran. Po sestanku 1. oktobra 2026 je v pripravi prvi modul eSporočanje in dogovor o razvoju z mentorji ter morebitnimi drugimi šolami.
 
-Pobudnik je Mitja Pirih, v vlogi starša in strokovnega svetovalca. Pobudo sta podprli vodstvi OŠ Vojke Šmuc Izola in GEPŠ Piran, formalni dogovor o sodelovanju pa še ni sklenjen. Predlagana organizacija sodelovanja ni formalno potrjena. Omemba šol ne pomeni, da sta odobrili ta javni osnutek ali prevzeli razvojne in finančne obveznosti; obseg pilota, razdelitev odgovornosti, roki in pogoji produkcijske uvedbe se še usklajujejo.
+Pobudnik je Mitja Pirih, v vlogi starša in strokovnega svetovalca. Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Omemba šol ne pomeni, da sta odobrili ta javni osnutek ali prevzeli razvojne in finančne obveznosti; obseg pilota, razdelitev odgovornosti, roki in pogoji produkcijske uvedbe se še usklajujejo.
 
 Organizacija GitHub odprta-sola in javni repozitorij solska-platforma sta vzpostavljena. Obstaja osnutek specifikacije M1. Produkcijska aplikacija še ni na voljo.
 
@@ -21,7 +21,7 @@ Projekt ima tudi učni namen: razvoj omejenih modulov lahko postane maturitetna 
 
 ## Povpraševanje in omejitve ankete
 
-V spletni anketi na OŠ Vojke Šmuc (22. september–1. oktober 2026, 251 odgovorov) bi elektronsko potrjevanje uporabljalo 236 odgovorov (94,0 %). Starši so izpostavili preprosto uporabo, varstvo osebnih podatkov, obstoječi kanal eAsistent in ohranitev papirne možnosti; 14 od 15 odklonilnih odgovorov daje prednost papirju.
+V spletni anketi na OŠ Vojke Šmuc (22. september–1. oktober 2026, 251 odgovorov) 236 od 251 odgovorov (94,0 %) izraža pripravljenost za elektronsko potrjevanje. Starši so izpostavili preprosto uporabo, varstvo osebnih podatkov, obstoječi kanal eAsistent in ohranitev papirne možnosti; 14 od 15 odklonilnih odgovorov daje prednost papirju.
 
 Anketa je samoizbirna in spletna, število različnih družin in odzivnost nista potrjena. Rezultat podpira nadaljnji preizkus elektronskega poslovanja, ne dokazuje pa sprejemljivosti konkretne rešitve. Podrobni rezultati in omejitve so v [poročilu ankete](../raziskave/anketa-starsi.md).
 
@@ -87,7 +87,7 @@ Pred vključevanjem kode se uredijo licenca in pravice prispevkov. Predvidena li
 ## Naslednji koraki
 
 1. Mentor pregleda obseg M1 in oceni izvedljivost ter roke.
-2. Zavoda skleneta dogovor o sodelovanju in uskladita razdelitev dela ter odgovorne osebe.
+2. Zavoda dokumentirata izvedbeni dogovor, razdelitev dela ter odgovorne osebe.
 3. Potrdijo se minimalna arhitektura, jeziki, politika dostopov in infrastruktura.
 4. Uredijo se licence in prispevki avtorjev.
 5. Razvojni prototip se preveri na testnih podatkih.
@@ -99,7 +99,7 @@ Kratkoročno preverjanje možnosti obstoječega ponudnika eAsistent lahko poteka
 
 - V5, poslan ravnateljema v PDF, ostane zgodovinsko izhodišče.
 - V6 je nova javna različica brez osebnih kontaktov in podrobnih internih zapisov.
-- Stanje sodelovanja je opisano kot podpora pobudi; formalni dogovor in izvedbeni dogovori ostajajo odprti.
+- Odločitev za sodelovanje je navedena s sklicem na potrditev pobudnika z dne 5. oktobra 2026; pisna potrditev v repozitoriju ni evidentirana, izvedbeni dogovori se še usklajujejo.
 - Rezultati ankete so v povzetku skrčeni na ključne ugotovitve z omejitvami; podrobna razlaga in popravki so v poročilu ankete.
 - Ločeni so prototip, produkcijski pilot in poznejše funkcije.
 - Ocenjena zahtevnost in stroški so predmet preverjanja.
