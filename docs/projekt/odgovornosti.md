@@ -12,12 +12,16 @@ To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obvezno
 | Vodstvo sodelujočega zavoda | Potrdi obseg sodelovanja, vire in uvedbo na svoji šoli | Vire pred razvojem, uvedbo pred produkcijo |
 | Koordinator projekta | Usklajuje gradivo, vprašanja, mejnike in sodelovanje | Pred začetkom razvoja |
 | Mentor | Oceni učni obseg, vodi dijake in preverja izdelek | Pred potrditvijo maturitetne teme |
-| Tehnični nosilec | Potrjuje arhitekturo, skupne gradnike in strokovni pregled | Pred začetkom razvoja |
+| Skupni tehnični nosilec | Potrjuje arhitekturo, skupne gradnike, pogodbe vmesnikov in strokovni pregled povezovanja | Pred začetkom razvoja |
+| Nosilec modula M1 oziroma M2 | Usklajuje obseg svojega modula, naloge ekipe, povezovanje in predajo | Pred razdelitvijo razvoja |
+| Nosilec skupnih gradnikov | Zagotavlja skupno prijavo, identitete in pravice ter njihovo vzdrževanje | Pred razvojem odvisnih funkcij |
 | Razvijalci | Izvedejo potrjeni obseg in dokumentacijo na testnih podatkih | Ob začetku razvoja |
 | Predstavnik pilotne šole | Določi procese, prejemnike in uporabniški prevzem | Pred potrditvijo pilota |
 | Pooblaščena oseba za varstvo podatkov | Svetuje pri obdelavi, hrambi in potrebi po oceni učinka | Pred produkcijo |
 | Skrbnik namestitve | Upravlja dostop, infrastrukturo, kopije in posodobitve | Pred produkcijo |
 | Vzdrževalec in namestnik | Odpravlja napake, spremlja odvisnosti in zagotavlja nadaljevanje po zaključku mature | Pred produkcijo |
+
+Mentor vsake ekipe vodi učni razrez, dijake in pregled svojega izdelka. Nosilec modula usklajuje izvedbo tega modula; skupni tehnični nosilec odloča o skupni arhitekturi in združljivosti. Nosilec skupnih gradnikov skrbi za njihovo izvedbo in vzdrževanje. Vloge se lahko združijo pri isti osebi, vendar se obseg in razpoložljiv čas izrecno dogovorita. Ta dokument še ne imenuje ekip ali oseb.
 
 ## Potrjevanje
 

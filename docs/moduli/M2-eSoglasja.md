@@ -155,7 +155,8 @@ Nasprotujoč elektronski in papirni odziv ne prepišeta zgodovine; sprožita obr
 - Avtor: predloge, različice, predogled in oddaja v pregled.
 - Potrjevalec: besedilo, pravila, upravičenci in odobritev različice.
 - Zaposleni: potrebna skupna stanja, manjkajoči odzivi, spori in naloge po preklicu.
-- Pooblaščeni skrbnik: dostopi, uvoz, obveščanje, hramba in izvozi.
+- Skrbnik: dostopi, uvoz, obveščanje in pravila hrambe.
+- Pooblaščeni pregledovalec: dokazni zapisi, dnevniki in pooblaščeni izvozi.
 
 Osnovni postopki delujejo na telefonu, s tipkovnico in bralnikom zaslona. Izbire imajo jasna poimenovanja, napake razumljiva pojasnila; stanje ni razvidno samo iz barve.
 

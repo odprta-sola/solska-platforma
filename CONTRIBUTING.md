@@ -12,7 +12,7 @@ Dokumenti imajo status osnutek, za pregled ali potrjeno. Potrjen dokument vsebuj
 
 Uporabljajte izmišljene testne podatke. Ne vključujte osebnih kontaktnih seznamov, produkcijskih izvozov, gesel, ključev ali internih zapisov brez ustrezne priprave za objavo.
 
-Varnostne težave, ki bi razkrile podatke ali omogočile zlorabo, se najprej obravnavajo zasebno z vzdrževalcem. Zasebni kanal prijave bo določen pred produkcijo (glej [SECURITY.md](SECURITY.md)); ne objavljajte skrivnosti ali resničnih podatkov v issueju.
+Varnostne težave, ki bi razkrile podatke ali omogočile zlorabo, se najprej obravnavajo zasebno z vzdrževalcem. Zasebni kanal prijave bo določen pred prvo kodo oziroma pred vključitvijo zunanjih razvojnih ekip, kar nastopi prej (glej [SECURITY.md](SECURITY.md)); ne objavljajte skrivnosti ali resničnih podatkov v issueju.
 
 ## Dokumentacija
 

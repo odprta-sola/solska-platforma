@@ -4,7 +4,7 @@ Projekt je v fazi dokumentacije in še nima produkcijske kode ali podatkov. Prav
 
 ## Kako sporočiti varnostno težavo
 
-Zasebni kanal prijave še ni določen; določi se pred produkcijo (glej [CONTRIBUTING.md](CONTRIBUTING.md)). Do takrat:
+Zasebni kanal prijave še ni določen; določi se pred prvo kodo oziroma pred vključitvijo zunanjih razvojnih ekip, kar nastopi prej (glej [CONTRIBUTING.md](CONTRIBUTING.md)). Do takrat:
 
 - v javnem issueju sporočite le, da imate varnostno opažanje, in prosite za zasebni stik;
 - v issue ne vpisujte tehničnih podrobnosti, načinov zlorabe, skrivnosti ali resničnih podatkov;

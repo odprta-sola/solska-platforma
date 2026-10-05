@@ -9,6 +9,7 @@ Javna dokumentacija je nova uredniška različica gradiva, ki ga je pobudnik pre
 | Projekt_modularna_resitev_povzetek_V5.docx in V5.pdf, 1. oktober 2026 | projekt/povzetek.md, V6 | V5 PDF je bil že poslan ravnateljema; ohrani se kot zgodovinsko izhodišče |
 | Modul eSporočanje – opis modula.docx, 5. oktober 2026 | moduli/M1-eSporocanje.md | Dopolnjen osnutek z ločenim pilotom in poznejšimi funkcijami |
 | Porocilo_anketa_starsi_OS_Vojke_Smuc.docx, 1. oktober 2026 | raziskave/anketa-starsi.md | Javna različica z ohranjenimi zbirnimi številkami in popravljeno interpretacijo |
+| Nova specifikacija M2, 5. oktober 2026; izhodišči V6 in predlog notranjega akta | moduli/M2-eSoglasja.md | Nov delovni osnutek za mentorjev, vsebinski in pravni pregled; ni prepis ali potrditev akta |
 | Elektronsko poslovanje šole.pdf, dopis 1. oktober 2026 | Brez javne kopije | Ohranjen izvirnik korespondence |
 | Neimenovan obrazec (Odzivi).xlsx, predloženo 5. oktobra 2026 | raziskave/anketa-starsi.md | Preverjena zbirna števila 251 odgovorov in popravljen izračun hitrosti odziva; izvoz ni javno objavljen |
 | Pravilnik_e-poslovanje_s_starsi_OS_Vojke_Smuc_Izola_PREDLOG_AKTA(1).docx, predloženo 5. oktobra 2026 | Evidenca prejema v tem dokumentu | Predlog za obravnavo: 42 členov in šest prilog; brez javne kopije izvirnika |
