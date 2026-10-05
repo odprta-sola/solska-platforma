@@ -66,7 +66,7 @@ Predloga vsebuje naslov, vrsto postopka, razumljivo besedilo, različico, namene
 
 Pilot uporablja omejen nabor polj: jasno besedilo, izbire in datum. Prosto besedilo in nalaganje prilog staršev nista privzeti del pilota. Priloge avtorja so PDF ali slike z omejitvijo velikosti, preverjanjem vsebine in zaščitenim prenosom po pravilih M1.
 
-Avtor vidi predogled za starša in seznam upravičencev. Obrazec gre skozi stanja osnutek, v pregledu, odobreno, objavljeno, zaključeno ali umaknjeno. Odobritev je vezana na konkretno različico; sprememba besedila ali pravil odobritev razveljavi in zahteva nov pregled. Avtor ne more odobriti lastne različice; potrjevalec je druga oseba. Izjemo zaradi majhnosti šole potrdi pooblaščena oseba šole z zabeleženo odločitvijo.
+Avtor vidi predogled za starša in seznam upravičencev. Obrazec gre skozi stanja osnutek, v pregledu, odobreno, objavljeno, zaključeno ali umaknjeno. Odobritev je vezana na konkretno različico; sprememba besedila ali pravil odobritev razveljavi in zahteva nov pregled. Avtor ne more odobriti lastne različice; potrjevalec je druga oseba. Izjemo, da avtor potrdi svojo različico, lahko odobri samo vodstvo šole oziroma oseba z izrecnim pooblastilom šole, ki ni avtor. Izjema velja za eno različico enega postopka, ne za vse obrazce; velja do zamenjave različice oziroma do roka, ki ga določi šola. Zabeležita se razlog in odobritelj, izjema pa je vidna pooblaščenemu pregledovalcu. Ali izjema velja tudi za privolitve, je odprto vprašanje za šolo in pravni pregled; do odločitve velja samo za organizacijska soglasja.
 
 Po objavi se besedilo, nameni in pravila ne prepišejo. Objavljena različica in tedanji prejemniki se ohranijo. Umik ustavi nove oddaje in opomnike; posledice za že podane odločitve določi potrjeni postopek.
 
@@ -130,7 +130,7 @@ M2 ne zahteva dokončanega celotnega jedra platforme. Samostojna namestitev pome
 
 ## Roki, opomniki in papirna pot
 
-Rok odziva, veljavnost odločitve in rok hrambe so ločeni podatki. Opominjajo se zahtevani upravičenci brez ustrezne aktualne odločitve; zavrnjenih ali preklicanih odločitev se ne obravnava kot pozabljeni odziv. Uporabljajo se tihi čas, omejene ponovitve in vidne napake po pravilih M1.
+Rok odziva, veljavnost odločitve in rok hrambe so ločeni podatki. Opominjajo se zahtevani upravičenci brez ustrezne aktualne odločitve; zavrnjenih ali preklicanih odločitev se ne obravnava kot pozabljeni odziv. M2 odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic sproži M2. M1 izvaja pošiljanje, tihi čas, omejene ponovne poskuse in prikaz napak po svojih pravilih. Predaja strežniku ni dokaz prejema; stanje obveščanja v M2 je samo informativno in ne nadomesti odločitve upravičene osebe.
 
 Papirni obrazec vsebuje isto različico vsebine in izbire kot spletni. Interni seznam za razdelitev je ločen. Zaposleni evidentira prejeti odgovor, vir, datum prejema in vnosa ter različico; ne ustvari navideznega elektronskega klika starša. Način hrambe in povezave s papirnim izvirnikom določi šola.
 
@@ -239,7 +239,7 @@ To je možnost organizacije, ne imenovanje ekip. En lastnik odločitve o skupnem
 ## Odločitve pred razvojem in uvedbo
 
 1. Katera šola, postopek in skupina uporabnikov sestavljajo pilot?
-2. Kdo potrdi vrsto postopka, besedilo in pravila odločanja?
+2. Kdo potrdi vrsto postopka, besedilo in pravila odločanja ter ali izjema pri odobritvi velja tudi za privolitve?
 3. Kdo sme odločati (vključno s polnoletnimi dijaki), koliko upravičencev je potrebnih in kako se rešujejo spori?
 4. Katera raven prijave in preverjanja dejanja je potrebna?
 5. Kaj pomeni sprememba, preklic in iztek za izbrani postopek?
