@@ -18,7 +18,11 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D07 | Hramba, dostopi in podatkovne poti | Odprto | Pilotna šola ob posvetu z DPO |
 | D08 | Licenca EUPL 1.2 in pravice prispevkov | Predlog | Nosilec projekta in avtorji |
 | D09 | Vzdrževanje, podpora in namestnik | Odprto | Sodelujoči zavodi |
-| D10 | Merila produkcijskega prevzema | Predlog v specifikaciji M1 | Tehnični nosilec in pilotna šola |
+| D10 | Merila produkcijskega prevzema M1 in M2 | Predlog v specifikacijah | Tehnični nosilec in pilotna šola |
+| D11 | Postopek pilota M2, besedilo obrazca in pravila odločanja | Odprto | Pilotna šola ob vsebinskem in pravnem pregledu |
+| D12 | Minimalni vmesnik M1–M2 in skupni vir identitet ter upravičenj | Odprto | Skupni tehnični nosilec in mentorji ekip |
+| D13 | Razdelitev ekip, nosilci modulov in ocena ur po fazah | Odprto | Sodelujoči zavodi in mentorji |
+| D14 | Zasebni kanal za prijavo ranljivosti in nosilec obravnave | Odprto; pred prvo kodo oziroma vključitvijo zunanjih ekip | Nosilec projekta in skrbnik repozitorija |
 
 ## Stanje sodelovanja
 
@@ -27,7 +31,7 @@ Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEP
 ## Evidentirana dejstva
 
 - 5. oktobra 2026 sta bila vzpostavljena javna organizacija GitHub in repozitorij.
-- Za M1 je odprt osnutek predloga sprememb št. 1.
+- Specifikaciji M1 in M2 sta vključeni v main prek združenih PR #1 in #7; ostajata delovna osnutka za mentorjev pregled.
 - Uporabnik je nastavil aktivno zaščito glavne veje z obveznim pull requestom, brez obveznih odobritev, z blokado brisanja in prisilnega prepisa.
 
 Ta dejstva ne pomenijo potrditve obsega ali produkcijske uvedbe.

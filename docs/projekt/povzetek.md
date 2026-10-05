@@ -11,7 +11,7 @@ Odprta šola je pobuda za modularno odprtokodno rešitev elektronskega poslovanj
 
 Pobudnik je Mitja Pirih, v vlogi starša in strokovnega svetovalca. Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Omemba šol ne pomeni, da sta odobrili ta javni osnutek ali prevzeli razvojne in finančne obveznosti.
 
-Organizacija GitHub odprta-sola in javni repozitorij solska-platforma sta vzpostavljena. Obstaja osnutek specifikacije M1. Produkcijska aplikacija še ni na voljo.
+Organizacija GitHub odprta-sola in javni repozitorij solska-platforma sta vzpostavljena. Obstajata osnutka specifikacij M1 in M2. Produkcijska aplikacija še ni na voljo.
 
 ## Cilji
 
@@ -43,7 +43,7 @@ Spodnja razčlenitev je razvojna smer, ne potrjen program izvedbe.
 | --- | --- | --- |
 | P0 Jedro | Identitete, povezave z učenci, šifranti, pravice in skupne storitve | Minimalne skupne komponente ob M1; razvoj vodi strokovni nosilec |
 | M1 eSporočanje | Obvestila in seznanitev | Prvi pilot |
-| M2 eSoglasja | Soglasja, privolitve in dokazni zapisi | Po izkušnjah M1 in pravnem pregledu |
+| M2 eSoglasja | Soglasja, privolitve in dokazni zapisi | Razvoj lahko poteka vzporedno z M1; produkcijski pilot po preverjanju povezave z M1 in pravnem pregledu izbranega postopka |
 | M3 Govorilne ure | Termini, rezervacije in opomniki | Poznejša faza |
 | M4 Prijave | Dejavnosti in programi | Poznejša faza |
 | M5 Odsotnosti | Sporočila in obravnava izostankov | Poznejša faza |
@@ -86,7 +86,7 @@ Pred vključevanjem kode se uredijo licenca in pravice prispevkov. Predvidena li
 
 ## Naslednji koraki
 
-1. Mentor pregleda obseg M1 in oceni izvedljivost ter roke.
+1. Mentorji pregledajo obseg [M1](../moduli/M1-eSporocanje.md) in [M2](../moduli/M2-eSoglasja.md), ocenijo ure, odvisnosti in roke ter predlagajo razdelitev dela.
 2. Zavoda dokumentirata izvedbeni dogovor, razdelitev dela ter odgovorne osebe.
 3. Potrdijo se minimalna arhitektura, jeziki, politika dostopov in infrastruktura.
 4. Uredijo se licence in prispevki avtorjev.

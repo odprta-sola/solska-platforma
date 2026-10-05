@@ -28,7 +28,9 @@ Vsak modul upravlja svoj podatkovni model. Moduli se povezujejo prek dokumentira
 
 Spletna aplikacija z mobilnim vmesnikom, podatkovna baza, trajna čakalna vrsta za e-pošto, zaščitena shramba prilog in dnevnik dogodkov. Tehnologijo potrdita mentor in tehnični nosilec; Django je kandidat iz izhodiščnega opisa, ne zahteva.
 
-Prvi pilot ne zahteva javnega integracijskega API za vse prihodnje module. Potrebuje jasne notranje meje in podatkovni model, ki omogoča nadaljnje povezovanje.
+Prvi pilot vključuje minimalni dokumentirani vmesnik M1–M2 za obveščanje. Razširjen API za vse prihodnje module ni pogoj pilota. M2 vodi odločitve in določa potrebne opomnike; M1 izvaja pošiljanje, tihi čas in ponovne poskuse.
+
+Pogodba vmesnika in skupni vir identitet ter upravičenj se opredelita z mentorji in skupnim tehničnim nosilcem v ločenem dokumentu docs/arhitektura/vmesnik-M1-M2.md. Ta dokument še ni pripravljen. Opredeli zahteve, odgovore, napake, preklic, stanje zahteve in primere ter način posredovanja sprememb oseb in povezav. Do dogovora prototipa uporabljata nadomestni testni vmesnik.
 
 ## Meje okolij
 
