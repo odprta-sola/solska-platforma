@@ -3,11 +3,13 @@
 Status: osnutek za dogovor  
 Datum: 5. oktober 2026
 
+Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo.
+
 To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obveznosti šol. Imena, namestnike in razpoložljiv čas se potrdijo v dogovoru sodelujočih.
 
 | Vloga | Odgovornost | Kdaj mora biti določena |
 | --- | --- | --- |
-| Vodstvo sodelujočega zavoda | Odloči o sodelovanju, virih in uvedbi na svoji šoli | Pred formalnim začetkom |
+| Vodstvo sodelujočega zavoda | Potrdi obseg sodelovanja, vire in uvedbo na svoji šoli | Vire pred razvojem, uvedbo pred produkcijo |
 | Koordinator projekta | Usklajuje gradivo, vprašanja, mejnike in sodelovanje | Pred začetkom razvoja |
 | Mentor | Oceni učni obseg, vodi dijake in preverja izdelek | Pred potrditvijo maturitetne teme |
 | Tehnični nosilec | Potrjuje arhitekturo, skupne gradnike in strokovni pregled | Pred začetkom razvoja |
