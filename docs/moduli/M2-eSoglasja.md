@@ -47,12 +47,14 @@ Za prvi produkcijski pilot se uvede samo izbrani in pregledani postopek. Predlag
 
 | Vloga | Opravila | Omejitev |
 | --- | --- | --- |
-| Upravičeni starš oziroma skrbnik | Pregled, odločitev, lastno potrdilo, dovoljena sprememba ali preklic | Preverjena povezava z otrokom in obseg upravičenja |
+| Upravičena oseba (starš oziroma skrbnik; pri polnoletnem dijaku dijak) | Pregled, odločitev, lastno potrdilo, dovoljena sprememba ali preklic | Preverjena povezava z otrokom oziroma lastno upravičenje in obseg upravičenja |
 | Avtor obrazca | Priprava predloge, ciljna skupina, predogled | Dodeljeni postopki in skupine |
 | Vsebinski potrjevalec | Pregled vsebine in pravil, odobritev objave | Pooblastilo šole za konkretni postopek |
 | Zaposleni, ki izvaja postopek | Pregled stanja in naloge po spremembi | Samo potrebni podatki, dodeljeni oddelki in nameni |
 | Skrbnik | Dostopi, uvoz, tehnične nastavitve, nadzor | Tehnična vloga ne daje samodejnega rutinskega vpogleda |
 | Pooblaščeni pregledovalec | Pregled dokazov in izvoz | Namen pregleda in pooblastilo se evidentirata |
+
+Kdo odloča, določi šola za vsak postopek. Pravni pregled pred produkcijo potrdi, kdo odloča pri polnoletnem dijaku in kdaj je privolitev ustrezna podlaga za šolo; modul tega ne presoja. V besedilu za krajšo rabo pogosto piše »starš«, kar pomeni upravičeno osebo.
 
 Osebe imajo stalne identifikatorje. Skupni e-poštni naslov ne združi identitet ali odločitev. Povezave, omejitve in obdobja upravičenja preverja šola; njihovih občutljivih utemeljitev se ne razkriva drugim staršem ali običajnim izvajalcem.
 
@@ -64,7 +66,7 @@ Predloga vsebuje naslov, vrsto postopka, razumljivo besedilo, različico, namene
 
 Pilot uporablja omejen nabor polj: jasno besedilo, izbire in datum. Prosto besedilo in nalaganje prilog staršev nista privzeti del pilota. Priloge avtorja so PDF ali slike z omejitvijo velikosti, preverjanjem vsebine in zaščitenim prenosom po pravilih M1.
 
-Avtor vidi predogled za starša in seznam upravičencev. Obrazec gre skozi stanja osnutek, v pregledu, odobreno, objavljeno, zaključeno ali umaknjeno. Odobritev je vezana na konkretno različico; sprememba besedila ali pravil odobritev razveljavi in zahteva nov pregled.
+Avtor vidi predogled za starša in seznam upravičencev. Obrazec gre skozi stanja osnutek, v pregledu, odobreno, objavljeno, zaključeno ali umaknjeno. Odobritev je vezana na konkretno različico; sprememba besedila ali pravil odobritev razveljavi in zahteva nov pregled. Avtor ne more odobriti lastne različice; potrjevalec je druga oseba. Izjemo zaradi majhnosti šole potrdi pooblaščena oseba šole z zabeleženo odločitvijo.
 
 Po objavi se besedilo, nameni in pravila ne prepišejo. Objavljena različica in tedanji prejemniki se ohranijo. Umik ustavi nove oddaje in opomnike; posledice za že podane odločitve določi potrjeni postopek.
 
@@ -116,13 +118,13 @@ Bistvena sprememba vsebine, namenov ali pravil ustvari novo različico in potreb
 
 ## M1, jedro in skupni vmesniki
 
-[M1 eSporočanje je v PR #1](https://github.com/odprta-sola/solska-platforma/pull/1). M2 uporablja skupne vzdrževane gradnike za identitete, povezave, prijavo in pravice. Ne razvija lastnega sistema prijave.
+[M1 eSporočanje](M1-eSporocanje.md) je predpogoj za obveščanje. M2 uporablja skupne vzdrževane gradnike za identitete, povezave, prijavo in pravice. Ne razvija lastnega sistema prijave.
 
 M2 pošlje M1 zahtevo za obvestilo, opomnik, potrdilo ali obvestilo o spremembi. M1 prejme samo potrebne prejemnike, splošno besedilo in zaščiten sklic; ne kopije vseh odločitev. M2 je edini vir stanja obrazcev in odločitev. Modula ne bereta tabel drug drugega.
 
 Vmesnik določi različico pogodbe, pooblastila, identifikator zahteve, potrditve prevzema, ponovne poskuse in preprečevanje podvojitev. Odločitev se shrani neodvisno od trenutne razpoložljivosti M1; obveščanje čaka v trajni vrsti. Ob preklicu se zastareli opomniki odpovejo, upravičenje pa preveri tudi pred dejanskim pošiljanjem.
 
-Obveščanje iz drugih modulov je trenutno poznejša funkcija M1. Če M2 potrebuje povezavo že v pilotu, mentorja in tehnični nosilec skupaj potrdita minimalni vmesnik ter ustrezno dopolnita obseg M1. Do tega trenutka se povezava v prototipu preverja z nadomestnim testnim vmesnikom; produkcijski pilot potrebuje delujoč pregledan kanal.
+Minimalni vmesnik za obveščanje iz drugih modulov je del pilota M1 ([razdelek v M1](M1-eSporocanje.md#minimalni-vmesnik-za-druge-module)). Mentor in tehnični nosilec ga skupaj uskladita z ekipama M1 in M2. Do uskladitve se povezava v prototipu preverja z nadomestnim testnim vmesnikom; produkcijski pilot potrebuje delujoč pregledan kanal.
 
 M2 ne zahteva dokončanega celotnega jedra platforme. Samostojna namestitev pomeni uporabo skupnih gradnikov in dogovorjenega kanala obveščanja, ne podvajanja varnostnih funkcij.
 
@@ -202,6 +204,7 @@ Pred produkcijo se določijo posodobitve, nadzor, incidenti, obnovitev in spreje
 | Pravilo zahteva več upravičencev | Stanje čaka do izpolnitve pravila; posamezni odzivi so ohranjeni |
 | Odzivi si nasprotujejo | Avtomatska izvedba je blokirana in primer predan v obravnavo |
 | Odobreni obrazec se spremeni pred objavo | Zahtevan je nov pregled različice |
+| Avtor poskusi odobriti lastno različico | Odobritev je zavrnjena brez zabeležene izjeme |
 | Objavljeni obrazec se bistveno spremeni | Stare odločitve ne veljajo samodejno za novo različico |
 | Zahteva za oddajo se ponovi ali prispe sočasno | Ni izgube odzivov ali podvojenih logičnih oddaj |
 | Privolitev za namen je preklicana | Novo stanje je takoj vidno; ustvari se potrdilo in potrebna naloga |
@@ -209,6 +212,9 @@ Pred produkcijo se določijo posodobitve, nadzor, incidenti, obnovitev in spreje
 | Prispe papirni odziv | Vir, različica in vnos so sledljivi; spor sproži obravnavo |
 | Upravičenje osebe se spremeni | Nadaljnje dejanje sledi preverjenim pravicam, zgodovina ostane sledljiva |
 | Sistem se obnovi iz kopije | Odločitve so uporabne, pravila hrambe in brisanja ponovno veljajo |
+| Uvoz vsebuje napačne povezave ali dvojnike | Napake so prikazane, obstoječa evidenca ostane celovita |
+| Priloga je zlonamerna ali preverjanje ne deluje | Priloga ostane zadržana in ni dostopna |
+| Preizkus z reprezentativnim številom upravičencev in hkratnih oddaj | Ni izgubljenih odločitev; odzivnost dosega predhodno potrjeni cilj |
 | Uporaba na telefonu, s tipkovnico in bralnikom zaslona | Ključni postopki so izvedljivi |
 | Izvoz za pooblaščen pregled | Vsebuje celotno potrebno različico in zgodovino, brez podatkov zunaj pooblastila |
 
@@ -234,7 +240,7 @@ To je možnost organizacije, ne imenovanje ekip. En lastnik odločitve o skupnem
 
 1. Katera šola, postopek in skupina uporabnikov sestavljajo pilot?
 2. Kdo potrdi vrsto postopka, besedilo in pravila odločanja?
-3. Kdo sme odločati, koliko upravičencev je potrebnih in kako se rešujejo spori?
+3. Kdo sme odločati (vključno s polnoletnimi dijaki), koliko upravičencev je potrebnih in kako se rešujejo spori?
 4. Katera raven prijave in preverjanja dejanja je potrebna?
 5. Kaj pomeni sprememba, preklic in iztek za izbrani postopek?
 6. Kdo izvede naloge zunaj M2 in v kakšnih rokih?
