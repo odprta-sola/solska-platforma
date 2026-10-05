@@ -20,6 +20,10 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D09 | Vzdrževanje, podpora in namestnik | Odprto | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema | Predlog v specifikaciji M1 | Tehnični nosilec in pilotna šola |
 
+## Dogovorjeno sodelovanje
+
+OŠ Vojke Šmuc Izola in GEPŠ Piran sta se odločili za sodelovanje v projektu. Podatek je 5. oktobra 2026 potrdil pobudnik Mitja Pirih. Datum prvotne odločitve in zapis dogovora tu nista določena. Obseg pilota, konkretne odgovornosti in produkcijska uvedba ostajajo predmet ločenih odločitev.
+
 ## Evidentirana dejstva
 
 - 5. oktobra 2026 sta bila vzpostavljena javna organizacija GitHub in repozitorij.
