@@ -4,13 +4,13 @@ Projekt je v fazi dokumentacije in še nima produkcijske kode ali podatkov. Prav
 
 ## Kako sporočiti varnostno težavo
 
-Zasebni kanal prijave še ni določen; določi se pred prvo kodo oziroma pred vključitvijo zunanjih razvojnih ekip, kar nastopi prej (glej [CONTRIBUTING.md](CONTRIBUTING.md)). Do takrat:
+Zasebna prijava ranljivosti v GitHubu je omogočena. V zavihku **Security** izberite **Report a vulnerability** oziroma uporabite [zasebno prijavo](https://github.com/odprta-sola/solska-platforma/security/advisories/new). Prijavo prejmejo pooblaščeni vzdrževalci repozitorija.
 
-- v javnem issueju sporočite le, da imate varnostno opažanje, in prosite za zasebni stik;
-- v issue ne vpisujte tehničnih podrobnosti, načinov zlorabe, skrivnosti ali resničnih podatkov;
-- osebnih podatkov učencev, staršev ali zaposlenih ne pošiljajte nikamor v repozitoriju.
+- Tehničnih podrobnosti, načinov zlorabe ali skrivnosti ne objavljajte v javnih Issues.
+- Za dokaz uporabite izmišljene oziroma zmanjšane podatke; ne prilagajte produkcijskih izvozov ali osebnih podatkov.
+- Ob opaženi objavi skrivnosti ali osebnih podatkov navedite mesto težave brez ponovnega kopiranja vsebine.
 
-Če ste v repozitoriju zasledili objavljene skrivnosti ali osebne podatke, to prav tako sporočite brez ponovnega navajanja vsebine.
+Odgovorna oseba za obravnavo in roki odziva še potrebujejo potrditev v D14.
 
 ## Obravnava
 
