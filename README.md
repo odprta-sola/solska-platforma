@@ -4,9 +4,15 @@ Modularna odprtokodna rešitev za elektronsko poslovanje šol.
 
 Projekt nastaja iz pobude za preprostejšo komunikacijo med šolo in starši ter sodelovanje šol, mentorjev in dijakov pri razvoju uporabnih odprtokodnih rešitev.
 
+## Dokumentacija
+
+[Kazalo dokumentacije](docs/README.md) povezuje javni povzetek V6, predlog odgovornosti, arhitekturna izhodišča in register odločitev.
+
+[Osnutek M1 eSporočanje](https://github.com/odprta-sola/solska-platforma/pull/1) je v ločenem predlogu sprememb. [Navodila za sodelovanje](CONTRIBUTING.md) opisujejo pripravo in pregled prispevkov.
+
 ## Trenutno stanje
 
-Projekt je v fazi priprave dokumentacije, usklajevanja obsega prvega modula in organizacije razvoja. Aplikacija še ni na voljo za produkcijsko uporabo.
+OŠ Vojke Šmuc Izola in GEPŠ Piran sta se odločili za sodelovanje v projektu. Potekajo priprava dokumentacije, usklajevanje obsega prvega modula in organizacija razvoja. Aplikacija še ni na voljo za produkcijsko uporabo.
 
 Dokumentacija v repozitoriju je delovna, razen kadar je izrecno označena kot potrjena. Objava spremembe sama po sebi ne pomeni potrditve sodelujočih šol.
 
