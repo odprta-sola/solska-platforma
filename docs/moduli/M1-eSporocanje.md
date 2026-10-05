@@ -111,7 +111,9 @@ Delitev odgovornosti pri opomnikih: klicoči modul odloči, koga in do kdaj opom
 
 Klicoči modul ob oddaji odziva, spremembi, preklicu ali izteku potrebe sproži preklic povezanih opomnikov. M1 pred pošiljanjem preveri še aktualno potrebo prek dogovorjenega vmesnika klicočega modula; samo preverjanje upravičenja ne zadostuje. Preklic je varen pri ponovitvah. Pogodba opredeli tudi tekmovanje med odzivom in pošiljanjem: e-pošte, ki je že predana strežniku, ni mogoče priklicati, vendar njena povezava pokaže aktualno stanje postopka.
 
-Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (expires_at); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
+#### Veljavnost opomnikov
+
+Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (polje `expires_at`); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
 
 Ob polnoletstvu dijaka med šolskim letom šola zagotovi spremembo upravičenj z določenim začetkom veljavnosti. Modul ponovno preveri prejemnike, dostope in odprte zahteve; preteklih potrditev ne prepiše. Nova dejanja sledijo aktualnim, za postopek potrjenim pravilom. Sam datum rojstva brez potrjenih pravil ni avtomatsko dovoljenje za dostop starša.
 
@@ -176,7 +178,7 @@ Pred produkcijo se s pooblaščeno osebo za varstvo podatkov presodi potreba po 
 
 Modul ima lastno logično podatkovno shrambo in dokumentiran API. Ne bere tabel drugih modulov. Skupne komponente za prijavo in pravice naj bodo vzdrževane centralno in uporabne tudi v samostojni namestitvi.
 
-Tehnologijo potrdi tehnični nosilec z mentorjem glede na znanje ekipe, vzdrževanje, varnost in ciljno okolje. Django je kandidat, ne potrjena odločitev. Predviden je ponovljiv kontejnerski namestitveni paket.
+Tehnologijo potrdi skupni tehnični nosilec z mentorjem glede na znanje ekipe, vzdrževanje, varnost in ciljno okolje. Django je kandidat, ne potrjena odločitev. Predviden je ponovljiv kontejnerski namestitveni paket.
 
 Komunikacija uporablja vzdrževane varne nastavitve TLS. Pri e-pošti se dokumentirajo dejanske možnosti prenosa; ne predpostavlja se zagotovljeno šifriranje vseh zunanjih poštnih poti. Priponke in kopije se zaščitijo s šifriranjem ter upravljanjem ključev. Lastna kriptografija ni dovoljena. Postkvantna izmenjava ključev ni pogoj prvega prevzema.
 
