@@ -6,7 +6,7 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 | --- | --- |
 | [Povzetek projekta V6](projekt/povzetek.md) | Namen, stanje, faze, moduli in spremembe glede na V5 |
 | [Odgovornosti](projekt/odgovornosti.md) | Predlog vodenja, pregleda in vzdrževanja |
-| [Arhitektura](arhitektura/izhodišča.md) | Predlagana razmejitev jedra in samostojnih modulov |
+| [Arhitektura](arhitektura/izhodisca.md) | Predlagana razmejitev jedra in samostojnih modulov |
 | [Anketa staršev](raziskave/anketa-starsi.md) | Javno poročilo s popravljeno razlago rezultatov |
 | [Register odločitev](projekt/odlocitve.md) | Odprta vprašanja in postopek potrjevanja |
 | [Izvor gradiva](projekt/izvor-gradiva.md) | Sledljivost izvirnikov in novih javnih različic |

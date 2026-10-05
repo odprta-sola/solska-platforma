@@ -62,7 +62,7 @@ Moduli imajo dokumentirane vmesnike in ne dostopajo do tabel drugih modulov. Sam
 
 Za pilot je predlagana ločena namestitev posamezne šole. Arnes je kandidat za infrastrukturo, vendar je treba pred potrditvijo preveriti storitve, pogoje in odgovornosti upravljanja. SI-PASS in ArnesAAI sta predvideni prihodnji povezavi, ne že potrjeni integraciji.
 
-Gostovanje pri šoli ne izključuje zunanjih podatkovnih poti. E-pošto, kopije, podporo in zunanje prijave je treba dokumentirati. Tehnologijo z mentorjem potrdi tehnični nosilec. [Arhitekturna izhodišča](../arhitektura/izhodišča.md) ostajajo osnutek.
+Gostovanje pri šoli ne izključuje zunanjih podatkovnih poti. E-pošto, kopije, podporo in zunanje prijave je treba dokumentirati. Tehnologijo z mentorjem potrdi tehnični nosilec. [Arhitekturna izhodišča](../arhitektura/izhodisca.md) ostajajo osnutek.
 
 ## Vodenje in vzdrževanje
 

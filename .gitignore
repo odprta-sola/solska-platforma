@@ -1,0 +1,34 @@
+# Skrivnosti in okolja
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+*.secret
+
+# Podatki in izvozi: nikoli v repozitorij
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
+*.bak
+dumps/
+exports/
+izvozi/
+backups/
+
+# Orodja in gradnja
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

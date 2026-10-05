@@ -13,7 +13,7 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D02 | Mentor, dijaki in roki | Odprto | Razvojni zavod |
 | D03 | Tehnični nosilec in skupni gradniki | Odprto | Sodelujoči zavodi |
 | D04 | Gostovanje, e-pošta in kopije | Odprto | Pilotna šola in tehnični nosilec |
-| D05 | Jeziki in dostopnost pilota | Odprto | Pilotna šola |
+| D05 | Jeziki in dostopnost pilota (podatkovni model je večjezičen od začetka; zahtevani jeziki za namestitve po državi, npr. italijanščina in madžarščina, se pravno preverijo) | Odprto | Pilotna šola in nosilec projekta |
 | D06 | Upravičeni prejemniki in pravila potrjevanja | Odprto | Pilotna šola |
 | D07 | Hramba, dostopi in podatkovne poti | Odprto | Pilotna šola ob posvetu z DPO |
 | D08 | Licenca EUPL 1.2 in pravice prispevkov | Predlog | Nosilec projekta in avtorji |

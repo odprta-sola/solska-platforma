@@ -11,9 +11,9 @@ Javna dokumentacija je nova uredniška različica gradiva, ki ga je pobudnik pre
 | Porocilo_anketa_starsi_OS_Vojke_Smuc.docx, 1. oktober 2026 | raziskave/anketa-starsi.md | Javna različica z ohranjenimi zbirnimi številkami in popravljeno interpretacijo |
 | Elektronsko poslovanje šole.pdf, dopis 1. oktober 2026 | Brez javne kopije | Ohranjen izvirnik korespondence |
 
-Izvirna preglednica odgovorov ni bila na voljo pri pripravi te javne različice. Številke izhajajo iz predloženega poročila, ne iz ponovne analize surovih podatkov. V javno gradivo niso preneseni posnetki razrednih glasovanj ali dobesedni prosti odgovori.
+Pri prvi pripravi te javne različice izvirna preglednica odgovorov ni bila na voljo, številke pa so izhajale iz predloženega poročila. Pozneje, 5. oktobra 2026, so bile zbirne številke (načini, za/proti po načinih, pomisleki, odgovori z več izbirami, hitrost odziva) preverjene z izvirno preglednico; zbirne vrednosti iz poročila so se ujemale. Preglednica ni del javnega repozitorija. V javno gradivo niso preneseni posnetki razrednih glasovanj ali dobesedni prosti odgovori.
 
-Predlog notranjega akta, omenjen v V5, ni bil med predloženimi priponkami. Javna dokumentacija zato ne zatrjuje njegovega pregleda.
+Predlog notranjega akta (pravilnik o elektronskem poslovanju s starši, osnutek september 2026) je bil pri prvi pripravi odsoten, pozneje pa je bil predložen. V javno dokumentacijo ni prenesen in ta ne zatrjuje njegove potrditve ali pravnega pregleda.
 
 ## Različice in potrditve
 

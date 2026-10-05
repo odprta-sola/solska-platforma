@@ -87,7 +87,7 @@ Pomislek glede zapletenosti ne določa sam po sebi primerne ravni zaščite prij
 
 ## Hitrost odziva in prosti odgovori
 
-Po izvornem poročilu je 198 od 251 odgovorov (78,9 %) prispelo v prvih 48 urah. To je koristno izhodišče za preizkus časov opominjanja, ne dokaz, da bodo odzivi na obvestila ali soglasja enaki.
+Po izvornem poročilu je 198 od 251 odgovorov (78,9 %) prispelo do konca 23. septembra 2026, torej v prvih dveh koledarskih dneh od začetka ankete 22. septembra. Merjeno od prvega odgovora (22. septembra ob 18.34) jih je v 48 urah prispelo 233 (92,8 %). To je koristno izhodišče za preizkus časov opominjanja, ne dokaz, da bodo odzivi na obvestila ali soglasja enaki.
 
 Pet prostih odgovorov odpira teme brezplačne uporabe, ene vstopne točke, kopije potrdila, opomnikov in jasnih pravic vpogleda. Zaradi majhnega števila jih uporabljamo kot kvalitativne predloge, ne splošno izmerjene zahteve. Dobesednih navedb v to javno različico ne prenašamo.
 

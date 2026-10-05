@@ -23,6 +23,16 @@ Mentor potrjuje izvedljivost učnega izdelka. Tehnični nosilec pregleda tehnič
 
 Merge v GitHubu je tehničen dogodek. Potrditev dokumenta mora navesti različico oziroma commit, datum, obseg odločitve in odgovorno osebo. GitHub ni nadomestilo za potreben dogovor med zavodoma.
 
+## Nasprotje interesov in nekomercialna vloga
+
+Koordinator projekta je hkrati direktor podjetja, ki tržno opravlja informacijske storitve za javne zavode. To ni ovira za sodelovanje, je pa tveganje za ugled projekta in sodelujoče šole. Predlagana pravila, ki jih je treba zapisati v dogovor o sodelovanju med zavodoma (predlog, ne sklenjen dogovor):
+
+1. Podjetje v projektu ne nastopa kot izvajalec, obdelovalec osebnih podatkov ali ponudnik hrambe, ampak izključno nekomercialno.
+2. Dokler koordinator vodi projekt, podjetje sodelujočim šolam ne izstavlja ponudb za storitve, povezane s predmetom projekta.
+3. Če projekt pridobi sredstva, je prijaviteljica šola; podjetje iz teh sredstev ni plačano, sicer koordinator vodenje prepusti drugi osebi.
+
+Dejanske naloge in dostope vseh sodelujočih se pred produkcijo presodi in dokumentira (glej povzetek, razdelek Pravne in organizacijske odločitve).
+
 ## Dostopi in podpora
 
 Pravice GitHub se določijo po vlogi: branje, predlaganje sprememb, pregled in upravljanje. Dostop do repozitorija ne daje dostopa do produkcijskih podatkov.
