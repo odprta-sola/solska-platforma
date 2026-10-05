@@ -3,11 +3,11 @@
 Status: osnutek za dogovor  
 Datum: 5. oktober 2026
 
-To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obveznosti šol. Imena, namestnike in razpoložljiv čas se potrdijo v dogovoru sodelujočih.
+OŠ Vojke Šmuc Izola in GEPŠ Piran sta se odločili za sodelovanje v projektu. Ta dokument je predlog konkretne razdelitve dela; odgovorne osebe, namestniki in razpoložljiv čas se še določijo.
 
 | Vloga | Odgovornost | Kdaj mora biti določena |
 | --- | --- | --- |
-| Vodstvo sodelujočega zavoda | Odloči o sodelovanju, virih in uvedbi na svoji šoli | Pred formalnim začetkom |
+| Vodstvo sodelujočega zavoda | Konkretizira dogovorjeno sodelovanje ter potrdi vire in uvedbo na svoji šoli | Vire pred razvojem, uvedbo pred produkcijo |
 | Koordinator projekta | Usklajuje gradivo, vprašanja, mejnike in sodelovanje | Pred začetkom razvoja |
 | Mentor | Oceni učni obseg, vodi dijake in preverja izdelek | Pred potrditvijo maturitetne teme |
 | Tehnični nosilec | Potrjuje arhitekturo, skupne gradnike in strokovni pregled | Pred začetkom razvoja |
