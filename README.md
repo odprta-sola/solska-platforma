@@ -8,7 +8,7 @@ Projekt nastaja iz pobude za preprostejšo komunikacijo med šolo in starši ter
 
 [Kazalo dokumentacije](docs/README.md) povezuje javni povzetek V6, poročilo ankete, predlog odgovornosti, arhitekturna izhodišča in register odločitev.
 
-[Osnutek M1 eSporočanje](docs/moduli/M1-eSporocanje.md) je odprt za pregled. [Navodila za sodelovanje](CONTRIBUTING.md) opisujejo pripravo in pregled prispevkov.
+[Osnutek M1 eSporočanje](docs/moduli/M1-eSporocanje.md) opredeli obvestila in seznanitev. [Osnutek M2 eSoglasja](docs/moduli/M2-eSoglasja.md) opredeli obrazce, odločitve in preklic. Oba sta odprta za mentorjev pregled. [Navodila za sodelovanje](CONTRIBUTING.md) opisujejo pripravo in pregled prispevkov.
 
 ## Trenutno stanje
 
@@ -58,7 +58,7 @@ V javne razprave ne vključujte osebnih podatkov učencev, staršev ali zaposlen
 1. Uskladitev in potrditev obsega prvega pilota M1.
 2. Določitev odgovornosti za razvoj, pregled in vzdrževanje.
 3. Priprava arhitekture in pravil povezovanja modulov.
-4. Dodajanje licence in navodil za prispevanje.
+4. Potrditev licence kode in pogojev prispevkov.
 5. Razvoj in preizkus na testnih podatkih.
 
 ## Licenca
