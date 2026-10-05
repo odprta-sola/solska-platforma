@@ -8,7 +8,7 @@ Projekt nastaja iz pobude za preprostejšo komunikacijo med šolo in starši ter
 
 [Kazalo dokumentacije](docs/README.md) povezuje javni povzetek V6, poročilo ankete, predlog odgovornosti, arhitekturna izhodišča in register odločitev.
 
-[Osnutek M1 eSporočanje](https://github.com/odprta-sola/solska-platforma/pull/1) je v ločenem predlogu sprememb. [Navodila za sodelovanje](CONTRIBUTING.md) opisujejo pripravo in pregled prispevkov.
+[Osnutek M1 eSporočanje](docs/moduli/M1-eSporocanje.md) je odprt za pregled. [Navodila za sodelovanje](CONTRIBUTING.md) opisujejo pripravo in pregled prispevkov.
 
 ## Trenutno stanje
 

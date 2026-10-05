@@ -12,7 +12,7 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 | [Izdaje](izdaje/README.md) | Pravila za potrjene dokumente in PDF |
 | [Navodila za sodelovanje](../CONTRIBUTING.md) | Predlaganje in pregled sprememb |
 
-Specifikacija M1 je trenutno v [predlogu sprememb št. 1](https://github.com/odprta-sola/solska-platforma/pull/1), v datoteki [docs/moduli/M1-eSporocanje.md](https://github.com/odprta-sola/solska-platforma/blob/docs/m1-esporocanje/docs/moduli/M1-eSporocanje.md). Po združitvi bo del glavne veje.
+[Osnutek specifikacije M1 eSporočanje](moduli/M1-eSporocanje.md) opredeli obvestila, potrditev seznanitve, opomnike, papirno pot ter minimalni vmesnik za druge module. Obseg pilota potrebuje mentorjev pregled.
 
 Za mentorjev prvi pregled so najpomembnejši povzetek, specifikacija M1 in odgovornosti. Tehnologija in razrez dela ostajata predmet dogovora.
 

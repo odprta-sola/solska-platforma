@@ -31,9 +31,9 @@ M1 eSporočanje je namenjen organizacijskim obvestilom, prilogam, e-poštnemu ob
 
 Pilot mora ločiti objavo, predajo e-pošte strežniku, odprtje vsebine in izrecno potrditev konkretne različice. Prejemnike določa preverjena evidenca upravičenih oseb.
 
-Predlagani prvi obseg vključuje uvoz, varno prijavo, pravice dostopa, različice, pregled odzivov, izvoz, kopije in mobilno dostopnost. Potisna obvestila, povezave z državnimi prijavami, integracije drugih modulov in avtomatizacija šolskega leta so predlog za naslednjo fazo. Potrebni jeziki pilotne šole sodijo že v pilot.
+Predlagani prvi obseg vključuje uvoz, varno prijavo, pravice dostopa, različice, pregled odzivov, izvoz, kopije in mobilno dostopnost. Vključen je tudi minimalni vmesnik za obveščanje iz drugih modulov, ki ga potrebuje M2. Potisna obvestila, povezave z državnimi prijavami, razširjene integracije in avtomatizacija šolskega leta so predlog za naslednjo fazo. Potrebni jeziki pilotne šole sodijo že v pilot.
 
-Obseg še pregleda mentor. [Osnutek M1](https://github.com/odprta-sola/solska-platforma/pull/1) je odprt za pripombe.
+Obseg še pregleda mentor. [Osnutek M1](../moduli/M1-eSporocanje.md) je odprt za pripombe.
 
 ## Predvideni moduli
 
