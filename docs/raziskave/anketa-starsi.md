@@ -23,7 +23,7 @@ Spletna anketa je v izvornem poročilu opisana kot anonimna in samoizbirna. Vibe
 
 Navodilo je predvidevalo odgovor v imenu družine za otroka v razredu. Enoličnosti ni bilo mogoče tehnično preveriti, družine z več otroki pa so lahko odgovorile večkrat. V tem javnem poročilu je zato enota štetja odgovor, ne potrjeno število različnih družin.
 
-Pri pripravi te različice izvorna preglednica in posnetki glasovanj niso bili na voljo za neodvisno preverjanje. Naknadne navedbe o preverjanju preglednice so v ločenem predlogu sprememb in še niso vključene. Spodnje številke so prenesene iz predloženega poročila; grafi se ne rekonstruirajo iz neznanih podrobnih podatkov.
+Izvorna preglednica »Neimenovan obrazec (Odzivi).xlsx« je bila predložena in pregledana 5. oktobra 2026. Vsebuje 251 odgovorov. Zbirna števila pripravljenosti, uporabe eAsistenta, želenega načina, ponujenih pomislekov in navzkrižna tabela želenega načina s pripravljenostjo se ujemajo s spodnjimi tabelami. Posnetki razrednih glasovanj Viber niso bili neodvisno preverjeni. Pregled ne potrjuje enoličnosti družin ali reprezentativnosti vzorca.
 
 ## Pripravljenost
 
@@ -79,7 +79,7 @@ Možnih je bilo več izbir, zato se deleži ne seštevajo do 100 %.
 | Želim ohraniti papirno možnost | 25 | 10,0 % |
 | Nimam primerne naprave ali zanesljivega dostopa | 3 | 1,2 % |
 
-Izvorno poročilo navaja 11 odgovorov, ki hkrati izberejo »nimam posebnih pomislekov« in še drug pomislek. To omejuje razlago kategorij.
+Pregled izvorne preglednice potrjuje 11 odgovorov, ki hkrati izberejo »nimam posebnih pomislekov« in še drug ponujeni pomislek. Še en odgovor to možnost združuje s prostim komentarjem. To omejuje razlago kategorij.
 
 Delež 1,2 % ni zanesljiva ocena digitalne izključenosti, ker so osebe brez spletnega dostopa težje sodelovale. Desetina odgovorov za papirno možnost prav tako ni natančna ocena potreb vseh družin.
 
@@ -87,7 +87,7 @@ Pomislek glede zapletenosti ne določa sam po sebi primerne ravni zaščite prij
 
 ## Hitrost odziva in prosti odgovori
 
-Izvorno poročilo navaja 198 od 251 odgovorov (78,9 %) v prvih 48 urah. Časovna opredelitev je predmet naknadnega preverjanja; do uskladitve je ne uporabljamo za določanje rokov ali opomnikov. Novi časovni izračuni še niso vključeni.
+Po časovnih oznakah v izvozu je bilo 198 od 251 odgovorov (78,9 %) oddanih do konca 23. septembra 2026. V 48 urah od prvega zabeleženega odgovora, oddanega 22. septembra ob 18:34:51, je bilo oddanih 233 odgovorov (92,8 %). Izvoz ne določa časovnega pasu. Izračun je vezan na prvi odgovor, ne na potrjeni čas objave ankete. Ti podatki popravljajo navedbo izvornega poročila o 198 odgovorih v prvih 48 urah in sami po sebi ne določajo rokov ali opomnikov.
 
 Pet prostih odgovorov odpira teme brezplačne uporabe, ene vstopne točke, kopije potrdila, opomnikov in jasnih pravic vpogleda. Zaradi majhnega števila jih uporabljamo kot kvalitativne predloge, ne splošno izmerjene zahteve. Dobesednih navedb v to javno različico ne prenašamo.
 
@@ -110,8 +110,8 @@ Izvirnik opozarja na zbirno številko 62 pri enem glasovanju: gre za seštevek g
 
 Za izračun odzivnosti je treba najprej razjasniti enoto odgovarjanja, podvojitve in ustrezen imenovalec; samo število družin brez tega ni dovolj. Spletno samoizbiro je smiselno dopolniti s pogovorom s starši, ki spletne poti ne uporabljajo.
 
-Pred morebitno statistično razširitvijo je treba preveriti surove podatke v pooblaščenem okolju. Javni repozitorij ne vsebuje individualnih odgovorov, kontaktov ali posnetkov z identitetami.
+Pred morebitno statistično razširitvijo je treba razjasniti podvojitve, ustrezen imenovalec in omejitve samoizbire. Javni repozitorij ne vsebuje individualnih odgovorov, kontaktov ali posnetkov z identitetami.
 
 ## Evidenca popravkov
 
-Zbirne številke iz poročila ostajajo ohranjene. Popravljeni so interpretacija 87,3 %, sklep o zgolj 3,6-odstotni sprejemljivosti portala, označevanje odgovorov kot potrjenih družin in premočni sklepi o reprezentativnosti, motivih ter prihodnji hitrosti odziva. Izvirni dokument ni spremenjen.
+Zbirne številke iz poročila ostajajo ohranjene. Popravljeni so interpretacija 87,3 %, sklep o zgolj 3,6-odstotni sprejemljivosti portala, označevanje odgovorov kot potrjenih družin in premočni sklepi o reprezentativnosti, motivih ter prihodnji hitrosti odziva. Naknadno preverjanje preglednice potrjuje zbirne tabele ter popravlja časovno opredelitev in dopolnjuje razlago sočasnih izbir pomislekov. Izvirni dokument ni spremenjen.
