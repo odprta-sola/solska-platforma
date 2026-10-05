@@ -23,6 +23,8 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D12 | Minimalni vmesnik M1–M2 in skupni vir identitet ter upravičenj | Odprto | Skupni tehnični nosilec in mentorji ekip |
 | D13 | Razdelitev ekip, nosilci modulov in ocena ur po fazah | Odprto | Sodelujoči zavodi in mentorji |
 | D14 | Zasebni kanal za prijavo ranljivosti in nosilec obravnave | Odprto; pred prvo kodo oziroma vključitvijo zunanjih ekip | Nosilec projekta in skrbnik repozitorija |
+| D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | Predlog/Odprto | Nosilec projekta in avtorji |
+| D16 | Prejemniki in odločevalci pri polnoletnih dijakih, prehod med letom in ustreznost privolitve za postopek | Odprto | Pilotna šola ob pravnem in podatkovnem pregledu |
 
 ## Stanje sodelovanja
 

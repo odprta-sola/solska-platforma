@@ -80,7 +80,8 @@ Pilot omogoča odločitev za posameznega otroka. Starš z več otroki postopek p
 
 | Podatek | Pomen |
 | --- | --- |
-| Posamezni odziv | Brez odziva, pritrdilno, odklonilno, spremenjeno ali preklicano |
+| Trenutna odločitev posameznika | Brez odziva, pritrdilno, odklonilno ali preklicano; pri privolitvi ločeno za vsak namen |
+| Dogodek v zgodovini | Oddaja, sprememba, preklic ali popravek vnosa; dogodek ne nadomesti trenutne odločitve |
 | Skupno stanje | Čaka na zahtevane odzive, pogoji izpolnjeni, pogoji niso izpolnjeni ali potrebna ročna obravnava |
 | Stanje obveščanja | Ločeno stanje pošiljanja, odprtja in seznanitve v M1 |
 
@@ -116,6 +117,12 @@ Preklic ali nasprotna odločitev ustvari nalogo za odgovornega zaposlenega, kada
 
 Bistvena sprememba vsebine, namenov ali pravil ustvari novo različico in potrebo po novi odločitvi po pregledanem postopku. Stare odločitve se ne prenesejo samodejno. Iztek veljavnosti ne podaljša odločitve.
 
+Zaključek zbiranja novih odgovorov ne zapre poti za preklic veljavne privolitve. Sistem loči stanje zbiranja obrazca, veljavnost odločitev in dovoljene nadaljnje postopke. Preklic je dostopen tudi pri zaključenem ali umaknjenem obrazcu, dokler obstaja veljavna privolitev; če uporabnik nima več spletnega dostopa, šola zagotovi drugo pot obravnave.
+
+Po zavrnitvi ali preklicu je nova odločitev možna le po pravilih izbranega postopka in ob ponovnem preverjanju upravičenja, različice ter veljavnosti obrazca. Uporabnik ponovno pregleda vsebino in izrecno odda novo odločitev; prejšnji zapisi ostanejo v zgodovini. Kadar rok ali stanje tega ne dopušča, sistem ponudi zahtevo za obravnavo, ne samodejne potrditve.
+
+Ročna obravnava zabeleži pristojno osebo, razlog in rezultat. Ne ustvari navidezne odločitve starša ali dijaka. Če je potrebna nova izjava, jo poda upravičena oseba po dovoljenem kanalu. Zaključek obravnave sproži ponovno izračunano skupno stanje ter ustrezno ustavitev ali obnovo nalog in opomnikov.
+
 ## M1, jedro in skupni vmesniki
 
 [M1 eSporočanje](M1-eSporocanje.md) je predpogoj za obveščanje. M2 uporablja skupne vzdrževane gradnike za identitete, povezave, prijavo in pravice. Ne razvija lastnega sistema prijave.
@@ -128,9 +135,13 @@ Minimalni vmesnik za obveščanje iz drugih modulov je del pilota M1 ([razdelek 
 
 M2 ne zahteva dokončanega celotnega jedra platforme. Samostojna namestitev pomeni uporabo skupnih gradnikov in dogovorjenega kanala obveščanja, ne podvajanja varnostnih funkcij.
 
+Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (expires_at); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
+
+Pri polnoletstvu med šolskim letom šola potrdi aktualne odločevalce in čas začetka novih pravil ter posodobi preverjena upravičenja. M2 ponovno presodi odprte postopke in potrebo po novi izjavi. Stare odločitve staršev ostanejo v zgodovini; ne štejejo samodejno kot nova odločitev dijaka. Nadaljnje oddaje, dostopi in opomniki sledijo novim pravilom. Nosilec tega postopka je pilotna šola ob potrebnem pravnem pregledu.
+
 ## Roki, opomniki in papirna pot
 
-Rok odziva, veljavnost odločitve in rok hrambe so ločeni podatki. Opominjajo se zahtevani upravičenci brez ustrezne aktualne odločitve; zavrnjenih ali preklicanih odločitev se ne obravnava kot pozabljeni odziv. M2 odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic sproži M2. M1 izvaja pošiljanje, tihi čas, omejene ponovne poskuse in prikaz napak po svojih pravilih. Predaja strežniku ni dokaz prejema; stanje obveščanja v M2 je samo informativno in ne nadomesti odločitve upravičene osebe.
+Rok odziva, veljavnost odločitve in rok hrambe so ločeni podatki. Opominjajo se zahtevani upravičenci brez ustrezne aktualne odločitve; zavrnjenih ali preklicanih odločitev se ne obravnava kot pozabljeni odziv. M2 odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic sproži M2. Ob oddaji odziva ali spremembi njegovega stanja M2 sproži preklic vseh opomnikov, ki niso več potrebni. M1 neposredno pred pošiljanjem prek dogovorjenega vmesnika preveri, ali zahteva ni preklicana ali nadomeščena ter ali je odziv še potreben. Če preverjanje ni dosegljivo, se opomnik zadrži; že predane e-pošte ni mogoče priklicati, povezava pa pokaže aktualno stanje. M1 izvaja pošiljanje, tihi čas, omejene ponovne poskuse in prikaz napak po svojih pravilih. Predaja strežniku ni dokaz prejema; stanje obveščanja v M2 je samo informativno in ne nadomesti odločitve upravičene osebe.
 
 Papirni obrazec vsebuje isto različico vsebine in izbire kot spletni. Interni seznam za razdelitev je ločen. Zaposleni evidentira prejeti odgovor, vir, datum prejema in vnosa ter različico; ne ustvari navideznega elektronskega klika starša. Način hrambe in povezave s papirnim izvirnikom določi šola.
 
@@ -138,7 +149,7 @@ Nasprotujoč elektronski in papirni odziv ne prepišeta zgodovine; sprožita obr
 
 ## Glavni zasloni
 
-- Starš: seznam odprtih obrazcev, otrok, rok, veljavnost in stanje.
+- Upravičena oseba: seznam odprtih obrazcev, otrok oziroma lastni postopek dijaka, rok, veljavnost in stanje.
 - Starš: vsebina, izbire po namenih, pregled pred oddajo in potrdilo.
 - Starš: zgodovina lastnih odločitev, sprememba ali preklic.
 - Avtor: predloge, različice, predogled in oddaja v pregled.
@@ -209,6 +220,15 @@ Pred produkcijo se določijo posodobitve, nadzor, incidenti, obnovitev in spreje
 | Objavljeni obrazec se bistveno spremeni | Stare odločitve ne veljajo samodejno za novo različico |
 | Zahteva za oddajo se ponovi ali prispe sočasno | Ni izgube odzivov ali podvojenih logičnih oddaj |
 | Privolitev za namen je preklicana | Novo stanje je takoj vidno; ustvari se potrdilo in potrebna naloga |
+| Odziv prispe, ko opomnik čaka | M2 sproži preklic, M1 preveri aktualno potrebo; zastareli opomnik se ne pošlje |
+| Zaključeno zbiranje odgovorov pri veljavni privolitvi | Preklic ostane dostopen in ustvari nov dokazni dogodek |
+| Po zavrnitvi ali preklicu je dovoljena nova odločitev | Uporabnik ponovno pregleda vsebino; nova oddaja ohrani zgodovino in aktualno stanje |
+| Ročna obravnava je zaključena | Rezultat in odgovorna oseba sta sledljiva; sistem ne ponaredi izjave upravičenca |
+| Polnoletni dijak odloča o lastnem postopku | Odločitev in dostop sledita pregledanim pravilom; starš ne odloči v njegovem imenu brez ustreznega upravičenja |
+| M2 je nedosegljiv do izteka opomnika | M1 zamujenega opomnika ne pošlje; napaka in iztek sta sledljiva |
+| Obrazec je umaknjen, privolitev pa še velja | Upravičencu ostane dostopna pot za preklic |
+| Dijak postane polnoleten med letom | Novi odzivi sledijo potrjenim novim pravilom; stare odločitve staršev ostanejo v zgodovini |
+| M1 preveri potrebo po opomniku | Prejme samo potreben/nepotreben s kodo razloga ali napako, brez vsebine odločitev |
 | Obveščanje odpove | Odločitev ostane shranjena; po obnovi ni zastarelih opomnikov |
 | Prispe papirni odziv | Vir, različica in vnos so sledljivi; spor sproži obravnavo |
 | Upravičenje osebe se spremeni | Nadaljnje dejanje sledi preverjenim pravicam, zgodovina ostane sledljiva |
