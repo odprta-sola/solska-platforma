@@ -12,7 +12,7 @@ Projekt nastaja iz pobude za preprostejšo komunikacijo med šolo in starši ter
 
 ## Trenutno stanje
 
-Pobudo sta podprli vodstvi OŠ Vojke Šmuc Izola in GEPŠ Piran; formalni dogovor o sodelovanju še ni sklenjen. Potekajo priprava dokumentacije, usklajevanje obsega prvega modula in organizacija razvoja. Aplikacija še ni na voljo za produkcijsko uporabo.
+Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Potekajo priprava dokumentacije, usklajevanje obsega prvega modula in organizacija razvoja. Aplikacija še ni na voljo za produkcijsko uporabo.
 
 Dokumentacija v repozitoriju je delovna, razen kadar je izrecno označena kot potrjena. Objava spremembe sama po sebi ne pomeni potrditve sodelujočih šol.
 
