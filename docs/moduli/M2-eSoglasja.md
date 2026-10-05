@@ -117,7 +117,7 @@ Preklic ali nasprotna odločitev ustvari nalogo za odgovornega zaposlenega, kada
 
 Bistvena sprememba vsebine, namenov ali pravil ustvari novo različico in potrebo po novi odločitvi po pregledanem postopku. Stare odločitve se ne prenesejo samodejno. Iztek veljavnosti ne podaljša odločitve.
 
-Zaključek zbiranja novih odgovorov ne zapre poti za preklic veljavne privolitve. Sistem loči stanje zbiranja obrazca, veljavnost odločitev in dovoljene nadaljnje postopke. Preklic je dostopen tudi pri zaključenem obrazcu, dokler obstaja veljavna privolitev; če uporabnik nima več spletnega dostopa, šola zagotovi drugo pot obravnave.
+Zaključek zbiranja novih odgovorov ne zapre poti za preklic veljavne privolitve. Sistem loči stanje zbiranja obrazca, veljavnost odločitev in dovoljene nadaljnje postopke. Preklic je dostopen tudi pri zaključenem ali umaknjenem obrazcu, dokler obstaja veljavna privolitev; če uporabnik nima več spletnega dostopa, šola zagotovi drugo pot obravnave.
 
 Po zavrnitvi ali preklicu je nova odločitev možna le po pravilih izbranega postopka in ob ponovnem preverjanju upravičenja, različice ter veljavnosti obrazca. Uporabnik ponovno pregleda vsebino in izrecno odda novo odločitev; prejšnji zapisi ostanejo v zgodovini. Kadar rok ali stanje tega ne dopušča, sistem ponudi zahtevo za obravnavo, ne samodejne potrditve.
 
@@ -134,6 +134,10 @@ Vmesnik določi različico pogodbe, pooblastila, identifikator zahteve, potrditv
 Minimalni vmesnik za obveščanje iz drugih modulov je del pilota M1 ([razdelek v M1](M1-eSporocanje.md#minimalni-vmesnik-za-druge-module)). Mentor in tehnični nosilec ga skupaj uskladita z ekipama M1 in M2. Do uskladitve se povezava v prototipu preverja z nadomestnim testnim vmesnikom; produkcijski pilot potrebuje delujoč pregledan kanal.
 
 M2 ne zahteva dokončanega celotnega jedra platforme. Samostojna namestitev pomeni uporabo skupnih gradnikov in dogovorjenega kanala obveščanja, ne podvajanja varnostnih funkcij.
+
+Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (expires_at); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
+
+Pri polnoletstvu med šolskim letom šola potrdi aktualne odločevalce in čas začetka novih pravil ter posodobi preverjena upravičenja. M2 ponovno presodi odprte postopke in potrebo po novi izjavi. Stare odločitve staršev ostanejo v zgodovini; ne štejejo samodejno kot nova odločitev dijaka. Nadaljnje oddaje, dostopi in opomniki sledijo novim pravilom. Nosilec tega postopka je pilotna šola ob potrebnem pravnem pregledu.
 
 ## Roki, opomniki in papirna pot
 
@@ -220,6 +224,10 @@ Pred produkcijo se določijo posodobitve, nadzor, incidenti, obnovitev in spreje
 | Po zavrnitvi ali preklicu je dovoljena nova odločitev | Uporabnik ponovno pregleda vsebino; nova oddaja ohrani zgodovino in aktualno stanje |
 | Ročna obravnava je zaključena | Rezultat in odgovorna oseba sta sledljiva; sistem ne ponaredi izjave upravičenca |
 | Polnoletni dijak odloča o lastnem postopku | Odločitev in dostop sledita pregledanim pravilom; starš ne odloči v njegovem imenu brez ustreznega upravičenja |
+| M2 je nedosegljiv do izteka opomnika | M1 zamujenega opomnika ne pošlje; napaka in iztek sta sledljiva |
+| Obrazec je umaknjen, privolitev pa še velja | Upravičencu ostane dostopna pot za preklic |
+| Dijak postane polnoleten med letom | Novi odzivi sledijo potrjenim novim pravilom; stare odločitve staršev ostanejo v zgodovini |
+| M1 preveri potrebo po opomniku | Prejme samo potreben/nepotreben s kodo razloga ali napako, brez vsebine odločitev |
 | Obveščanje odpove | Odločitev ostane shranjena; po obnovi ni zastarelih opomnikov |
 | Prispe papirni odziv | Vir, različica in vnos so sledljivi; spor sproži obravnavo |
 | Upravičenje osebe se spremeni | Nadaljnje dejanje sledi preverjenim pravicam, zgodovina ostane sledljiva |
