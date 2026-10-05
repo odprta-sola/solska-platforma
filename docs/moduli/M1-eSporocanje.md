@@ -103,6 +103,8 @@ Pooblaščen izvoz vključuje obvestila, različice, priloge, povezane potrditve
 
 ## Poznejše funkcije
 
+Poznejša faza pomeni nadgradnjo po uspešnem preverjanju prvega pilota. Rok, izvajalci in obseg dela še niso določeni. Spodnja razvrstitev je izhodiščni predlog za mentorjev pregled; na podlagi ocene lahko mentor predlaga premik posamezne funkcije v zgodnejšo ali poznejšo fazo.
+
 Po uspešnem pilotu so predvideni:
 
 - potisna obvestila;
@@ -184,6 +186,8 @@ Merijo se čas priprave obvestil, težave pri prijavi, manjkajoče potrditve, na
 ## Organizacija dela in ocena zahtevnosti
 
 Omejen prototip je lahko primeren za maturitetno nalogo. Celotni produkcijski obseg ni označen kot naloga nizke zahtevnosti. Ocena 150–250 ur se pred potrditvijo preveri z razrezom nalog in jasno ločitvijo dela dijakov, mentorja ter tehničnega nosilca.
+
+Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Ocena loči delo dijakov, mentorja in tehničnega nosilca. Razvrstitev v tem dokumentu je izhodiščni predlog za pregled. Rezultat pregleda se zabeleži v tabeli funkcij z oceno ur, odvisnostmi, predlagano fazo in nosilcem izvedbe; obseg pilota nato potrdita mentor in pilotna šola.
 
 Razvojni izdelek in dovoljenje za produkcijsko uporabo sta ločena mejnika. Produkcijsko vzdrževanje mora imeti nosilca tudi po zaključku šolskega leta.
 
