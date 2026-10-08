@@ -4,7 +4,8 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 
 | Dokument | Namen |
 | --- | --- |
-| [Vodnik za mentorje](mentorji/razvojni-paket-P0-M1-M2.md) | Primeri, mejniki, delitev dela in odprte odločitve |
+| [Razvojno naročilo P0–M1–M2](projekt/razvojno-narocilo-P0-M1-M2.md) | Izhodiščni cilj pobudnika, obvezni obseg, vloge in demonstracije |
+| [Razlaga in praktični primeri](mentorji/razvojni-paket-P0-M1-M2.md) | Primeri, mejniki, delitev dela in odprte odločitve |
 | [P0 uporabniki](moduli/P0-uporabniki.md) | Evidenca, lokalna prijava, uvoz in testni podatki |
 | [Pogodba P0–M1–M2](arhitektura/vmesnik-P0-M1-M2.md) | Osnutek API za potrditev D12 |
 | [Povzetek projekta V6](projekt/povzetek.md) | Namen, stanje, faze, moduli in spremembe glede na V5 |
@@ -19,7 +20,7 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 
 [Osnutek specifikacije M2 eSoglasja](moduli/M2-eSoglasja.md) opredeli obrazce, odločitve, preklic, dokazne zapise in povezavo z M1. Postopek pilota ter pravila potrebujejo mentorjev, vsebinski in pravni pregled.
 
-Za mentorjev prvi pregled začnite z [razvojnim paketom P0–M1–M2](mentorji/razvojni-paket-P0-M1-M2.md): vsebuje razlago modulov, šest praktičnih primerov in predlog mejnikov; uporabniška evidenca, API in navodilo za neodvisni pregled so v povezanih dodatkih. Paket je osnutek z dne 8. oktobra 2026; pogodba API in razrez dela še potrebujeta potrditev. Podrobne zahteve ostajajo v specifikacijah M1 in M2, povzetku ter odgovornostih.
+Začnite z [razvojnim naročilom](projekt/razvojno-narocilo-P0-M1-M2.md), nato preberite [razlago in praktične primere](mentorji/razvojni-paket-P0-M1-M2.md). Razvojni zavod oceni izvedljivost tega konkretnega predloga, razporedi izvajalce in predlaga roke oziroma popravke. Tehnična pogodba potrebuje dopolnitev in potrditev D12; statusi drugih odločitev ostajajo v registru.
 
 ## Podporno gradivo
 
