@@ -16,7 +16,7 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 
 [Osnutek specifikacije M2 eSoglasja](moduli/M2-eSoglasja.md) opredeli obrazce, odločitve, preklic, dokazne zapise in povezavo z M1. Postopek pilota ter pravila potrebujejo mentorjev, vsebinski in pravni pregled.
 
-Za mentorjev prvi pregled so najpomembnejši povzetek, specifikaciji M1 in M2 ter odgovornosti. Tehnologija in razrez dela ostajata predmet dogovora.
+Za mentorjev prvi pregled začnite z [razvojnim paketom P0–M1–M2](mentorji/razvojni-paket-P0-M1-M2.md): vsebuje razlago modulov, uporabniške evidence, šest praktičnih primerov, predlog mejnikov, osnutek API in navodilo za neodvisni pregled. Paket je osnutek z dne 8. oktobra 2026; pogodba API in razrez dela še potrebujeta potrditev. Podrobne zahteve ostajajo v specifikacijah M1 in M2, povzetku ter odgovornostih.
 
 ## Podporno gradivo
 
