@@ -119,7 +119,7 @@ Ob polnoletstvu dijaka med šolskim letom šola zagotovi spremembo upravičenj z
 
 #### Veljavnost opomnikov
 
-Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (polje `expires_at`); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
+Skupno pravilo je v [pogodbi P0–M1–M2: veljavnost opomnikov](../arhitektura/vmesnik-P0-M1-M2.md#preverjanje-potrebe-in-veljavnost-opomnikov), vključno s poljem `expires_at`, zadržanjem in iztekom.
 
 ### Papirna pot
 
@@ -246,3 +246,7 @@ Razvojni izdelek in dovoljenje za produkcijsko uporabo sta ločena mejnika. Prod
 10. Kdo so prejemniki obvestil pri polnoletnih dijakih?
 
 Odločitve se zabeležijo z datumom in odgovorno osebo. Ta osnutek ne potrjuje sodelovanja ali obveznosti posamezne šole.
+
+## Povezana razvojna gradiva
+
+[Minimalni P0](P0-uporabniki.md) je predlagani lastnik osnovne evidence in uvoza oseb ter povezav. Uvozi, opisani v tem modulu, uporabljajo to skupno evidenco; ne ustvarjajo ločenih uporabniških računov. Vsebinski podatki ostanejo v modulu. [Pogodba API](../arhitektura/vmesnik-P0-M1-M2.md) potrebuje potrditev D12. [Mentorski vodnik](../mentorji/razvojni-paket-P0-M1-M2.md) razmeji prvo demonstracijo od celotnega učnega izdelka in produkcijskega prevzema.
