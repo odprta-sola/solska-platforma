@@ -26,6 +26,8 @@ Predlog notranjega akta, omenjen v V5, je bil naknadno predložen 5. oktobra 202
 | Predlog razdelitve 2–3 dijaki na modul in tehnični API | Uredniški/tehnični predlog za mentorje, ne potrjena razpoložljivost ali pogodba |
 | Priloženi neodvisni pregled PR #29, 8. oktober | Obravnava B1–B6, P1–P7 in U1–U9 v [navodilu za pregled](../mentorji/navodilo-za-pregled.md); izvirnik ni kopiran v repozitorij |
 
+Dodatna usmeritev pobudnika 8. oktobra 2026: cilj, obvezni obseg in merila poda pobudnik; mentorji ocenijo izvedljivost in organizacijo. Prenesena je v [razvojno naročilo](razvojno-narocilo-P0-M1-M2.md) ter razmejitev odgovornosti. To ne potrjuje ur, oseb ali obveznosti zavodov.
+
 ## Različice in potrditve
 
 Markdown je glavni vir nadaljnjih sprememb. Potrjene izdaje se označijo s commitom oziroma tagom; PDF za posredovanje se izdela iz potrjene vsebine. Združitev osnutka v main ni odločitev zavodov.
