@@ -28,6 +28,10 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 
 Osnutek D12 z dne 8. oktobra 2026 konkretizira že predvidene skupne identitete in obveščanje. Sheme, prijavni protokol, nosilci, testni nadomestki in pogodbeni preizkusi še niso potrjeni; D12 ostaja odprt. Izhodišča za razdelitev dijaškega dela so v [vodniku za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md).
 
+## Izhodiščni obseg pobudnika
+
+8. oktobra 2026 je pobudnik določil pripravo [konkretnega razvojnega naročila P0–M1–M2](razvojno-narocilo-P0-M1-M2.md). D01 in D13 zato obravnavata izvedljivost, razdelitev ter morebitne spremembe podanega obsega. Cilja projekta ni treba na novo oblikovati mentorjem. Naročilo ne zaključi D01–D16; potrditve virov, izvajalcev, pogodbe in produkcije ostajajo pri določenih nosilcih.
+
 ## Roki in sledenje
 
 D01–D03, D11–D14 in D16 blokirajo začetek odvisnega razvoja. D07, D09 in D10 se zaključijo pred produkcijskim pilotom; imenovanje drugega skrbnika iz D09 je izjema in je potrebno že pred prvo kodo oziroma vključitvijo zunanjih ekip. D04–D06 se rešijo pred razvojem odvisnih funkcij, D08 pred sprejemom kode in D15 pred potrditvijo pogojev ponovne uporabe besedil. Koledarske roke in GitHub dodelitve določijo potrjeni nosilci; vloge niso samodejno imenovanja oseb.
