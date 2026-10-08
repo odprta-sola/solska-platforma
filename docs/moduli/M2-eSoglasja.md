@@ -135,7 +135,7 @@ Minimalni vmesnik za obveščanje iz drugih modulov je del pilota M1 ([razdelek 
 
 M2 ne zahteva dokončanega celotnega jedra platforme. Samostojna namestitev pomeni uporabo skupnih gradnikov in dogovorjenega kanala obveščanja, ne podvajanja varnostnih funkcij.
 
-Za opomnike M2 velja skupno pravilo [veljavnosti opomnikov v M1](M1-eSporocanje.md#veljavnost-opomnikov), vključno s poljem `expires_at`, zadržanjem, potekom in minimalnim odgovorom preverjanja potrebe. Ob pripravi pogodbe vmesnika D12 se pravilo preseli v dokument vmesnika; do takrat je M1 edini vir tega pravila.
+Za opomnike M2 velja skupno pravilo v [pogodbi P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md#preverjanje-potrebe-in-veljavnost-opomnikov), vključno s poljem `expires_at`, zadržanjem, potekom in minimalnim odgovorom preverjanja potrebe. Pogodba je osnutek za potrditev D12.
 
 Pri polnoletstvu med šolskim letom šola potrdi aktualne odločevalce in čas začetka novih pravil ter posodobi preverjena upravičenja. M2 ponovno presodi odprte postopke in potrebo po novi izjavi. Stare odločitve staršev ostanejo v zgodovini; ne štejejo samodejno kot nova odločitev dijaka. Nadaljnje oddaje, dostopi in opomniki sledijo novim pravilom. Nosilec tega postopka je pilotna šola ob potrebnem pravnem pregledu.
 
@@ -272,3 +272,7 @@ To je možnost organizacije, ne imenovanje ekip. En lastnik odločitve o skupnem
 10. Kako se potrdijo licenca, pravice prispevkov, infrastruktura in merila obremenitve?
 
 Odločitve se evidentirajo z datumom, odgovorno osebo in različico. Združitev specifikacije v main ne potrjuje pravne ustreznosti postopka ali produkcijske uvedbe.
+
+## Povezana razvojna gradiva
+
+[Minimalni P0](P0-uporabniki.md) je predlagani lastnik osnovne evidence in uvoza oseb ter povezav. Uvozi, opisani v tem modulu, uporabljajo to skupno evidenco; ne ustvarjajo ločenih uporabniških računov. Vsebinski podatki ostanejo v modulu. [Pogodba API](../arhitektura/vmesnik-P0-M1-M2.md) potrebuje potrditev D12. [Mentorski vodnik](../mentorji/razvojni-paket-P0-M1-M2.md) razmeji prvo demonstracijo od celotnega učnega izdelka in produkcijskega prevzema.
