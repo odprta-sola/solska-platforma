@@ -3,6 +3,10 @@
 Datum: 8. oktober 2026  
 Status: delovni predlog D12 za potrditev; ni dokončna implementacijska pogodba
 
+## Vloga pogodbe v naročilu
+
+Ta pogodba je skupni tehnični predlog v [razvojnem naročilu pobudnika](../projekt/razvojno-narocilo-P0-M1-M2.md). Dopolnitev shem in testov je naloga mejnika T. Pobudnik s tehnično pomočjo pripravi izhodiščno rešitev; mentorji in skupni tehnični nosilec preverijo izvedljivost in varnost ter potrdijo pogodbo pred odvisno implementacijo. Vmesniki niso prosta izbira posamezne ekipe. Zapisane odprte vrzeli niso s tem zaključene.
+
 ## Obseg in odprte odločitve
 
 Ta dokument je stalno mesto osnutka pogodbe. Nadomešča načrtovani naslov vmesnik-M1-M2.md in vključuje skupni vir identitet ter upravičenj, ki je že del D12. [Vodnik za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md) in [P0](../moduli/P0-uporabniki.md) pojasnita uporabo.
