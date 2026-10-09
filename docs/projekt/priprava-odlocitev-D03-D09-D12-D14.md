@@ -127,13 +127,13 @@ Mitja Pirih je izrecno osebno sprejel vlogo skupnega tehničnega nosilca D03: ar
 
 Mitja je 9. oktobra 2026 dovolil zapis približno treh ur načrtovanega dela tedensko ob podpori AI za tehnično vodenje, usklajevanje in preglede ter izrecno pojasnil, da razvoj P0 ni vključen v ta okvir. Obseg teh nalog se prilagaja tej kapaciteti; roki izvedbe niso obljubljeni. Čas razvoja P0 se vodi ločeno in še ni ocenjen. Razlog je merljiv planski okvir, ki loči vodenje od razvoja referenčnega jedra.
 
-Mitja je 9. oktobra 2026 določil začetni model D03 brez ločenega tehničnega namestnika; Aleksandarja za to vlogo ne predlagamo. To je pobudnikov potrjeni predlog organizacije, ki ga morajo sprejeti sodelujoči zavodi. Razlog je omejena sestava ekipe in razporeditev dela. Način ravnanja ob odsotnosti tehničnega nosilca ter nadomeščanje pri posameznih gradnikih ostajata za dogovor; obstoječe merilo #12 o gradnikih in nadomeščanju ostaja odprto. Ta odločitev ne spreminja ločenega dogovora D14 o predlaganem namestniku za varnostne prijave.
+Mitja je 9. oktobra 2026 določil začetni model D03 brez ločenega tehničnega namestnika; Aleksandarja za to vlogo ne predlagamo. To je pobudnikov potrjeni predlog organizacije, ki ga morajo sprejeti sodelujoči zavodi. Razlog je omejena sestava ekipe in razporeditev dela. Mitja je 9. oktobra 2026 potrdil ravnanje ob svoji odsotnosti: nove skupne tehnične odločitve in spremembe pogodbe API počakajo na njegov pregled, delo po že potrjenih dogovorih pa lahko poteka naprej. Razlog je nadaljevanje dogovorjenega dela ob ohranjeni odgovornosti za skupne spremembe. Potrditev zavodov ter konkretna razdelitev in predaja posameznih gradnikov še ostajajo odprti. Konkretna ureditev po gradnikih ostaja za dogovor; obstoječe merilo #12 o gradnikih in nadomeščanju ostaja odprto. Ta odločitev ne spreminja ločenega dogovora D14 o predlaganem namestniku za varnostne prijave.
 
-Potrditev imenovanja, časovnega okvira in modela brez ločenega tehničnega namestnika s strani sodelujočih zavodov, lastništvo in predaja posameznih gradnikov, ravnanje ob odsotnosti ter tehnološka osnova še niso potrjeni. Aleksandarju ta zapis ne dodeljuje novih odgovornosti. D03 ostaja odprta; osebni sprejem še ne izpolni celotnega predkodnega pogoja.
+Potrditev imenovanja, časovnega okvira in modela brez ločenega tehničnega namestnika s strani sodelujočih zavodov, lastništvo in predaja posameznih gradnikov ter tehnološka osnova še niso potrjeni; osebno sprejeti način ravnanja ob odsotnosti morajo sprejeti tudi zavodi. Aleksandarju ta zapis ne dodeljuje novih odgovornosti. D03 ostaja odprta; osebni sprejem še ne izpolni celotnega predkodnega pogoja.
 
 ### Predlog mandata
 
-Sodelujoči zavodi potrdijo eno odgovorno človeško osebo za skupno tehnično odločanje in razpoložljivost. Mitjev začetni predlog je brez ločenega tehničnega namestnika; dogovor mora določiti ravnanje ob odsotnosti. Pobudnik ostane pripravljavec P0/T po sedanji usmeritvi; lahko je tudi tehnični nosilec samo po ločenem izrecnem imenovanju. AI in podjetje pobudnika nista samodejna nosilca.
+Sodelujoči zavodi potrdijo eno odgovorno človeško osebo za skupno tehnično odločanje in razpoložljivost. Mitjev začetni predlog je brez ločenega tehničnega namestnika; zavodi morajo potrditi tudi osebno sprejeti način ravnanja ob odsotnosti iz izvedbenega zapisa. Pobudnik ostane pripravljavec P0/T po sedanji usmeritvi; lahko je tudi tehnični nosilec samo po ločenem izrecnem imenovanju. AI in podjetje pobudnika nista samodejna nosilca.
 
 Mandat naj pokrije arhitekturo, skupno prijavo, identitete in dovoljenja, D12/OpenAPI, združljivost modulov, tehnični pregled sprememb in predajo ekipam. Določi se način reševanja nesoglasij z mentorji. Vsebinska in pravna pravila šole ter produkcijski prevzem ostanejo pri svojih potrjevalcih.
 
@@ -154,8 +154,8 @@ Za vsak gradnik se v dogovoru vpiše dejanski nosilec, način ravnanja ob odsotn
 | --- | --- |
 | Obdobje sodelovanja | Ni določeno |
 | Razpoložljive ure ali druga merljiva kapaciteta | Mitja: približno 3 ure načrtovanega dela tedensko ob podpori AI za tehnično vodenje, usklajevanje in preglede; razvoj P0 je izključen in se oceni ločeno; potrditev zavodov še odprta |
-| Običajna pokritost in odsotnosti | Ni določeno |
-| Ločen tehnični namestnik | Mitjev potrjeni začetni predlog: brez te vloge; sprejem zavodov in ravnanje ob odsotnosti še odprta |
+| Običajna pokritost in odsotnosti | Mitja je osebno potrdil: nove skupne tehnične odločitve in spremembe API ob odsotnosti počakajo na njegov pregled; delo po potrjenih dogovorih lahko poteka naprej. Redni termini in sprejem zavodov še niso določeni. |
+| Ločen tehnični namestnik | Mitjev potrjeni začetni predlog: brez te vloge; sprejem zavodov še odprt; osebno ravnanje ob odsotnosti potrjeno spodaj |
 | Izdelki T in pričakovano trajanje po izdelkih | Ocena po potrditvi tehnologije in pregleda; brez obljubljenega datuma |
 | Pregledovalec T in njegov termin | Ni dogovorjeno |
 | Predaja ob odhodu | Potrjen seznam dokumentacije, verzij, pravic in zasebne predaje potrebnih skrivnosti |
