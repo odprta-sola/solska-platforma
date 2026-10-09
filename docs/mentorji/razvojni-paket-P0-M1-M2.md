@@ -131,7 +131,7 @@ Povezava vodi v M2. Uporabnik tam prebere in odda izbire. Predhodna potrditev se
 
 Mejnik: I za dostavo prek testnega in nato pravega vmesnika; B za celoten postopek M2.
 
-M2 naroči opomnik osebi brez zahtevanega odziva in določi najpoznejši dovoljeni čas pošiljanja.
+M2 ob dospelosti opomnika odda M1 zahtevo za osebo brez zahtevanega odziva in določi najpoznejši dovoljeni čas pošiljanja. M1 upošteva tihi čas.
 
 E-pošta: »V šolskem portalu vas še čaka obrazec za odločitev.«
 

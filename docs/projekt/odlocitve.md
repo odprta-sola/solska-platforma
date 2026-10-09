@@ -32,6 +32,8 @@ Osnutek D12 z dne 8. oktobra 2026 konkretizira že predvidene skupne identitete 
 
 8. oktobra 2026 je pobudnik določil pripravo [konkretnega razvojnega naročila P0–M1–M2](razvojno-narocilo-P0-M1-M2.md). D01 in D13 zato obravnavata izvedljivost, razdelitev ter morebitne spremembe podanega obsega. Cilja projekta ni treba na novo oblikovati mentorjem. Naročilo ne zaključi D01–D16; potrditve virov, izvajalcev, pogodbe in produkcije ostajajo pri določenih nosilcih.
 
+9. oktobra 2026 je pobudnik usmeritev dopolnil: osebno s pomočjo AI pripravi referenčni P0 in paket T; dijaki razvijajo predvsem M1/M2. Mentorji ocenijo izvedljivost in predlagajo utemeljene spremembe, pobudnik pa cilj in obseg uskladi s šolo uporabnico. Zapis ne spremeni statusov ali nosilcev D01–D16 v zgornji tabeli; njihovo morebitno spremembo je treba posebej obravnavati v ustreznem issueju.
+
 ## Roki in sledenje
 
 D01–D03, D11–D14 in D16 blokirajo začetek odvisnega razvoja. D07, D09 in D10 se zaključijo pred produkcijskim pilotom; imenovanje drugega skrbnika iz D09 je izjema in je potrebno že pred prvo kodo oziroma vključitvijo zunanjih ekip. D04–D06 se rešijo pred razvojem odvisnih funkcij, D08 pred sprejemom kode in D15 pred potrditvijo pogojev ponovne uporabe besedil. Koledarske roke in GitHub dodelitve določijo potrjeni nosilci; vloge niso samodejno imenovanja oseb.

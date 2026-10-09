@@ -3,6 +3,7 @@
 Datum: 9. oktober 2026
 
 Različica: predlog izvedbe 2
+
 Avtorstvo usmeritve: pobudnik projekta Mitja Pirih  
 Status: projektna usmeritev pobudnika in predlog za izvedbeni dogovor; ne potrditev virov zavodov ali produkcijske uvedbe
 
@@ -24,8 +25,8 @@ Ta dokument določa naš izhodiščni cilj, funkcionalni obseg, vloge, zaporedje
 | Obvezne funkcije in demonstracije | Določene spodaj; zmanjšanje obsega je izrecen dogovor, ne tiha opustitev |
 | Vmesniki in pravila dostopa | Skupen tehnični predlog za vse ekipe; pred odvisno implementacijo pregled in potrditev D12 |
 | Dijaki, ure, roki in maturitetna primernost | Mentor in razvojni zavod določita na podlagi tega naročila |
-| Tehnologija in prijavna komponenta | Skupni tehnični nosilec predlaga eno izvedbo z mentorji; ni prosta ločena izbira vsake ekipe |
-| Priprava P0 in paketa T | Pobudnik osebno s pomočjo AI pripravi referenčno osnovo; ne nastopa samodejno njegovo podjetje. Tehnični nosilec in neodvisni človeški pregledovalec jo preverita pred predajo. |
+| Tehnologija in prijavna komponenta | Pobudnik predlaga osnovo; skupni tehnični nosilec in mentorji pregledajo in potrdijo skupno izbiro pred izvedbo; ni prosta ločena izbira vsake ekipe |
+| Priprava P0 in paketa T | Pobudnik osebno s pomočjo AI pripravi referenčno osnovo; ne nastopa samodejno njegovo podjetje. Neodvisni človeški pregledovalec jo preveri pred predajo. |
 | Oblikovanje in notranja organizacija kode | Prostor za dijake ob izpolnjenih skupnih pravilih |
 | Dodatne funkcije | Šele po obveznih demonstracijah, brez spremembe pogodbe na lastno pobudo |
 | Produkcija in pravna ustreznost postopka | Ločen pregled in odločitev šole; učni rezultat je ne nadomesti |
@@ -49,6 +50,14 @@ Tehnična vloga ne daje rutinskega vpogleda v vsebine. Povezava starš–otrok s
 ## Referenčna osnova P0
 
 **Priprava pobudnika:** delujoči P0 je predajna osnova za dijake, ne obvezna začetna maturitetna naloga. Podroben razrez prvega prevzema in dopolnitev za B določa [načrt priprave P0](priprava-referencnega-P0.md); spodnji seznam opisuje ciljni obseg B, ne drugega neodvisnega prevzemnega merila.
+
+| Vprašanje za dijaka | Izhodišče |
+| --- | --- |
+| Kaj dobi pripravljeno? | Prevzeti P0, v D12 potrjeno pogodbo, izmišljene podatke, nadomestka in pogodbene teste. |
+| Kaj izdela sam? | Dodeljeni del M1 ali M2, povezavo s P0, lastne teste, navodila in demonstracijo. |
+| Kaj je obvezno? | Dogovorjeni del obveznega jedra B in sodelovanje pri povezani demonstraciji. |
+| Kaj je izbirno? | Dodatna funkcija ali omejena razširitev P0 po dogovoru z mentorjem. |
+| Kako dokaže uspeh? | Pri A objava → prijava → dovoljeni prikaz → potrditev; pri I oddaja odločitve in zanesljiva dostava tudi po izpadu. |
 
 1. Evidenca oseb, otrok, oddelkov, šolskih let, povezav in dovoljenj s stalnimi ID.
 2. Lokalna prijava z vzdrževano rešitvijo; gesel in kriptografije dijaki ne razvijajo na novo.
@@ -138,8 +147,9 @@ Te vrzeli niso prepuščene domišljiji posamezne ekipe. Pobudnik s pomočjo AI 
 | --- | --- |
 | Pobudnik in koordinator | Cilj, prioritete in izhodiščni obseg; osebna priprava referenčnega P0/T s pomočjo AI; usklajene vsebinske spremembe s šolo uporabnico |
 | Predstavnik šole uporabnice | Preveri realnost postopkov, pravila upravičenj in uporabniški prevzem |
-| Skupni tehnični nosilec | Pregleda/izbere skupno tehnologijo, potrdi pogodbo, vodi integracijske preglede |
+| Skupni tehnični nosilec | Z mentorji pregleda in potrdi predlagano skupno tehnologijo in pogodbo; vodi integracijske preglede |
 | Nosilec skupnih gradnikov | Koordinira tehnično predajo P0/T in skladnost skupnih gradnikov; prihodnje vzdrževanje se dodeli posebej |
+| Neodvisni pregledovalec T | Človek, ki ni izdelal pregledovane kode; po navodilih preveri namestitev, kodo in demonstracije. Imenovanje je pogoj pred prevzemom T. |
 | Mentorji | Ocenijo izvedljivost podanega naročila, določijo individualne izdelke, dijake in roke ter preverjajo napredek |
 | Dijaki | Razvijejo predvsem M1 in M2 ter njuno povezavo s P0, teste, dokumentacijo in demonstracijo; omejene razširitve P0 so možne po dogovoru z mentorjem |
 | Skrbnik repozitorija in namestnik | Dovoljenja, pregled sprememb in obravnava varnostnih prijav |
@@ -147,13 +157,15 @@ Te vrzeli niso prepuščene domišljiji posamezne ekipe. Pobudnik s pomočjo AI 
 
 Osebe se imenujejo posebej. Predlog 2–3 dijakov na modul je izhodišče za razporeditev, ne zahteva ali obljuba razpoložljivosti. Primerjalni prototipi so dovoljeni do zgodnjega izbora osnove; pogodba in preizkusi veljajo za vse. Vsak dijak mora imeti razpoznaven izdelek in prispevek.
 
+Za mentorjev razrez so mogoči ločeni individualni izdelki M1 objave in seznanitev, M1 dostava in papirna evidenca, M2 priprava in pregled obrazcev ter M2 odločitve, zgodovina in preklic. Dostopnost, testi, navodila in povezovanje so del vsakega ustreznega izdelka. Mentorji preverijo zahtevnost, samostojnost in formalno ustreznost; razrez ne predpostavlja števila razpoložljivih dijakov.
+
 ## Mejniki in demonstracije
 
 | Mejnik | Obvezni rezultat | Dokaz zaključka |
 | --- | --- | --- |
-| T – skupna tehnična priprava | Delujoči referenčni P0, izbrana razvojna osnova, v D12 potrjena različica pogodbe OpenAPI, izmišljeni nabor, nadomestki, pogodbeni testi in navodila za namestitev | Neodvisni človek po navodilih namesti P0, preveri prijavo, tujo družino, odvzem povezave/dovoljenja in klice obeh vrst avtorizacije; pogodbena testa pokažeta uspešno in neuspešno dostavo |
+| T – skupna tehnična priprava | Delujoči referenčni P0, izbrana razvojna osnova, v D12 potrjena različica pogodbe OpenAPI, izmišljeni nabor, nadomestki, pogodbeni testi in navodila za namestitev | Celoten seznam dokazov je v [človeškem prevzemu P0/T](priprava-referencnega-P0.md#človeški-prevzem). |
 | A – prvi uporabniški potek | Besedilni M1 na prevzetem P0, vnaprej pripravljeni računi | Učitelj objavi; pravi starš vidi in potrdi; druga družina nima dostopa |
-| I – povezava | Minimalni M2 shrani odločitev in trajno zahtevo za dostavo; M1 prevzame zahtevo po pogodbi | Odločitev ostane shranjena med izpadom M1; dostava se nadaljuje; dvojna zahteva se ne podvoji logično |
+| I – povezava | Minimalni M2 z enim pregledanim testnim obrazcem, eno izrecno odločitvijo in trajno zahtevo za dostavo; M1 prevzame zahtevo po pogodbi | Odločitev ostane shranjena med izpadom M1; dostava se nadaljuje; dvojna zahteva se ne podvoji logično |
 | B – celoten učni izdelek | Obvezni obseg P0/M1/M2 iz tega naročila | Skupna demonstracija spodnjih primerov, namestitev, testi in dokumentacija |
 | C – morebitni produkcijski pilot | Poseben potrjen postopek in strokovni prevzem | Vsa produkcijska merila iz specifikacij ter imenovani nosilci |
 
@@ -166,6 +178,9 @@ A in I se lahko razvijata vzporedno šele po celotnem človeškem prevzemu T. Pr
 | Dva starša in druga družina | A | Ločeni odzivi; tuji neposredni naslov je zavrnjen |
 | Osnovna dostopnost | A | Potek s tipkovnico, vidni fokus, označena polja in razumljive napake; osnovni pregled z bralnikom zaslona |
 | M2 odda zahtevo dvakrat in jo prekliče | I | En logični prevzem; sledljiv preklic ali pojasnjen prepozen preklic |
+| Izpad M1 med odločitvijo | I | M2 ohrani odločitev in trajno zahtevo; ob obnovi povezave se dostava nadaljuje |
+| Izgubljen odgovor 202 | I | M1 zapiše zahtevo pred odgovorom; ponovitev z istim ključem vrne isti logični rezultat |
+| Preklic ene od dveh dostav | I | Ustavi se samo izbrani prejemnik; druga dostava ostane veljavna |
 | Napačen in ponovljen CSV | T za osnovni uvoz; B za celotni obseg | Brez delnega prepisa in podvojenih oseb |
 | Odvzem povezave ob obstoječem grants | T | Dovoljenje, ki temelji na odvzeti povezavi, ne omogoči novega dejanja |
 | Skupni kontakt dveh računov | B | Aktivacija/obnova sledi pregledanemu individualnemu postopku |
@@ -177,12 +192,17 @@ A in I se lahko razvijata vzporedno šele po celotnem človeškem prevzemu T. Pr
 | Negotov izid poštne predaje | B | Izvedba sledi dogovorjeni politiki; ne trdi dokazljive enkratne fizične dostave brez podlage |
 | Jeziki | B | Jezik prejemnika in izrecna nadomestna možnost; večjezični model od začetka |
 | Namestitev in izvoz | B | Druga ekipa iz navodil ponovi demonstracijo; izvoz vsebuje dokumentiran obseg |
+| Dostopnost celotnega jedra | B | Osnovni postopki M1/M2 so izvedljivi s tipkovnico in preverjeni z bralnikom zaslona |
+| Skupni integracijski preizkus | B | Pravi P0/M1/M2 prestanejo pogodbeni in uporabniški potek brez nadomestkov |
+| Organizacijsko soglasje | B | Ločeni upravičenci, pravila skupnega stanja in potrdilo |
+| Privolitev po namenih | B | Vsak namen je ločena izbira; preklic in zgodovina sta sledljiva |
+| Vsebinski pregled M2 | B | Avtor sam ne odobri svoje različice; objavljena je le pregledana različica |
 
 ## Kaj pustimo za pozneje
 
 ArnesAAI, neposredna integracija z eAsistentom, potisna obvestila, avtomatiziran prehod šolskega leta, napredni obrazci, drugi moduli in centralna namestitev več šol niso obvezni za učni izdelek B. Potrebni jeziki dejanskega pilota in dostopnost niso izbirna produkcijska nadgradnja.
 
-Za B so dostopnost, ponovljiva namestitev, integracijski preizkusi, izvoz, papirna pot in dva učna postopka obvezne prečne naloge. Izbirne so dodatne funkcije in po dogovoru omejene dijaške razširitve P0. Če ocena izvedljivosti pokaže prevelik obseg B, mentorji predlagajo konkreten rez v številu podprtih možnosti ali postopkov; sprememba obveznega jedra zahteva izrecen dogovor pobudnika s šolo. Dostopov, sledljivosti in osnovne dostopnosti zaradi rokov ne opustimo. Oblikovanje zaslonov in organizacija kode dopuščata ustvarjalnost, pomen odločitev, dostopi, podatkovni tokovi in API pa so skupni dogovor.
+Za B so dostopnost, ponovljiva namestitev, integracijski preizkusi, izvoz, papirna pot in dva učna postopka obvezno jedro. Izbirne so dodatne funkcije in po dogovoru omejene dijaške razširitve P0. Če ocena izvedljivosti pokaže prevelik obseg B, mentorji predlagajo konkreten rez v številu podprtih možnosti ali postopkov; sprememba obveznega jedra zahteva izrecen dogovor pobudnika s šolo. Dostopov, sledljivosti in osnovne dostopnosti zaradi rokov ne opustimo. Oblikovanje zaslonov in organizacija kode dopuščata ustvarjalnost, pomen odločitev, dostopi, podatkovni tokovi in API pa so skupni dogovor.
 
 ## Odgovor razvojnega zavoda
 

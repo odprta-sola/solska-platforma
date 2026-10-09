@@ -7,9 +7,9 @@ Referenčni P0 po [načrtu priprave in predaje](../projekt/priprava-referencnega
 
 [Uvod za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md) · [Pogodba vmesnikov](../arhitektura/vmesnik-P0-M1-M2.md)
 
-## 6. P0 in evidenca uporabnikov
+## P0 in evidenca uporabnikov
 
-### 6.1 Tri različne naloge
+### Tri različne naloge
 
 | Naloga | Pomen |
 | --- | --- |
@@ -21,15 +21,15 @@ E-poštni naslov ni identifikator osebe. Starša s skupnim naslovom imata ločen
 
 P0 uporablja vzdrževano rešitev za prijavo. Dijaki ne razvijajo lastne kriptografije ali novega sistema shranjevanja gesel. Izbor knjižnic oziroma storitve, sej in integracije potrdi skupni tehnični nosilec.
 
-### 6.2 Kje so podatki
+### Kje so podatki
 
 P0 je del namestitvenega paketa in uporablja podatkovno zbirko v dogovorjenem okolju šole. M1 hrani obvestila in potrditve, M2 obrazce in odločitve. Na osebe se sklicujeta s stalnimi identifikatorji P0. Skupna prijava ne daje samodejnega dostopa do vseh podatkov.
 
 Lokalni način ne potrebuje ArnesAAI. Poznejša zunanja prijava se varno poveže z obstoječo identiteto; enak e-poštni naslov sam ni dovolj za samodejno združitev računov. ArnesAAI ne nadomesti šolske evidence povezav starš–otrok. Izvedbo in razpoložljive atribute je treba pred integracijo preveriti.
 
-### 6.3 Uvoz in spremembe
+### Uvoz in spremembe
 
-Za razvoj AI pripravi izmišljene podatke. Pred produkcijo šola določi odgovorno osebo za pravilnost evidence in povezav; AI tega ne potrjuje namesto šole.
+Pobudnik s pomočjo AI pripravi izmišljene razvojne podatke, scenarije preveri neodvisni pregledovalec T. Pred produkcijo šola določi odgovorno osebo za pravilnost evidence in povezav; AI tega ne potrjuje namesto šole.
 
 Predlagan postopek:
 1. Šola pridobi dovoljen izvoz iz svoje evidence. Možnosti eAsistenta se preverijo; povezave ali formata ne predpostavljamo.
@@ -41,7 +41,7 @@ Predlagan postopek:
 
 Ponovni uvoz istega vira ne ustvari novih oseb. Preslikava izvornega ključa v notranji ID je stabilna. Odsotnost vrstice pri delnem uvozu ne pomeni samodejnega izbrisa ali odvzema pravic. Razlikovanje celotnega in delnega uvoza potrdita pilotna šola in skupni tehnični nosilec. Ročni popravki so sledljivi; konflikt z naslednjim uvozom se pokaže v predogledu.
 
-### 6.4 Aktivacija in podpora
+### Aktivacija in podpora
 
 Šola preveri osebo, kontakt in povezavo z otrokom; nato pošlje časovno omejeno povabilo za enkratno uporabo. Aktivacija preveri nadzor nad predalom, ne sorodstvenega razmerja. Uporabnik nastavi prijavo po pravilih izbrane rešitve. Povabilo je vezano na točno določen račun.
 
@@ -49,7 +49,7 @@ Obnovitev dostopa, sprememba kontakta in odvzem dostopa uporabljajo pregledane p
 
 Cilj je brezplačna uporaba za starša in rešitev brez nujnih plačljivih SMS. Gostovanje, pošiljanje, kopije, pregledi in vzdrževanje imajo stroške oziroma zahtevajo delo; ničelnega stroška šoli ne obljubljamo.
 
-### 6.5 Posebni primeri
+### Posebni primeri
 
 | Primer | Zahtevano ravnanje |
 | --- | --- |
@@ -62,7 +62,7 @@ Cilj je brezplačna uporaba za starša in rešitev brez nujnih plačljivih SMS. 
 | Neznano upravičenje ali nedosegljiv P0 | Zaščiteno dejanje se ne dovoli na slepo; uporabniku razumljiva napaka |
 | Zgodovinski zapis | Ohranimo ID osebe, različico in obseg dogodka; brez rutinskega podvajanja imen. Morebitni dokazni posnetek in hramba se potrdita v D07 |
 
-## 9. Izmišljeni testni podatki
+## Izmišljeni testni podatki
 
 Naslednji mali nabor je osnova za razširitev. ID so ponazoritveni nizi; končni format določi pogodba. Domene example.invalid se ne uporabljajo za resnično dostavo. Ves promet razvojne e-pošte prestreže lokalni testni predal.
 

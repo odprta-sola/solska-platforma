@@ -9,8 +9,8 @@ Ta načrt podrobneje razdeli [razvojno naročilo](razvojno-narocilo-P0-M1-M2.md)
 
 | Faza | Vključeno | Dokaz |
 | --- | --- | --- |
-| Prvi prevzem v T | Ena izmišljena šola; vnaprej pripravljeni individualni računi in skupen testni poštni predal; osebe, učenci, oddelki, povezave, dodelitve in dovoljenja; vzdrževana lokalna prijava; preverjanje uporabniških in servisnih pravic; odvzem povezave in dovoljenja; sprememba kontakta; osnovni CSV uvoz s predogledom, validacijo, celovito potrditvijo in ponovitvijo; omejen kontaktni klic; API, testni podatki in ponovljiva namestitev | Neodvisni pregledovalec sistem namesti in izvede spodnje scenarije |
-| Dopolnitev pred B | Individualna aktivacija in obnova računov pri skupnem e-poštnem predalu; celoten dogovorjeni obseg administrativnega uvoza, sledljivih popravkov in upravljanja; dokumentiran izvoz | Preizkusi posebnih primerov iz naročila in dokumentacija |
+| Prvi prevzem v T | Ena izmišljena šola; vnaprej pripravljeni individualni računi in skupen testni poštni predal; osebe, učenci, oddelki, povezave, dodelitve in dovoljenja; vir jezika ter prikaznih oznak po pravilih D12; vzdrževana lokalna prijava; preverjanje uporabniških in servisnih pravic; odvzem povezave in dovoljenja; sprememba kontakta; osnovni CSV uvoz s predogledom, validacijo, celovito potrditvijo in ponovitvijo; omejen kontaktni klic; API, testni podatki in ponovljiva namestitev | Neodvisni pregledovalec sistem namesti in izvede spodnje scenarije |
+| Dopolnitev pred B | Individualna aktivacija in obnova računov pri skupnem e-poštnem predalu; celoten dogovorjeni obseg administrativnega uvoza, sledljivih popravkov in upravljanja; dokumentiran izvoz. Pripravo organizira pobudnik; omejen prepoznaven del je lahko dijaška razširitev le po dogovoru z mentorjem. | Preizkusi posebnih primerov iz naročila in dokumentacija |
 | Pozneje | ArnesAAI, neposredna integracija eAsistent, avtomatizacija šolskega leta in večšolska centralna namestitev | Ločena odločitev |
 
 Obseg v tabeli je merodajen za prvi prevzem P0; seznam v naročilu opisuje ciljni B. Prvi prevzem ne predpostavlja že pripravljene produkcijske prijave ali povezave s šolsko evidenco. Gesel, kriptografije in prijavnega protokola ne razvijamo na novo.
@@ -33,6 +33,9 @@ Pregledovalec ni izdelal kode, ki jo prevzema. Po navodilih sam namesti osnovo i
 4. Napačen CSV ne povzroči delnega prepisa, ponovljen uvoz ne podvoji oseb; sprememba kontakta je sledljiva.
 5. Servisni klic za kontakt je dovoljen samo za evidentirano zahtevo in prejemnika; tuj ali ugiban obseg je zavrnjen.
 6. Izvorno kodo za avtorizacijo, `scope_ref`, kontaktni klic in CSV uvoz pregleda neodvisen človek; zabeleži ugotovitve in ponovitve testov.
+7. Po ponastavitvi izmišljenih testnih podatkov zažene pogodbene teste proti nadomestkoma M1/M2, vključno z dovoljeno in zavrnjeno dostavo.
+8. Ob izpadu P0 M1/M2 ne dovolita zaščitenega dejanja in ne pošljeta sporočila na slepo; po obnovi preverita trenutne pravice.
+9. Prijava in osnovna opravila P0 delujejo s tipkovnico, imajo viden fokus in razumljive napake; opravi se osnovni pregled z bralnikom zaslona.
 
 Šele celoten prevzem T sprosti odvisni razvoj A in I. Nadomestka M1/M2 ne nadomestita P0. Dijaki dobijo zagotovljeno kodo, navodila, pogodbo in testne podatke; mentor določi njihove samostojne izdelke in pravila uporabe AI. Razširitve P0 so dodatne individualne naloge po dogovoru, ne predpostavljena obveznost.
 
@@ -40,11 +43,15 @@ Pregledovalec ni izdelal kode, ki jo prevzema. Po navodilih sam namesti osnovo i
 
 | Dejanje | Pogoj |
 | --- | --- |
-| Prva koda oziroma vključitev zunanjih ekip | D09/D14: imenovan drugi skrbnik, nosilec zasebnih varnostnih prijav in namestnik, preverjeni dostopi ter odzivni roki |
+| Prva koda oziroma vključitev zunanjih ekip, tudi primerjalni prototipi | D09/D14: imenovan drugi skrbnik, nosilec zasebnih varnostnih prijav in namestnik, preverjeni dostopi ter odzivni roki; D03: imenovan skupni tehnični nosilec in dogovor o tehnologiji ter skupnih varnostnih funkcijah skladno s [CONTRIBUTING.md](../../CONTRIBUTING.md) |
 | Priprava predloga pogodbe | Dovoljena kot osnutek; D12 ostaja odprt |
-| Odvisna implementacija vmesnikov | V D12 potrjena različica pogodbe, vključno s selektivnim preklicem pred I |
+| Implementacija API P0, ki ga uporabljata M1/M2, in druga odvisna implementacija | V D12 potrjena različica pogodbe pred vezavo na ta API; predlog sheme in neodvisne raziskave se lahko pripravijo prej. Selektivni preklic mora biti potrjen pred I. |
 | Sprejem kode v repozitorij | D08: pravice avtorja za objavo, pogoji prispevka in licence odvisnosti |
 | Razdelitev maturitetnih izdelkov | Mentorjeva presoja izvedljivosti in samostojnega prispevka; institucionalni viri niso predpostavljeni |
 | Začetek A/I | Celoten človeški prevzem T in izpolnjeni predhodni pogoji |
 
 Za vsak prispevek se zabeležijo avtor, izvor predhodne kode, uporaba AI, odvisnosti in licence, obseg človeškega pregleda ter samostojni prispevek dijaka. Ta predloga ne potrjuje D08 ali formalne ustreznosti maturitetne naloge. D01–D16 ostajajo v statusih [registra](odlocitve.md).
+
+Pred prvo kodo pobudnik v projektnem zapisu poveže način osebnega, nekomercialnega izvajanja z [razdelkom o nekomercialni vlogi](odgovornosti.md#nasprotje-interesov-in-nekomercialna-vloga). Zapis zajame obseg dela, odsotnost plačila podjetju iz projektnih sredstev, avtorstvo in izvor kode za poznejšo presojo D08. To ni pravno mnenje ali zaključena odločitev o pravicah.
+
+Ker je P0 na kritični poti, pobudnik in tehnični nosilec pred dogovorom rokov z mentorji ocenita trajanje T po izdelkih, tveganjih in razpoložljivosti neodvisnega pregledovalca. Ocena ni obljuba ur ali datuma; A/I se začne šele po dejanskem prevzemu T.

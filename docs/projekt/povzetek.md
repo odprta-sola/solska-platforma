@@ -41,7 +41,7 @@ Spodnja razčlenitev je razvojna smer, ne potrjen program izvedbe.
 
 | Gradnik | Namen | Faza |
 | --- | --- | --- |
-| P0 Jedro | Identitete, povezave z učenci, šifranti, pravice in skupne storitve | Minimalne skupne komponente ob M1; razvoj vodi strokovni nosilec |
+| P0 Jedro | Identitete, povezave z učenci, šifranti, pravice in skupne storitve | Referenčni P0/T osebno pripravi pobudnik s pomočjo AI; strokovni nosilec in neodvisni človek ga pregledata pred predajo M1/M2 |
 | M1 eSporočanje | Obvestila in seznanitev | Prvi pilot |
 | M2 eSoglasja | Soglasja, privolitve in dokazni zapisi | Razvoj lahko poteka vzporedno z M1; produkcijski pilot po preverjanju povezave z M1 in pravnem pregledu izbranega postopka |
 | M3 Govorilne ure | Termini, rezervacije in opomniki | Poznejša faza |

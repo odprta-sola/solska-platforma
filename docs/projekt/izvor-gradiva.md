@@ -28,6 +28,10 @@ Predlog notranjega akta, omenjen v V5, je bil naknadno predložen 5. oktobra 202
 
 Dodatna usmeritev pobudnika 8. oktobra 2026: cilj, obvezni obseg in merila poda pobudnik; mentorji ocenijo izvedljivost in organizacijo. Prenesena je v [razvojno naročilo](razvojno-narocilo-P0-M1-M2.md) ter razmejitev odgovornosti. To ne potrjuje ur, oseb ali obveznosti zavodov.
 
+## Dopolnitev 9. oktobra 2026
+
+Pobudnik je določil pripravo referenčnega P0 in tehničnega paketa T osebno s pomočjo AI; dijaki razvijajo predvsem M1/M2. Usmeritev je zapisana v [naročilu](razvojno-narocilo-P0-M1-M2.md) in [načrtu predaje](priprava-referencnega-P0.md). Navedba izvora ne pomeni izdelane kode, potrditve zavodov ali zaključenih odločitev D01–D16.
+
 ## Različice in potrditve
 
 Markdown je glavni vir nadaljnjih sprememb. Potrjene izdaje se označijo s commitom oziroma tagom; PDF za posredovanje se izdela iz potrjene vsebine. Združitev osnutka v main ni odločitev zavodov.

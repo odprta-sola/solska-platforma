@@ -12,7 +12,9 @@ Za vsako ugotovitev navedite datoteko, razdelek, konkreten problem in predlagani
 
 Naloga je pregled in poročilo v pogovoru. Brez posebnega naročila ne spreminjajte, komentirajte na GitHubu ali združujte PR. Če do repozitorija nimate dostopa, to povejte.
 
-## Odziv na prvi pregled
+## Zgodovinski odziv na prvi pregled pri 487ff00
+
+Spodnje vrstice beležijo odziv na prejšnjo različico. Ne opisujejo trenutnega HEAD; za sedanji obseg in razdelitev dela veljajo naročilo, načrt P0 in aktualni diff PR.
 
 | Pripombe | Obravnava |
 | --- | --- |
@@ -21,11 +23,11 @@ Naloga je pregled in poročilo v pogovoru. Brez posebnega naročila ne spreminja
 | B3 | Ohranjen dogovor: M2 načrtuje in odda ob dospelosti. send_not_before zato ni dodan; dodan iztek v tihem času. |
 | B5 | Predlagani skupni vhod, ločene osnovne poti in SSO potek; konkretna rešitev odprta. Enaka API predpona sama ne bi bila napaka pri različnih gostiteljih. |
 | B6 | Pogodba prestavljena na stalno mesto; sklici in D12 usklajeni. D12 ostaja odprt. |
-| P1, P3 | Ločeni mejniki A/I/B/C, dodan minimalni sprejem M1, oznake zaslonov, celoten M2 prototip in dodatni preizkusi. |
+| P1, P3 | Takrat so bili dodani mejniki A/I/B/C, minimalni sprejem M1 in dodatni preizkusi; poznejša razdelitev jih je spremenila. |
 | P2 | Prejšnje stanje pri c3388ed: nadomestek je omogočal vzporednost in P0 je ostal dijaški razvoj. Nova usmeritev določa pobudnikov referenčni P0 in celoten človeški prevzem T pred A/I. |
 | P4 | Predloge, locale, omejeni parametri in štiri vrste dostave. |
 | P5 | CSV polja, šifranti in lastništvo P0. Manjkajoče vrstice ne ukinjajo pravic samodejno; politiko potrdita šola in tehnični nosilec. |
-| P6, P7 | Aktivacijska pošta neodvisna od M1; dodana tabela blokad in rokov. |
+| P6, P7 | Aktivacijska pošta je bila ločena od M1; poznejši načrt P0 določa aktualne pogoje pred kodo in prevzemom. |
 | U1–U9 | Ločeni dodatki in navodilo, oznake primerov, primerjalna tabela, pojmovnik, izvor, ID, vloge, predlagana šola in dopolnjeni testni podatki. |
 
 OpenAPI, testni strežnik in produkcijska rešitev še niso izdelani; dokumentacija tega ne predstavlja kot zaključeno delo.

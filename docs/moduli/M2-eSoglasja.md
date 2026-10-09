@@ -141,7 +141,7 @@ Pri polnoletstvu med šolskim letom šola potrdi aktualne odločevalce in čas z
 
 ## Roki, opomniki in papirna pot
 
-Rok odziva, veljavnost odločitve in rok hrambe so ločeni podatki. Opominjajo se zahtevani upravičenci brez ustrezne aktualne odločitve; zavrnjenih ali preklicanih odločitev se ne obravnava kot pozabljeni odziv. M2 odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic sproži M2. Ob oddaji odziva ali spremembi njegovega stanja M2 sproži preklic vseh opomnikov, ki niso več potrebni. M1 neposredno pred pošiljanjem prek dogovorjenega vmesnika preveri, ali zahteva ni preklicana ali nadomeščena ter ali je odziv še potreben. Če preverjanje ni dosegljivo, se opomnik zadrži; že predane e-pošte ni mogoče priklicati, povezava pa pokaže aktualno stanje. M1 izvaja pošiljanje, tihi čas, omejene ponovne poskuse in prikaz napak po svojih pravilih. Predaja strežniku ni dokaz prejema; stanje obveščanja v M2 je samo informativno in ne nadomesti odločitve upravičene osebe.
+Rok odziva, veljavnost odločitve in rok hrambe so ločeni podatki. Opominjajo se zahtevani upravičenci brez ustrezne aktualne odločitve; zavrnjenih ali preklicanih odločitev se ne obravnava kot pozabljeni odziv. M2 odloči, koga in do kdaj opominjati, ter odda M1 zahtevo ob dospelosti opomnika; preklic sproži M2. Ob oddaji odziva ali spremembi njegovega stanja M2 sproži preklic opomnikov za posamezne prejemnike, za katere niso več potrebni. M1 neposredno pred pošiljanjem prek dogovorjenega vmesnika preveri, ali zahteva ni preklicana ali nadomeščena ter ali je odziv še potreben. Če preverjanje ni dosegljivo, se opomnik zadrži; že predane e-pošte ni mogoče priklicati, povezava pa pokaže aktualno stanje. M1 izvaja pošiljanje, tihi čas, omejene ponovne poskuse in prikaz napak po svojih pravilih. Predaja strežniku ni dokaz prejema; stanje obveščanja v M2 je samo informativno in ne nadomesti odločitve upravičene osebe.
 
 Papirni obrazec vsebuje isto različico vsebine in izbire kot spletni. Interni seznam za razdelitev je ločen. Zaposleni evidentira prejeti odgovor, vir, datum prejema in vnosa ter različico; ne ustvari navideznega elektronskega klika starša. Način hrambe in povezave s papirnim izvirnikom določi šola.
 
@@ -234,7 +234,7 @@ Pred produkcijo se določijo posodobitve, nadzor, incidenti, obnovitev in spreje
 | Prispe papirni odziv | Vir, različica in vnos so sledljivi; spor sproži obravnavo |
 | Upravičenje osebe se spremeni | Nadaljnje dejanje sledi preverjenim pravicam, zgodovina ostane sledljiva |
 | Sistem se obnovi iz kopije | Odločitve so uporabne, pravila hrambe in brisanja ponovno veljajo |
-| Uvoz vsebuje napačne povezave ali dvojnike | Napake so prikazane, obstoječa evidenca ostane celovita |
+| Uvoz P0 vsebuje napačne povezave ali dvojnike | P0 prikaže napake in ohrani celovitost evidence; M2 ne vodi ločenega uvoza oseb |
 | Priloga je zlonamerna ali preverjanje ne deluje | Priloga ostane zadržana in ni dostopna |
 | Preizkus z reprezentativnim številom upravičencev in hkratnih oddaj | Ni izgubljenih odločitev; odzivnost dosega predhodno potrjeni cilj |
 | Uporaba na telefonu, s tipkovnico in bralnikom zaslona | Ključni postopki so izvedljivi |

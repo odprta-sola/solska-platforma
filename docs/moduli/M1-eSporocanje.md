@@ -107,7 +107,7 @@ Vmesnik določa:
 
 M1 obdela tako zahtevo kot obvestilo brez javno objavljene vsebine. Vsebino, odločitve in stanje postopka ohrani klicoči modul; potrditev seznanitve v M1 ne ustvari odločitve v drugem modulu. Modula ne bereta tabel drug drugega.
 
-Delitev odgovornosti pri opomnikih: klicoči modul odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic prav tako sproži klicoči modul. M1 izvaja pošiljanje, tihi čas, ponovne poskuse in prikaz napak; o prejemnikih in rokih opominjanja pri teh zahtevah ne odloča. Opomniki za zahtevano seznanitev lastnih obvestil M1 ostanejo v M1.
+Delitev odgovornosti pri opomnikih: klicoči modul odloči, koga in do kdaj opominjati, ter odda M1 zahtevo ob dospelosti opomnika; preklic prav tako sproži klicoči modul. M1 nato izvaja pošiljanje ob upoštevanju tihega časa, ponovne poskuse in prikaz napak; o prejemnikih in rokih opominjanja pri teh zahtevah ne odloča. Opomniki za zahtevano seznanitev lastnih obvestil M1 ostanejo v M1.
 
 Klicoči modul ob oddaji odziva, spremembi, preklicu ali izteku potrebe sproži preklic povezanih opomnikov. M1 pred pošiljanjem preveri še aktualno potrebo prek dogovorjenega vmesnika klicočega modula; samo preverjanje upravičenja ne zadostuje. Preklic je varen pri ponovitvah. Pogodba opredeli tudi tekmovanje med odzivom in pošiljanjem: e-pošte, ki je že predana strežniku, ni mogoče priklicati, vendar njena povezava pokaže aktualno stanje postopka.
 
@@ -158,7 +158,7 @@ Samodejno prevajanje je predmet ločene odločitve o podatkovnih tokovih, kakovo
 - Starš: jezik, kanal, papirna pot in nastavitve e-poštnih potrdil.
 - Zaposleni: osnutek, izbira prejemnikov, predogled in objava.
 - Zaposleni: pregled potrjenih, nepotrjenih, napak pošiljanja in papirne poti.
-- Skrbnik: uvoz, dostopi, opravila pošiljanja, izvozi in pravila hrambe.
+- Skrbnik: skupni uvoz oseb in povezav prek P0, dostopi, opravila pošiljanja, izvozi in pravila hrambe.
 
 Osnovni postopki morajo delovati na telefonu, s tipkovnico in bralnikom zaslona. Obvestilo naj ima dostopno besedilo; slikovna priloga ne sme biti edini nosilec pomembnega navodila.
 
@@ -207,7 +207,7 @@ Pred uvedbo se določijo upravljanje skrivnosti, posodobitve, zaščita skrbniš
 | Starš ponovno potrdi oziroma zahteva pride dvakrat | Ena logična potrditev, brez podvojenih posledic |
 | Obvestilo se bistveno spremeni | Stara potrditev ostane pri stari različici, nova zahteva novo potrditev |
 | Poštna storitev odpove in pozneje okreva | Opravila se nadaljujejo, napake so vidne, podvojitve so omejene |
-| Uvoz vsebuje napačne povezave | Napake so prikazane, obstoječa evidenca ostane celovita |
+| Uvoz P0 vsebuje napačne povezave | P0 prikaže napake in ohrani celovitost evidence; M1 ne vodi ločenega uvoza oseb |
 | Priloga je zlonamerna ali preverjanje ne deluje | Priloga ostane zadržana in ni dostopna |
 | Obvestilo se objavi v tihem času | E-pošta čaka do konca tihega časa; nujno pošiljanje zahteva pravico in razlog |
 | Drug modul pošlje isto zahtevo dvakrat ali jo prekliče | Ena logična dostava; zastareli opomniki so odpovedani |

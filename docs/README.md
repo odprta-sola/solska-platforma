@@ -5,7 +5,7 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 | Dokument | Namen |
 | --- | --- |
 | [Razvojno naročilo P0–M1–M2](projekt/razvojno-narocilo-P0-M1-M2.md) | Izhodiščni cilj pobudnika, obvezni obseg, vloge in demonstracije |
-| [Razlaga in praktični primeri](mentorji/razvojni-paket-P0-M1-M2.md) | Primeri, mejniki, delitev dela in odprte odločitve |
+| [Razlaga in praktični primeri](mentorji/razvojni-paket-P0-M1-M2.md) | Pojasnila in praktični primeri k razvojnemu naročilu |
 | [Priprava referenčnega P0](projekt/priprava-referencnega-P0.md) | Obseg prvega prevzema, paket T, predaja in projektni pogoji |
 | [P0 uporabniki](moduli/P0-uporabniki.md) | Evidenca, lokalna prijava, uvoz in testni podatki |
 | [Pogodba P0–M1–M2](arhitektura/vmesnik-P0-M1-M2.md) | Osnutek API za potrditev D12 |

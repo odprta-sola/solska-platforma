@@ -11,7 +11,7 @@ Ta pogodba je skupni tehnični predlog v [razvojnem naročilu pobudnika](../proj
 
 Ta dokument je stalno mesto osnutka pogodbe. Nadomešča načrtovani naslov vmesnik-M1-M2.md in vključuje skupni vir identitet ter upravičenj, ki je že del D12. [Vodnik za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md) in [P0](../moduli/P0-uporabniki.md) pojasnita uporabo.
 
-Pred odvisno implementacijo mentorji in skupni tehnični nosilec potrdijo topologijo, prijavno rešitev, delegiranje identitete, sheme, šifrante, meje velikosti, roke hrambe ključev in izvajalce testnega nadomestka. OpenAPI in delujoči nadomestek še nista izdelana. Besedilni primeri niso nadomestilo za pogodbeno testiranje.
+Pred odvisno implementacijo mentorji in skupni tehnični nosilec potrdijo topologijo, prijavno rešitev, delegiranje identitete, sheme, šifrante, meje velikosti in roke hrambe ključev. Pobudnik pripravi tudi testna nadomestka v paketu T s pomočjo AI; izvajanje in človeški pregled se dokumentirata po [načrtu predaje](../projekt/priprava-referencnega-P0.md). OpenAPI in delujoča nadomestka še niso izdelani. Besedilni primeri niso nadomestilo za pogodbeno testiranje.
 
 P0 sam ne določi povezav M2 → M1 in M1 → M2. Paket T mora zagotoviti njuni shemi, nadomestka in pogodbene teste. Pred D12 je treba izrecno določiti vir jezika in prikaznih oznak vsakega prejemnika, slovar poslovnih ID, semantiko `scope_ref` pri več otrocih in `grants.scope_key`, ravnanje ob odsotnem kontaktu, pravilo tihega časa ter zgodovinski dostop. Seznam vprašanj ni dokončana pogodba.
 
@@ -73,11 +73,11 @@ Servisni kontaktni klic vsebuje recipient_id, scope_ref in delivery_request_id. 
 | GET /delivery-requests/{id} | Stanje lastne zahteve | 200 s stanji po prejemnikih |
 | POST /delivery-requests/{id}/cancel | Ponovljiv preklic | 200 s stanji in rezultatom preklica po prejemniku |
 
-Klicoči modul vidi le svoje zahteve. Vsak prejemnik ima svoj scope_ref. Število prejemnikov je omejeno s potrjeno shemo.
+Klicoči modul vidi le svoje zahteve. Primer spodaj uporablja en `scope_ref` na prejemnika; način predstavitve več otrok v eni dostavi in povezava z `grants.scope_key` ostajata odprta do potrditve D12. Število prejemnikov je omejeno s potrjeno shemo.
 
 Selektivni preklic je del D12 pred začetkom odvisnega razvoja I: zahteva mora omogočiti izbiro konkretnega prejemnika oziroma njegove dostave, ne avtomatskega preklica drugih prejemnikov iste zahteve. Identifikator, shema in odgovor za posameznega prejemnika se določijo v OpenAPI in pogodbenem testu.
 
-kind je notification, reminder, receipt ali change_notice. Besedilo izbere pregledana večjezična predloga template_id in locale. params dopušča le polja iz potrjene sheme predloge. Splošna predloga nima imen otrok ali vsebine odločitev. Vnos poljubnega besedila ni del tega predloga API. Manjkajoč prevod se obravnava po D05, nadomestni jezik je izrecen, ne tih.
+kind je notification, reminder, receipt ali change_notice. Besedilo izbere pregledana večjezična predloga `template_id`. Polje `locale` v spodnjem primeru je začasno ponazorilo; vir jezika po posameznem prejemniku in pravilo izrecnega nadomestnega jezika določi D12 ob upoštevanju D05. `params` dopušča le polja iz potrjene sheme predloge. Splošna predloga nima imen otrok ali vsebine odločitev. Vnos poljubnega besedila ni del tega predloga API.
 
 ```json
 {
