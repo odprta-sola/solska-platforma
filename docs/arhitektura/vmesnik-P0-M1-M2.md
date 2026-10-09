@@ -1,17 +1,19 @@
 # Pogodba vmesnikov P0–M1–M2
 
-Datum: 8. oktober 2026  
+Datum: 9. oktober 2026
 Status: delovni predlog D12 za potrditev; ni dokončna implementacijska pogodba
 
 ## Vloga pogodbe v naročilu
 
-Ta pogodba je skupni tehnični predlog v [razvojnem naročilu pobudnika](../projekt/razvojno-narocilo-P0-M1-M2.md). Dopolnitev shem in testov je naloga mejnika T. Pobudnik s tehnično pomočjo pripravi izhodiščno rešitev; mentorji in skupni tehnični nosilec preverijo izvedljivost in varnost ter potrdijo pogodbo pred odvisno implementacijo. Vmesniki niso prosta izbira posamezne ekipe. Zapisane odprte vrzeli niso s tem zaključene.
+Ta pogodba je skupni tehnični predlog v [razvojnem naročilu pobudnika](../projekt/razvojno-narocilo-P0-M1-M2.md). Dopolnitev shem in testov je naloga mejnika T. Pobudnik s pomočjo AI pripravi izhodiščno rešitev; mentorji in skupni tehnični nosilec preverijo izvedljivost in varnost ter potrdijo različico pogodbe v D12 pred odvisno implementacijo. Vmesniki niso prosta izbira posamezne ekipe. Zapisane odprte vrzeli niso s tem zaključene.
 
 ## Obseg in odprte odločitve
 
 Ta dokument je stalno mesto osnutka pogodbe. Nadomešča načrtovani naslov vmesnik-M1-M2.md in vključuje skupni vir identitet ter upravičenj, ki je že del D12. [Vodnik za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md) in [P0](../moduli/P0-uporabniki.md) pojasnita uporabo.
 
 Pred odvisno implementacijo mentorji in skupni tehnični nosilec potrdijo topologijo, prijavno rešitev, delegiranje identitete, sheme, šifrante, meje velikosti, roke hrambe ključev in izvajalce testnega nadomestka. OpenAPI in delujoči nadomestek še nista izdelana. Besedilni primeri niso nadomestilo za pogodbeno testiranje.
+
+P0 sam ne določi povezav M2 → M1 in M1 → M2. Paket T mora zagotoviti njuni shemi, nadomestka in pogodbene teste. Pred D12 je treba izrecno določiti vir jezika in prikaznih oznak vsakega prejemnika, slovar poslovnih ID, semantiko `scope_ref` pri več otrocih in `grants.scope_key`, ravnanje ob odsotnem kontaktu, pravilo tihega časa ter zgodovinski dostop. Seznam vprašanj ni dokončana pogodba.
 
 ## Topologija in prijava
 
@@ -50,6 +52,8 @@ Razreševanje občinstva prejme class_id oziroma odobren group_id, namen, poobla
 
 scope_ref je neprosojen sklic na potrjeni obseg (šola, subjekt/otrok, vir ali postopek, dovoljena dejanja in veljavnost). Izdajo in razrešitev sklica izvajata P0 ter lastnik vira po potrjeni pogodbi; klicateljev poljuben niz ni dokaz pravice. Konkretna shema izdaje sklica je odprta zahteva OpenAPI. Vir ostane odgovornost modula: P0 dovoli obseg, M1 preveri naslovljenost in različico, M2 veljavnost obrazca in pravila odločanja.
 
+Povezava, na kateri temelji dovoljenje, se preveri ob vsakem zaščitenem dejanju; njen odvzem ima prednost pred še veljavnim zapisom dovoljenja. Semantika izdaje `scope_ref` in vezave na `grants.scope_key` ostaja za shemo D12.
+
 Primer preverjanja:
 ```json
 {"subject_id":"parent-01","scope_ref":"scope-demo-01","permission":"m1.confirm"}
@@ -70,6 +74,8 @@ Servisni kontaktni klic vsebuje recipient_id, scope_ref in delivery_request_id. 
 | POST /delivery-requests/{id}/cancel | Ponovljiv preklic | 200 s stanji in rezultatom preklica po prejemniku |
 
 Klicoči modul vidi le svoje zahteve. Vsak prejemnik ima svoj scope_ref. Število prejemnikov je omejeno s potrjeno shemo.
+
+Selektivni preklic je del D12 pred začetkom odvisnega razvoja I: zahteva mora omogočiti izbiro konkretnega prejemnika oziroma njegove dostave, ne avtomatskega preklica drugih prejemnikov iste zahteve. Identifikator, shema in odgovor za posameznega prejemnika se določijo v OpenAPI in pogodbenem testu.
 
 kind je notification, reminder, receipt ali change_notice. Besedilo izbere pregledana večjezična predloga template_id in locale. params dopušča le polja iz potrjene sheme predloge. Splošna predloga nima imen otrok ali vsebine odločitev. Vnos poljubnega besedila ni del tega predloga API. Manjkajoč prevod se obravnava po D05, nadomestni jezik je izrecen, ne tih.
 
@@ -93,6 +99,8 @@ M2 načrtuje opomnik in odda zahtevo šele, ko dospe. Zato send_not_before v prv
 
 Stanja posamezne dostave: queued, held, handed_off, failed, cancelled, expired. handed_off pomeni predajo strežniku, ne prejema. Ponovitev obdela le neobdelane prejemnike. Agregat naj vrne število po stanju; ne skriva delnih napak.
 
+Odgovor 202 sme slediti šele trajnemu zapisu zahteve, potrebnemu za obnovitev po izpadu. Pri negotovem izidu poštne predaje mora potrjena politika določiti, kdaj je ponovitev dopustna, kako se zabeleži negotovost in kaj lahko dokazujemo; logična deduplikacija ne zagotavlja enkratnega fizičnega prejema.
+
 Rezultat preklica je ločen od stanja: cancelled_now, already_cancelled, too_late ali already_terminal. Pri too_late ostane state=handed_off; pri expired/failed vrnemo already_terminal z dejanskim stanjem. failed je končno stanje po izčrpanju poskusov; začasna napaka ostane queued ali held. Neveljavna/nepooblaščena zahteva vrne običajno napako, ne uspešnega preklica.
 
 ## Preverjanje potrebe in veljavnost opomnikov
@@ -115,4 +123,4 @@ Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (polje 
 
 Skupni preizkusi morajo pokriti: pravico avtorja do oddelka, servisni klic brez seje, podtaknjen ID/obseg, nepooblaščen kontaktni klic, dvojno zahtevo, konflikt ključa, delno dostavo, ponovljen preklic, odziv med čakanjem, izpad P0/M2, iztek v tihem času in manjkajoč prevod.
 
-Odvisni razvoj začne po potrditvi shem in dovoljenj; nadomestek uporabi iste sheme. Izdelavo lahko prevzamejo dodeljeni dijaki pod pregledom nosilca skupnih gradnikov. Ta odgovornost še ni imenovana. Zgodnji skupni preizkus najprej lahko uporabi nadomestek, pozneje nujno prave module. Sprememba pogodbe zahteva uskladitev prizadetih ekip; nezdružljiva sprememba novo različico ali potrjen prehod.
+Predlog shem in dovoljenj se lahko izdela pred potrditvijo D12. Odvisni razvoj A/I začne šele po celotnem človeškem prevzemu T z v D12 potrjeno različico pogodbe; nadomestka M1/M2 uporabita iste sheme, vendar ne nadomestita pravega P0. Pobudnik s pomočjo AI pripravi paket T, neodvisen človeški pregledovalec preveri kodo in pogodbo. Odgovorni nosilci še niso imenovani. Sprememba pogodbe zahteva uskladitev prizadetih ekip; nezdružljiva sprememba novo različico ali potrjen prehod.

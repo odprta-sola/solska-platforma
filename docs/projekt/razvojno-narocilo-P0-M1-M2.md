@@ -1,7 +1,8 @@
 # Razvojno naročilo P0, M1 in M2
 
-Datum: 8. oktober 2026  
-Različica: predlog izvedbe 1  
+Datum: 9. oktober 2026
+
+Različica: predlog izvedbe 2
 Avtorstvo usmeritve: pobudnik projekta Mitja Pirih  
 Status: projektna usmeritev pobudnika in predlog za izvedbeni dogovor; ne potrditev virov zavodov ali produkcijske uvedbe
 
@@ -24,6 +25,7 @@ Ta dokument določa naš izhodiščni cilj, funkcionalni obseg, vloge, zaporedje
 | Vmesniki in pravila dostopa | Skupen tehnični predlog za vse ekipe; pred odvisno implementacijo pregled in potrditev D12 |
 | Dijaki, ure, roki in maturitetna primernost | Mentor in razvojni zavod določita na podlagi tega naročila |
 | Tehnologija in prijavna komponenta | Skupni tehnični nosilec predlaga eno izvedbo z mentorji; ni prosta ločena izbira vsake ekipe |
+| Priprava P0 in paketa T | Pobudnik osebno s pomočjo AI pripravi referenčno osnovo; ne nastopa samodejno njegovo podjetje. Tehnični nosilec in neodvisni človeški pregledovalec jo preverita pred predajo. |
 | Oblikovanje in notranja organizacija kode | Prostor za dijake ob izpolnjenih skupnih pravilih |
 | Dodatne funkcije | Šele po obveznih demonstracijah, brez spremembe pogodbe na lastno pobudo |
 | Produkcija in pravna ustreznost postopka | Ločen pregled in odločitev šole; učni rezultat je ne nadomesti |
@@ -44,9 +46,9 @@ Odprti register D01–D16 se s tem ne zaključi. Zlasti ne imenujemo oseb, ne ob
 
 Tehnična vloga ne daje rutinskega vpogleda v vsebine. Povezava starš–otrok sama ni dovoljenje za vsako dejanje. Vloge se lahko združujejo, vendar se pravice preverijo za konkretni vir in postopek.
 
-## Obvezni izdelek P0
+## Referenčna osnova P0
 
-**Naloga ekipe:** izdelati skupno osnovo, ki jo lahko uporabljata obe drugi ekipi.
+**Priprava pobudnika:** delujoči P0 je predajna osnova za dijake, ne obvezna začetna maturitetna naloga. Podroben razrez prvega prevzema in dopolnitev za B določa [načrt priprave P0](priprava-referencnega-P0.md); spodnji seznam opisuje ciljni obseg B, ne drugega neodvisnega prevzemnega merila.
 
 1. Evidenca oseb, otrok, oddelkov, šolskih let, povezav in dovoljenj s stalnimi ID.
 2. Lokalna prijava z vzdrževano rešitvijo; gesel in kriptografije dijaki ne razvijajo na novo.
@@ -62,7 +64,7 @@ Tehnična vloga ne daje rutinskega vpogleda v vsebine. Povezava starš–otrok s
 
 P0 ne pošilja aktivacijskih sporočil prek poslovnega API M1. Uporabi poštni mehanizem izbrane prijavne rešitve. Razvojna e-pošta gre v prestrezni testni predal.
 
-Za prvo demonstracijo so računi pripravljeni vnaprej. Pred izvedbo aktivacije in obnove prek skupnega predala se določi individualni postopek; sam dostop do skupnega predala ne zagotavlja ločitve oseb. Podrobnosti evidence in uvoza: [P0 uporabniki](../moduli/P0-uporabniki.md).
+Za prvo demonstracijo so računi pripravljeni vnaprej. Prvi prevzem P0 vključuje spremembo kontakta in odvzem povezave ter dovoljenja. Individualna aktivacija in obnova prek skupnega predala sta dopolnitev pred B; sam dostop do skupnega predala ne zagotavlja ločitve oseb. Podrobnosti evidence in uvoza: [P0 uporabniki](../moduli/P0-uporabniki.md).
 
 ## Obvezni izdelek M1
 
@@ -128,18 +130,18 @@ Začetni tehnični paket mora pripraviti predlog rešitve tudi za preostale ugot
 - negotov izid poštne predaje in meje zagotovila ene dostave;
 - individualna aktivacija in obnova pri skupnem e-poštnem predalu.
 
-Te vrzeli niso prepuščene domišljiji posamezne ekipe. Pobudnik s tehnično pomočjo pripravi eno izhodiščno rešitev, skupni tehnični nosilec in mentorji jo preverijo v D12. Obstoječi osnutek še ni dokončni OpenAPI ali delujoč testni strežnik.
+Te vrzeli niso prepuščene domišljiji posamezne ekipe. Pobudnik s pomočjo AI pripravi eno izhodiščno rešitev, skupni tehnični nosilec in mentorji jo preverijo v D12. P0 sam ne določi povezav M2 → M1 in M1 → M2; paket T mora vključiti njuni shemi, nadomestka in pogodbene teste. Obstoječi osnutek še ni dokončni OpenAPI ali delujoč testni strežnik.
 
 ## Vloge pri izvedbi
 
 | Vloga | Konkretni rezultat |
 | --- | --- |
-| Pobudnik in koordinator | Cilj, prioritete, primeri in predlog obsega; usklajene vsebinske spremembe s šolo uporabnico |
+| Pobudnik in koordinator | Cilj, prioritete in izhodiščni obseg; osebna priprava referenčnega P0/T s pomočjo AI; usklajene vsebinske spremembe s šolo uporabnico |
 | Predstavnik šole uporabnice | Preveri realnost postopkov, pravila upravičenj in uporabniški prevzem |
 | Skupni tehnični nosilec | Pregleda/izbere skupno tehnologijo, potrdi pogodbo, vodi integracijske preglede |
-| Nosilec skupnih gradnikov | Koordinira P0 in pripravo skupnih tehničnih gradnikov |
+| Nosilec skupnih gradnikov | Koordinira tehnično predajo P0/T in skladnost skupnih gradnikov; prihodnje vzdrževanje se dodeli posebej |
 | Mentorji | Ocenijo izvedljivost podanega naročila, določijo individualne izdelke, dijake in roke ter preverjajo napredek |
-| Dijaki | Izdelajo dodeljene dele, teste, dokumentacijo in demonstracijo; predlagajo izboljšave |
+| Dijaki | Razvijejo predvsem M1 in M2 ter njuno povezavo s P0, teste, dokumentacijo in demonstracijo; omejene razširitve P0 so možne po dogovoru z mentorjem |
 | Skrbnik repozitorija in namestnik | Dovoljenja, pregled sprememb in obravnava varnostnih prijav |
 | Vzdrževalec in namestnik | Poznejši prevzem podpore ter produkcijskega delovanja |
 
@@ -149,13 +151,13 @@ Osebe se imenujejo posebej. Predlog 2–3 dijakov na modul je izhodišče za raz
 
 | Mejnik | Obvezni rezultat | Dokaz zaključka |
 | --- | --- | --- |
-| T – skupna tehnična priprava | Izbrana razvojna osnova, prva pregledana shema vmesnikov, izmišljeni nabor, nadomestki in pogodbeni testi | Klici obeh načinov avtorizacije, zavrnitev tujega obsega, uspešna in neuspešna testna dostava |
-| A – prvi uporabniški potek | Minimalni P0 in besedilni M1, vnaprej pripravljeni računi | Učitelj objavi; pravi starš vidi in potrdi; druga družina nima dostopa |
-| I – povezava | M2 oddaja zahteve M1; najprej nadomestek, nato pravi moduli | Odločitev ostane shranjena med izpadom M1; dostava se nadaljuje; dvojna zahteva se ne podvoji logično |
+| T – skupna tehnična priprava | Delujoči referenčni P0, izbrana razvojna osnova, v D12 potrjena različica pogodbe OpenAPI, izmišljeni nabor, nadomestki, pogodbeni testi in navodila za namestitev | Neodvisni človek po navodilih namesti P0, preveri prijavo, tujo družino, odvzem povezave/dovoljenja in klice obeh vrst avtorizacije; pogodbena testa pokažeta uspešno in neuspešno dostavo |
+| A – prvi uporabniški potek | Besedilni M1 na prevzetem P0, vnaprej pripravljeni računi | Učitelj objavi; pravi starš vidi in potrdi; druga družina nima dostopa |
+| I – povezava | Minimalni M2 shrani odločitev in trajno zahtevo za dostavo; M1 prevzame zahtevo po pogodbi | Odločitev ostane shranjena med izpadom M1; dostava se nadaljuje; dvojna zahteva se ne podvoji logično |
 | B – celoten učni izdelek | Obvezni obseg P0/M1/M2 iz tega naročila | Skupna demonstracija spodnjih primerov, namestitev, testi in dokumentacija |
 | C – morebitni produkcijski pilot | Poseben potrjen postopek in strokovni prevzem | Vsa produkcijska merila iz specifikacij ter imenovani nosilci |
 
-A in I se lahko razvijata vzporedno po pregledu potrebnih delov T. Nadomestek ne nadomesti pravega P0 pri prevzemu B. Roke in obremenitev predlaga razvojni zavod; naročilo ne določa nepreverjenih ur.
+A in I se lahko razvijata vzporedno šele po celotnem človeškem prevzemu T. Pravi P0 je na kritični poti; nadomestka M1/M2 ga ne nadomestita. Če se T zamakne, se zamakne začetek odvisnega razvoja, pri čemer mentorji lahko pripravljajo neodvisne učne naloge brez trditve, da je A/I že stekel. Roke in obremenitev predlaga razvojni zavod; naročilo ne določa nepreverjenih ur.
 
 | Preizkus | Mejnik | Pričakovano |
 | --- | --- | --- |
@@ -164,8 +166,8 @@ A in I se lahko razvijata vzporedno po pregledu potrebnih delov T. Nadomestek ne
 | Dva starša in druga družina | A | Ločeni odzivi; tuji neposredni naslov je zavrnjen |
 | Osnovna dostopnost | A | Potek s tipkovnico, vidni fokus, označena polja in razumljive napake; osnovni pregled z bralnikom zaslona |
 | M2 odda zahtevo dvakrat in jo prekliče | I | En logični prevzem; sledljiv preklic ali pojasnjen prepozen preklic |
-| Napačen in ponovljen CSV | B | Brez delnega prepisa in podvojenih oseb |
-| Odvzem povezave ob obstoječem grants | B | Dovoljenje, ki temelji na odvzeti povezavi, ne omogoči novega dejanja |
+| Napačen in ponovljen CSV | T za osnovni uvoz; B za celotni obseg | Brez delnega prepisa in podvojenih oseb |
+| Odvzem povezave ob obstoječem grants | T | Dovoljenje, ki temelji na odvzeti povezavi, ne omogoči novega dejanja |
 | Skupni kontakt dveh računov | B | Aktivacija/obnova sledi pregledanemu individualnemu postopku |
 | Več otrok in spremenjena različica | B | Jasno izbran obseg; stara potrditev ne potrdi novega navodila |
 | Priloga in papirna pot | B | Dostop zaščiten; izročitev ločena od potrditve |
@@ -180,7 +182,7 @@ A in I se lahko razvijata vzporedno po pregledu potrebnih delov T. Nadomestek ne
 
 ArnesAAI, neposredna integracija z eAsistentom, potisna obvestila, avtomatiziran prehod šolskega leta, napredni obrazci, drugi moduli in centralna namestitev več šol niso obvezni za učni izdelek B. Potrebni jeziki dejanskega pilota in dostopnost niso izbirna produkcijska nadgradnja.
 
-Dijaki lahko predlagajo dodatne funkcije po zaključku obveznega dela. Oblikovanje zaslonov in organizacija kode dopuščata ustvarjalnost, pomen odločitev, dostopi, podatkovni tokovi in API pa so skupni dogovor.
+Za B so dostopnost, ponovljiva namestitev, integracijski preizkusi, izvoz, papirna pot in dva učna postopka obvezne prečne naloge. Izbirne so dodatne funkcije in po dogovoru omejene dijaške razširitve P0. Če ocena izvedljivosti pokaže prevelik obseg B, mentorji predlagajo konkreten rez v številu podprtih možnosti ali postopkov; sprememba obveznega jedra zahteva izrecen dogovor pobudnika s šolo. Dostopov, sledljivosti in osnovne dostopnosti zaradi rokov ne opustimo. Oblikovanje zaslonov in organizacija kode dopuščata ustvarjalnost, pomen odločitev, dostopi, podatkovni tokovi in API pa so skupni dogovor.
 
 ## Odgovor razvojnega zavoda
 

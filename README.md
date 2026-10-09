@@ -10,6 +10,8 @@ Projekt nastaja iz pobude za preprostejšo komunikacijo med šolo in starši ter
 
 [Osnutek M1 eSporočanje](docs/moduli/M1-eSporocanje.md) opredeli obvestila in seznanitev. [Osnutek M2 eSoglasja](docs/moduli/M2-eSoglasja.md) opredeli obrazce, odločitve in preklic. Oba sta odprta za mentorjev pregled. [Navodila za sodelovanje](CONTRIBUTING.md) opisujejo pripravo in pregled prispevkov.
 
+[Razvojno naročilo](docs/projekt/razvojno-narocilo-P0-M1-M2.md) in [načrt referenčnega P0](docs/projekt/priprava-referencnega-P0.md) določata predlagano razdelitev: pobudnik pripravi osnovo P0/T, dijaki razvijajo predvsem M1/M2. P0 in OpenAPI še nista izdelana.
+
 ## Trenutno stanje
 
 Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Potekajo priprava dokumentacije, usklajevanje obsega prvega modula in organizacija razvoja. Aplikacija še ni na voljo za produkcijsko uporabo.

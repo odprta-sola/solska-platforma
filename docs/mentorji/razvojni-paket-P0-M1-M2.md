@@ -29,12 +29,12 @@ Pobudnik je 8. oktobra 2026 podal naslednja izhodišča za pripravo:
 - Šola uporablja eAsistent. Oblika in razpoložljivost izvoza nista preverjeni.
 - Osnovna namestitev deluje z lokalnimi računi in CSV uvozom, brez obvezne povezave z eAsistentom ali ARNES.
 - Možnost ArnesAAI ostane zahtevana razvojna smer, predvidoma v naslednji fazi; posamezni šoli njena uporaba ni obvezna. Termin in izvedba še nista potrjena.
-- P0, M1 in M2 so predlagani za razvoj dijakov pod mentorskim in strokovnim vodstvom.
+- Pobudnik pripravi referenčni P0 in paket T s pomočjo AI; dijaki razvijajo predvsem M1/M2 in njuno povezavo. Omejene razširitve P0 so možne po dogovoru z mentorjem.
 - Po navedbi pobudnika je na eni šoli približno 20–25 potencialnih maturantov. Sodelovanje vseh ni dogovorjeno.
 - Ohranimo povezavo M2 z M1 za obveščanje. Nadomestni produkcijski kanal za M2 brez M1 ni del tega predloga.
 - Vmesnike določimo pred vzporednim razvojem in zgodaj preverimo skupno delovanje.
 
-Razvojno naročilo določa obvezni izhodiščni obseg pobudnika. Razporeditev 2–3 dijakov na modul ostaja predlog; osebe, ure in roke potrdi razvojni zavod. Tehnične vrzeli pogodbe se rešijo v skupni pripravi T. D01–D16 ostajajo v statusih registra.
+Razvojno naročilo določa obvezni izhodiščni obseg pobudnika. Razporeditev 2–3 dijakov za M1 ali M2 ostaja predlog; osebe, ure in roke potrdi razvojni zavod. [Načrt priprave P0](../projekt/priprava-referencnega-P0.md) določa predajo in prevzem T. Odvisni razvoj A/I se začne šele po celotnem človeškem prevzemu T. D01–D16 ostajajo v statusih registra.
 
 ## Razlika med P0, M1 in M2
 

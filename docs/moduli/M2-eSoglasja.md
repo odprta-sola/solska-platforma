@@ -246,15 +246,15 @@ Uspeh se meri s časom izpolnjevanja, težavami pri prijavi, napačnimi ali neja
 
 ## Mentorjeva ocena in razdelitev dela
 
-Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Loči delo dijakov, mentorja in skupnega tehničnega nosilca. Ocena ur M1 se ne prenese avtomatično na M2.
+Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Za učni izdelek B velja obvezno jedro iz [razvojnega naročila](../projekt/razvojno-narocilo-P0-M1-M2.md): dva izmišljena postopka, papirna pot, izvoz, osnovna dostopnost, ponovljiva namestitev in integracijski testi. Sprememba jedra potrebuje izrecen dogovor pobudnika s šolo. Loči delo dijakov, mentorja in skupnega tehničnega nosilca. Ocena ur M1 se ne prenese avtomatično na M2.
 
 Rezultat se zabeleži v tabeli funkcij z urami, odvisnostmi, fazo in nosilcem izvedbe. Obseg produkcijskega pilota potrdita mentor in pilotna šola po potrebnih strokovnih pregledih.
 
 Predlog razdelitve med šolami:
-- skupni tehnični nosilec: identitete, pravice, pogodbe API in pregled združljivosti;
+- pobudnik s pomočjo AI: priprava referenčnega P0 in tehničnega paketa T; skupni tehnični nosilec: pregled in potrditev pogodbe ter združljivosti;
 - ekipa M1: kanal obveščanja in dogovorjeni minimalni vmesnik;
 - ekipa M2: obrazci, odločitve in zgodovina;
-- dodatna ekipa: neodvisni prevzemni preizkusi, dostopnost in dokumentacija.
+- prečne obvezne naloge ekip: prevzemni preizkusi, dostopnost in dokumentacija; neodvisni človek posebej prevzame T.
 
 To je možnost organizacije, ne imenovanje ekip. En lastnik odločitve o skupnem vmesniku preprečuje različne nezdružljive izvedbe.
 

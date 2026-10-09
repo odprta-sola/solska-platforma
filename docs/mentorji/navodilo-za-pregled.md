@@ -2,6 +2,8 @@
 
 Preglejte dejanski diff PR #29 in nove dokumente v celoti. Primerjajte z M1, M2, arhitekturo, povzetkom, odgovornostmi in registrom na osnovni veji.
 
+Najprej preberite [razvojno naročilo](../projekt/razvojno-narocilo-P0-M1-M2.md), nato [praktične primere](razvojni-paket-P0-M1-M2.md), [načrt P0](../projekt/priprava-referencnega-P0.md) in [osnutek API](../arhitektura/vmesnik-P0-M1-M2.md). Ločite jasno označena odprta vprašanja od prikritih vrzeli in pojasnite njihov vpliv na odvisni razvoj.
+
 Preverite razumljivost za mentorja, razmejitev evidenc/prijave/upravičenj, uvoz in aktivacijo, mejnike ter individualne izdelke. Pri API preverite prejemnike, servisno avtorizacijo, minimalne podatke, podvojitve, preklic, iztek, topologijo in prijavo. Vključite varstvo podatkov, dostopnost in večjezičnost.
 
 Ocenite ločeno: primernost za mentorjev pregled; pripravljenost pogodbe za implementacijo; pripravljenost za produkcijo. Odprtih odločitev ne štejte kot že potrjene izvedbe.
@@ -20,7 +22,7 @@ Naloga je pregled in poročilo v pogovoru. Brez posebnega naročila ne spreminja
 | B5 | Predlagani skupni vhod, ločene osnovne poti in SSO potek; konkretna rešitev odprta. Enaka API predpona sama ne bi bila napaka pri različnih gostiteljih. |
 | B6 | Pogodba prestavljena na stalno mesto; sklici in D12 usklajeni. D12 ostaja odprt. |
 | P1, P3 | Ločeni mejniki A/I/B/C, dodan minimalni sprejem M1, oznake zaslonov, celoten M2 prototip in dodatni preizkusi. |
-| P2 | Nadomestek omogoča vzporednost; P0 ostaja dijaški razvoj. Izvajalca imenuje mentor, ne predpostavljamo razpoložljivega tehničnega nosilca. |
+| P2 | Prejšnje stanje pri c3388ed: nadomestek je omogočal vzporednost in P0 je ostal dijaški razvoj. Nova usmeritev določa pobudnikov referenčni P0 in celoten človeški prevzem T pred A/I. |
 | P4 | Predloge, locale, omejeni parametri in štiri vrste dostave. |
 | P5 | CSV polja, šifranti in lastništvo P0. Manjkajoče vrstice ne ukinjajo pravic samodejno; politiko potrdita šola in tehnični nosilec. |
 | P6, P7 | Aktivacijska pošta neodvisna od M1; dodana tabela blokad in rokov. |

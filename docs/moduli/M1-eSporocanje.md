@@ -228,7 +228,7 @@ Merijo se čas priprave obvestil, težave pri prijavi, manjkajoče potrditve, na
 
 Omejen prototip je lahko primeren za maturitetno nalogo. Celotni produkcijski obseg ni označen kot naloga nizke zahtevnosti. Ocena 150–250 ur se pred potrditvijo preveri z razrezom nalog in jasno ločitvijo dela dijakov, mentorja ter skupnega tehničnega nosilca.
 
-Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Ocena loči delo dijakov, mentorja in skupnega tehničnega nosilca. Razvrstitev v tem dokumentu je izhodiščni predlog za pregled. Rezultat pregleda se zabeleži v tabeli funkcij z oceno ur, odvisnostmi, predlagano fazo in nosilcem izvedbe; obseg pilota nato potrdita mentor in pilotna šola.
+Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Ocena loči delo dijakov, mentorja in skupnega tehničnega nosilca. Za učni izdelek B velja obvezno jedro iz [razvojnega naročila](../projekt/razvojno-narocilo-P0-M1-M2.md): tudi papirna pot, izvoz, osnovna dostopnost, ponovljiva namestitev in integracijski testi. Sprememba tega jedra potrebuje izrecen dogovor pobudnika s šolo, ne samostojne prerazvrstitve mentorja. Rezultat pregleda se zabeleži v tabeli funkcij z oceno ur, odvisnostmi, predlagano fazo in nosilcem izvedbe; obseg produkcijskega pilota nato potrdi šola po potrebnih strokovnih pregledih.
 
 Razvojni izdelek in dovoljenje za produkcijsko uporabo sta ločena mejnika. Produkcijsko vzdrževanje mora imeti nosilca tudi po zaključku šolskega leta.
 

@@ -3,6 +3,8 @@
 Datum: 8. oktober 2026  
 Status: predlog za mentorjev in tehnični pregled
 
+Referenčni P0 po [načrtu priprave in predaje](../projekt/priprava-referencnega-P0.md) pripravi pobudnik s pomočjo AI. Ta dokument opisuje model in ciljni obseg B; prvi prevzem T je podrobno določen v načrtu. Dijaki razvijajo predvsem M1/M2, omejene razširitve P0 pa so možne po dogovoru z mentorjem.
+
 [Uvod za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md) · [Pogodba vmesnikov](../arhitektura/vmesnik-P0-M1-M2.md)
 
 ## 6. P0 in evidenca uporabnikov
