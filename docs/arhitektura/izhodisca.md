@@ -30,7 +30,7 @@ Spletna aplikacija z mobilnim vmesnikom, podatkovna baza, trajna čakalna vrsta 
 
 Prvi pilot vključuje minimalni dokumentirani vmesnik M1–M2 za obveščanje. Razširjen API za vse prihodnje module ni pogoj pilota. M2 vodi odločitve in določa potrebne opomnike; M1 izvaja pošiljanje, tihi čas in ponovne poskuse.
 
-Pogodba vmesnika in skupni vir identitet ter upravičenj se opredelita z mentorji in skupnim tehničnim nosilcem v ločenem dokumentu docs/arhitektura/vmesnik-M1-M2.md. Ta dokument še ni pripravljen. Opredeli zahteve, odgovore, napake, preklic, stanje zahteve in primere ter način posredovanja sprememb oseb in povezav. Do dogovora prototipa uporabljata nadomestni testni vmesnik.
+Osnutek pogodbe in skupnega vira identitet ter upravičenj je v [vmesniku P0–M1–M2](vmesnik-P0-M1-M2.md). Nadomešča načrtovano ime vmesnik-M1-M2.md. Opredeljuje predlagane osnovne poti, prijavo, prejemnike, servisna dovoljenja, dostavo in napake. Topologija in prijavni protokol še potrebujeta potrditev D12; osnutek ni dovoljenje za začetek odvisne implementacije. Prvi predlog preverja upravičenja ob uporabi; način periodične uskladitve odprtih postopkov oziroma dogodkov se potrdi pred pilotom. Testne nadomestke je še treba izdelati.
 
 ## Meje okolij
 

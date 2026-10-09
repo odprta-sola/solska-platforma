@@ -18,6 +18,20 @@ Izvirna preglednica ni bila na voljo pri pripravi prvega javnega osnutka. Po pre
 
 Predlog notranjega akta, omenjen v V5, je bil naknadno predložen 5. oktobra 2026. Pregled potrjuje njegov status predloga za obravnavo in strukturo z 42 členi ter šestimi prilogami. To ni potrditev pravne ustreznosti, sprejetja akta ali izvedbenih zahtev za M1. Pred uporabo potrebuje vsebinski in pravni pregled ter odločitve pristojnih na šoli. Izvirnik z internimi podatki ni javno objavljen.
 
+## Dopolnitve 8. oktobra 2026
+
+| Vir | Javna obravnava |
+| --- | --- |
+| Usmeritve pobudnika v pogovoru 8. oktobra: eAsistent, približno 20–25 potencialnih dijakov, lokalni računi, izmišljeni podatki in povezani P0/M1/M2 | [Mentorski vodnik](../mentorji/razvojni-paket-P0-M1-M2.md) in [P0](../moduli/P0-uporabniki.md); niso institucionalne potrditve |
+| Predlog razdelitve 2–3 dijaki na modul in tehnični API | Uredniški/tehnični predlog za mentorje, ne potrjena razpoložljivost ali pogodba |
+| Priloženi neodvisni pregled PR #29, 8. oktober | Obravnava B1–B6, P1–P7 in U1–U9 v [navodilu za pregled](../mentorji/navodilo-za-pregled.md); izvirnik ni kopiran v repozitorij |
+
+Dodatna usmeritev pobudnika 8. oktobra 2026: cilj, obvezni obseg in merila poda pobudnik; mentorji ocenijo izvedljivost in organizacijo. Prenesena je v [razvojno naročilo](razvojno-narocilo-P0-M1-M2.md) ter razmejitev odgovornosti. To ne potrjuje ur, oseb ali obveznosti zavodov.
+
+## Dopolnitev 9. oktobra 2026
+
+Pobudnik je določil pripravo referenčnega P0 in tehničnega paketa T osebno s pomočjo AI; dijaki razvijajo predvsem M1/M2. Usmeritev je zapisana v [naročilu](razvojno-narocilo-P0-M1-M2.md) in [načrtu predaje](priprava-referencnega-P0.md). Navedba izvora ne pomeni izdelane kode, potrditve zavodov ali zaključenih odločitev D01–D16.
+
 ## Različice in potrditve
 
 Markdown je glavni vir nadaljnjih sprememb. Potrjene izdaje se označijo s commitom oziroma tagom; PDF za posredovanje se izdela iz potrjene vsebine. Združitev osnutka v main ni odločitev zavodov.

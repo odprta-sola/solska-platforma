@@ -4,6 +4,11 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 
 | Dokument | Namen |
 | --- | --- |
+| [Razvojno naročilo P0–M1–M2](projekt/razvojno-narocilo-P0-M1-M2.md) | Izhodiščni cilj pobudnika, obvezni obseg, vloge in demonstracije |
+| [Razlaga in praktični primeri](mentorji/razvojni-paket-P0-M1-M2.md) | Pojasnila in praktični primeri k razvojnemu naročilu |
+| [Priprava referenčnega P0](projekt/priprava-referencnega-P0.md) | Obseg prvega prevzema, paket T, predaja in projektni pogoji |
+| [P0 uporabniki](moduli/P0-uporabniki.md) | Evidenca, lokalna prijava, uvoz in testni podatki |
+| [Pogodba P0–M1–M2](arhitektura/vmesnik-P0-M1-M2.md) | Osnutek API za potrditev D12 |
 | [Povzetek projekta V6](projekt/povzetek.md) | Namen, stanje, faze, moduli in spremembe glede na V5 |
 | [Odgovornosti](projekt/odgovornosti.md) | Predlog vodenja, pregleda in vzdrževanja |
 | [Arhitektura](arhitektura/izhodisca.md) | Predlagana razmejitev jedra in samostojnih modulov |
@@ -16,7 +21,7 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 
 [Osnutek specifikacije M2 eSoglasja](moduli/M2-eSoglasja.md) opredeli obrazce, odločitve, preklic, dokazne zapise in povezavo z M1. Postopek pilota ter pravila potrebujejo mentorjev, vsebinski in pravni pregled.
 
-Za mentorjev prvi pregled so najpomembnejši povzetek, specifikaciji M1 in M2 ter odgovornosti. Tehnologija in razrez dela ostajata predmet dogovora.
+Začnite z [razvojnim naročilom](projekt/razvojno-narocilo-P0-M1-M2.md), nato preberite [razlago in praktične primere](mentorji/razvojni-paket-P0-M1-M2.md). Razvojni zavod oceni izvedljivost tega konkretnega predloga, razporedi izvajalce in predlaga roke oziroma popravke. Tehnična pogodba potrebuje dopolnitev in potrditev D12; statusi drugih odločitev ostajajo v registru.
 
 ## Podporno gradivo
 

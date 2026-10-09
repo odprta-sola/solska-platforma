@@ -20,11 +20,19 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D09 | Vzdrževanje, podpora in namestnik | Odprto | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema M1 in M2 | Predlog v specifikacijah | Skupni tehnični nosilec in pilotna šola |
 | D11 | Postopek pilota M2, besedilo obrazca in pravila odločanja | Odprto | Pilotna šola ob vsebinskem in pravnem pregledu |
-| D12 | Minimalni vmesnik M1–M2 in skupni vir identitet ter upravičenj | Odprto | Skupni tehnični nosilec in mentorji ekip |
+| D12 | [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md): minimalno obveščanje in skupni vir identitet ter upravičenj | Odprto | Skupni tehnični nosilec in mentorji ekip |
 | D13 | Razdelitev ekip, nosilci modulov in ocena ur po fazah | Odprto | Sodelujoči zavodi in mentorji |
 | D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; obravnava odprta, pred prvo kodo oziroma vključitvijo zunanjih ekip | Nosilec projekta in skrbnik repozitorija |
 | D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | Predlog/Odprto | Nosilec projekta in avtorji |
 | D16 | Prejemniki in odločevalci pri polnoletnih dijakih, prehod med letom in ustreznost privolitve za postopek | Odprto | Pilotna šola ob pravnem in podatkovnem pregledu |
+
+Osnutek D12 z dne 8. oktobra 2026 konkretizira že predvidene skupne identitete in obveščanje. Sheme, prijavni protokol, nosilci, testni nadomestki in pogodbeni preizkusi še niso potrjeni; D12 ostaja odprt. Izhodišča za razdelitev dijaškega dela so v [vodniku za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md).
+
+## Izhodiščni obseg pobudnika
+
+8. oktobra 2026 je pobudnik določil pripravo [konkretnega razvojnega naročila P0–M1–M2](razvojno-narocilo-P0-M1-M2.md). D01 in D13 zato obravnavata izvedljivost, razdelitev ter morebitne spremembe podanega obsega. Cilja projekta ni treba na novo oblikovati mentorjem. Naročilo ne zaključi D01–D16; potrditve virov, izvajalcev, pogodbe in produkcije ostajajo pri določenih nosilcih.
+
+9. oktobra 2026 je pobudnik usmeritev dopolnil: osebno s pomočjo AI pripravi referenčni P0 in paket T; dijaki razvijajo predvsem M1/M2. Mentorji ocenijo izvedljivost in predlagajo utemeljene spremembe, pobudnik pa cilj in obseg uskladi s šolo uporabnico. Zapis ne spremeni statusov ali nosilcev D01–D16 v zgornji tabeli; njihovo morebitno spremembo je treba posebej obravnavati v ustreznem issueju.
 
 ## Roki in sledenje
 

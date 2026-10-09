@@ -107,7 +107,7 @@ Vmesnik določa:
 
 M1 obdela tako zahtevo kot obvestilo brez javno objavljene vsebine. Vsebino, odločitve in stanje postopka ohrani klicoči modul; potrditev seznanitve v M1 ne ustvari odločitve v drugem modulu. Modula ne bereta tabel drug drugega.
 
-Delitev odgovornosti pri opomnikih: klicoči modul odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic prav tako sproži klicoči modul. M1 izvaja pošiljanje, tihi čas, ponovne poskuse in prikaz napak; o prejemnikih in rokih opominjanja pri teh zahtevah ne odloča. Opomniki za zahtevano seznanitev lastnih obvestil M1 ostanejo v M1.
+Delitev odgovornosti pri opomnikih: klicoči modul odloči, koga in do kdaj opominjati, ter odda M1 zahtevo ob dospelosti opomnika; preklic prav tako sproži klicoči modul. M1 nato izvaja pošiljanje ob upoštevanju tihega časa, ponovne poskuse in prikaz napak; o prejemnikih in rokih opominjanja pri teh zahtevah ne odloča. Opomniki za zahtevano seznanitev lastnih obvestil M1 ostanejo v M1.
 
 Klicoči modul ob oddaji odziva, spremembi, preklicu ali izteku potrebe sproži preklic povezanih opomnikov. M1 pred pošiljanjem preveri še aktualno potrebo prek dogovorjenega vmesnika klicočega modula; samo preverjanje upravičenja ne zadostuje. Preklic je varen pri ponovitvah. Pogodba opredeli tudi tekmovanje med odzivom in pošiljanjem: e-pošte, ki je že predana strežniku, ni mogoče priklicati, vendar njena povezava pokaže aktualno stanje postopka.
 
@@ -119,7 +119,7 @@ Ob polnoletstvu dijaka med šolskim letom šola zagotovi spremembo upravičenj z
 
 #### Veljavnost opomnikov
 
-Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (polje `expires_at`); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
+Skupno pravilo je v [pogodbi P0–M1–M2: veljavnost opomnikov](../arhitektura/vmesnik-P0-M1-M2.md#preverjanje-potrebe-in-veljavnost-opomnikov), vključno s poljem `expires_at`, zadržanjem in iztekom.
 
 ### Papirna pot
 
@@ -158,7 +158,7 @@ Samodejno prevajanje je predmet ločene odločitve o podatkovnih tokovih, kakovo
 - Starš: jezik, kanal, papirna pot in nastavitve e-poštnih potrdil.
 - Zaposleni: osnutek, izbira prejemnikov, predogled in objava.
 - Zaposleni: pregled potrjenih, nepotrjenih, napak pošiljanja in papirne poti.
-- Skrbnik: uvoz, dostopi, opravila pošiljanja, izvozi in pravila hrambe.
+- Skrbnik: skupni uvoz oseb in povezav prek P0, dostopi, opravila pošiljanja, izvozi in pravila hrambe.
 
 Osnovni postopki morajo delovati na telefonu, s tipkovnico in bralnikom zaslona. Obvestilo naj ima dostopno besedilo; slikovna priloga ne sme biti edini nosilec pomembnega navodila.
 
@@ -207,7 +207,7 @@ Pred uvedbo se določijo upravljanje skrivnosti, posodobitve, zaščita skrbniš
 | Starš ponovno potrdi oziroma zahteva pride dvakrat | Ena logična potrditev, brez podvojenih posledic |
 | Obvestilo se bistveno spremeni | Stara potrditev ostane pri stari različici, nova zahteva novo potrditev |
 | Poštna storitev odpove in pozneje okreva | Opravila se nadaljujejo, napake so vidne, podvojitve so omejene |
-| Uvoz vsebuje napačne povezave | Napake so prikazane, obstoječa evidenca ostane celovita |
+| Uvoz P0 vsebuje napačne povezave | P0 prikaže napake in ohrani celovitost evidence; M1 ne vodi ločenega uvoza oseb |
 | Priloga je zlonamerna ali preverjanje ne deluje | Priloga ostane zadržana in ni dostopna |
 | Obvestilo se objavi v tihem času | E-pošta čaka do konca tihega časa; nujno pošiljanje zahteva pravico in razlog |
 | Drug modul pošlje isto zahtevo dvakrat ali jo prekliče | Ena logična dostava; zastareli opomniki so odpovedani |
@@ -228,7 +228,7 @@ Merijo se čas priprave obvestil, težave pri prijavi, manjkajoče potrditve, na
 
 Omejen prototip je lahko primeren za maturitetno nalogo. Celotni produkcijski obseg ni označen kot naloga nizke zahtevnosti. Ocena 150–250 ur se pred potrditvijo preveri z razrezom nalog in jasno ločitvijo dela dijakov, mentorja ter skupnega tehničnega nosilca.
 
-Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Ocena loči delo dijakov, mentorja in skupnega tehničnega nosilca. Razvrstitev v tem dokumentu je izhodiščni predlog za pregled. Rezultat pregleda se zabeleži v tabeli funkcij z oceno ur, odvisnostmi, predlagano fazo in nosilcem izvedbe; obseg pilota nato potrdita mentor in pilotna šola.
+Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Ocena loči delo dijakov, mentorja in skupnega tehničnega nosilca. Za učni izdelek B velja obvezno jedro iz [razvojnega naročila](../projekt/razvojno-narocilo-P0-M1-M2.md): tudi papirna pot, izvoz, osnovna dostopnost, ponovljiva namestitev in integracijski testi. Sprememba tega jedra potrebuje izrecen dogovor pobudnika s šolo, ne samostojne prerazvrstitve mentorja. Rezultat pregleda se zabeleži v tabeli funkcij z oceno ur, odvisnostmi, predlagano fazo in nosilcem izvedbe; obseg produkcijskega pilota nato potrdi šola po potrebnih strokovnih pregledih.
 
 Razvojni izdelek in dovoljenje za produkcijsko uporabo sta ločena mejnika. Produkcijsko vzdrževanje mora imeti nosilca tudi po zaključku šolskega leta.
 
@@ -246,3 +246,7 @@ Razvojni izdelek in dovoljenje za produkcijsko uporabo sta ločena mejnika. Prod
 10. Kdo so prejemniki obvestil pri polnoletnih dijakih?
 
 Odločitve se zabeležijo z datumom in odgovorno osebo. Ta osnutek ne potrjuje sodelovanja ali obveznosti posamezne šole.
+
+## Povezana razvojna gradiva
+
+[Minimalni P0](P0-uporabniki.md) je predlagani lastnik osnovne evidence in uvoza oseb ter povezav. Uvozi, opisani v tem modulu, uporabljajo to skupno evidenco; ne ustvarjajo ločenih uporabniških računov. Vsebinski podatki ostanejo v modulu. [Pogodba API](../arhitektura/vmesnik-P0-M1-M2.md) potrebuje potrditev D12. [Mentorski vodnik](../mentorji/razvojni-paket-P0-M1-M2.md) razmeji prvo demonstracijo od celotnega učnega izdelka in produkcijskega prevzema.

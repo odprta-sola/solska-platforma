@@ -135,13 +135,13 @@ Minimalni vmesnik za obveščanje iz drugih modulov je del pilota M1 ([razdelek 
 
 M2 ne zahteva dokončanega celotnega jedra platforme. Samostojna namestitev pomeni uporabo skupnih gradnikov in dogovorjenega kanala obveščanja, ne podvajanja varnostnih funkcij.
 
-Za opomnike M2 velja skupno pravilo [veljavnosti opomnikov v M1](M1-eSporocanje.md#veljavnost-opomnikov), vključno s poljem `expires_at`, zadržanjem, potekom in minimalnim odgovorom preverjanja potrebe. Ob pripravi pogodbe vmesnika D12 se pravilo preseli v dokument vmesnika; do takrat je M1 edini vir tega pravila.
+Za opomnike M2 velja skupno pravilo v [pogodbi P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md#preverjanje-potrebe-in-veljavnost-opomnikov), vključno s poljem `expires_at`, zadržanjem, potekom in minimalnim odgovorom preverjanja potrebe. Pogodba je osnutek za potrditev D12.
 
 Pri polnoletstvu med šolskim letom šola potrdi aktualne odločevalce in čas začetka novih pravil ter posodobi preverjena upravičenja. M2 ponovno presodi odprte postopke in potrebo po novi izjavi. Stare odločitve staršev ostanejo v zgodovini; ne štejejo samodejno kot nova odločitev dijaka. Nadaljnje oddaje, dostopi in opomniki sledijo novim pravilom. Nosilec tega postopka je pilotna šola ob potrebnem pravnem pregledu.
 
 ## Roki, opomniki in papirna pot
 
-Rok odziva, veljavnost odločitve in rok hrambe so ločeni podatki. Opominjajo se zahtevani upravičenci brez ustrezne aktualne odločitve; zavrnjenih ali preklicanih odločitev se ne obravnava kot pozabljeni odziv. M2 odloči, koga in do kdaj opominjati, in M1 pošlje zahtevo za opomnik, ko ta dospe; preklic sproži M2. Ob oddaji odziva ali spremembi njegovega stanja M2 sproži preklic vseh opomnikov, ki niso več potrebni. M1 neposredno pred pošiljanjem prek dogovorjenega vmesnika preveri, ali zahteva ni preklicana ali nadomeščena ter ali je odziv še potreben. Če preverjanje ni dosegljivo, se opomnik zadrži; že predane e-pošte ni mogoče priklicati, povezava pa pokaže aktualno stanje. M1 izvaja pošiljanje, tihi čas, omejene ponovne poskuse in prikaz napak po svojih pravilih. Predaja strežniku ni dokaz prejema; stanje obveščanja v M2 je samo informativno in ne nadomesti odločitve upravičene osebe.
+Rok odziva, veljavnost odločitve in rok hrambe so ločeni podatki. Opominjajo se zahtevani upravičenci brez ustrezne aktualne odločitve; zavrnjenih ali preklicanih odločitev se ne obravnava kot pozabljeni odziv. M2 odloči, koga in do kdaj opominjati, ter odda M1 zahtevo ob dospelosti opomnika; preklic sproži M2. Ob oddaji odziva ali spremembi njegovega stanja M2 sproži preklic opomnikov za posamezne prejemnike, za katere niso več potrebni. M1 neposredno pred pošiljanjem prek dogovorjenega vmesnika preveri, ali zahteva ni preklicana ali nadomeščena ter ali je odziv še potreben. Če preverjanje ni dosegljivo, se opomnik zadrži; že predane e-pošte ni mogoče priklicati, povezava pa pokaže aktualno stanje. M1 izvaja pošiljanje, tihi čas, omejene ponovne poskuse in prikaz napak po svojih pravilih. Predaja strežniku ni dokaz prejema; stanje obveščanja v M2 je samo informativno in ne nadomesti odločitve upravičene osebe.
 
 Papirni obrazec vsebuje isto različico vsebine in izbire kot spletni. Interni seznam za razdelitev je ločen. Zaposleni evidentira prejeti odgovor, vir, datum prejema in vnosa ter različico; ne ustvari navideznega elektronskega klika starša. Način hrambe in povezave s papirnim izvirnikom določi šola.
 
@@ -234,7 +234,7 @@ Pred produkcijo se določijo posodobitve, nadzor, incidenti, obnovitev in spreje
 | Prispe papirni odziv | Vir, različica in vnos so sledljivi; spor sproži obravnavo |
 | Upravičenje osebe se spremeni | Nadaljnje dejanje sledi preverjenim pravicam, zgodovina ostane sledljiva |
 | Sistem se obnovi iz kopije | Odločitve so uporabne, pravila hrambe in brisanja ponovno veljajo |
-| Uvoz vsebuje napačne povezave ali dvojnike | Napake so prikazane, obstoječa evidenca ostane celovita |
+| Uvoz P0 vsebuje napačne povezave ali dvojnike | P0 prikaže napake in ohrani celovitost evidence; M2 ne vodi ločenega uvoza oseb |
 | Priloga je zlonamerna ali preverjanje ne deluje | Priloga ostane zadržana in ni dostopna |
 | Preizkus z reprezentativnim številom upravičencev in hkratnih oddaj | Ni izgubljenih odločitev; odzivnost dosega predhodno potrjeni cilj |
 | Uporaba na telefonu, s tipkovnico in bralnikom zaslona | Ključni postopki so izvedljivi |
@@ -246,15 +246,15 @@ Uspeh se meri s časom izpolnjevanja, težavami pri prijavi, napačnimi ali neja
 
 ## Mentorjeva ocena in razdelitev dela
 
-Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Loči delo dijakov, mentorja in skupnega tehničnega nosilca. Ocena ur M1 se ne prenese avtomatično na M2.
+Mentor za vsako funkcijo oceni zahtevnost, potrebne ure in odvisnosti ter predlaga razvrstitev v učni prototip, prvi produkcijski pilot ali poznejšo nadgradnjo. Za učni izdelek B velja obvezno jedro iz [razvojnega naročila](../projekt/razvojno-narocilo-P0-M1-M2.md): dva izmišljena postopka, papirna pot, izvoz, osnovna dostopnost, ponovljiva namestitev in integracijski testi. Sprememba jedra potrebuje izrecen dogovor pobudnika s šolo. Loči delo dijakov, mentorja in skupnega tehničnega nosilca. Ocena ur M1 se ne prenese avtomatično na M2.
 
 Rezultat se zabeleži v tabeli funkcij z urami, odvisnostmi, fazo in nosilcem izvedbe. Obseg produkcijskega pilota potrdita mentor in pilotna šola po potrebnih strokovnih pregledih.
 
 Predlog razdelitve med šolami:
-- skupni tehnični nosilec: identitete, pravice, pogodbe API in pregled združljivosti;
+- pobudnik s pomočjo AI: priprava referenčnega P0 in tehničnega paketa T; skupni tehnični nosilec: pregled in potrditev pogodbe ter združljivosti;
 - ekipa M1: kanal obveščanja in dogovorjeni minimalni vmesnik;
 - ekipa M2: obrazci, odločitve in zgodovina;
-- dodatna ekipa: neodvisni prevzemni preizkusi, dostopnost in dokumentacija.
+- prečne obvezne naloge ekip: prevzemni preizkusi, dostopnost in dokumentacija; neodvisni človek posebej prevzame T.
 
 To je možnost organizacije, ne imenovanje ekip. En lastnik odločitve o skupnem vmesniku preprečuje različne nezdružljive izvedbe.
 
@@ -272,3 +272,7 @@ To je možnost organizacije, ne imenovanje ekip. En lastnik odločitve o skupnem
 10. Kako se potrdijo licenca, pravice prispevkov, infrastruktura in merila obremenitve?
 
 Odločitve se evidentirajo z datumom, odgovorno osebo in različico. Združitev specifikacije v main ne potrjuje pravne ustreznosti postopka ali produkcijske uvedbe.
+
+## Povezana razvojna gradiva
+
+[Minimalni P0](P0-uporabniki.md) je predlagani lastnik osnovne evidence in uvoza oseb ter povezav. Uvozi, opisani v tem modulu, uporabljajo to skupno evidenco; ne ustvarjajo ločenih uporabniških računov. Vsebinski podatki ostanejo v modulu. [Pogodba API](../arhitektura/vmesnik-P0-M1-M2.md) potrebuje potrditev D12. [Mentorski vodnik](../mentorji/razvojni-paket-P0-M1-M2.md) razmeji prvo demonstracijo od celotnega učnega izdelka in produkcijskega prevzema.

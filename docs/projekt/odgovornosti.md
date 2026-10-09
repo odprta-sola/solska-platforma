@@ -10,11 +10,12 @@ To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obvezno
 | Vloga | Odgovornost | Kdaj mora biti določena |
 | --- | --- | --- |
 | Vodstvo sodelujočega zavoda | Potrdi obseg sodelovanja, vire in uvedbo na svoji šoli | Vire pred razvojem, uvedbo pred produkcijo |
-| Koordinator projekta | Usklajuje gradivo, vprašanja, mejnike in sodelovanje | Pred začetkom razvoja |
-| Mentor | Oceni učni obseg, vodi dijake in preverja izdelek | Pred potrditvijo maturitetne teme |
+| Pobudnik in koordinator projekta | Določi izhodiščni cilj in obseg; osebno s pomočjo AI pripravi predlog P0/T; usklajuje vsebinske spremembe in sodelovanje | Pred začetkom razvoja; način izvajanja zabeleži pred prvo kodo |
+| Mentor | Oceni izvedljivost podanega naročila, razdeli individualne izdelke, vodi dijake in predlaga konkretne spremembe | Pred potrditvijo maturitetne teme |
 | Skupni tehnični nosilec | Potrjuje arhitekturo, skupne gradnike, pogodbe vmesnikov in strokovni pregled povezovanja | Pred začetkom razvoja |
 | Nosilec modula M1 oziroma M2 | Usklajuje obseg svojega modula, naloge ekipe, povezovanje in predajo | Pred razdelitvijo razvoja |
-| Nosilec skupnih gradnikov | Zagotavlja skupno prijavo, identitete in pravice ter njihovo vzdrževanje | Pred razvojem odvisnih funkcij |
+| Nosilec skupnih gradnikov | Koordinira izvedbo in predajo skupne prijave, identitet in pravic; prihodnje vzdrževanje se posebej dodeli | Pred razvojem odvisnih funkcij |
+| Neodvisni tehnični pregledovalec | Človek, ki ni izdelal pregledovane kode, preveri namestitev, avtorizacijo, obsege, kontaktni klic in uvoz | Pred prevzemom T |
 | Razvijalci | Izvedejo potrjeni obseg in dokumentacijo na testnih podatkih | Ob začetku razvoja |
 | Predstavnik pilotne šole | Določi procese, prejemnike in uporabniški prevzem | Pred potrditvijo pilota |
 | Pooblaščena oseba za varstvo podatkov | Svetuje pri obdelavi, hrambi in potrebi po oceni učinka | Pred produkcijo |
@@ -22,7 +23,7 @@ To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obvezno
 | Skrbnik namestitve | Upravlja dostop, infrastrukturo, kopije in posodobitve | Pred produkcijo |
 | Vzdrževalec in namestnik | Odpravlja napake, spremlja odvisnosti in zagotavlja nadaljevanje po zaključku mature | Pred produkcijo |
 
-Mentor vsake ekipe vodi učni razrez, dijake in pregled svojega izdelka. Nosilec modula usklajuje izvedbo tega modula; skupni tehnični nosilec odloča o skupni arhitekturi in združljivosti. Nosilec skupnih gradnikov skrbi za njihovo izvedbo in vzdrževanje. Vloge se lahko združijo pri isti osebi, vendar se obseg in razpoložljiv čas izrecno dogovorita. Ta dokument še ne imenuje ekip ali oseb.
+Mentor vsake ekipe vodi učni razrez M1/M2, dijake in pregled njihovega samostojnega izdelka. Nosilec modula usklajuje izvedbo tega modula; skupni tehnični nosilec odloča o skupni arhitekturi in združljivosti. Pobudnik osebno pripravi P0/T s pomočjo AI, nosilec skupnih gradnikov usklajuje predajo, neodvisni pregledovalec pa opravi človeški prevzem. Podjetje pobudnika ni samodejno izvajalec. Vloge se lahko združijo pri isti osebi, razen neodvisnega pregleda lastne kode; obseg in razpoložljiv čas se izrecno dogovorita. Ta dokument še ne imenuje ekip ali oseb.
 
 ## Potrjevanje
 
@@ -46,11 +47,13 @@ Pravice GitHub se določijo po vlogi: branje, predlaganje sprememb, pregled in u
 
 Pred produkcijo se določi kanal podpore, čas obravnave napak, postopek za incidente, obnova podatkov in zamenjava skrbnika. Vloge se pregledajo ob zaključku vsakega šolskega leta.
 
-## Odprta vprašanja za mentorja
+## Izvedbeni odgovor razvojnega zavoda
 
 - Število dijakov in razpoložljive ure.
 - Rok za prijavo teme in zaključek.
-- Katere funkcije so primerne za učni izdelek?
-- Katere gradnike mora vnaprej zagotoviti strokovni nosilec?
+- Katere konkretne spremembe podanega obsega predlaga mentor zaradi primernosti učnega izdelka?
+- Kdo prevzame naloge skupne tehnične priprave in njihov pregled?
 - Tehnologija in način strokovnega pregleda.
 - Prevzem ter nadaljnje vzdrževanje kode po zaključku naloge.
+
+Izhodišče je [razvojno naročilo pobudnika](razvojno-narocilo-P0-M1-M2.md). Mentorjem ni naloženo oblikovanje namena projekta; ohranijo presojo izvedljivosti, individualnih nalog in maturitetne primernosti. Določitev projektne usmeritve ne pomeni imenovanja oseb ali zaveze zavodov.
