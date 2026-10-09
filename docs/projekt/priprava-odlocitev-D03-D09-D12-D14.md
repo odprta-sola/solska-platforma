@@ -2,14 +2,14 @@
 
 Datum pregleda: 9. oktober 2026
 
-Status: predlog za potrditev z izvedbenim zapisom; ne potrjuje sprejema vlog, aktivnih dostopov ali razpoložljivosti
+Status: priprava odločitev z izvedbenim zapisom potrjenih osebnih sprejemov in dogovorov; institucionalne potrditve, dejanski dostopi ter preostala merila ostajajo odprti
 Preverjeni GitHub `main`: `28598e22f52799c9ec964ce8af3c8e4006d11d94`
 
-Dokument pripravi izvedljive odločitve in dokazila. Merodajna ostajata [register](odlocitve.md) in [načrt priprave P0/T](priprava-referencnega-P0.md). Združitev tega predloga ne izpolni nobenega predkodnega pogoja. Vsa spodaj predlagana pravila in številke zahtevajo izrecno potrditev; ne pomenijo že dogovorjenih obveznosti.
+Dokument pripravi izvedljive odločitve in dokazila. Merodajna ostajata [register](odlocitve.md) in [načrt priprave P0/T](priprava-referencnega-P0.md). Združitev tega predloga ne izpolni nobenega predkodnega pogoja. Izvedbeni zapis in statusi v tabelah ločijo osebno potrjene dogovore od preostalih predlogov. Predlagana pravila in številke zahtevajo izrecno potrditev.
 
 ## Preverjeno stanje in omejitve preverjanja
 
-| Predmet | Neposredno preverjeno 9. 10. 2026 | Posledica |
+| Predmet | Neposredno preverjeno ob začetnem pregledu 9. 10. 2026 | Posledica |
 | --- | --- | --- |
 | [PR #29](https://github.com/odprta-sola/solska-platforma/pull/29) | Združen 9. 10. 2026 ob 14:10:29 UTC; merge commit je navedeni `main` | Stare razvojne veje niso osnova tega pregleda |
 | [Preverjanje dokumentacije na main](https://github.com/odprta-sola/solska-platforma/actions/runs/37942219900) | Zaključeno uspešno za navedeni commit | Dokaz veljavnih povezav; ne dokaz implementacije ali varnosti |
@@ -44,7 +44,7 @@ Mitja je potrdil tudi zasebno posodobitev prijavitelju vsaj vsakih pet delovnih 
 
 Mitja je 9. oktobra 2026 potrdil, da ob zaznavi kritične prijave med dogovorjeno pokritostjo takoj prednostno začne obravnavo in koordinacijo omejitve škode v okviru svojih pooblastil. Primer sta javno razkrito geslo ali sum nepooblaščenega dostopa; to nista ugotovljeni napaki projekta. Razlog je hitro omejevanje izpostavljenosti pri nujnih primerih. Dogovor ne uvaja pokritosti 24/7 in ne pomeni zagotovila takojšnje odprave.
 
-Mitja je 9. oktobra 2026 potrdil slovenski koledar za štetje rokov: delovni dnevi so od ponedeljka do petka brez zakonsko določenih dela prostih dni v Sloveniji, časovni pas je Europe/Ljubljana. Razlog je enotno štetje rokov in pregledov. Mitja je 9. oktobra 2026 potrdil štetje rokov od prejema v zasebni kanal: dan prejema ne šteje, prvi naslednji delovni dan je dan 1, cilj pa poteče ob koncu zadnjega delovnega dne po potrjenem slovenskem koledarju in času Europe/Ljubljana. Razlog je nedvoumno štetje, neodvisno od trenutka, ko obravnavalec prijavo prebere. Natančna ura pregleda, obravnava nenapovedane odsotnosti, izvedba izbranega e-poštnega obveščanja in eskalacija ob nedosegljivosti obeh še niso potrjeni; razpoložljivost predlaganega namestnika ni potrjena. Potrditev sodelujočih zavodov za D09 ter preizkus zasebnih prijav in obvestil ostajata potrebna. Skupni tehnični nosilec D03 s tem ni določen. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
+Mitja je 9. oktobra 2026 potrdil slovenski koledar za štetje rokov: delovni dnevi so od ponedeljka do petka brez zakonsko določenih dela prostih dni v Sloveniji, časovni pas je Europe/Ljubljana. Razlog je enotno štetje rokov in pregledov. Mitja je 9. oktobra 2026 potrdil štetje rokov od prejema v zasebni kanal: dan prejema ne šteje, prvi naslednji delovni dan je dan 1, cilj pa poteče ob koncu zadnjega delovnega dne po potrjenem slovenskem koledarju in času Europe/Ljubljana. Razlog je nedvoumno štetje, neodvisno od trenutka, ko obravnavalec prijavo prebere. Natančna ura pregleda, obravnava nenapovedane odsotnosti, izvedba izbranega e-poštnega obveščanja in eskalacija ob nedosegljivosti obeh še niso potrjeni; razpoložljivost predlaganega namestnika ni potrjena. Potrditev sodelujočih zavodov za D09 ter preizkus zasebnih prijav in obvestil ostajata potrebna. Mitjev osebni sprejem skupnega tehničnega vodenja je evidentiran pri D03 spodaj; imenovanje s strani zavodov še ni potrjeno. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
 
 
 Mitja je 9. oktobra 2026 potrdil način predaje pred napovedano odsotnostjo: namestniku preda odprte prijave in spremljanje novih ter pred odhodom pridobi njegovo izrecno potrditev prevzema. Dogovorjeni roki tečejo naprej in se ob predaji ne ponastavijo. Aleksandar lahko prevzame šele po izrecnem sprejemu vloge in preverjenem dostopu. Razlog je neprekinjena obravnava s potrjenim prevzemom; ta zapis še ne dokazuje izvedene predaje ali Aleksandarjevega sprejema.
@@ -120,6 +120,12 @@ Odziv pomeni odgovor in načrt, ne obljubljenega popravka v tem času. Čas odpr
 - Predkodni prehod se evidentira posebej. Dodelitev issuea ali združitev dokumenta ga ne nadomesti.
 
 ## D03: mandat tehničnega nosilca in predaja gradnikov
+
+### Osebni sprejem tehničnega vodenja — 9. oktober 2026
+
+Mitja Pirih je izrecno osebno sprejel vlogo skupnega tehničnega nosilca D03: arhitekturo, pogodbo API, skupne gradnike in usklajevanje z mentorji. Sprejem in nadaljnji izrecno potrjeni organizacijski dogovori D03 se javno evidentirajo po njegovem pritrdilnem odgovoru na vprašanje o sprejemu vloge in javnem zapisu. Razlog je enotno tehnično usklajevanje skupnih gradnikov in odločitev. Ta osebni sprejem ne pomeni obveznosti Mitjevega podjetja.
+
+Potrditev imenovanja s strani sodelujočih zavodov, razpoložljivi čas, namestnik, lastništvo in predaja posameznih gradnikov ter tehnološka osnova še niso potrjeni. Aleksandarju ta zapis ne dodeljuje novih odgovornosti. D03 ostaja odprta; osebni sprejem še ne izpolni celotnega predkodnega pogoja.
 
 ### Predlog mandata
 
