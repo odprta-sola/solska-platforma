@@ -125,7 +125,9 @@ Odziv pomeni odgovor in načrt, ne obljubljenega popravka v tem času. Čas odpr
 
 Mitja Pirih je izrecno osebno sprejel vlogo skupnega tehničnega nosilca D03: arhitekturo, pogodbo API, skupne gradnike in usklajevanje z mentorji. Sprejem in nadaljnji izrecno potrjeni organizacijski dogovori D03 se javno evidentirajo po njegovem pritrdilnem odgovoru na vprašanje o sprejemu vloge in javnem zapisu. Razlog je enotno tehnično usklajevanje skupnih gradnikov in odločitev. Ta osebni sprejem ne pomeni obveznosti Mitjevega podjetja.
 
-Potrditev imenovanja s strani sodelujočih zavodov, razpoložljivi čas, namestnik, lastništvo in predaja posameznih gradnikov ter tehnološka osnova še niso potrjeni. Aleksandarju ta zapis ne dodeljuje novih odgovornosti. D03 ostaja odprta; osebni sprejem še ne izpolni celotnega predkodnega pogoja.
+Mitja je 9. oktobra 2026 dovolil zapis približno treh ur načrtovanega dela tedensko ob podpori AI za tehnično vodenje, usklajevanje in preglede ter izrecno pojasnil, da razvoj P0 ni vključen v ta okvir. Obseg teh nalog se prilagaja tej kapaciteti; roki izvedbe niso obljubljeni. Čas razvoja P0 se vodi ločeno in še ni ocenjen. Razlog je merljiv planski okvir, ki loči vodenje od razvoja referenčnega jedra.
+
+Potrditev imenovanja in časovnega okvira s strani sodelujočih zavodov, namestnik, lastništvo in predaja posameznih gradnikov ter tehnološka osnova še niso potrjeni. Aleksandarju ta zapis ne dodeljuje novih odgovornosti. D03 ostaja odprta; osebni sprejem še ne izpolni celotnega predkodnega pogoja.
 
 ### Predlog mandata
 
@@ -149,7 +151,7 @@ Za vsak gradnik se v dogovoru vpiše dejanski nosilec, namestnik, obseg vzdržev
 | Podatek za dogovor | Polje, ki ga izpolni imenovani nosilec |
 | --- | --- |
 | Obdobje sodelovanja | Ni določeno |
-| Razpoložljive ure ali druga merljiva kapaciteta | Ni določeno; ločeno priprava, pregledi, usklajevanje, popravki |
+| Razpoložljive ure ali druga merljiva kapaciteta | Mitja: približno 3 ure načrtovanega dela tedensko ob podpori AI za tehnično vodenje, usklajevanje in preglede; razvoj P0 je izključen in se oceni ločeno; potrditev zavodov še odprta |
 | Običajna pokritost in odsotnosti | Ni določeno |
 | Namestnik in obseg pooblastila | Ni imenovan |
 | Izdelki T in pričakovano trajanje po izdelkih | Ocena po potrditvi tehnologije in pregleda; brez obljubljenega datuma |
