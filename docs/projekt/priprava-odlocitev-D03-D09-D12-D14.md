@@ -127,24 +127,26 @@ Mitja Pirih je izrecno osebno sprejel vlogo skupnega tehničnega nosilca D03: ar
 
 Mitja je 9. oktobra 2026 dovolil zapis približno treh ur načrtovanega dela tedensko ob podpori AI za tehnično vodenje, usklajevanje in preglede ter izrecno pojasnil, da razvoj P0 ni vključen v ta okvir. Obseg teh nalog se prilagaja tej kapaciteti; roki izvedbe niso obljubljeni. Čas razvoja P0 se vodi ločeno in še ni ocenjen. Razlog je merljiv planski okvir, ki loči vodenje od razvoja referenčnega jedra.
 
-Potrditev imenovanja in časovnega okvira s strani sodelujočih zavodov, namestnik, lastništvo in predaja posameznih gradnikov ter tehnološka osnova še niso potrjeni. Aleksandarju ta zapis ne dodeljuje novih odgovornosti. D03 ostaja odprta; osebni sprejem še ne izpolni celotnega predkodnega pogoja.
+Mitja je 9. oktobra 2026 določil začetni model D03 brez ločenega tehničnega namestnika; Aleksandarja za to vlogo ne predlagamo. To je pobudnikov potrjeni predlog organizacije, ki ga morajo sprejeti sodelujoči zavodi. Razlog je omejena sestava ekipe in razporeditev dela. Način ravnanja ob odsotnosti tehničnega nosilca ter nadomeščanje pri posameznih gradnikih ostajata za dogovor; obstoječe merilo #12 o gradnikih in nadomeščanju ostaja odprto. Ta odločitev ne spreminja ločenega dogovora D14 o predlaganem namestniku za varnostne prijave.
+
+Potrditev imenovanja, časovnega okvira in modela brez ločenega tehničnega namestnika s strani sodelujočih zavodov, lastništvo in predaja posameznih gradnikov, ravnanje ob odsotnosti ter tehnološka osnova še niso potrjeni. Aleksandarju ta zapis ne dodeljuje novih odgovornosti. D03 ostaja odprta; osebni sprejem še ne izpolni celotnega predkodnega pogoja.
 
 ### Predlog mandata
 
-Sodelujoči zavodi potrdijo eno odgovorno človeško osebo za skupno tehnično odločanje, njenega namestnika in razpoložljivost. Pobudnik ostane pripravljavec P0/T po sedanji usmeritvi; lahko je tudi tehnični nosilec samo po ločenem izrecnem imenovanju. AI in podjetje pobudnika nista samodejna nosilca.
+Sodelujoči zavodi potrdijo eno odgovorno človeško osebo za skupno tehnično odločanje in razpoložljivost. Mitjev začetni predlog je brez ločenega tehničnega namestnika; dogovor mora določiti ravnanje ob odsotnosti. Pobudnik ostane pripravljavec P0/T po sedanji usmeritvi; lahko je tudi tehnični nosilec samo po ločenem izrecnem imenovanju. AI in podjetje pobudnika nista samodejna nosilca.
 
 Mandat naj pokrije arhitekturo, skupno prijavo, identitete in dovoljenja, D12/OpenAPI, združljivost modulov, tehnični pregled sprememb in predajo ekipam. Določi se način reševanja nesoglasij z mentorji. Vsebinska in pravna pravila šole ter produkcijski prevzem ostanejo pri svojih potrjevalcih.
 
 | Gradnik/izdelek | Predlagana odgovorna vloga za izvedbo oziroma koordinacijo | Kaj mora biti predano | Manjkajoča potrditev |
 | --- | --- | --- | --- |
-| P0: osebe, povezave, dodelitve, dovoljenja in osnovni CSV | Pobudnik pripravi; nosilec skupnih gradnikov koordinira | Model, sledljiv uvoz, scenariji odvzema in testni nabor | Oseba nosilca, čas, namestnik |
+| P0: osebe, povezave, dodelitve, dovoljenja in osnovni CSV | Pobudnik pripravi; nosilec skupnih gradnikov koordinira | Model, sledljiv uvoz, scenariji odvzema in testni nabor | Potrditev nosilca, ločen čas razvoja in ravnanje ob odsotnosti |
 | Skupna lokalna prijava in servisna avtentikacija | Skupni tehnični nosilec določi rešitev; pobudnik jo vključi v T | Vzdrževana komponenta, zaščita sej/CSRF, odjava, omejena servisna dovoljenja | Rešitev, izvajalec, lastnik posodobitev |
 | OpenAPI, šifranti in pogodbeni testi | Tehnični nosilec vodi; pobudnik pripravi predlog; mentorji pregledajo | Pogodba za vse tri smeri klicev in ponovljivi dovoljeni/zavrnjeni primeri | Imenovani pregledovalci in potrditev D12 |
-| Nadomestka M1/M2 | Pobudnik pripravi po potrjeni pogodbi | Zagon, izpadi, ponovitve, selektivni preklic; ista shema kot pravi moduli | Koordinacija predaje in namestnik |
+| Nadomestka M1/M2 | Pobudnik pripravi po potrjeni pogodbi | Zagon, izpadi, ponovitve, selektivni preklic; ista shema kot pravi moduli | Koordinacija predaje in ravnanje ob odsotnosti |
 | Razvojna namestitev in prestrezna pošta | Pobudnik pripravi paket T | Ponovljiva namestitev z izmišljenimi podatki, skrivnosti zunaj repozitorija | Ciljno razvojno okolje, dostopi, lastnik gradnika |
 | Neodvisni prevzem T | Pregledovalec, ki ni izdelal prevzemane kode | Samostojna namestitev, pregled kode in zapis vseh scenarijev iz načrta T | Oseba, razpoložljivost in dogovor pregleda pred T |
 
-Za vsak gradnik se v dogovoru vpiše dejanski nosilec, namestnik, obseg vzdrževanja do predaje in meja odgovornosti po T. Oseba lahko vodi več gradnikov. Izdelava gradnika ne ustvari avtomatične obveznosti produkcijskega vzdrževanja.
+Za vsak gradnik se v dogovoru vpiše dejanski nosilec, način ravnanja ob odsotnosti skladno z merilom #12 o nadomeščanju, obseg vzdrževanja do predaje in meja odgovornosti po T. Nadomeščanje pri gradniku ne pomeni samodejnega imenovanja ločenega tehničnega namestnika D03. Oseba lahko vodi več gradnikov. Izdelava gradnika ne ustvari avtomatične obveznosti produkcijskega vzdrževanja.
 
 ### Obrazec razpoložljivosti brez izmišljene ocene
 
@@ -153,7 +155,7 @@ Za vsak gradnik se v dogovoru vpiše dejanski nosilec, namestnik, obseg vzdržev
 | Obdobje sodelovanja | Ni določeno |
 | Razpoložljive ure ali druga merljiva kapaciteta | Mitja: približno 3 ure načrtovanega dela tedensko ob podpori AI za tehnično vodenje, usklajevanje in preglede; razvoj P0 je izključen in se oceni ločeno; potrditev zavodov še odprta |
 | Običajna pokritost in odsotnosti | Ni določeno |
-| Namestnik in obseg pooblastila | Ni imenovan |
+| Ločen tehnični namestnik | Mitjev potrjeni začetni predlog: brez te vloge; sprejem zavodov in ravnanje ob odsotnosti še odprta |
 | Izdelki T in pričakovano trajanje po izdelkih | Ocena po potrditvi tehnologije in pregleda; brez obljubljenega datuma |
 | Pregledovalec T in njegov termin | Ni dogovorjeno |
 | Predaja ob odhodu | Potrjen seznam dokumentacije, verzij, pravic in zasebne predaje potrebnih skrivnosti |
@@ -174,7 +176,7 @@ Tehnični nosilec in mentorji preverijo znanje ekip, življenjsko dobo podpore, 
 
 ### Merilo za zaključek D03
 
-Odločitev zavodov vsebuje imenovanje in sprejem mandata, namestnika, kapaciteto, lastnike vseh skupnih gradnikov ter predajo; tehnični nosilec in mentorji potrdijo tehnološko osnovo in skupne varnostne funkcije. V #12 in registru se navedejo datum, različica, razlog in posledice. Imenovanje ni prevzem T. Neodvisni pregledovalec mora biti dejansko zagotovljen pred prevzemom T.
+Odločitev zavodov vsebuje imenovanje in sprejem mandata, kapaciteto, sprejem začetnega modela brez ločenega tehničnega namestnika, ravnanje ob odsotnosti, lastnike vseh skupnih gradnikov ter predajo; tehnični nosilec in mentorji potrdijo tehnološko osnovo in skupne varnostne funkcije. V #12 in registru se navedejo datum, različica, razlog in posledice. Imenovanje ni prevzem T. Neodvisni pregledovalec mora biti dejansko zagotovljen pred prevzemom T.
 
 ## D12: seznam odločitev in nasprotnih primerov
 
@@ -224,14 +226,14 @@ Obrazci ostanejo neizpolnjeni do potrditve. V javni zapis se prenesejo le podatk
 | --- | --- |
 | D09 — zgodnji del | Prvi in drugi skrbnik ter individualna računa; sprejem vlog; dejanske pravice; datum in povzetek praktičnega preizkusa; potrditev zavodov; preostala produkcijska merila |
 | D14 | Nosilec in namestnik; potrjene ure/dnevi pokritosti, koledar, odzivni cilji, odsotnosti in eskalacija; preizkus prijave/obvestila/odgovora/prevzema; potrditev nosilca projekta in skrbnika; usklajen SECURITY.md |
-| D03 | Nosilec in namestnik; mandat in kapaciteta; lastnik vsakega gradnika in predaja; potrjena tehnologija/skupne varnostne funkcije; način osebne priprave P0/T; potrditev zavodov ter tehničnega dogovora z mentorji |
+| D03 | Nosilec; mandat in kapaciteta; sprejem modela brez ločenega tehničnega namestnika in ravnanje ob odsotnosti; lastnik vsakega gradnika in predaja; potrjena tehnologija/skupne varnostne funkcije; način osebne priprave P0/T; potrditev zavodov ter tehničnega dogovora z mentorji |
 | D12 | Sprejet rezultat C01–C16 ali razlog zavrnitve predloga; slovar ID/šifrantov; commit OpenAPI in testnih primerov; lastniki; potrditvi tehničnega nosilca in mentorjev; povezane šolske odločitve in omejitve učnih pravil |
 
 Potrditev zapišemo v ustrezni issue; s pull requestom uskladimo register in povezane dokumente. Dodelitev računa se izvede šele po potrditvi osebe in računa. Kjer dokazila manjkajo, ostane merilo odprto. D09 zgodnji del in produkcijski del se vodita ločeno.
 
 ## Naslednji koraki in manjkajoči odgovori
 
-1. Nosilec projekta in sodelujoči zavodi pridobijo izrecna imenovanja: drugi skrbnik, nosilec prijav in namestnik, skupni tehnični nosilec in njegov namestnik. Vloge se lahko združijo po zgornjih omejitvah. Kandidatov ne sklepamo iz repozitorija.
+1. Nosilec projekta in sodelujoči zavodi pridobijo izrecna imenovanja: drugi skrbnik, nosilec prijav in namestnik, skupni tehnični nosilec. Za D03 se potrdi model brez ločenega tehničnega namestnika in ravnanje ob odsotnosti. Vloge se lahko združijo po zgornjih omejitvah. Kandidatov ne sklepamo iz repozitorija.
 2. Imenovana nosilec prijav in namestnik sprejmeta ali prilagodita odzivne cilje ter določita pokritost in zasebno eskalacijo. Skrbnika nato izvedeta opisani preizkus. Za spremembo pravic je potreben dejansko pooblaščen skrbnik; ta pregled pravic ni dodelil.
 3. Zavodi potrdijo mandat, čas in lastnike skupnih gradnikov za D03; nosilec in mentorji sprejmejo ali nadomestijo tehnološki predlog. Pred prvo kodo se v issueih preveri izpolnitev vseh zgodnjih pogojev.
 4. V D08 nosilec projekta in avtorji uredijo licenco, pravice in odvisnosti pred sprejemom kode. Mentorji pripravijo odgovore D02/D13, ne da bi jim naložili novo oblikovanje cilja.
