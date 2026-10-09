@@ -32,7 +32,7 @@ Po oddaji povabila je bilo 9. 10. 2026 ob 15:05 UTC v upravljanju dostopov nepos
 
 9. oktobra 2026 je Mitja Pirih izrecno potrdil, da osebno prevzame vlogo nosilca obravnave zasebnih varnostnih prijav D14, ter podprl predlog Aleksandarja Lazarevića za namestnika. Mitjev osebni sprejem vloge je potrjen; Aleksandarjev sprejem odgovornosti namestnika in drugega skrbnika še ni evidentiran. Ta dogovor ne pomeni obveznosti Mitjevega podjetja. Mitja je istega dne izrecno dovolil javni zapis imen, vlog in statusa potrditve; zasebni kontaktni naslov je izključen.
 
-Razlog predlagane razdelitve je jasen nosilec zasebne obravnave in nadomeščanje z drugim skrbnikom. Mitja je 9. oktobra 2026 potrdil koordinacijsko naravo svoje vloge in pregled obvestil o novih varnostnih prijavah vsaj enkrat vsak delovni dan, od ponedeljka do petka, razen praznikov in dogovorjenih odsotnosti. Izrecno je dovolil tudi javni zapis tega dogovora. To ni zagotovilo stalne dežurne službe ali rok za odpravo napake. Natančna ura pregleda, koledar praznikov, roki potrditve prejema in obravnave ter ureditev odsotnosti in zasebne eskalacije še niso potrjeni; razpoložljivost predlaganega namestnika ni potrjena. Potrditev sodelujočih zavodov za D09 ter preizkus zasebnih prijav in obvestil ostajata potrebna. Skupni tehnični nosilec D03 s tem ni določen. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
+Razlog predlagane razdelitve je jasen nosilec zasebne obravnave in nadomeščanje z drugim skrbnikom. Mitja je 9. oktobra 2026 potrdil koordinacijsko naravo svoje vloge in pregled obvestil o novih varnostnih prijavah vsaj enkrat vsak delovni dan, od ponedeljka do petka, razen praznikov in dogovorjenih odsotnosti. Izrecno je dovolil tudi javni zapis tega dogovora. To ni zagotovilo stalne dežurne službe ali rok za odpravo napake. Mitja je istega dne za javni dogovor D14 potrdil cilj človeške zasebne potrditve prejema v dveh delovnih dneh od prejema prijave. Razlog je, da prijavitelj prejme jasno povratno informacijo; ta cilj ne določa roka odprave napake. Natančna ura pregleda, koledar praznikov, roki začetne ocene in vsebinske obravnave ter ureditev odsotnosti in zasebne eskalacije še niso potrjeni; razpoložljivost predlaganega namestnika ni potrjena. Potrditev sodelujočih zavodov za D09 ter preizkus zasebnih prijav in obvestil ostajata potrebna. Skupni tehnični nosilec D03 s tem ni določen. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
 
 ## Zaporedje sprostitve dela
 
@@ -80,17 +80,17 @@ GitHubova [obvestila o zasebnih prijavah](https://docs.github.com/en/code-securi
 
 ### Odzivni cilji za potrditev
 
-Naslednje vrednosti so konkretni predlog za dokumentacijsko/razvojno fazo z izmišljenimi podatki. Noben rok ali pokritost še ni dogovorjen. Pred potrditvijo nosilec in namestnik preverita, ali ga z razpoložljivim časom lahko izvajata.
+Cilji veljajo za pripravo dokumentacijske/razvojne faze z izmišljenimi podatki. Mitja je 9. oktobra 2026 potrdil svoj pregled novih prijav vsak delovni dan in cilj potrditve prejema v dveh delovnih dneh. Preostali odzivni cilji v tabeli so predlogi; sprejem namestnika in pokritje odsotnosti ostajata odprta. Pred potrditvijo preostalih ciljev nosilec in namestnik preverita izvedljivost.
 
-| Korak | Predlagani največji čas | Merljiv rezultat |
-| --- | --- | --- |
-| Potrditev prejema | 2 delovna dneva od prejema prijave | Človeški zasebni odgovor in imenovan obravnavalec |
-| Začetna ocena resnosti | 5 delovnih dni od prejema prijave | Vpliv, prizadeti obseg in stopnja resnosti ali jasno navedene manjkajoče informacije |
-| Vsebinski odziv oziroma načrt ukrepanja | 5 delovnih dni od ocene, največ 10 od prejema | Odločitev o obravnavi, omejitveni ukrep, odgovorna oseba in naslednja posodobitev |
-| Kritična prijava oziroma razkritje skrivnosti | Prednostna obravnava v prvem potrjenem dnevu pokritosti | Omejitev izpostavljenosti v okviru pooblastil; koordinacija namestnika |
-| Posodobitev odprte obravnave | Največ vsakih 5 delovnih dni | Napredek, preostalo tveganje in naslednji korak |
+| Korak | Največji čas | Merljiv rezultat | Status |
+| --- | --- | --- | --- |
+| Potrditev prejema | 2 delovna dneva od prejema prijave | Človeški zasebni odgovor in imenovan obravnavalec | Mitja potrdil 9. 10. 2026; sprejem namestnika in nadomeščanje še odprta |
+| Začetna ocena resnosti | 5 delovnih dni od prejema prijave | Vpliv, prizadeti obseg in stopnja resnosti ali jasno navedene manjkajoče informacije | Predlog |
+| Vsebinski odziv oziroma načrt ukrepanja | 5 delovnih dni od ocene, največ 10 od prejema | Odločitev o obravnavi, omejitveni ukrep, odgovorna oseba in naslednja posodobitev | Predlog |
+| Kritična prijava oziroma razkritje skrivnosti | Prednostna obravnava v prvem potrjenem dnevu pokritosti | Omejitev izpostavljenosti v okviru pooblastil; koordinacija namestnika | Predlog |
+| Posodobitev odprte obravnave | Največ vsakih 5 delovnih dni | Napredek, preostalo tveganje in naslednji korak | Predlog |
 
-Predlog štetja: delovni dnevi od ponedeljka do petka brez praznikov po dogovorjenem koledarju, časovni pas Europe/Ljubljana. Dejanske dneve/ure spremljanja in pokritje odsotnosti morata osebi še potrditi. Števec se ne ponastavi ob predaji namestniku; manjkajoče informacije ne opravičijo tišine. Ob napovedani odsotnosti se predaja izvede vnaprej; ob zamudi ciljnega odziva prevzame namestnik. Če sta oba nedosegljiva, mora dogovor določiti potrjeno zasebno eskalacijsko pot in odgovorno vlogo.
+Predlog štetja: delovni dnevi od ponedeljka do petka brez praznikov po dogovorjenem koledarju, časovni pas Europe/Ljubljana. Mitjev ritem pregleda je potrjen v izvedbenem zapisu; natančne ure, razpoložljivost namestnika in pokritje odsotnosti še niso potrjeni. Števec se ne ponastavi ob predaji namestniku; manjkajoče informacije ne opravičijo tišine. Ob napovedani odsotnosti se predaja izvede vnaprej; ob zamudi ciljnega odziva prevzame namestnik. Če sta oba nedosegljiva, mora dogovor določiti potrjeno zasebno eskalacijsko pot in odgovorno vlogo.
 
 Odziv pomeni odgovor in načrt, ne obljubljenega popravka v tem času. Čas odprave se določi po presoji konkretnega primera. Pokritost 24/7, datum prve kode in produkcijski odzivni roki niso določeni. Če ta predlog ni izvedljiv, se pred kodo potrdi druga merljiva ureditev.
 
