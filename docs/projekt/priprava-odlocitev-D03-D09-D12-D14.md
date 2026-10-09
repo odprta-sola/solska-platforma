@@ -133,6 +133,23 @@ Potrditev imenovanja, časovnega okvira in modela brez ločenega tehničnega nam
 
 Mitja je 9. oktobra 2026 izrecno osebno prevzel pripravo in predajo referenčnega paketa T ob pomoči AI: P0, skupno prijavo, predlog pogodbe API in teste, nadomestka M1/M2 ter ponovljivo razvojno namestitev. Razlog je določitev enega človeškega nosilca izvedbe in predaje skupne razvojne osnove. Čas razvoja se oceni ločeno; razvoj P0 ostaja izključen iz triurnega tedenskega okvira. Osebni prevzem priprave ne pomeni izdelanega paketa, njegovega neodvisnega prevzema ali obveznosti produkcijskega vzdrževanja.
 
+### Predlog spremembe prevzema T: Mitja ob pomoči AI
+
+9. oktobra 2026 je Mitja določil, da želi pregled in prevzem T opraviti osebno ob pomoči AI; Aleksandar za pregledovalca T ni predlagan. Osebna izbira izvajalca je potrjena. Sedanji [načrt P0/T na main](priprava-referencnega-P0.md#človeški-prevzem) zahteva človeka, ki ni izdelal prevzemane kode, in neodvisen človeški pregled avtorizacije, obsegov, kontaktnega klica ter CSV uvoza. Zato je sprememba merila formalnega prevzema še predlog za potrditev sodelujočih zavodov in mentorjev.
+
+Predlagano nadomestno merilo: Mitja osebno izvede celoten človeški prevzem ob pomoči AI, vključno s samostojno svežo namestitvijo, pregledom izvorne kode in vsemi devetimi scenariji sedanjega načrta. Pregled avtorja in AI se evidentira pod tema nazivoma; ne označi se kot neodvisen človeški pregled.
+
+Predlog dokazil in postopka za tak prevzem:
+
+1. Evidentirajo se točen commit paketa, navodila, izmišljeni podatki in preizkušeno razvojno okolje.
+2. Mitja po navodilih izvede svežo namestitev in vse človeške scenarije, vključno s tipkovnico ter osnovnim bralnikom zaslona. Evidentira dejanske rezultate in ponovitve po popravkih.
+3. Pogodbeni testi preverijo dovoljene in zavrnjene klice, odvzem pravic, izpade, ponovitve in selektivni preklic po potrjeni pogodbi D12.
+4. AI opravi dodaten pregled kode in dokazil; zabeležijo se uporabljeni model oziroma orodje, različica, obseg pregleda in ugotovitve. Zapis AI sam ne dokazuje izvedenega testa.
+5. Mitja razreši ugotovitve ali jasno evidentira odprte omejitve; v sprejemnem zapisniku navede, da je tudi nosilec priprave kode.
+6. Zavodi in mentorji pred formalnim sprejemom T potrdijo spremembo merila in sprejemni zapis. Produkcijski prevzem ostane ločen.
+
+Razlog predloga je izvedljivost v trenutni ekipi. Posledica je opustitev ločitve avtorja in človeškega pregledovalca; dodaten pregled AI te ločitve ne vzpostavi. Dokler sprememba ni potrjena, ostaja merodajen sedanji načrt. To vprašanje se reši pred formalnim prevzemom T in sprostitvijo A/I; ne ustvarja novega roka ali že izvedenega prevzema.
+
 ### Predlog mandata
 
 Sodelujoči zavodi potrdijo eno odgovorno človeško osebo za skupno tehnično odločanje in razpoložljivost. Mitjev začetni predlog je brez ločenega tehničnega namestnika; zavodi morajo potrditi tudi osebno sprejeti način ravnanja ob odsotnosti iz izvedbenega zapisa. Pobudnik ostane pripravljavec P0/T po sedanji usmeritvi; lahko je tudi tehnični nosilec samo po ločenem izrecnem imenovanju. AI in podjetje pobudnika nista samodejna nosilca.
@@ -146,7 +163,7 @@ Mandat naj pokrije arhitekturo, skupno prijavo, identitete in dovoljenja, D12/Op
 | OpenAPI, šifranti in pogodbeni testi | Mitja osebno sprejel pripravo predloga in testov ter predajo; pregled in potrditev mentorjev še odprta | Pogodba za vse tri smeri klicev in ponovljivi dovoljeni/zavrnjeni primeri | Imenovani pregledovalci in potrditev D12 |
 | Nadomestka M1/M2 | Mitja osebno sprejel pripravo in predajo ob pomoči AI po potrjeni pogodbi | Zagon, izpadi, ponovitve, selektivni preklic; ista shema kot pravi moduli | Pogoji predaje, potrditev zavodov in D12 |
 | Razvojna namestitev in prestrezna pošta | Mitja osebno sprejel pripravo razvojnega paketa in predajo ob pomoči AI | Ponovljiva namestitev z izmišljenimi podatki, skrivnosti zunaj repozitorija | Ciljno razvojno okolje, dostopi in lastnik po predaji |
-| Neodvisni prevzem T | Pregledovalec, ki ni izdelal prevzemane kode | Samostojna namestitev, pregled kode in zapis vseh scenarijev iz načrta T | Oseba, razpoložljivost in dogovor pregleda pred T |
+| Prevzem T | Mitja je izbral osebni pregled ob pomoči AI; sprememba merila še predlog | Sveža namestitev, pregled kode, dejanski rezultati vseh scenarijev in dodatnega pregleda AI | Potrditev spremembe sedanjega neodvisnega človeškega merila; čas in formalni sprejem T |
 
 Za vsak gradnik se v dogovoru vpiše dejanski nosilec, način ravnanja ob odsotnosti skladno z merilom #12 o nadomeščanju, obseg vzdrževanja do predaje in meja odgovornosti po T. Nadomeščanje pri gradniku ne pomeni samodejnega imenovanja ločenega tehničnega namestnika D03. Oseba lahko vodi več gradnikov. Izdelava gradnika ne ustvari avtomatične obveznosti produkcijskega vzdrževanja.
 
@@ -159,7 +176,7 @@ Za vsak gradnik se v dogovoru vpiše dejanski nosilec, način ravnanja ob odsotn
 | Običajna pokritost in odsotnosti | Mitja je osebno potrdil: nove skupne tehnične odločitve in spremembe API ob odsotnosti počakajo na njegov pregled; delo po potrjenih dogovorih lahko poteka naprej. Redni termini in sprejem zavodov še niso določeni. |
 | Ločen tehnični namestnik | Mitjev potrjeni začetni predlog: brez te vloge; sprejem zavodov še odprt; osebno ravnanje ob odsotnosti potrjeno spodaj |
 | Izdelki T in pričakovano trajanje po izdelkih | Ocena po potrditvi tehnologije in pregleda; brez obljubljenega datuma |
-| Pregledovalec T in njegov termin | Ni dogovorjeno |
+| Pregledovalec T in njegov termin | Mitja želi osebni pregled ob pomoči AI; sprememba neodvisnega človeškega merila in termin še nista potrjena |
 | Predaja ob odhodu | Potrjen seznam dokumentacije, verzij, pravic in zasebne predaje potrebnih skrivnosti |
 
 Pred prvo kodo se evidentira tudi način osebnega, nekomercialnega izvajanja pobudnika iz [načrta P0](priprava-referencnega-P0.md#projektni-pogoji-in-sled-izvora): obseg, izvor kode, uporaba AI, avtorstvo in odsotnost avtomatične zaveze podjetja. Pravice ostanejo za D08; ta zapis jih ne razreši.
@@ -178,7 +195,7 @@ Tehnični nosilec in mentorji preverijo znanje ekip, življenjsko dobo podpore, 
 
 ### Merilo za zaključek D03
 
-Odločitev zavodov vsebuje imenovanje in sprejem mandata, kapaciteto, sprejem začetnega modela brez ločenega tehničnega namestnika, ravnanje ob odsotnosti, lastnike vseh skupnih gradnikov ter predajo; tehnični nosilec in mentorji potrdijo tehnološko osnovo in skupne varnostne funkcije. V #12 in registru se navedejo datum, različica, razlog in posledice. Imenovanje ni prevzem T. Neodvisni pregledovalec mora biti dejansko zagotovljen pred prevzemom T.
+Odločitev zavodov vsebuje imenovanje in sprejem mandata, kapaciteto, sprejem začetnega modela brez ločenega tehničnega namestnika, ravnanje ob odsotnosti, lastnike vseh skupnih gradnikov ter predajo; tehnični nosilec in mentorji potrdijo tehnološko osnovo in skupne varnostne funkcije. V #12 in registru se navedejo datum, različica, razlog in posledice. Imenovanje ni prevzem T. Po sedanjem načrtu mora biti neodvisni pregledovalec dejansko zagotovljen pred prevzemom T; alternativni predlog Mitja + AI zgoraj zahteva izrecno potrditev spremembe merila pred formalnim sprejemom T.
 
 ## D12: seznam odločitev in nasprotnih primerov
 
@@ -240,6 +257,6 @@ Potrditev zapišemo v ustrezni issue; s pull requestom uskladimo register in pov
 3. Zavodi potrdijo mandat, čas in lastnike skupnih gradnikov za D03; nosilec in mentorji sprejmejo ali nadomestijo tehnološki predlog. Pred prvo kodo se v issueih preveri izpolnitev vseh zgodnjih pogojev.
 4. V D08 nosilec projekta in avtorji uredijo licenco, pravice in odvisnosti pred sprejemom kode. Mentorji pripravijo odgovore D02/D13, ne da bi jim naložili novo oblikovanje cilja.
 5. Tehnični nosilec in mentorji obravnavajo C01–C16. Pripravi se pregledana OpenAPI pogodba in primeri; odvisna implementacija se začne po izrecni potrditvi D12. Sedanjih primerov ne razglasimo za dokončno pogodbo.
-6. Pobudnik in nosilec ocenita T po izdelkih, tveganjih in razpoložljivosti pregledovalca. Neodvisen človek nato preveri pravi P0, kodo in celoten paket T; šele tak prevzem sprosti A/I ob drugih predhodnih pogojih.
+6. Pobudnik in nosilec ocenita T po izdelkih, tveganjih in razpoložljivosti pregledovalca. Po sedanjem načrtu neodvisen človek preveri pravi P0, kodo in celoten paket T. Mitjev predlog osebnega pregleda ob pomoči AI zahteva predhodno potrditev spremembe merila; A/I se sprosti šele po formalnem prevzemu T po potrjenih merilih in drugih predhodnih pogojih.
 
 Za nadaljevanje so zato resnično manjkajoči odgovori: potrjene osebe/računi in njihov sprejem vlog, pokritost/odzivni dogovor, mandat in razpoložljivi čas, lastništvo gradnikov, tehnološka potrditev ter pozneje konkretne odločitve D12. Datum začetka, ure zavodov, dostopi in produkcijski pilot niso ugotovljeni ali obljubljeni.
