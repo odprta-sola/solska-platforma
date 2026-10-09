@@ -7,6 +7,7 @@ Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združ
 | [Razvojno naročilo P0–M1–M2](projekt/razvojno-narocilo-P0-M1-M2.md) | Izhodiščni cilj pobudnika, obvezni obseg, vloge in demonstracije |
 | [Razlaga in praktični primeri](mentorji/razvojni-paket-P0-M1-M2.md) | Pojasnila in praktični primeri k razvojnemu naročilu |
 | [Priprava referenčnega P0](projekt/priprava-referencnega-P0.md) | Obseg prvega prevzema, paket T, predaja in projektni pogoji |
+| [Priprava odločitev D03/D09/D12/D14](projekt/priprava-odlocitev-D03-D09-D12-D14.md) | Predlog vlog, dokazil, preizkusa zasebne poti in seznam odločitev pred kodo |
 | [P0 uporabniki](moduli/P0-uporabniki.md) | Evidenca, lokalna prijava, uvoz in testni podatki |
 | [Pogodba P0–M1–M2](arhitektura/vmesnik-P0-M1-M2.md) | Osnutek API za potrditev D12 |
 | [Povzetek projekta V6](projekt/povzetek.md) | Namen, stanje, faze, moduli in spremembe glede na V5 |
@@ -26,3 +27,4 @@ Začnite z [razvojnim naročilom](projekt/razvojno-narocilo-P0-M1-M2.md), nato p
 ## Podporno gradivo
 
 [Anketa staršev](raziskave/anketa-starsi.md) dokumentira uporabniške potrebe, rezultate in njihove omejitve. Kratek povzetek rezultatov je v [povzetku projekta](projekt/povzetek.md).
+
