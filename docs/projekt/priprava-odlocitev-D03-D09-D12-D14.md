@@ -30,7 +30,9 @@ Repozitorij navaja sodelovanje dveh zavodov po potrditvi pobudnika; pisna potrdi
 
 Po oddaji povabila je bilo 9. 10. 2026 ob 15:05 UTC v upravljanju dostopov neposredno preverjeno: račun alexlandich, vloga admin, stanje **Pending Invite / Awaiting alexlandich’s response**. Povabilo je poslano; sprejem povabila in aktiven dostop še nista potrjena. To je neposredno opazovan rezultat, ne zgolj predlog.
 
-Aleksandarjev sprejem odgovornosti drugega skrbnika, potrditev sodelujočih zavodov, preizkus zasebnih prijav in obvestil ter nadomeščanje ostajajo potrebni. Nosilec in namestnik obravnave prijav D14 ter skupni tehnični nosilec D03 s tem še niso določeni. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
+9. oktobra 2026 je Mitja Pirih izrecno potrdil, da osebno prevzame vlogo nosilca obravnave zasebnih varnostnih prijav D14, ter podprl predlog Aleksandarja Lazarevića za namestnika. Mitjev osebni sprejem vloge je potrjen; Aleksandarjev sprejem odgovornosti namestnika in drugega skrbnika še ni evidentiran. Ta dogovor ne pomeni obveznosti Mitjevega podjetja.
+
+Razlog predlagane razdelitve je jasen nosilec zasebne obravnave in nadomeščanje z drugim skrbnikom. Pokritost, roki odziva, odsotnosti in zasebna eskalacija še niso potrjeni. Potrditev sodelujočih zavodov za D09 ter preizkus zasebnih prijav in obvestil ostajata potrebna. Skupni tehnični nosilec D03 s tem ni določen. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
 
 ## Zaporedje sprostitve dela
 
