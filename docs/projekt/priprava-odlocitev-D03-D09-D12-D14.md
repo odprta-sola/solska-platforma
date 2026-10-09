@@ -2,7 +2,7 @@
 
 Datum pregleda: 9. oktober 2026
 
-Status: predlog za potrditev; ne imenuje oseb, ne potrjuje dostopov ali razpoložljivosti
+Status: predlog za potrditev z izvedbenim zapisom; ne potrjuje sprejema vlog, aktivnih dostopov ali razpoložljivosti
 Preverjeni GitHub `main`: `28598e22f52799c9ec964ce8af3c8e4006d11d94`
 
 Dokument pripravi izvedljive odločitve in dokazila. Merodajna ostajata [register](odlocitve.md) in [načrt priprave P0/T](priprava-referencnega-P0.md). Združitev tega predloga ne izpolni nobenega predkodnega pogoja. Vsa spodaj predlagana pravila in številke zahtevajo izrecno potrditev; ne pomenijo že dogovorjenih obveznosti.
@@ -23,6 +23,14 @@ Dokument pripravi izvedljive odločitve in dokazila. Merodajna ostajata [registe
 [SECURITY.md](../../SECURITY.md) in register evidentirata omogočeno zasebno prijavo. To je preverjeno stanje dokumentacije, ne nov praktični preizkus nastavitve GitHub. Dejanski dostop posameznih računov, obvestila, nadomeščanje in sprejem zasebne prijave v tem pregledu niso bili preizkušeni. Javni podatki o članstvu, avtorstvo commitov in dodelitev issuea tega ne dokazujejo.
 
 Repozitorij navaja sodelovanje dveh zavodov po potrditvi pobudnika; pisna potrditev vodstev ni evidentirana. Osebni prispevek pobudnika pri P0/T je zapisana usmeritev. To ni imenovanje skupnega tehničnega nosilca ali zaveza njegovega podjetja.
+
+## Izvedbeni zapis po začetnem pregledu
+
+9. oktobra 2026 je pobudnik Mitja Pirih predlagal Aleksandarja Lazarevića iz GEPŠ za drugega skrbnika in izrecno odobril povabilo z vlogo Admin na repozitoriju. GitHub je zasebno navedeni kontakt povezal z računom [alexlandich](https://github.com/alexlandich). Kontaktnih naslovov v tem dokumentu ne objavljamo.
+
+Po oddaji povabila je bilo 9. 10. 2026 ob 15:05 UTC v upravljanju dostopov neposredno preverjeno: račun alexlandich, vloga admin, stanje **Pending Invite / Awaiting alexlandich’s response**. Povabilo je poslano; sprejem povabila in aktiven dostop še nista potrjena. To je neposredno opazovan rezultat, ne zgolj predlog.
+
+Aleksandarjev sprejem odgovornosti drugega skrbnika, potrditev sodelujočih zavodov, preizkus zasebnih prijav in obvestil ter nadomeščanje ostajajo potrebni. Nosilec in namestnik obravnave prijav D14 ter skupni tehnični nosilec D03 s tem še niso določeni. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
 
 ## Zaporedje sprostitve dela
 
