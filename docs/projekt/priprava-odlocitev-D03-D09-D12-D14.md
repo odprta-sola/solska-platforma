@@ -32,7 +32,17 @@ Po oddaji povabila je bilo 9. 10. 2026 ob 15:05 UTC v upravljanju dostopov nepos
 
 9. oktobra 2026 je Mitja Pirih izrecno potrdil, da osebno prevzame vlogo nosilca obravnave zasebnih varnostnih prijav D14, ter podprl predlog Aleksandarja Lazarevića za namestnika. Mitjev osebni sprejem vloge je potrjen; Aleksandarjev sprejem odgovornosti namestnika in drugega skrbnika še ni evidentiran. Ta dogovor ne pomeni obveznosti Mitjevega podjetja. Mitja je istega dne izrecno dovolil javni zapis imen, vlog in statusa potrditve; zasebni kontaktni naslov je izključen.
 
-Razlog predlagane razdelitve je jasen nosilec zasebne obravnave in nadomeščanje z drugim skrbnikom. Mitja je 9. oktobra 2026 potrdil koordinacijsko naravo svoje vloge in pregled obvestil o novih varnostnih prijavah vsaj enkrat vsak delovni dan, od ponedeljka do petka, razen praznikov in dogovorjenih odsotnosti. Izrecno je dovolil tudi javni zapis tega dogovora. To ni zagotovilo stalne dežurne službe ali rok za odpravo napake. Mitja je istega dne za javni dogovor D14 potrdil cilj človeške zasebne potrditve prejema v dveh delovnih dneh od prejema prijave. Razlog je, da prijavitelj prejme jasno povratno informacijo; ta cilj ne določa roka odprave napake. Mitja je potrdil tudi cilj začetne ocene v petih delovnih dneh od prejema prijave: vpliv, prizadeti obseg in nujnost ukrepanja oziroma jasno navedene manjkajoče informacije. Obravnavo koordinira in po potrebi vključi tehnično pomoč; konkretni tehnični sodelavec s tem ni imenovan. Razlog je zgodnja razjasnitev tveganja in naslednjih korakov. Mitja je potrdil tudi cilj načrta ukrepanja v petih delovnih dneh po začetni oceni, najpozneje v desetih delovnih dneh od prejema prijave. Prijavitelju se zasebno sporočijo predvideni ukrepi in termin naslednje posodobitve; rok odprave se določi glede na konkreten primer. Razlog je, da začetni oceni sledi jasen načrt obravnave. Natančna ura pregleda, koledar praznikov, ritem posodobitev odprte obravnave ter ureditev odsotnosti in zasebne eskalacije še niso potrjeni; razpoložljivost predlaganega namestnika ni potrjena. Potrditev sodelujočih zavodov za D09 ter preizkus zasebnih prijav in obvestil ostajata potrebna. Skupni tehnični nosilec D03 s tem ni določen. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
+Razlog predlagane razdelitve je jasen nosilec zasebne obravnave in nadomeščanje z drugim skrbnikom. Mitja je 9. oktobra 2026 potrdil koordinacijsko naravo svoje vloge in pregled obvestil o novih varnostnih prijavah vsaj enkrat vsak delovni dan, od ponedeljka do petka, razen praznikov in dogovorjenih odsotnosti. Izrecno je dovolil tudi javni zapis tega dogovora. To ni zagotovilo stalne dežurne službe ali rok za odpravo napake.
+
+Mitja je istega dne za javni dogovor D14 potrdil cilj človeške zasebne potrditve prejema v dveh delovnih dneh od prejema prijave. Razlog je, da prijavitelj prejme jasno povratno informacijo; ta cilj ne določa roka odprave napake.
+
+Mitja je potrdil tudi cilj začetne ocene v petih delovnih dneh od prejema prijave: vpliv, prizadeti obseg in nujnost ukrepanja oziroma jasno navedene manjkajoče informacije. Obravnavo koordinira in po potrebi vključi tehnično pomoč; konkretni tehnični sodelavec s tem ni imenovan. Razlog je zgodnja razjasnitev tveganja in naslednjih korakov.
+
+Mitja je potrdil tudi cilj načrta ukrepanja v petih delovnih dneh po začetni oceni, najpozneje v desetih delovnih dneh od prejema prijave. Prijavitelju se zasebno sporočijo predvideni ukrepi in termin naslednje posodobitve; rok odprave se določi glede na konkreten primer. Razlog je, da začetni oceni sledi jasen načrt obravnave.
+
+Mitja je potrdil tudi zasebno posodobitev prijavitelju vsaj vsakih pet delovnih dni, dokler je obravnava odprta. Posodobitev vsebuje stanje in naslednji korak tudi takrat, ko popravka še ni; razlog je redno obveščanje brez dolgotrajne tišine.
+
+Natančna ura pregleda, koledar praznikov ter ureditev odsotnosti in zasebne eskalacije še niso potrjeni; razpoložljivost predlaganega namestnika ni potrjena. Potrditev sodelujočih zavodov za D09 ter preizkus zasebnih prijav in obvestil ostajata potrebna. Skupni tehnični nosilec D03 s tem ni določen. D09/D14 ostajata odprta; predkodni pogoj še ni izpolnjen.
 
 ## Zaporedje sprostitve dela
 
@@ -80,7 +90,7 @@ GitHubova [obvestila o zasebnih prijavah](https://docs.github.com/en/code-securi
 
 ### Odzivni cilji za potrditev
 
-Cilji veljajo za pripravo dokumentacijske/razvojne faze z izmišljenimi podatki. Mitja je 9. oktobra 2026 potrdil svoj pregled novih prijav vsak delovni dan ter cilja potrditve prejema v dveh in začetne ocene v petih delovnih dneh od prejema prijave. Potrdil je tudi načrt ukrepanja v petih delovnih dneh po začetni oceni, najpozneje v desetih od prejema prijave. Preostali odzivni cilji v tabeli so predlogi; sprejem namestnika in pokritje odsotnosti ostajata odprta. Pred potrditvijo preostalih ciljev nosilec in namestnik preverita izvedljivost.
+Cilji veljajo za pripravo dokumentacijske/razvojne faze z izmišljenimi podatki. Mitja je 9. oktobra 2026 potrdil svoj pregled novih prijav vsak delovni dan ter cilja potrditve prejema v dveh in začetne ocene v petih delovnih dneh od prejema prijave. Potrdil je tudi načrt ukrepanja v petih delovnih dneh po začetni oceni, najpozneje v desetih od prejema prijave. Potrjena je tudi posodobitev prijavitelju vsaj vsakih pet delovnih dni med odprto obravnavo. Prednostna obravnava kritičnih prijav v tabeli ostaja predlog; sprejem namestnika in pokritje odsotnosti ostajata odprta. Pred potrditvijo preostalih ciljev nosilec in namestnik preverita izvedljivost.
 
 | Korak | Največji čas | Merljiv rezultat | Status |
 | --- | --- | --- | --- |
@@ -88,7 +98,7 @@ Cilji veljajo za pripravo dokumentacijske/razvojne faze z izmišljenimi podatki.
 | Začetna ocena resnosti | 5 delovnih dni od prejema prijave | Vpliv, prizadeti obseg in stopnja resnosti ali jasno navedene manjkajoče informacije | Mitja potrdil 9. 10. 2026; sprejem namestnika in nadomeščanje še odprta |
 | Vsebinski odziv oziroma načrt ukrepanja | 5 delovnih dni od ocene, največ 10 od prejema | Odločitev o obravnavi, omejitveni ukrep, odgovorna oseba in naslednja posodobitev | Mitja potrdil 9. 10. 2026; sprejem namestnika in nadomeščanje še odprta |
 | Kritična prijava oziroma razkritje skrivnosti | Prednostna obravnava v prvem potrjenem dnevu pokritosti | Omejitev izpostavljenosti v okviru pooblastil; koordinacija namestnika | Predlog |
-| Posodobitev odprte obravnave | Največ vsakih 5 delovnih dni | Napredek, preostalo tveganje in naslednji korak | Predlog |
+| Posodobitev odprte obravnave | Največ vsakih 5 delovnih dni | Napredek, preostalo tveganje in naslednji korak | Mitja potrdil 9. 10. 2026; sprejem namestnika in nadomeščanje še odprta |
 
 Predlog štetja: delovni dnevi od ponedeljka do petka brez praznikov po dogovorjenem koledarju, časovni pas Europe/Ljubljana. Mitjev ritem pregleda je potrjen v izvedbenem zapisu; natančne ure, razpoložljivost namestnika in pokritje odsotnosti še niso potrjeni. Števec se ne ponastavi ob predaji namestniku; manjkajoče informacije ne opravičijo tišine. Ob napovedani odsotnosti se predaja izvede vnaprej; ob zamudi ciljnega odziva prevzame namestnik. Če sta oba nedosegljiva, mora dogovor določiti potrjeno zasebno eskalacijsko pot in odgovorno vlogo.
 
