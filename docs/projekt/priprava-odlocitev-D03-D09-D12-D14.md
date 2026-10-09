@@ -51,6 +51,8 @@ Mitja je 9. oktobra 2026 potrdil način predaje pred napovedano odsotnostjo: nam
 
 Mitja je 9. oktobra 2026 izrecno potrdil e-pošto kot zadosten način nujnega zasebnega obveščanja med nosilcem in namestnikom. Naslovi se hranijo zasebno in niso objavljeni. Razlog je Mitjeva ocena, da e-pošta za ta dogovor zadošča. Aleksandarjev sprejem, dogovor o spremljanju tega kanala in praktični preizkus dostave ter opaženega obvestila ostajajo odprti; izbrani kanal ne dokazuje dejanskega odziva.
 
+Mitja je 9. oktobra 2026 navedel, da kandidata za zasebno eskalacijo nujne prijave ob nedosegljivosti nosilca in namestnika še ni. Oseba oziroma izvedljiva rezervna pot ni določena; ta odločitev D14 ostaja odprta in je treba pred izpolnitvijo predkodnega pogoja potrditi konkretno ureditev.
+
 ## Zaporedje sprostitve dela
 
 | Korak | Potreben rezultat | Delo, ki ga rezultat sprosti |
