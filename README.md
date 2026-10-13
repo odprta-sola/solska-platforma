@@ -6,11 +6,11 @@ Projekt nastaja iz pobude za preprostejšo komunikacijo med šolo in starši ter
 
 ## Dokumentacija
 
-[Kazalo dokumentacije](docs/README.md) povezuje javni povzetek V6, poročilo ankete, predlog odgovornosti, arhitekturna izhodišča in register odločitev.
+Začnite s [predstavitvijo za mentorja in šolo](docs/mentorji/predstavitev-projekta.md). P0 zagotavlja prijavo in pravice, M1 obvestila ter izrecno seznanitev, M2 odločitve po namenih. Možnost obveščanja učencev in dijakov je predlog za šolsko in mentorsko presojo.
 
-[Osnutek M1 eSporočanje](docs/moduli/M1-eSporocanje.md) opredeli obvestila in seznanitev. [Osnutek M2 eSoglasja](docs/moduli/M2-eSoglasja.md) opredeli obrazce, odločitve in preklic. Oba sta odprta za mentorjev pregled. [Navodila za sodelovanje](CONTRIBUTING.md) opisujejo pripravo in pregled prispevkov.
+[Razvojno naročilo](docs/projekt/razvojno-narocilo-P0-M1-M2.md) določa obseg in faze, [kratka tehnična specifikacija](docs/arhitektura/kratka-specifikacija-P0-M1-M2.md) pa model, poti API in 20 skupin prihodnjih preizkusov. [Kazalo](docs/README.md) loči delovno dokumentacijo od podrobnega podpornega gradiva in arhiva.
 
-[Razvojno naročilo](docs/projekt/razvojno-narocilo-P0-M1-M2.md) in [načrt referenčnega P0](docs/projekt/priprava-referencnega-P0.md) določata predlagano razdelitev: pobudnik pripravi osnovo P0/T, dijaki razvijajo predvsem M1/M2. P0 in OpenAPI še nista izdelana.
+Pobudnik osebno pripravlja skupno osnovo ob pomoči AI; dijaki po dogovoru z mentorjem razvijajo predvsem obvestila in obrazce. Delujoči P0, pogodba OpenAPI in aplikacija še niso izdelani. [Register odločitev](docs/projekt/odlocitve.md) loči sprejete osebne dogovore od preostalih institucionalnih potrditev.
 
 ## Trenutno stanje
 
@@ -57,11 +57,13 @@ V javne razprave ne vključujte osebnih podatkov učencev, staršev ali zaposlen
 
 ## Naslednji koraki
 
-1. Uskladitev in potrditev obsega prvega pilota M1.
-2. Določitev odgovornosti za razvoj, pregled in vzdrževanje.
-3. Priprava arhitekture in pravil povezovanja modulov.
-4. Potrditev licence kode in pogojev prispevkov.
-5. Razvoj in preizkus na testnih podatkih.
+1. Predstavitev projekta in prva mentorska ter šolska ocena.
+2. Uskladitev učnega obsega, vključno s predlogom računov učencev/dijakov, individualnih izdelkov in virov.
+3. Ločeni dogovori o predaji, skrbništvu, pregledih in varnostnem nadomeščanju; izpolnitev pogojev pred prvo kodo.
+4. Potrditev razvojne pogodbe in priprava ter prevzem skupne osnove.
+5. Razvoj in demonstracije na testnih podatkih. Uporaba na šoli ima ločen prevzem.
+
+CSV ostane osnovna pot uvoza. Vsaka šola ima svojo namestitev in v izvedbenem dogovoru določi skrbnike ter vzdrževanje; centralna večšolska namestitev ni predvidena. Integracija eAsistent, ArnesAAI in SI-PASS so poznejše možnosti, brez potrjenih dostopov ali rokov.
 
 ## Licenca
 

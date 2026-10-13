@@ -5,13 +5,19 @@ Status: načrt; delujoči P0, OpenAPI, nadomestki in pogodbeni testi še niso iz
 
 Ta načrt podrobneje razdeli [razvojno naročilo](razvojno-narocilo-P0-M1-M2.md). Pobudnik osebno s pomočjo OpenAI in Claude pripravi razvojno osnovo in predlog paketa T. Pomoč AI ne pomeni človeškega tehničnega pregleda. Podjetje pobudnika s tem ni določeno za izvajalca. Pred izdelavo se zabeležijo izvajanje, obseg in način sodelovanja. Nosilec skupnih gradnikov koordinira izvedbo in predajo; prihodnje vzdrževanje se dodeli posebej.
 
+## Uskladitev 13. oktobra 2026
+
+Prvo branje sta [predstavitev](../mentorji/predstavitev-projekta.md) in [kratka specifikacija](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Najprej pridobimo mentorsko oceno, nato dogovorimo izvedbo in ločene vloge. Predkodni pogoji ostajajo.
+
+Seznam »prve različice« v predstavitvi pomeni ciljni B. Prvi T še uporablja vnaprej pripravljene individualne testne račune; individualna aktivacija/obnova ostaneta dopolnitev pred B. Učenčev račun in ciljna skupina M1 sta predlog, ne samodejna širitev T. CSV se ohrani tudi ob morebitnih poznejših integracijah. Vsaka šola ima ločeno namestitev s posebej potrjenim upravljanjem.
+
 ## En vir obsega in prevzema P0
 
 | Faza | Vključeno | Dokaz |
 | --- | --- | --- |
 | Prvi prevzem v T | Ena izmišljena šola; vnaprej pripravljeni individualni računi in skupen testni poštni predal; osebe, učenci, oddelki, povezave, dodelitve in dovoljenja; vir jezika ter prikaznih oznak po pravilih D12; vzdrževana lokalna prijava; preverjanje uporabniških in servisnih pravic; odvzem povezave in dovoljenja; sprememba kontakta; osnovni CSV uvoz s predogledom, validacijo, celovito potrditvijo in ponovitvijo; omejen kontaktni klic; API, testni podatki in ponovljiva namestitev | Neodvisni pregledovalec sistem namesti in izvede spodnje scenarije |
 | Dopolnitev pred B | Individualna aktivacija in obnova računov pri skupnem e-poštnem predalu; celoten dogovorjeni obseg administrativnega uvoza, sledljivih popravkov in upravljanja; dokumentiran izvoz. Pripravo organizira pobudnik; omejen prepoznaven del je lahko dijaška razširitev le po dogovoru z mentorjem. | Preizkusi posebnih primerov iz naročila in dokumentacija |
-| Pozneje | ArnesAAI, neposredna integracija eAsistent, avtomatizacija šolskega leta in večšolska centralna namestitev | Ločena odločitev |
+| Pozneje | ArnesAAI in SI-PASS, dodatna integracija eAsistent ter avtomatizacija šolskega leta; centralna večšolska namestitev ni predvidena | Ločena odločitev |
 
 Obseg v tabeli je merodajen za prvi prevzem P0; seznam v naročilu opisuje ciljni B. Prvi prevzem ne predpostavlja že pripravljene produkcijske prijave ali povezave s šolsko evidenco. Gesel, kriptografije in prijavnega protokola ne razvijamo na novo.
 

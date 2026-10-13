@@ -1,30 +1,31 @@
 # Dokumentacija Odprte šole
 
-Dokumenti so osnutki za pregled, razen če je izrecno navedena potrditev. Združitev v main pomeni vključitev v skupno delovno dokumentacijo, ne odobritve sodelujočih zavodov.
+Datum usmeritve: 13. oktober 2026. Dokumenti so delovni predlogi, razen izrecno evidentiranih sprejemov. Merge ni institucionalna potrditev.
 
-| Dokument | Namen |
+## Delovna raven
+
+| Za koga oziroma kdaj | Dokument |
 | --- | --- |
-| [Razvojno naročilo P0–M1–M2](projekt/razvojno-narocilo-P0-M1-M2.md) | Izhodiščni cilj pobudnika, obvezni obseg, vloge in demonstracije |
-| [Razlaga in praktični primeri](mentorji/razvojni-paket-P0-M1-M2.md) | Pojasnila in praktični primeri k razvojnemu naročilu |
-| [Priprava referenčnega P0](projekt/priprava-referencnega-P0.md) | Obseg prvega prevzema, paket T, predaja in projektni pogoji |
-| [Priprava odločitev D03/D09/D12/D14](projekt/priprava-odlocitev-D03-D09-D12-D14.md) | Predlog vlog, dokazil, preizkusa zasebne poti in seznam odločitev pred kodo |
-| [P0 uporabniki](moduli/P0-uporabniki.md) | Evidenca, lokalna prijava, uvoz in testni podatki |
-| [Pogodba P0–M1–M2](arhitektura/vmesnik-P0-M1-M2.md) | Osnutek API za potrditev D12 |
-| [Povzetek projekta V6](projekt/povzetek.md) | Namen, stanje, faze, moduli in spremembe glede na V5 |
-| [Odgovornosti](projekt/odgovornosti.md) | Predlog vodenja, pregleda in vzdrževanja |
-| [Arhitektura](arhitektura/izhodisca.md) | Predlagana razmejitev jedra in samostojnih modulov |
-| [Register odločitev](projekt/odlocitve.md) | Odprta vprašanja in postopek potrjevanja |
-| [Izvor gradiva](projekt/izvor-gradiva.md) | Sledljivost izvirnikov in novih javnih različic |
-| [Izdaje](izdaje/README.md) | Pravila za potrjene dokumente in PDF |
-| [Navodila za sodelovanje](../CONTRIBUTING.md) | Predlaganje in pregled sprememb |
+| Prvi mentorski in šolski pogovor | [Predstavitev projekta](mentorji/predstavitev-projekta.md) in [spremni sporočili](mentorji/prvi-pogovor.md) |
+| Ocena obsega, individualnih izdelkov in faz | [Razvojno naročilo](projekt/razvojno-narocilo-P0-M1-M2.md) |
+| Model, API, pravila in 20 skupin preizkusov | [Kratka tehnična specifikacija](arhitektura/kratka-specifikacija-P0-M1-M2.md) |
+| Pogodbeni dogovor pred implementacijo | [Stalni osnutek D12](arhitektura/vmesnik-P0-M1-M2.md) |
+| Priprava in prevzem skupne osnove | [Načrt P0/T](projekt/priprava-referencnega-P0.md) |
+| Potrditve in formalni pogoji | [Register odločitev](projekt/odlocitve.md) in [odgovornosti](projekt/odgovornosti.md) |
 
-[Osnutek specifikacije M1 eSporočanje](moduli/M1-eSporocanje.md) opredeli obvestila, potrditev seznanitve, opomnike, papirno pot ter minimalni vmesnik za druge module. Obseg pilota potrebuje mentorjev pregled.
+Najprej razumemo namen in primere. Mentor oceni primernost, obseg in individualne izdelke; šola preveri postopke in pravila. Šele nato se z ustreznimi ljudmi dogovorijo izvedba, skrbništvo in varnostno nadomeščanje, pri čemer formalni pogoji veljajo pred prvo kodo. Nov splošni krog AI pregledov dolge priloge ni naslednji korak.
 
-[Osnutek specifikacije M2 eSoglasja](moduli/M2-eSoglasja.md) opredeli obrazce, odločitve, preklic, dokazne zapise in povezavo z M1. Postopek pilota ter pravila potrebujejo mentorjev, vsebinski in pravni pregled.
+## Podporno gradivo in arhiv
 
-Začnite z [razvojnim naročilom](projekt/razvojno-narocilo-P0-M1-M2.md), nato preberite [razlago in praktične primere](mentorji/razvojni-paket-P0-M1-M2.md). Razvojni zavod oceni izvedljivost tega konkretnega predloga, razporedi izvajalce in predlaga roke oziroma popravke. Tehnična pogodba potrebuje dopolnitev in potrditev D12; statusi drugih odločitev ostajajo v registru.
+[Arhiv in pravila branja](arhiv/README.md) pojasnita drugi nivo dokumentacije. Daljši opisi [P0](moduli/P0-uporabniki.md), [M1](moduli/M1-eSporocanje.md), [M2](moduli/M2-eSoglasja.md) in [priprava odločitev](projekt/priprava-odlocitev-D03-D09-D12-D14.md) niso obvezno prvo branje.
 
-## Podporno gradivo
-
-[Anketa staršev](raziskave/anketa-starsi.md) dokumentira uporabniške potrebe, rezultate in njihove omejitve. Kratek povzetek rezultatov je v [povzetku projekta](projekt/povzetek.md).
-
+| Podporno gradivo | Namen |
+| --- | --- |
+| [Praktični primeri razvojnega paketa](mentorji/razvojni-paket-P0-M1-M2.md) | Podrobnejša pojasnila k naročilu |
+| [Navodilo za pregled](mentorji/navodilo-za-pregled.md) | Prva človeška ocena in ločen tehnični pregled |
+| [Povzetek projekta V6](projekt/povzetek.md) | Zgodovina pobude, anketa in širši okvir |
+| [Anketa staršev](raziskave/anketa-starsi.md) | Preverjene potrebe in omejitve raziskave |
+| [Arhitekturna izhodišča](arhitektura/izhodisca.md) | Meje modulov in podatkovnih poti |
+| [Izvor gradiva](projekt/izvor-gradiva.md) | Sledljivost vhodov in uredniških popravkov |
+| [Izdaje](izdaje/README.md) | Postopek potrjenih izdaj in PDF |
+| [Sodelovanje](../CONTRIBUTING.md) | Prispevki, licence in pregledi |

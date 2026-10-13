@@ -37,3 +37,16 @@ Pobudnik je določil pripravo referenčnega P0 in tehničnega paketa T osebno s 
 Markdown je glavni vir nadaljnjih sprememb. Potrjene izdaje se označijo s commitom oziroma tagom; PDF za posredovanje se izdela iz potrjene vsebine. Združitev osnutka v main ni odločitev zavodov.
 
 Za formalni izvirnik V5 skrbi pobudnik v obstoječem internem arhivu. Ta prenos ne ustvarja nove zasebne zbirke in ne spreminja izvirnih datotek.
+
+## Dopolnitev 13. oktobra 2026
+
+Pobudnik je izrecno izbral dopolnjeno smer in naročil uskladitev GitHub. Navedel je, da je gradivo usklajeno s Claude AI. Ta navedba pomeni izvor njegove usmeritve, ne potrditev mentorjev, zavodov ali produkcije.
+
+| Predloženi vir | SHA-256 |
+| --- | --- |
+| ODPRTA_SOLA_NASLEDNJI_KORAKI_IN_POTRDITVE_2026-10-13(3).md | `6ee88d2d8d5caaa3d4a508a637f4d8de102886e6c3ecb1aa94c4653df99607c6` |
+| ODPRTA_SOLA_PREDSTAVITEV_ZA_MENTORJA_2026-10-13-1.pdf, šest strani | `ba1b22aa30db782d744cdb8d59d858bf700270fbce408cb4f8a4ce855bfc1071` |
+
+Javna uredniška različica je [predstavitev](../mentorji/predstavitev-projekta.md), [prvi pogovor](../mentorji/prvi-pogovor.md), posodobljeno naročilo in nova kratka specifikacija. Izvirnika ostaneta nespremenjena pri pobudniku; ne kopiramo njunega notranjega zapisa kot novega dokaza sedanjih dostopov.
+
+Pri prenosu so pojasnjene tri pomembne meje: M1 beleži izrecno seznanitev, ne dokazanega branja; kontaktni klic je samo M1, ne M2; polnoletstvo ali učenčev račun ne dodelita vseh pravic brez potrjenih šolskih pravil. »Prva različica« je ciljni B, zato ni tihe širitve T/A. Izrecno nesprejet predlog izjeme za lokalne prototipe ostaja predlog.

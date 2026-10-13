@@ -1,5 +1,7 @@
 # M1 eSporočanje
 
+Podporno podrobno gradivo. Za prvo branje uporabite [predstavitev](../mentorji/predstavitev-projekta.md) in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Usmeritev 13. oktobra 2026: CSV ostane, vsaka šola ima svojo namestitev; računi učencev in ciljne skupine M1 so predlog za mentorsko/šolsko presojo. Podrobne zahteve niso tiho ukinjene; njihov sprejem in faze sledijo registru ter naročilu.
+
 Status: osnutek za pregled  
 Datum: 5. oktober 2026  
 Izhodišče: Modul eSporočanje – opis modula, 5. oktober 2026  
@@ -30,6 +32,10 @@ Dostop se preverja pri vsakem obvestilu, prilogi in izvozu. Ob spremembi zaposli
 Vsaka oseba ima stalen notranji identifikator. E-poštni naslov ni identifikator osebe. Skupni naslov dveh staršev ne pomeni skupne identitete ali potrditve obeh.
 
 Prejemnike določa veljavna evidenca upravičenih oseb. Pravilo pošiljanja obema staršema velja samo, kadar sta oba upravičena do konkretnih informacij. Omejitve dostopa in skrbništva upravlja pooblaščena oseba šole.
+
+## Predlog neposrednega obveščanja učencev in dijakov
+
+Zaposleni bi izbral starše, učence/dijake ali oboje, z ločenim naslovljenim naborom. Učenec vidi samo njemu namenjene vsebine in potrjuje v svojem obsegu; njegova seznanitev ne nadomesti starševe. Potrebni so individualni računi P0, preverjeni obsegi in pogodbeni testi. Šola določi starost/razred, kanal in izdajo računa, mentor pa predlaga prvo fazo ali pozneje. To ni že potrjen obseg pilota ali avtomatičen dostop do vseh obvestil oddelka.
 
 ## Predlagani obseg prvega pilota
 

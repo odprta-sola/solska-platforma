@@ -5,6 +5,12 @@ Datum: 5. oktober 2026
 Status: javni osnutek dokumenta za pregled; sodelovanje šol je navedeno po izjavi pobudnika  
 Izhodišče: projektni povzetek V5 z dne 1. oktobra 2026
 
+## Posodobljena razvojna usmeritev 13. oktobra 2026
+
+Prvi stik uporablja [predstavitev](../mentorji/predstavitev-projekta.md), nato mentorsko oceno in odziv šole. Delovni nivo dopolnjujeta [naročilo](razvojno-narocilo-P0-M1-M2.md) ter [kratka specifikacija](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Starejši V6 spodaj ostane širše izhodišče, ne novo imenovanje ali dogovor o virih.
+
+CSV ostaja, eAsistent je morebitna dodatna pot; vsaka šola ima ločeno namestitev, centralna storitev ni predvidena. ArnesAAI/SI-PASS, push in letni prehod so prihodnje smeri. Računi učencev in izbira ciljne skupine M1 so predlog za presojo faze, starosti, kontakta in pravic. Novi račun ne odpira starševskih vsebin ali odločitev. Formalni pogoji iz registra ostajajo.
+
 ## Namen in stanje
 
 Odprta šola je pobuda za modularno odprtokodno rešitev elektronskega poslovanja šol. Nastala je ob sodelovanju pobudnika z OŠ Vojke Šmuc Izola in GEPŠ Piran. Po sestanku 1. oktobra 2026 je v pripravi prvi modul eSporočanje in dogovor o razvoju z mentorji ter morebitnimi drugimi šolami.

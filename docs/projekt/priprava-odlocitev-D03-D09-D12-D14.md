@@ -7,6 +7,14 @@ Preverjeni GitHub `main`: `28598e22f52799c9ec964ce8af3c8e4006d11d94`
 
 Dokument pripravi izvedljive odločitve in dokazila. Merodajna ostajata [register](odlocitve.md) in [načrt priprave P0/T](priprava-referencnega-P0.md). Združitev tega predloga ne izpolni nobenega predkodnega pogoja. Izvedbeni zapis in statusi v tabelah ločijo osebno potrjene dogovore od preostalih predlogov. Predlagana pravila in številke zahtevajo izrecno potrditev.
 
+## Trenutni vrstni red po usmeritvi 13. oktobra 2026
+
+Ta daljši zapis je podporna sled priprave. Za prvi pogovor uporabimo [predstavitev](../mentorji/predstavitev-projekta.md) in [spremni sporočili](../mentorji/prvi-pogovor.md), nato naročilo in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Mentorjeve ocene ne združimo s pozivom za prevzem skrbništva ali varnostnega nadomeščanja. Ti vlogi se dogovorita ločeno po predstavitvi, pred prvo kodo.
+
+Spodnji podatki o Admin povabilu opisujejo stanje 9. oktobra, ne današnjega. Pri dodatnem preverjanju 13. oktobra ob 21.21 Europe/Ljubljana je preverjanje računa alexlandich vrnilo permission=read; sprejem povabila in dostop do prihodnjih zasebnih prijav s tem nista potrjena. Pravice s to dokumentacijsko posodobitvijo niso dodeljene. Mitjevi osebni dogovori ostanejo, Aleksandarjevi še niso sprejeti. Formalne statuse določa [register](odlocitve.md).
+
+Predlog lokalnih učnih prototipov brez D03/D09/D14 ni sprejet. Neodvisni človeški prevzem T pred A/I ostaja do formalno potrjene spremembe merila. Daljši predlogi spodaj niso tiha izjema od teh pogojev.
+
 ## Preverjeno stanje in omejitve preverjanja
 
 | Predmet | Neposredno preverjeno ob začetnem pregledu 9. 10. 2026 | Posledica |

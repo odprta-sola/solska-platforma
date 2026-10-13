@@ -3,6 +3,12 @@
 Datum: 9. oktober 2026
 Status: delovni predlog D12 za potrditev; ni dokončna implementacijska pogodba
 
+## Kratka delovna raven
+
+Za prvo tehnično branje uporabite [kratko specifikacijo](kratka-specifikacija-P0-M1-M2.md). Ta dokument ostaja stalno mesto osnutka D12 in ni nadomeščen s potrjeno pogodbo.
+
+Predlog učenčevih računov in ciljne skupine starši/učenci/oboje zahteva nove obsege, ločeno naslovljenost in preizkuse. Vsebina za starše ter odločitve M2 se s tem ne odprejo učencem. Sheme se najprej uskladijo v D12; prva faza in šolska pravila še niso sprejeti. Kontaktni klic ostane samo M1.
+
 ## Vloga pogodbe v naročilu
 
 Ta pogodba je skupni tehnični predlog v [razvojnem naročilu pobudnika](../projekt/razvojno-narocilo-P0-M1-M2.md). Dopolnitev shem in testov je naloga mejnika T. Pobudnik s pomočjo AI pripravi izhodiščno rešitev; mentorji in skupni tehnični nosilec preverijo izvedljivost in varnost ter potrdijo različico pogodbe v D12 pred odvisno implementacijo. Vmesniki niso prosta izbira posamezne ekipe. Zapisane odprte vrzeli niso s tem zaključene.
@@ -17,7 +23,7 @@ P0 sam ne določi povezav M2 → M1 in M1 → M2. Paket T mora zagotoviti njuni 
 
 ## Topologija in prijava
 
-Predlog za prvi pilot je ena namestitev šole za skupnim HTTPS vhodom. Zunanje osnovne poti so /p0/api/v1, /m1/api/v1 in /m2/api/v1. Fizična razporeditev procesov je odprta; ni zahteve po treh strežnikih. M1 samostojno pomeni paket P0+M1; M2 potrebuje P0+M1.
+Usmeritev pobudnika je ločena namestitev za vsako šolo, brez centralne večšolske storitve. Predlog za prvi pilot je ena namestitev šole za skupnim HTTPS vhodom. Zunanje osnovne poti so /p0/api/v1, /m1/api/v1 in /m2/api/v1. Fizična razporeditev procesov je odprta; ni zahteve po treh strežnikih. M1 samostojno pomeni paket P0+M1; M2 potrebuje P0+M1.
 
 Predlog je skupen vzdrževan ponudnik prijave P0. Ob odprtju M2 iz e-pošte M2 preveri svojo sejo, po potrebi preusmeri na prijavo in nato vrne uporabnika na dovoljeni cilj. Seje oziroma preverjanje identitete uredimo z izbrano vzdrževano integracijo. Deljenje piškotkov ali sprejem poljubnega person_id ni dogovorjena prijavna rešitev. Končni protokol, zaščita sej, CSRF, potek in odjava so pogoj potrditve D12.
 

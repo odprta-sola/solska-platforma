@@ -1,5 +1,7 @@
 # M2 eSoglasja
 
+Podporno podrobno gradivo. Za prvo branje uporabite [predstavitev](../mentorji/predstavitev-projekta.md) in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Usmeritev 13. oktobra 2026: CSV ostane, vsaka šola ima svojo namestitev; računi učencev in ciljne skupine M1 so predlog za mentorsko/šolsko presojo. Podrobne zahteve niso tiho ukinjene; njihov sprejem in faze sledijo registru ter naročilu.
+
 Status: osnutek za mentorjev, vsebinski in pravni pregled  
 Datum: 5. oktober 2026  
 Potrditev: postopek pilota, pravila odločanja in odgovornosti še niso potrjeni
@@ -59,6 +61,12 @@ Kdo odloča, določi šola za vsak postopek. Pravni pregled pred produkcijo potr
 Osebe imajo stalne identifikatorje. Skupni e-poštni naslov ne združi identitet ali odločitev. Povezave, omejitve in obdobja upravičenja preverja šola; njihovih občutljivih utemeljitev se ne razkriva drugim staršem ali običajnim izvajalcem.
 
 Dostop se preveri pri obrazcu, prilogi, oddaji, spremembi, potrdilu in izvozu. Upravičence ter pravila ponovnega preverjanja določi šola. Sprememba upravičenja ne prepiše zgodovinskih odločitev; prihodnji dostop in skupno stanje se ponovno presodita.
+
+## Vpliv predloga učenčevih računov
+
+Račun za obvestila M1 ne daje mladoletnemu učencu pravice odločanja namesto staršev ali branja njihovih odločitev. Ali in kdaj vidi njemu namenjen obrazec oziroma stanje, mora šola posebej določiti. Pri polnoletnem dijaku veljajo konkretna pregledana upravičenja in prehod D16, brez samodejne pretvorbe starih izjav starša. Prvi M2 ostane po enem otroku; skupinska oddaja je poznejša nadgradnja.
+
+M2 za poslovno pošto ne pridobiva kontaktov iz P0; dostavo naroči M1. Minimalni vmesnik M2–M1 je del učnega izdelka, širitev za druge module pa je poznejša smer.
 
 ## Priprava, pregled in objava obrazca
 

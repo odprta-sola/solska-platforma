@@ -1,16 +1,18 @@
-# Navodilo za neodvisni pregled dokumentacije
+# Navodilo za prvi mentorski in poznejši tehnični pregled
 
-Preglejte dejanski diff PR #29 in nove dokumente v celoti. Primerjajte z M1, M2, arhitekturo, povzetkom, odgovornostmi in registrom na osnovni veji.
+Datum: 13. oktober 2026
 
-Najprej preberite [razvojno naročilo](../projekt/razvojno-narocilo-P0-M1-M2.md), nato [praktične primere](razvojni-paket-P0-M1-M2.md), [načrt P0](../projekt/priprava-referencnega-P0.md) in [osnutek API](../arhitektura/vmesnik-P0-M1-M2.md). Ločite jasno označena odprta vprašanja od prikritih vrzeli in pojasnite njihov vpliv na odvisni razvoj.
+## Prvi mentorski pogovor
 
-Preverite razumljivost za mentorja, razmejitev evidenc/prijave/upravičenj, uvoz in aktivacijo, mejnike ter individualne izdelke. Pri API preverite prejemnike, servisno avtorizacijo, minimalne podatke, podvojitve, preklic, iztek, topologijo in prijavo. Vključite varstvo podatkov, dostopnost in večjezičnost.
+Najprej preberite [predstavitev](predstavitev-projekta.md). Ocenite primernost cilja, samostojne izdelke, izvedljiv obseg, potrebne informacije ter vključitev učencev/dijakov v prvo različico ali pozneje. Pojasnite predlagane spremembe in odvisnosti; začetna ocena ni sprejem skrbništva, varnostnih odzivov ali produkcijskega vzdrževanja.
 
-Ocenite ločeno: primernost za mentorjev pregled; pripravljenost pogodbe za implementacijo; pripravljenost za produkcijo. Odprtih odločitev ne štejte kot že potrjene izvedbe.
+Nato obravnavajte [naročilo](../projekt/razvojno-narocilo-P0-M1-M2.md) in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Dolga priloga K 0.6 in arhiv AI pregledov nista obvezno prvo branje. Naslednji vhod je človeška ocena, ne nov splošni krog AI pregleda.
 
-Za vsako ugotovitev navedite datoteko, razdelek, konkreten problem in predlagani popravek. Ločite blokirajoče napake, pomembne dopolnitve in uredniške predloge. Preverite tudi odprte točke iz spodnjega odziva na prvi pregled.
+## Poznejši tehnični pregled
 
-Naloga je pregled in poročilo v pogovoru. Brez posebnega naročila ne spreminjajte, komentirajte na GitHubu ali združujte PR. Če do repozitorija nimate dostopa, to povejte.
+Na dejanskem aktualnem diffu preverite model, pravice, podatkovne poti, uporabniške/servisne identitete, različice, trajnost in negotove dostavne izide, CSV, ločenost učencev/staršev ter 20 skupin preizkusov. Primerjajte s stalnim D12, načrtom T in registrom. Ločite pripravljenost za mentorski pogovor, implementacijo pogodbe in produkcijo.
+
+Za ugotovitev navedite datoteko, razdelek, vpliv in konkreten popravek. Brez posebnega naročila je naloga pregled, ne pisanje na GitHub ali merge. Imenovanja in formalna potrditev pogodbe zahtevajo izrecen sprejem pristojnih. Sedanji neodvisni človeški prevzem T ostaja merilo do potrjene spremembe.
 
 ## Zgodovinski odziv na prvi pregled pri 487ff00
 
