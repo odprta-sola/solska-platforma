@@ -34,6 +34,24 @@ Osnutek D12 z dne 8. oktobra 2026 konkretizira že predvidene skupne identitete 
 
 9. oktobra 2026 je pobudnik usmeritev dopolnil: osebno s pomočjo AI pripravi referenčni P0 in paket T; dijaki razvijajo predvsem M1/M2. Mentorji ocenijo izvedljivost in predlagajo utemeljene spremembe, pobudnik pa cilj in obseg uskladi s šolo uporabnico. Zapis ne spremeni statusov ali nosilcev D01–D16 v zgornji tabeli; njihovo morebitno spremembo je treba posebej obravnavati v ustreznem issueju.
 
+## Usmeritev pobudnika 13. oktobra 2026
+
+Pobudnik je predložil dopolnjeno predstavitev in nadaljnje korake ter izrecno naročil uskladitev GitHub. Navedel je uskladitev s Claude AI; to ne predstavlja institucionalne potrditve ali neodvisnega človeškega prevzema. [Izvor](izvor-gradiva.md#dopolnitev-13-oktobra-2026) vsebuje datoteki in kontrolni vsoti.
+
+| Usmeritev | Status in povezane odločitve |
+| --- | --- |
+| Najprej predstavitev, mentorska ocena in odziv šole; nato dogovor o izvedbi in ločene dodatne vloge | Sprejeta usmeritev pobudnika. D02/D03/D09/D13/D14 ostajajo odprti; Mitjevi osebni sprejemi ostanejo, Aleksandarjeve naloge niso dodeljene. |
+| Delovna raven: predstavitev, naročilo in kratka specifikacija; dolga priloga in AI pregledi kot neobvezen arhiv | Sprejeta usmeritev pobudnika. Kratka specifikacija je nov osnutek, ne formalni sprejem D12 ali izveden test. |
+| CSV ostane osnovna pot; eAsistent le dodatna prihodnja možnost | Sprejeta razvojna usmeritev. Izvoz/API, preslikava in dejanske pravice niso potrjeni; D04/D06/D07/D12. |
+| Ločena namestitev vsake šole; brez centralne večšolske storitve | Sprejeta razvojna usmeritev. Šola še potrdi konkretne skrbnike, vire, gostovanje in obnovo v D04/D09. |
+| ArnesAAI in SI-PASS ob lokalnih računih, push, letni prehod in dodatni moduli pozneje | Poznejše razvojne smeri brez rokov, izvajalcev ali že delujočih povezav; niso obseg učnega B. |
+| Računi učencev/dijakov in ciljna skupina M1 starši/učenci/oboje | Predlog za prvo mentorsko in šolsko oceno. Faza, starost/razred, kontakt, aktivacija, ločeni odzivi in vpogled v M2 še niso potrjeni; D01/D06/D07/D12/D13/D16. |
+| Omilitev predkodnih pogojev za lokalne učne prototipe | V prilogi izrecno [P], ni sprejeta. Do posebne odločitve velja D03/D09/D14 tudi za lokalno prvo kodo. |
+
+Opis »prve različice« v predstavitvi pomeni ciljni B, ne samodejne širitve T/A. Aktivacija/obnova ostaneta dopolnitev pred B; v T so računi pripravljeni vnaprej. Sedanji neodvisni človeški prevzem T pred A/I ostane; predlog avtorjevega pregleda z AI še ni potrjen.
+
+Noben D01–D16 se s to posodobitvijo ne zapre. Potrebna pravna in podatkovna pravila za šolo niso potrjena z uredniško objavo.
+
 ## Roki in sledenje
 
 D01–D03, D11–D14 in D16 blokirajo začetek odvisnega razvoja. D07, D09 in D10 se zaključijo pred produkcijskim pilotom; imenovanje drugega skrbnika iz D09 je izjema in je potrebno že pred prvo kodo oziroma vključitvijo zunanjih ekip. D04–D06 se rešijo pred razvojem odvisnih funkcij, D08 pred sprejemom kode in D15 pred potrditvijo pogojev ponovne uporabe besedil. Koledarske roke in GitHub dodelitve določijo potrjeni nosilci; vloge niso samodejno imenovanja oseb.

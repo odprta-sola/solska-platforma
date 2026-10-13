@@ -1,11 +1,17 @@
 # Razvojno naročilo P0, M1 in M2
 
-Datum: 9. oktober 2026
+Datum: 13. oktober 2026
 
-Različica: predlog izvedbe 2
+Različica: predlog izvedbe 3, uskladitev usmeritve 13. oktobra 2026
 
 Avtorstvo usmeritve: pobudnik projekta Mitja Pirih  
 Status: projektna usmeritev pobudnika in predlog za izvedbeni dogovor; ne potrditev virov zavodov ali produkcijske uvedbe
+
+## Vrstni red predstavitve in dogovora
+
+Najprej uporabimo [predstavitev](../mentorji/predstavitev-projekta.md) in pridobimo mentorsko oceno ter odziv šole. Nato uskladimo konkretni obseg, izvajalce, pregled in predajo. Skrbniške in varnostne vloge se sprejemajo posebej po predstavitvi, še vedno pred prvo kodo po registru.
+
+Delovna dokumentacija obsega predstavitev, to naročilo in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md); dolga priloga K 0.6 in AI pregledi so neobvezni arhiv. »Prva različica« v predstavitvi je celoten učni izdelek B, ne širitev vseh funkcij v T/A. Mentor predlaga utemeljene premike, sprejeti obseg pa se evidentira izrecno.
 
 ## Cilj prve različice
 
@@ -13,7 +19,7 @@ Izdelamo povezano spletno rešitev za eno testno šolo. Zaposleni objavi obvesti
 
 P0 zagotavlja skupne račune, evidenco in upravičenja. M1 zagotavlja obvestila, seznanitev in dostavo. M2 zagotavlja obrazce, odločitve in preklice; za obveščanje uporablja M1. M1 je uporaben s P0 tudi brez M2. Isti uporabnik uporablja isti račun.
 
-Razvijamo izključno na izmišljenih podatkih. OŠ Vojke Šmuc Izola je predlagana šola uporabnica; vključitev GEPŠ v preizkus se preveri. Rešitev deluje z lokalno prijavo in CSV uvozom brez neposredne povezave z eAsistentom ali ArnesAAI. Možnost poznejše povezave ArnesAAI ostane zahtevana razvojna smer, njena uporaba za šolo prostovoljna.
+Razvijamo izključno na izmišljenih podatkih. OŠ Vojke Šmuc Izola je predlagana šola uporabnica; vključitev GEPŠ v preizkus se preveri. Rešitev deluje z lokalno prijavo in CSV uvozom brez neposredne povezave z eAsistentom ali ArnesAAI. ArnesAAI in SI-PASS sta poznejši razvojni smeri poleg lokalnih računov, za šolo prostovoljni in brez potrjene integracije. CSV vedno ostane osnovna pot. Vsaka šola ima svojo namestitev; centralne storitve za več šol ne predvidevamo. Dejanske skrbnike, vire in vzdrževanje šola potrdi posebej.
 
 ## Kaj je določeno in kaj ostaja za dogovor
 
@@ -46,6 +52,10 @@ Odprti register D01–D16 se s tem ne zaključi. Zlasti ne imenujemo oseb, ne ob
 | Pooblaščeni pregledovalec | Dovoljenje za določen namen | Dnevnik in izvoz v obsegu pooblastila | Dokazni zapisi in izvoz v obsegu pooblastila |
 
 Tehnična vloga ne daje rutinskega vpogleda v vsebine. Povezava starš–otrok sama ni dovoljenje za vsako dejanje. Vloge se lahko združujejo, vendar se pravice preverijo za konkretni vir in postopek.
+
+## Predlog obveščanja učencev in dijakov
+
+Pobudnik predlaga individualni račun učenca/dijaka in izbiro ciljne skupine M1: starši, učenci/dijaki ali oboje. Učenec vidi samo njemu naslovljena obvestila, ne starševskih odločitev; njegova seznanitev ne nadomesti seznanitve starša. Vključitev v B ali pozneje še presodi mentor; starost/razred, kontakt, aktivacijo in pravila vpogleda v M2 potrdi šola ob D07/D16. Polnoletstvo ne ustvari avtomatično vseh pravic ali spremeni starih izjav. To ni že obvezna razširitev prve predaje T.
 
 ## Referenčna osnova P0
 
@@ -155,7 +165,7 @@ Te vrzeli niso prepuščene domišljiji posamezne ekipe. Pobudnik s pomočjo AI 
 | Skrbnik repozitorija in namestnik | Dovoljenja, pregled sprememb in obravnava varnostnih prijav |
 | Vzdrževalec in namestnik | Poznejši prevzem podpore ter produkcijskega delovanja |
 
-Osebe se imenujejo posebej. Predlog 2–3 dijakov na modul je izhodišče za razporeditev, ne zahteva ali obljuba razpoložljivosti. Primerjalni prototipi so dovoljeni do zgodnjega izbora osnove; pogodba in preizkusi veljajo za vse. Vsak dijak mora imeti razpoznaven izdelek in prispevek.
+Osebe se imenujejo posebej. Predlog 2–3 dijakov na modul je izhodišče za razporeditev, ne zahteva ali obljuba razpoložljivosti. Primerjalni prototipi so možni šele po izpolnitvi D03/D09/D14; pogodba in preizkusi veljajo za vse. Predlog omilitve za lokalne učne prototipe z izmišljenimi podatki še ni sprejet. Vsak dijak mora imeti razpoznaven izdelek in prispevek.
 
 Za mentorjev razrez so mogoči ločeni individualni izdelki M1 objave in seznanitev, M1 dostava in papirna evidenca, M2 priprava in pregled obrazcev ter M2 odločitve, zgodovina in preklic. Dostopnost, testi, navodila in povezovanje so del vsakega ustreznega izdelka. Mentorji preverijo zahtevnost, samostojnost in formalno ustreznost; razrez ne predpostavlja števila razpoložljivih dijakov.
 
@@ -200,7 +210,7 @@ A in I se lahko razvijata vzporedno šele po celotnem človeškem prevzemu T. Pr
 
 ## Kaj pustimo za pozneje
 
-ArnesAAI, neposredna integracija z eAsistentom, potisna obvestila, avtomatiziran prehod šolskega leta, napredni obrazci, drugi moduli in centralna namestitev več šol niso obvezni za učni izdelek B. Potrebni jeziki dejanskega pilota in dostopnost niso izbirna produkcijska nadgradnja.
+ArnesAAI in SI-PASS, neposredna integracija z eAsistentom, potisna obvestila, avtomatiziran prehod šolskega leta, napredni obrazci in drugi moduli niso obvezni za učni izdelek B. Centralna namestitev več šol ni predvidena razvojna smer. Prihodnje nadgradnje ne ukinejo CSV ali lokalnih računov. Potrebni jeziki dejanskega pilota in dostopnost niso izbirna produkcijska nadgradnja.
 
 Za B so dostopnost, ponovljiva namestitev, integracijski preizkusi, izvoz, papirna pot in dva učna postopka obvezno jedro. Izbirne so dodatne funkcije in po dogovoru omejene dijaške razširitve P0. Če ocena izvedljivosti pokaže prevelik obseg B, mentorji predlagajo konkreten rez v številu podprtih možnosti ali postopkov; sprememba obveznega jedra zahteva izrecen dogovor pobudnika s šolo. Dostopov, sledljivosti in osnovne dostopnosti zaradi rokov ne opustimo. Oblikovanje zaslonov in organizacija kode dopuščata ustvarjalnost, pomen odločitev, dostopi, podatkovni tokovi in API pa so skupni dogovor.
 

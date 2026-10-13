@@ -1,5 +1,7 @@
 # P0 – uporabniki, prijava in upravičenja
 
+Podporno podrobno gradivo. Za prvo branje uporabite [predstavitev](../mentorji/predstavitev-projekta.md) in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Usmeritev 13. oktobra 2026: CSV ostane, vsaka šola ima svojo namestitev; računi učencev in ciljne skupine M1 so predlog za mentorsko/šolsko presojo. Podrobne zahteve niso tiho ukinjene; njihov sprejem in faze sledijo registru ter naročilu.
+
 Datum: 8. oktober 2026  
 Status: predlog za mentorjev in tehnični pregled
 
@@ -61,6 +63,14 @@ Cilj je brezplačna uporaba za starša in rešitev brez nujnih plačljivih SMS. 
 | Konec šolskega leta | Novim članom ne odpremo starih obvestil; avtomatizacija prehoda je poznejša faza |
 | Neznano upravičenje ali nedosegljiv P0 | Zaščiteno dejanje se ne dovoli na slepo; uporabniku razumljiva napaka |
 | Zgodovinski zapis | Ohranimo ID osebe, različico in obseg dogodka; brez rutinskega podvajanja imen. Morebitni dokazni posnetek in hramba se potrdita v D07 |
+
+## Predlog lastnega računa učenca in šolske potrditve pravic
+
+Evidenčni učenec ni samodejno uporabniški račun. Šola lahko omogoči individualni račun po potrjenih pravilih starosti/razreda, izdaje in kontakta. Prijava ne ustvari povezav ali grantov; pri uvozu je potreben točen preverjen nabor in pooblaščena potrditev profila z izjemami. Glavni kontakt ni dokaz upravičenja in ne odvzame pravic drugi upravičeni osebi.
+
+Spremembe šola obdela iz sporočil staršev in preverjenih dokazil; aplikacija ne more zaznati nesporočene spremembe. Starejši uvoz ne sme obnoviti novejše ročne omejitve; konflikt gre v pooblaščeno razrešitev. Podrobnih dokazil o skrbništvu ne kopiramo v M1/M2.
+
+CSV je trajno ohranjen osnovni način. eAsistent API ali izvoz še nista potrjena. ArnesAAI in SI-PASS sta poznejši možnosti poleg lokalnih računov; zunanja prijava ne nadomesti šolske presoje pravic.
 
 ## Izmišljeni testni podatki
 

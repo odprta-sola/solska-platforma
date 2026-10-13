@@ -3,6 +3,10 @@
 Datum: 8. oktober 2026  
 Status: spremljevalno gradivo k predlogu izvedbe
 
+## Novo prvo branje
+
+Od 13. oktobra 2026 začnite s [predstavitvijo](predstavitev-projekta.md) in [prvim pogovorom](prvi-pogovor.md). Sledi naročilo ter [kratka specifikacija](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Ta vodnik ostane podrobnejše pojasnilo. Novi predlog učenčevih računov in ciljnih skupin M1 potrebuje mentorsko in šolsko presojo; starejši primeri ga še ne predpostavljajo.
+
 ## Najprej preberite razvojno naročilo
 
 [Cilj, obvezni obseg, vloge, vmesniki in prevzemne demonstracije](../projekt/razvojno-narocilo-P0-M1-M2.md) so določeni v razvojnem naročilu pobudnika. Ta dokument jih pojasnjuje skozi primere.
@@ -136,4 +140,3 @@ M2 ob dospelosti opomnika odda M1 zahtevo za osebo brez zahtevanega odziva in do
 E-pošta: »V šolskem portalu vas še čaka obrazec za odločitev.«
 
 Če uporabnik prej odgovori, M2 prekliče zahtevo, M1 pa pred pošiljanjem preveri potrebo. Zavrnitev je odziv in ni razlog za opominjanje kot pri pozabljenem odgovoru. Če preverjanje ni dosegljivo, je opomnik zadržan; po izteku se ne pošlje, razlog je viden. Že predane e-pošte ni mogoče priklicati; povezava pokaže aktualno stanje.
-

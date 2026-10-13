@@ -3,11 +3,17 @@
 Status: predlog za pregled z mentorjem  
 Datum: 5. oktober 2026
 
+## Posodobljena usmeritev 13. oktobra 2026
+
+Vsaka šola ima ločeno namestitev in podatke; centralna storitev za več šol ni predvidena. Dejansko upravljanje infrastrukture, kopij, dostopov in posodobitev potrdi šola v D04/D09. CSV ostane osnovna pot tudi ob poznejši dodatni integraciji eAsistent. ArnesAAI in SI-PASS sta prostovoljni prihodnji prijavi ob ohranjenih lokalnih računih.
+
+Mitja je osebno izbral Django 5.2 LTS/Python, PostgreSQL in Docker Compose za razvoj; skupni tehnološki dogovor in konkretne izdaje potrebujejo potrditev. [Kratka specifikacija](kratka-specifikacija-P0-M1-M2.md) je delovna vstopna točka; tu opisana razmejitev ne potrjuje implementacije.
+
 ## Samostojni modul in skupno jedro
 
 Samostojnost pomeni, da je M1 uporabna namestitev brez ostalih modulov. Ne pomeni, da dijaki ponovno razvijejo prijavo, kriptografijo ali upravljanje pravic.
 
-Skupne vzdrževane komponente zagotavljajo identitete, povezave z učenci, šifrante in osnovne varnostne funkcije. V samostojni namestitvi so vključene lokalno; poznejše jedro jih lahko zagotavlja kot skupne storitve.
+Skupne vzdrževane komponente zagotavljajo identitete, povezave z učenci, šifrante in osnovne varnostne funkcije. V samostojni namestitvi so vključene lokalno; poznejše razširitve jih lahko uporabljajo prek pregledanih lokalnih vmesnikov v isti šolski namestitvi.
 
 Vsak modul upravlja svoj podatkovni model. Moduli se povezujejo prek dokumentiranih API in dogodkov. Ločena logična podatkovna shramba ne zahteva ločenega fizičnega strežnika za vsak modul.
 

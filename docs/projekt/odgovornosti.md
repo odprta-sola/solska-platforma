@@ -25,6 +25,12 @@ To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obvezno
 
 Mentor vsake ekipe vodi učni razrez M1/M2, dijake in pregled njihovega samostojnega izdelka. Nosilec modula usklajuje izvedbo tega modula; skupni tehnični nosilec odloča o skupni arhitekturi in združljivosti. Pobudnik osebno pripravi P0/T s pomočjo AI, nosilec skupnih gradnikov usklajuje predajo, neodvisni pregledovalec pa opravi človeški prevzem. Podjetje pobudnika ni samodejno izvajalec. Vloge se lahko združijo pri isti osebi, razen neodvisnega pregleda lastne kode; obseg in razpoložljiv čas se izrecno dogovorita. Ta dokument še ne imenuje ekip ali oseb.
 
+## Predstavitev pred sprejemom dodatnih vlog
+
+Najprej mentor in šola dobita razumljivo predstavitev s primeri in razdelitvijo. Mentorska ocena je ločena od sprejema drugega skrbnika, varnostnega namestnika ali pregledovalca celotne osnove. Aleksandar ostaja kandidat za skrbništvo/nadomeščanje do izrecnega sprejema; njegove obveznosti ne izhajajo iz Mitjevih osebnih odzivnih ciljev ali samega povabila GitHub.
+
+Vsaka šola ima svojo namestitev in v dogovoru določi, kdo skrbi za infrastrukturo, kopije, dostope, posodobitve in podporo. Usmeritev pobudnika še ne imenuje skrbnikov ali zaveže šol k konkretnim uram. GitHub Admin ne daje dostopa do produkcijskih podatkov.
+
 ## Potrjevanje
 
 Mentor potrjuje izvedljivost učnega izdelka. Skupni tehnični nosilec pregleda tehnično ustreznost. Pilotna šola potrjuje uporabo v svojem procesu in produkcijsko uvedbo po opravljenih preverjanjih.
