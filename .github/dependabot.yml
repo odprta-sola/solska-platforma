@@ -1,13 +1,24 @@
 # Samodejni posodobitveni pull requesti za pripete GitHub Actions in slike (odločitev pobudnika
 # 12. 11. 2026). Paketi Python se posodabljajo ročno po docs/projekt/odvisnosti-in-licence.md.
+# Večje različice (in za osnovno sliko Python tudi manjše, npr. 3.12 -> 3.13) se ne predlagajo
+# samodejno: nadgradnja izvajalnega okolja ali baze je premišljena odločitev v ločenem PR.
 version: 2
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule: {interval: monthly}
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: docker
     directory: /p0
     schedule: {interval: monthly}
+    ignore:
+      - dependency-name: "python"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
   - package-ecosystem: docker-compose
     directory: /
     schedule: {interval: monthly}
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
