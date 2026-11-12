@@ -25,7 +25,7 @@ Tri visoke (poročilo OpenAI) in ena srednja (dodatno ugotovljena ob preverjanju
 | S-01 | visoka | Kontakt je bil dosegljiv brez obstoječe dostavne zahteve | klic začasno zaprt (503) do D12 | `ContactBindingContract` |
 | S-02 | visoka | Uvoz z drugačnim začetkom veljavnosti je obnovil ročno odvzeto pravico | varovalo za poslovni obseg | `test_varovala.ImportRestrictionTests` |
 | S-03 | visoka, znana pred B | Obnova gesla prek skupnega e-naslova za vse račune s tem naslovom | samopostrežna obnova izklopljena | `test_varovala.PasswordRecoveryTests` |
-| S-04 | srednja | Tajništvo je z uvozom lahko dodelilo vlogo skrbnika | vlogo `admin` dodeli samo skrbnik | `test_varovala.ImportRoleTests` |
+| S-04 | srednja | Tajništvo je z uvozom lahko dodelilo vlogo skrbnika ali tajništva | vlogi `admin` in `office` na novo dodeli samo skrbnik | `test_varovala.ImportRoleTests` |
 
 Preostanek: S-01 potrebuje odločitev D12 (predlog: vezava na posnetek občinstva, ki ga hrani P0, in avtor iz delegirane seje); S-03 potrebuje individualni postopek pred B.
 

@@ -98,7 +98,7 @@ python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNI
 python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNIK --apply-batch ID
 ```
 
-`UPORABNIK` je račun osebe z vlogo `office` ali `admin`; vlogo `admin` lahko z uvozom dodeli samo uvoznik z vlogo `admin`. Predogled nič ne spremeni; uveljavitev zahteva isto vsebino kot predogled in je vse ali nič. Če se je evidenca od predogleda spremenila tako, da bi uveljavitev izvedla drugačne operacije, je serija zavrnjena (`preview_stale`) in je potreben nov predogled. Serija je med uveljavitvijo zaklenjena; ponovna ali sočasna uveljavitev ne uspe.
+`UPORABNIK` je račun osebe z vlogo `office` ali `admin`; vlogi `admin` in `office` lahko z uvozom na novo dodeli samo uvoznik z vlogo `admin` (ponovni uvoz že dodeljene vloge je dovoljen). Predogled nič ne spremeni; uveljavitev zahteva isto vsebino kot predogled in je vse ali nič. Če se je evidenca od predogleda spremenila tako, da bi uveljavitev izvedla drugačne operacije, je serija zavrnjena (`preview_stale`) in je potreben nov predogled. Serija je med uveljavitvijo zaklenjena; ponovna ali sočasna uveljavitev ne uspe.
 
 - Napaka (neznana referenca, neveljaven datum ali šifrant, podvojen ključ) zavrne celotno serijo.
 - Ponovni uvoz ne podvoji oseb; manjkajoča vrstica ne izbriše in ne odvzame ničesar.
