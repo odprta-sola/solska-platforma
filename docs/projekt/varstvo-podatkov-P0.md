@@ -64,7 +64,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 | Pravica do popravka (čl. 16) | Popravek kontakta na zaslonu obstaja; uvoz je vir resnice | izvedeno delno |
 | Pravica do izbrisa in omejitve (čl. 17, 18) | Ni postopka; razmerje do hrambe zgodovine odločitev določi D07 | DPO |
 | Sled vpogledov (čl. 5(2)) | Izvedena za zaslone evidence (`AccessAudit`). Ne beležita se seznam oseb z iskanjem (imena in vloge do 50 oseb na stran) in skrbniški vmesnik Django `/admin/`, ki naj ostane le za tehnično vzdrževanje; rok hrambe sledi ni določen | D07; tehnično ob odločitvi |
-| Kršitve (čl. 33, 34) | SECURITY.md ureja ranljivosti, ne pa obveščanja Informacijskega pooblaščenca v 72 urah | šola, nosilec (D14) |
+| Kršitve (čl. 33, 34) | Osnutek postopka je v [SECURITY.md](../../SECURITY.md#kršitev-varstva-osebnih-podatkov) (vloge, 72 ur, zajezitev, ocena, obvestila, evidenca). Odprto: potrditev šole in DPO, kontaktna oseba šole, predloga obvestila in evidence kršitev | šola, DPO, nosilec (D14) |
 | Obdelovalci in prenosi (čl. 28, 44) | Gostovanje in e-pošta nista izbrana; prenos v tretje države ni predviden, a ni preverjen | D04 |
 | Mladoletni | Starostna meja 15 let za privolitev pri storitvah informacijske družbe (ZVOP-2) se uporabi le, če je podlaga privolitev | DPO (D16) |
 | Varnost v produkciji | HTTPS/HSTS, šifrirane varnostne kopije, ločitev okolij, dnevniki strežnika | D04 |
@@ -74,7 +74,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 1. Sled vpogledov: zapis, kdo je odprl podrobnosti osebe ali predogled uvoza (brez vsebine). Izvedeno (`AccessAudit`).
 2. Izvoz podatkov ene osebe za odgovor na zahtevo po dostopu. Izvedeno (`registry/export.py`, gumb »Prenesi vse podatke osebe« na strani osebe).
 3. Mehanizem rokov hrambe (seje, zaključeni zapisi), z dejanskimi roki iz D07; čiščenje potekle vsebine po vzoru `purge_import_uploads`. Za posnetke občinstva je izvedeno (`purge_audience_snapshots`).
-4. Dopolnitev SECURITY.md s postopkom ob kršitvi varstva podatkov.
+4. Dopolnitev SECURITY.md s postopkom ob kršitvi varstva podatkov. Osnutek izveden; potrdita ga šola in DPO.
 
 ## 6. Vprašanja za DPO
 
@@ -83,7 +83,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 3. Roki hrambe: povezave in upravičenja po zaključku, sled sprememb, sled vpogledov, posnetki občinstva, obvestila in potrditve (M1), odločitve in soglasja z zgodovino (M2), računi po izstopu iz šole.
 4. Ali ima učenec, ki dopolni 15 oziroma 18 let, lastne pravice v obrazcih, in kako to vpliva na prejemnike (D16)?
 5. Pogoji za gostitelja in ponudnika e-pošte (lokacija, pogodba, varnostne kopije).
-6. Kdo v šoli odgovarja na zahteve posameznikov in v kakšnem roku?
+6. Kdo v šoli odgovarja na zahteve posameznikov in v kakšnem roku ter kdo sprejema prijave kršitev in vodi njihovo evidenco (postopek v SECURITY.md)?
 7. Ali so izvorni ključi iz šolskega informacijskega sistema primerni ali jih je treba psevdonimizirati?
 8. Ali naj izvoz za zahtevo po dostopu vsebuje imena zaposlenih, ki so podatke spreminjali ali gledali? Zdaj jih ne vsebuje (samo čas, dejanje, zaslon in vir), pri lastnih dejanjih zaposlenega pa so izpuščeni sklici na druge osebe.
 
