@@ -1,6 +1,6 @@
 # D12: paket za odločitev (sestanek z mentorji)
 
-Status: predlog za sestanek, 12. november 2026. Ni odločitev. Pripravil Claude (Anthropic) po navodilih pobudnika; potrdita skupni tehnični nosilec in mentorji ([register](odlocitve.md)). Podrobna razlaga točk C01 do C16 je v [pripravi odločitev](priprava-odlocitev-D03-D09-D12-D14.md#d12-seznam-odločitev-in-nasprotnih-primerov), kanonični osnutek v [pogodbi](../arhitektura/vmesnik-P0-M1-M2.md) in [OpenAPI](../../api/openapi.yaml). Ta paket doda stanje izvedbe po prvem neodvisnem pregledu (`main` = `184c8f9`) in loči, kaj je treba odločiti **pred začetkom dela ekip** in kaj šele **pred integracijo** (mejnik I).
+Status: točke A je 12. 11. 2026 sprejel skupni tehnični nosilec (pobudnik) in so izvedene v P0; **potrditev mentorjev obeh ekip je odprta**, pogodba se zamrzne kot `1.0.0` šele po njej. Točke B ostajajo predlog. Pripravil Claude (Anthropic) po navodilih pobudnika; potrdita skupni tehnični nosilec in mentorji ([register](odlocitve.md)). Podrobna razlaga točk C01 do C16 je v [pripravi odločitev](priprava-odlocitev-D03-D09-D12-D14.md#d12-seznam-odločitev-in-nasprotnih-primerov), kanonični osnutek v [pogodbi](../arhitektura/vmesnik-P0-M1-M2.md) in [OpenAPI](../../api/openapi.yaml). Ta paket doda stanje izvedbe po prvem neodvisnem pregledu (`main` = `184c8f9`) in loči, kaj je treba odločiti **pred začetkom dela ekip** in kaj šele **pred integracijo** (mejnik I).
 
 ## Zakaj zdaj
 

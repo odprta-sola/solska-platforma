@@ -12,8 +12,9 @@ Potek pregledanega obrazca od osnutka do odločitve in dovoljene spremembe: prip
 | --- | --- | --- |
 | M2 → P0 | `GET /p0/api/v1/me/relationships` | Lastne povezave in `scope_ref` za odločanje |
 | M2 → P0 | `POST /p0/api/v1/authorizations/check` | Pravica za dejanje (`m2.decide`) pred prikazom in oddajo |
-| M2 → M1 | `POST /m1/api/v1/delivery-requests` | Obvestila in opomniki; M2 kontaktov ne vidi |
-| M2 → M1 | `POST .../{id}/cancel` | Selektivni preklic nepotrebnih opomnikov |
+| M2 → P0 | `POST /p0/api/v1/audiences/resolve` | Ob objavi obrazca: posnetek občinstva z avtorjevo sejo; `audience_ref` se pošlje v dostavno zahtevo |
+| M2 → M1 | `POST /m1/api/v1/delivery-requests` | Obvestila in opomniki z `audience_ref`; M2 kontaktov ne vidi |
+| M2 → M1 | `POST .../{id}/cancel` | Selektivni preklic nepotrebnih opomnikov po `item_id` |
 | M1 → M2 | `POST /m2/api/v1/reminders/check` | Strežniška stran, ki jo mora izdelati M2: samo `REQUIRED` ali `NO_LONGER_REQUIRED` |
 
 Servisni žeton M2 potrebuje `m1.delivery` in `p0.authorizations.check`. Nadomestek (`p0/stubs/m2.py`) je referenca obnašanja `reminders/check`.

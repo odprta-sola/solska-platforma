@@ -15,6 +15,7 @@ from registry import authz, importer, services, uploads
 from registry import models as m
 
 from .test_import import SRC, load
+from .test_varovala import audience_of, contact_for, staff_session
 from .test_zasloni import ScreenBase, csv_files
 
 WAIT = 10  # zgornja meja čakanja na dogodke (s); test ob preseku pade
@@ -240,6 +241,10 @@ class ConcurrentRevocationTests(TransactionTestCase):
         self.assert_scope_closed()
 
     def test_vse_stiri_poti_po_tekmi(self):
+        staff = self.person("staff-01")
+        author = staff_session(staff)
+        before = audience_of(author, staff)  # posnetek pred tekmo
+        _, token = services.create_service_client("m1", ["p0.contacts.resolve"])
         self.run_import_then_revoke(shifted("parent-02"), "relationship", self.p2, self.revoke_rel)
         account = m.Account.objects.create(username="p2-test", person=self.p2)
         client = Client()
@@ -254,32 +259,11 @@ class ConcurrentRevocationTests(TransactionTestCase):
             content_type="application/json",
         )
         self.assertEqual(r.json()["reason_code"], "NOT_ALLOWED")
-        _, token = services.create_service_client(
-            "m1", ["p0.audiences.resolve", "p0.contacts.resolve"]
-        )
-        auth = {"HTTP_AUTHORIZATION": f"Bearer {token}"}
-        staff = self.person("staff-01")
-        klass = m.StaffAssignment.objects.get(person=staff).school_class_id
-        r = Client().post(
-            "/p0/api/v1/audiences/resolve",
-            data=json.dumps(
-                {"author_id": str(staff.pk), "class_id": str(klass), "purpose": "notice"}
-            ),
-            content_type="application/json",
-            **auth,
-        )
-        pairs = {(x["person_id"], x["student_label"]) for x in r.json()["recipients"]}
+        after = audience_of(author, staff)
+        pairs = {(x["person_id"], x["student_label"]) for x in after["recipients"]}
         self.assertNotIn((str(self.p2.pk), "Učenec Testni 01"), pairs)
-        body = {"recipient_id": str(self.p2.pk), "scope_ref": ref.ref, "delivery_request_id": "d"}
-        post = lambda: Client().post(  # noqa: E731
-            "/p0/api/v1/delivery-contacts/resolve",
-            data=json.dumps(body),
-            content_type="application/json",
-            **auth,
-        )
-        self.assertEqual(post().status_code, 503)  # zapora do D12
-        with mock.patch("registry.api.delivery_binding_verified", return_value=True):
-            self.assertEqual(post().status_code, 403)
+        self.assertEqual(contact_for(before, self.p2, token).status_code, 403)
+        self.assertEqual(contact_for(before, self.p1, token).status_code, 200)
 
 
 class UploadExpiryTests(ScreenBase):

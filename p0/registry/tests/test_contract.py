@@ -7,7 +7,6 @@ Django odjemalca drugje niso samodejno preverjeni. To so testi osnutka, ne potrd
 
 import json
 from datetime import timedelta
-from unittest import mock
 
 from django.core.management import call_command
 from django.test import Client, TestCase
@@ -68,6 +67,20 @@ class ContractBase(TestCase):
         path = f"{P0}/me/relationships"
         data = check("get", path, self.session(username).get(path)).json()
         return {r["student_display_name"]: r["scopes"] for r in data["relationships"]}
+
+    def class_of(self, username):
+        return self.session(username).get(f"{P0}/me/classes").json()["classes"][0]["class_id"]
+
+    def audience(self, author="staff-01", purpose="notice"):
+        """Posnetek občinstva, ki ga ustvari prijavljeni avtor (seja)."""
+        r = self.call(
+            "post",
+            f"{P0}/audiences/resolve",
+            client=self.session(author),
+            body={"class_id": self.class_of(author), "purpose": purpose},
+        )
+        self.assertEqual(r.status_code, 200, r.content)
+        return r.json()
 
     def ref(self, username, student_name, permission="m1.confirm"):
         scopes = self.scope_refs(username)[student_name]
@@ -222,21 +235,19 @@ class AuthorizationCheckContract(ContractBase):
 
 
 class AudiencesContract(ContractBase):
-    def class_id(self, username):
-        return self.session(username).get(f"{P0}/me/classes").json()["classes"][0]["class_id"]
+    """Predogled občinstva: uporabniški klic avtorja (seja, CSRF), shrani posnetek (D12)."""
 
-    def resolve(self, author, class_id, purpose="notice", token=None):
+    def resolve(self, author, class_id, purpose="notice", client=None):
         return self.call(
             "post",
             f"{P0}/audiences/resolve",
-            token=token or self.t_m1,
-            body={"author_id": str(person_of(author).pk), "class_id": class_id, "purpose": purpose},
+            client=client or self.session(author),
+            body={"class_id": class_id, "purpose": purpose},
         )
 
     def test_avtor_dobi_prejemnike_svojega_oddelka(self):
-        r = self.resolve("staff-01", self.class_id("staff-01"))
+        r = self.resolve("staff-01", self.class_of("staff-01"))
         self.assertEqual(r.status_code, 200)
-        validate("AudienceResponse", r.json())
         labels = {x["display_label"] for x in r.json()["recipients"]}
         self.assertEqual(
             labels, {"Starš Testni 01", "Starš Testni 02", "Starš Testni 03", "Starš Testni 04"}
@@ -245,169 +256,156 @@ class AudiencesContract(ContractBase):
         self.assertNotIn("example.invalid", text)  # brez kontaktov
         self.assertNotIn("email", text)
 
+    def test_posnetek_je_shranjen_z_avtorjem_iz_seje(self):
+        r = self.resolve("staff-01", self.class_of("staff-01")).json()
+        snap = m.AudienceSnapshot.objects.get(ref=r["audience_ref"])
+        self.assertEqual(snap.author, person_of("staff-01"))
+        self.assertEqual(snap.permission, "acknowledge")
+        members = {(str(x.person_id), x.scope_ref) for x in snap.members.all()}
+        self.assertEqual(members, {(x["person_id"], x["scope_ref"]) for x in r["recipients"]})
+        self.assertGreater(snap.expires_at, timezone.now())
+
+    def test_avtorja_ni_mogoce_podtakniti(self):
+        body = {"author_id": str(person_of("staff-01").pk), "class_id": "1", "purpose": "notice"}
+        r = self.call("post", f"{P0}/audiences/resolve", client=self.session("staff-02"), body=body)
+        self.assertEqual(r.status_code, 400)  # dodatno polje
+
     def test_zaposleni_zunaj_oddelka_zavrnjen(self):
-        r = self.resolve("staff-02", self.class_id("staff-01"))
+        r = self.resolve("staff-02", self.class_of("staff-01"))
         self.assertEqual(r.status_code, 403)
-        validate("Error", r.json())
+        self.assertFalse(m.AudienceSnapshot.objects.exists())
 
     def test_obrazec_zahteva_drugo_dovoljenje(self):
-        r = self.resolve("staff-01", self.class_id("staff-01"), purpose="form")
+        r = self.resolve("staff-01", self.class_of("staff-01"), purpose="form")
         self.assertEqual(r.json()["recipients"], [])  # seed ima samo acknowledge
 
     def test_odvzeta_povezava_izpade_iz_predogleda(self):
         authz.revoke_relationship(m.Relationship.objects.get(guardian=person_of("parent-02")))
-        r = self.resolve("staff-01", self.class_id("staff-01"))
+        r = self.resolve("staff-01", self.class_of("staff-01"))
         self.assertNotIn("Starš Testni 02", {x["display_label"] for x in r.json()["recipients"]})
 
     def test_neznan_namen_ali_oddelek(self):
         self.assertEqual(
-            self.resolve("staff-01", self.class_id("staff-01"), "kaj").status_code, 400
+            self.resolve("staff-01", self.class_of("staff-01"), "kaj").status_code, 400
         )
         self.assertEqual(self.resolve("staff-01", "99999").status_code, 403)
         self.assertEqual(self.resolve("staff-01", "x").status_code, 403)
 
-    def test_brez_zetona_ali_dovoljenja(self):
-        body = {"author_id": "x", "class_id": "1", "purpose": "notice"}
+    def test_brez_seje_s_servisom_ali_brez_csrf(self):
+        body = {"class_id": "1", "purpose": "notice"}
         self.assertEqual(self.call("post", f"{P0}/audiences/resolve", body=body).status_code, 401)
-        self.assertEqual(
-            self.call("post", f"{P0}/audiences/resolve", token=self.t_m2b, body=body).status_code,
-            403,
-        )
+        r = self.call("post", f"{P0}/audiences/resolve", token=self.t_m1, body=body)
+        self.assertEqual(r.status_code, 401)  # servis ne more predogledati v imenu avtorja
+        self.assertEqual(self.resolve("parent-01", "1").status_code, 403)
+        client = Client(enforce_csrf_checks=True)
+        client.force_login(m.Account.objects.get(username="staff-01"))
+        r = self.call("post", f"{P0}/audiences/resolve", client=client, body=body)
+        self.assertEqual((r.status_code, r.json()["code"]), (403, "csrf_failed"))
 
 
 class ContactContract(ContractBase):
-    """Pravila upravičenosti ob simulirani preverjeni vezavi na dostavo (mehanizem: D12)."""
+    """Kontakt samo za prejemnika iz posnetka občinstva, z aktualnim upravičenjem (D12, C07)."""
 
     def setUp(self):
         super().setUp()
-        patcher = mock.patch("registry.api.delivery_binding_verified", return_value=True)
-        patcher.start()
-        self.addCleanup(patcher.stop)
+        self.aud = self.audience()
 
-    def contact(self, username, student, token=None, ref=None):
-        ref = ref or self.ref(username, student)
+    def member(self, username):
+        pid = str(person_of(username).pk)
+        return next(x for x in self.aud["recipients"] if x["person_id"] == pid)
+
+    def contact(self, username=None, token=None, client=None, **over):
+        body = {"audience_ref": self.aud["audience_ref"]}
+        if username:
+            x = self.member(username)
+            body.update(recipient_id=x["person_id"], scope_ref=x["scope_ref"])
+        body.update(over)
         return self.call(
             "post",
             f"{P0}/delivery-contacts/resolve",
-            token=token or self.t_m1,
-            body={
-                "recipient_id": str(person_of(username).pk),
-                "scope_ref": ref,
-                "delivery_request_id": "dr_test",
-            },
-        )
-
-    def test_kontakt_za_upravicenega(self):
-        r = self.contact("parent-01", "Učenec Testni 01")
-        self.assertEqual(r.status_code, 200)
-        validate("ContactResponse", r.json())
-        self.assertEqual(r.json()["email"], "family01@example.invalid")
-
-    def test_odsoten_kontakt_je_ocitno_stanje(self):
-        r = self.contact("parent-04", "Učenec Testni 04")
-        self.assertEqual(r.json(), {"deliverable": False, "reason_code": "NO_CONTACT"})
-
-    def test_tuj_sklic_ali_odvzeta_povezava_zavrnjena(self):
-        tuj = self.ref("parent-01", "Učenec Testni 01")
-        r = self.contact("parent-03", "", ref=tuj)
-        self.assertEqual(r.status_code, 403)
-        validate("Error", r.json())
-        ref = self.ref("parent-02", "Učenec Testni 01")
-        authz.revoke_relationship(m.Relationship.objects.get(guardian=person_of("parent-02")))
-        self.assertEqual(self.contact("parent-02", "", ref=ref).status_code, 403)
-
-    def test_samo_pooblascena_storitev(self):
-        self.assertEqual(
-            self.contact("parent-01", "Učenec Testni 01", token=self.t_m2).status_code, 403
-        )
-        body = {"recipient_id": "x", "scope_ref": "y", "delivery_request_id": "z"}
-        # seja ni dovolj
-        client = self.session("staff-01")
-        self.assertEqual(
-            self.call(
-                "post", f"{P0}/delivery-contacts/resolve", client=client, body=body
-            ).status_code,
-            401,
-        )
-
-    def test_ugibanje_ne_razkrije_kontaktov(self):
-        for bad in ("sr_a", "", "x"):
-            r = self.call(
-                "post",
-                f"{P0}/delivery-contacts/resolve",
-                token=self.t_m1,
-                body={
-                    "recipient_id": str(person_of("parent-01").pk),
-                    "scope_ref": bad,
-                    "delivery_request_id": "dr",
-                },
-            )
-            self.assertIn(r.status_code, (400, 403))
-            self.assertNotIn("example.invalid", r.content.decode())
-
-
-class ContactBindingContract(ContractBase):
-    """Brez preverljive vezave na dostavo P0 kontakta ne vrne, ne glede na vhod."""
-
-    def resolve(self, body, token=None, client=None):
-        return self.call(
-            "post",
-            f"{P0}/delivery-contacts/resolve",
-            token=token if client is None else None,
+            token=None if client else (token or self.t_m1),
             client=client,
             body=body,
         )
 
-    def body(self, username="parent-01", student="Učenec Testni 01", request_id="dr_x"):
-        return {
-            "recipient_id": str(person_of(username).pk),
-            "scope_ref": self.ref(username, student),
-            "delivery_request_id": request_id,
-        }
-
-    def assert_no_contact(self, r, status):
+    def assert_denied(self, r, status=403):
         self.assertEqual(r.status_code, status)
-        self.assertEqual(r["Content-Type"], "application/json")
         validate("Error", r.json())
         self.assertNotIn("example.invalid", r.content.decode())
-        self.assertNotIn("email", r.json())
 
-    def test_veljaven_prejemnik_brez_preverjene_vezave(self):
-        for rid in ("dr_x", "dr_" + "0" * 16, "x"):
-            self.assert_no_contact(self.resolve(self.body(request_id=rid), self.t_m1), 503)
+    def test_kontakt_za_prejemnika_iz_posnetka(self):
+        r = self.contact("parent-01")
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.json()["email"], "family01@example.invalid")
+        self.assertEqual(r.json()["locale"], "sl")
 
-    def test_odsoten_kontakt_ni_razkrit_pred_preverjanjem(self):
-        r = self.resolve(self.body("parent-04", "Učenec Testni 04"), self.t_m1)
-        self.assert_no_contact(r, 503)
+    def test_odsoten_kontakt_je_ocitno_stanje(self):
+        r = self.contact("parent-04")
+        self.assertEqual(r.json(), {"deliverable": False, "reason_code": "NO_CONTACT"})
 
-    def test_tuj_in_neobstojec_sklic_enak_odgovor(self):
-        tuj = self.body()
-        tuj["recipient_id"] = str(person_of("parent-03").pk)
-        neobstojec = {**self.body(), "scope_ref": "sr_ugibam"}
-        a, b = self.resolve(tuj, self.t_m1), self.resolve(neobstojec, self.t_m1)
-        self.assert_no_contact(a, 503)
-        self.assert_no_contact(b, 503)
-        self.assertEqual(a.json()["code"], b.json()["code"])
+    def test_brez_posnetka_ali_s_tujim_posnetkom(self):
+        self.assert_denied(self.contact("parent-01", audience_ref="au_ugibam"))
+        other = self.audience("staff-02")  # drug oddelek, drug posnetek
+        theirs = {(r["person_id"], r["scope_ref"]) for r in other["recipients"]}
+        x = next(
+            r for r in self.aud["recipients"] if (r["person_id"], r["scope_ref"]) not in theirs
+        )
+        r = self.contact(
+            audience_ref=other["audience_ref"],
+            recipient_id=x["person_id"],
+            scope_ref=x["scope_ref"],
+        )
+        self.assert_denied(r)
 
-    def test_odvzem_pred_razresitvijo(self):
-        body = self.body("parent-02", "Učenec Testni 01")
+    def test_tuj_in_neobstojec_prejemnik_ali_sklic_enak_odgovor(self):
+        x = self.member("parent-01")
+        a = self.contact(recipient_id=str(person_of("staff-03").pk), scope_ref=x["scope_ref"])
+        b = self.contact(recipient_id=x["person_id"], scope_ref="sr_ugibam")
+        c = self.contact(recipient_id="ni-uuid", scope_ref=x["scope_ref"])
+        for r in (a, b, c):
+            self.assert_denied(r)
+        self.assertEqual(
+            {a.json()["code"], b.json()["code"], c.json()["code"]}, {"scope_not_allowed"}
+        )
+
+    def test_potekel_posnetek(self):
+        m.AudienceSnapshot.objects.update(expires_at=timezone.now() - timedelta(seconds=1))
+        self.assert_denied(self.contact("parent-01"))
+
+    def test_odvzem_po_posnetku(self):
+        x = self.member("parent-02")
         authz.revoke_relationship(m.Relationship.objects.get(guardian=person_of("parent-02")))
-        self.assert_no_contact(self.resolve(body, self.t_m1), 503)
+        self.assert_denied(self.contact(recipient_id=x["person_id"], scope_ref=x["scope_ref"]))
 
-    def test_neupravicen_napacen_ali_neaktiven_zeton_in_seja(self):
-        body = self.body()
-        self.assert_no_contact(self.resolve(body, self.t_m2), 403)
-        self.assert_no_contact(self.resolve(body, "svc_napacen"), 401)
-        self.assert_no_contact(self.resolve(body, None), 401)
-        self.assert_no_contact(self.resolve(body, client=self.session("staff-01")), 401)
+    def test_upravicenje_mora_ustrezati_namenu_posnetka(self):
+        """Posnetek za seznanitev: odločanje (decide) ne zadošča za kontakt."""
+        p1 = person_of("parent-01")
+        grant = m.Grant.objects.get(person=p1, scope_key=f"student:{person_of('student-01').pk}")
+        m.Grant.objects.create(
+            person=p1,
+            scope_key=grant.scope_key,
+            permission="decide",
+            relationship=grant.relationship,
+            approval=grant.approval,
+            valid_from=grant.valid_from,
+        )
+        authz.revoke_grant(grant)
+        x = self.member("parent-01")
+        self.assert_denied(self.contact(recipient_id=x["person_id"], scope_ref=x["scope_ref"]))
+
+    def test_samo_pooblascena_storitev(self):
+        self.assert_denied(self.contact("parent-01", token=self.t_m2))
+        self.assert_denied(self.contact("parent-01", token="svc_napacen"), 401)
+        self.assert_denied(self.contact("parent-01", client=self.session("staff-01")), 401)
         m.ServiceClient.objects.filter(name="m1").update(active=False)
-        self.assert_no_contact(self.resolve(body, self.t_m1), 401)
+        self.assert_denied(self.contact("parent-01"), 401)
 
 
 def delivery_body(parent_refs, key="k1", expires_at=None, **over):
     body = {
         "idempotency_key": key,
         "kind": "reminder",
+        "audience_ref": "au_test",
         "recipients": [{"person_id": pid, "scope_ref": ref} for pid, ref in parent_refs],
         "template_id": "m2.pending-response.v1",
         "locale": "sl",
@@ -440,28 +438,54 @@ class DeliveryStubContract(ContractBase):
             body=delivery_body(self.refs, **kw),
         )
 
+    def items(self, response):
+        return {x["person_id"]: x["item_id"] for x in response.json()["recipients"]}
+
+    def cancel(self, rid, item_ids, token=None):
+        return self.call(
+            "post",
+            f"{M1}/delivery-requests/{rid}/cancel",
+            token=token or self.t_m2,
+            body={"item_ids": item_ids},
+        )
+
+    def advance(self, rid, item_id, new_state):
+        self.call(
+            "post",
+            f"{M1}/_stub/advance",
+            token=self.t_m2,
+            body={"delivery_request_id": rid, "item_id": item_id, "state": new_state},
+        )
+
     def test_prevzem_in_stanje(self):
         r = self.create()
         self.assertEqual(r.status_code, 202)
-        validate("DeliveryStatus", r.json())
         rid = r.json()["delivery_request_id"]
         g = self.call("get", f"{M1}/delivery-requests/{rid}", token=self.t_m2)
         self.assertEqual(g.status_code, 200)
-        validate("DeliveryStatus", g.json())
         self.assertEqual(g.json()["counts"], {"queued": 2})
+        self.assertEqual(len(set(self.items(g).values())), 2)
 
     def test_idempotenca_in_konflikt(self):
         a, b = self.create(), self.create()
         self.assertEqual(a.json()["delivery_request_id"], b.json()["delivery_request_id"])
+        self.assertEqual(self.items(a), self.items(b))
         c = self.create(template_id="drug")
         self.assertEqual(c.status_code, 409)
-        validate("Error", c.json())
 
     def test_zahtevane_in_neveljavne_vrednosti(self):
         body = delivery_body(self.refs)
         del body["expires_at"]
         self.assertEqual(
             self.call("post", f"{M1}/delivery-requests", token=self.t_m2, body=body).status_code,
+            400,
+        )
+        no_audience = delivery_body(self.refs, key="k1b")
+        del no_audience["audience_ref"]
+        self.assertEqual(
+            self.call(
+                "post", f"{M1}/delivery-requests", token=self.t_m2, body=no_audience
+            ).status_code,
             400,
         )
         past = (timezone.now() - timedelta(hours=1)).isoformat().replace("+00:00", "Z")
@@ -481,80 +505,42 @@ class DeliveryStubContract(ContractBase):
         self.assertEqual(self.call("get", f"{M1}/delivery-requests/{rid}").status_code, 401)
 
     def test_selektivni_preklic_in_delna_stanja(self):
-        rid = self.create().json()["delivery_request_id"]
-        self.call(
-            "post",
-            f"{M1}/_stub/advance",
-            token=self.t_m2,
-            body={"delivery_request_id": rid, "person_id": self.p2, "state": "handed_off"},
-        )
-        r = self.call(
-            "post",
-            f"{M1}/delivery-requests/{rid}/cancel",
-            token=self.t_m2,
-            body={"recipient_ids": [self.p1, self.p2]},
-        )
-        validate("CancelResponse", r.json())
-        results = {x["person_id"]: x for x in r.json()["recipients"]}
-        self.assertEqual(results[self.p1]["cancel_result"], "cancelled_now")
-        self.assertEqual(results[self.p2]["cancel_result"], "too_late")
-        self.assertEqual(results[self.p2]["state"], "handed_off")
-        again = self.call(
-            "post",
-            f"{M1}/delivery-requests/{rid}/cancel",
-            token=self.t_m2,
-            body={"recipient_ids": [self.p1]},
-        )
+        r = self.create()
+        rid, items = r.json()["delivery_request_id"], self.items(r)
+        self.advance(rid, items[self.p2], "handed_off")
+        res = self.cancel(rid, [items[self.p1], items[self.p2]])
+        results = {x["item_id"]: x for x in res.json()["recipients"]}
+        self.assertEqual(results[items[self.p1]]["cancel_result"], "cancelled_now")
+        self.assertEqual(results[items[self.p2]]["cancel_result"], "too_late")
+        self.assertEqual(results[items[self.p2]]["state"], "handed_off")
+        again = self.cancel(rid, [items[self.p1]])
         self.assertEqual(again.json()["recipients"][0]["cancel_result"], "already_cancelled")
 
     def test_preklic_enega_ne_ustavi_drugih(self):
-        rid = self.create().json()["delivery_request_id"]
-        self.call(
-            "post",
-            f"{M1}/delivery-requests/{rid}/cancel",
-            token=self.t_m2,
-            body={"recipient_ids": [self.p1]},
-        )
+        r = self.create()
+        rid, items = r.json()["delivery_request_id"], self.items(r)
+        self.cancel(rid, [items[self.p1]])
         counts = self.call("get", f"{M1}/delivery-requests/{rid}", token=self.t_m2).json()["counts"]
         self.assertEqual(counts, {"cancelled": 1, "queued": 1})
 
     def test_rocno_nastavljen_iztek_je_koncno_stanje(self):
         """Stanje expired nastavi _stub/advance; samodejni iztek ni preizkušen (ni ga)."""
-        rid = self.create().json()["delivery_request_id"]
-        self.call(
-            "post",
-            f"{M1}/_stub/advance",
-            token=self.t_m2,
-            body={"delivery_request_id": rid, "person_id": self.p1, "state": "expired"},
-        )
-        r = self.call(
-            "post",
-            f"{M1}/delivery-requests/{rid}/cancel",
-            token=self.t_m2,
-            body={"recipient_ids": [self.p1]},
-        )
-        self.assertEqual(r.json()["recipients"][0]["cancel_result"], "already_terminal")
-        self.assertEqual(r.json()["recipients"][0]["state"], "expired")
+        r = self.create()
+        rid, items = r.json()["delivery_request_id"], self.items(r)
+        self.advance(rid, items[self.p1], "expired")
+        res = self.cancel(rid, [items[self.p1]])
+        self.assertEqual(res.json()["recipients"][0]["cancel_result"], "already_terminal")
+        self.assertEqual(res.json()["recipients"][0]["state"], "expired")
 
-    def test_preklic_neznanega_prejemnika_in_prazen_izbor(self):
+    def test_preklic_neznane_postavke_in_prazen_izbor(self):
         rid = self.create().json()["delivery_request_id"]
-        url = f"{M1}/delivery-requests/{rid}/cancel"
-        self.assertEqual(
-            self.call("post", url, token=self.t_m2, body={"recipient_ids": ["nn"]}).status_code, 404
-        )
-        self.assertEqual(
-            self.call("post", url, token=self.t_m2, body={"recipient_ids": []}).status_code, 400
-        )
+        self.assertEqual(self.cancel(rid, ["di_nn"]).status_code, 404)
+        self.assertEqual(self.cancel(rid, []).status_code, 400)
 
     def test_preklic_tuje_zahteve_je_404(self):
-        rid = self.create().json()["delivery_request_id"]
-        r = self.call(
-            "post",
-            f"{M1}/delivery-requests/{rid}/cancel",
-            token=self.t_m2b,
-            body={"recipient_ids": [self.p1]},
-        )
-        self.assertEqual(r.status_code, 404)  # tuja zahteva
+        r = self.create()
+        rid, items = r.json()["delivery_request_id"], self.items(r)
+        self.assertEqual(self.cancel(rid, [items[self.p1]], token=self.t_m2b).status_code, 404)
 
 
 class ReminderCheckContract(ContractBase):

@@ -10,14 +10,14 @@ Celoten potek šolskega organizacijskega obvestila: učitelj objavi, upravičeni
 
 | Smer | Pot | Namen |
 | --- | --- | --- |
-| M1 → P0 | `POST /p0/api/v1/audiences/resolve` | Predogled prejemnikov oddelka za avtorja (vrne `scope_ref`, brez kontaktov) |
+| M1 → P0 | `POST /p0/api/v1/audiences/resolve` | Predogled prejemnikov oddelka z uporabnikovo sejo (CSRF); vrne `audience_ref` in `scope_ref`, brez kontaktov |
 | M1 → P0 | `POST /p0/api/v1/authorizations/check` | Pravica pred vpogledom, potrditvijo in dostavo |
-| M1 → P0 | `POST /p0/api/v1/delivery-contacts/resolve` | Kontakt tik pred pošiljanjem; samo M1 |
+| M1 → P0 | `POST /p0/api/v1/delivery-contacts/resolve` | Kontakt tik pred pošiljanjem za prejemnika iz posnetka (`audience_ref`); samo M1 |
 | M1 → M2 | `POST /m2/api/v1/reminders/check` | Ali je opomnik še potreben (`REQUIRED` / `NO_LONGER_REQUIRED`) |
 | M2 → M1 | `POST /m1/api/v1/delivery-requests` | Prevzem zahteve za dostavo; 202 šele po trajnem zapisu |
-| M2 → M1 | `GET .../{id}`, `POST .../{id}/cancel` | Stanje in selektivni preklic po prejemnikih |
+| M2 → M1 | `GET .../{id}`, `POST .../{id}/cancel` | Stanje in selektivni preklic po postavkah (`item_id` = oseba in obseg) |
 
-M1 mora izvajati strežniško stran `/m1/api/v1/` po shemi; nadomestek (`p0/stubs/m1.py`) je referenca obnašanja. Servisni žeton M1 potrebuje: `p0.audiences.resolve`, `p0.authorizations.check`, `p0.contacts.resolve`, `m2.reminders.check`.
+M1 mora izvajati strežniško stran `/m1/api/v1/` po shemi; nadomestek (`p0/stubs/m1.py`) je referenca obnašanja. Servisni žeton M1 potrebuje: `p0.authorizations.check`, `p0.contacts.resolve`, `m2.reminders.check`. Predogled občinstva gre prek seje prijavljenega avtorja, ne prek žetona.
 
 ## Predlog razreza po dijakih (mentor potrdi)
 
