@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
 from registry.api import json_body
+from registry.contract_schemas import valid_request
 from registry.services import error, service_only
 
 from . import state
@@ -16,10 +17,7 @@ from . import state
 @service_only("m2.reminders.check")
 def reminder_check(request, client):
     body = json_body(request)
-    if body is None or not all(
-        isinstance(body.get(k), str) and body.get(k)
-        for k in ("need_ref", "recipient_id", "scope_ref")
-    ):
+    if not valid_request("ReminderCheckRequest", body):
         return error(400, "invalid_request")
     if body["need_ref"] in state.NEEDS_DONE:
         return JsonResponse({"needed": False, "reason_code": "NO_LONGER_REQUIRED"})

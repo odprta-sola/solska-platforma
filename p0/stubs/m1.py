@@ -14,44 +14,31 @@ from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
 
 from registry.api import json_body
+from registry.contract_schemas import valid_request
 from registry.services import error, service_only
 
 from . import state
 
-KINDS = {"notification", "reminder", "receipt", "change_notice"}
-MAX_RECIPIENTS = 200  # predlog; končno mejo potrdi D12
 TERMINAL = {"handed_off", "failed", "cancelled", "expired"}
 
 
-def _is_str(v):
-    return isinstance(v, str) and bool(v)
-
-
-def _valid_request(body):
-    if not all(_is_str(body.get(k)) for k in ("idempotency_key", "template_id", "locale")):
-        return False
-    if body.get("kind") not in KINDS or not isinstance(body.get("params", {}), dict):
-        return False
-    recipients = body.get("recipients")
-    if not isinstance(recipients, list) or not 1 <= len(recipients) <= MAX_RECIPIENTS:
-        return False
-    for r in recipients:
-        if (
-            not isinstance(r, dict)
-            or not _is_str(r.get("person_id"))
-            or not _is_str(r.get("scope_ref"))
-        ):
-            return False
-    target = body.get("target")
-    if not isinstance(target, dict) or target.get("module") not in {"M1", "M2"}:
-        return False
-    if not _is_str(target.get("resource_id")):
-        return False
+def _expires(body):
+    """Rok dostave kot datum s časovnim pasom ali None."""
     try:
-        expires = datetime.fromisoformat(str(body.get("expires_at")).replace("Z", "+00:00"))
+        expires = datetime.fromisoformat(body["expires_at"].replace("Z", "+00:00"))
     except ValueError:
-        return False
-    return expires.tzinfo is not None and expires > timezone.now()
+        return None
+    return expires if expires.tzinfo is not None else None
+
+
+def _invalid(body):
+    """Koda napake neveljavne zahteve ali None. Pogoj roka preveri klicatelj."""
+    if not valid_request("DeliveryRequest", body) or _expires(body) is None:
+        return "invalid_request"
+    ids = [r["person_id"] for r in body["recipients"]]
+    if len(ids) != len(set(ids)):
+        return "duplicate_recipient"  # identiteta postavke ni določena v D12
+    return None
 
 
 def _view(record):
@@ -74,8 +61,9 @@ def _view(record):
 @service_only("m1.delivery")
 def create_delivery(request, client):
     body = json_body(request)
-    if body is None or not _valid_request(body):
-        return error(400, "invalid_request")
+    problem = _invalid(body)
+    if problem:
+        return error(400, problem)
     fingerprint = hashlib.sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
     key = (client.name, body["idempotency_key"])
     if key in state.IDEMPOTENCY:
@@ -83,6 +71,8 @@ def create_delivery(request, client):
         if old_fp != fingerprint:
             return error(409, "idempotency_conflict")
         return JsonResponse(_view(state.DELIVERIES[old_id]), status=202)
+    if _expires(body) <= timezone.now():
+        return error(400, "invalid_request")
     record = {
         "id": "dr_" + uuid.uuid4().hex[:16],
         "owner": client.name,
@@ -117,9 +107,9 @@ def cancel_delivery(request, client, delivery_request_id):
     if record is None:
         return error(404, "not_found")
     body = json_body(request)
-    ids = body.get("recipient_ids") if body else None
-    if not isinstance(ids, list) or not ids or not all(_is_str(i) for i in ids):
+    if not valid_request("CancelRequest", body):
         return error(400, "invalid_request")
+    ids = body["recipient_ids"]
     if any(i not in record["recipients"] for i in ids):
         return error(404, "not_found")
     results = []
