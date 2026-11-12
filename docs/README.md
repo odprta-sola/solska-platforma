@@ -9,7 +9,7 @@ Datum usmeritve: 13. oktober 2026. Dokumenti so delovni predlogi, razen izrecno 
 | Prvi mentorski in šolski pogovor | [Predstavitev projekta](mentorji/predstavitev-projekta.md) in [spremni sporočili](mentorji/prvi-pogovor.md) |
 | Ocena obsega, individualnih izdelkov in faz | [Razvojno naročilo](projekt/razvojno-narocilo-P0-M1-M2.md) |
 | Model, API, pravila in 20 skupin preizkusov | [Kratka tehnična specifikacija](arhitektura/kratka-specifikacija-P0-M1-M2.md) |
-| Pogodbeni dogovor pred implementacijo | [Stalni osnutek D12](arhitektura/vmesnik-P0-M1-M2.md) |
+| Pogodbeni dogovor pred implementacijo | [Stalni osnutek D12](arhitektura/vmesnik-P0-M1-M2.md) in [paket za odločitev](projekt/d12-paket-za-odlocitev.md) |
 | Priprava in prevzem skupne osnove | [Načrt P0/T](projekt/priprava-referencnega-P0.md) |
 | Razvijalci modulov M1 in M2 | [Navodila](razvijalci/README.md), [ekipa M1](razvijalci/ekipa-M1.md), [ekipa M2](razvijalci/ekipa-M2.md) |
 | Pregled in stanje paketa T | [Kontrolni seznam pregleda](projekt/pregled-P0-kontrolni-seznam.md) in [stanje prevzema T](projekt/stanje-prevzema-T.md) |
