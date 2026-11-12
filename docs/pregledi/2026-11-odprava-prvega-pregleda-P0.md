@@ -7,7 +7,7 @@ Status: osnutek, 12. november 2026. Ta zapis ne spreminja izvirnih poročil preg
 | Podatek | Vrednost |
 | --- | --- |
 | Izhodišče | `main` = `e854f60c7f2e9918b09f0b7db0108c6ab8f62b8f` |
-| Popravki | lokalne veje; ob objavi se commiti ponovno zložijo, zato se SHA spremenijo in se tu posodobijo |
+| Popravki | zasebni: `07e421b` (prek nasveta GHSA-8h4f-w469-mr34); javni: PR #41, #42, #43 in ta PR; poročili pregledovalcev: PR #39, #40 |
 | Izvedel | Claude (Anthropic), model Claude Opus 5.5, po navodilih pobudnika |
 | Odgovorni človek | Mitja Pirih; sprejem tega zapisa še ni potrjen |
 | Okolje preverjanja | izolirana PostgreSQL 16 in slika iz `p0/Dockerfile` (Python 3.12, Django 5.2.19, django-allauth 65.22.0); ločeno od okolij pregledovalcev, po koncu odstranjeno |
@@ -22,10 +22,10 @@ Tri visoke (poročilo OpenAI) in ena srednja (dodatno ugotovljena ob preverjanju
 
 | ID | Resnost | Ugotovitev | Odprava | Dokaz |
 | --- | --- | --- | --- | --- |
-| S-01 | visoka | Kontakt je bil dosegljiv brez obstoječe dostavne zahteve | klic začasno zaprt (503) do D12 | `ContactBindingContract` |
-| S-02 | visoka | Uvoz z drugačnim začetkom veljavnosti je obnovil ročno odvzeto pravico | varovalo za poslovni obseg | `test_varovala.ImportRestrictionTests` |
-| S-03 | visoka, znana pred B | Obnova gesla prek skupnega e-naslova za vse račune s tem naslovom | samopostrežna obnova izklopljena | `test_varovala.PasswordRecoveryTests` |
-| S-04 | srednja | Tajništvo je z uvozom lahko dodelilo vlogo skrbnika ali tajništva | vlogi `admin` in `office` na novo dodeli samo skrbnik | `test_varovala.ImportRoleTests` |
+| [S-01](https://github.com/odprta-sola/solska-platforma/security/advisories/GHSA-h7jp-rfj3-89xr) | visoka | Kontakt je bil dosegljiv brez obstoječe dostavne zahteve | klic začasno zaprt (503) do D12 | `ContactBindingContract` |
+| [S-02](https://github.com/odprta-sola/solska-platforma/security/advisories/GHSA-8h4f-w469-mr34) | visoka | Uvoz z drugačnim začetkom veljavnosti je obnovil ročno odvzeto pravico | varovalo za poslovni obseg | `test_varovala.ImportRestrictionTests` |
+| [S-03](https://github.com/odprta-sola/solska-platforma/security/advisories/GHSA-gfrq-669g-95fq) | visoka, znana pred B | Obnova gesla prek skupnega e-naslova za vse račune s tem naslovom | samopostrežna obnova izklopljena | `test_varovala.PasswordRecoveryTests` |
+| [S-04](https://github.com/odprta-sola/solska-platforma/security/advisories/GHSA-42r3-qhw4-9xx2) | srednja | Tajništvo je z uvozom lahko dodelilo vlogo skrbnika ali tajništva | vlogi `admin` in `office` na novo dodeli samo skrbnik | `test_varovala.ImportRoleTests` |
 
 Preostanek: S-01 potrebuje odločitev D12 (predlog: vezava na posnetek občinstva, ki ga hrani P0, in avtor iz delegirane seje); S-03 potrebuje individualni postopek pred B.
 
