@@ -193,3 +193,41 @@ class ChangeAudit(models.Model):
 
     class Meta:
         ordering = ["-at"]
+
+
+class ImportBatch(models.Model):
+    """Ena serija uvoza CSV. Hrani povzetek in napake, ne vsebine osebnih podatkov."""
+
+    class Status(models.TextChoices):
+        PREVIEWED = "previewed", "Predogled"
+        REJECTED = "rejected", "Zavrnjeno (napake ali konflikti)"
+        APPLIED = "applied", "Uveljavljeno"
+        FAILED = "failed", "Neuspelo"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    source = models.CharField(max_length=64)
+    created_at = models.DateTimeField(default=timezone.now)
+    created_by = models.ForeignKey(
+        Person, null=True, on_delete=models.SET_NULL, related_name="import_batches"
+    )
+    content_hash = models.CharField(max_length=64)
+    status = models.CharField(max_length=16, choices=Status.choices)
+    counts = models.JSONField(default=dict)
+    problems = models.JSONField(default=list)  # napake in konflikti: datoteka, vrstica, koda
+    applied_at = models.DateTimeField(null=True, blank=True)
+    applied_by = models.ForeignKey(
+        Person, null=True, blank=True, on_delete=models.SET_NULL, related_name="applied_batches"
+    )
+
+    class Meta:
+        ordering = ["-created_at"]
+
+
+class ImportPreview(models.Model):
+    """Postavka predogleda: kaj bi se zgodilo. Brez vrednosti polj, samo imena spremenjenih polj."""
+
+    batch = models.ForeignKey(ImportBatch, on_delete=models.CASCADE, related_name="items")
+    entity_type = models.CharField(max_length=32)
+    source_key = models.CharField(max_length=256)
+    action = models.CharField(max_length=16)  # create | update | unchanged
+    changed_fields = models.JSONField(default=list)

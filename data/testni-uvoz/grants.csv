@@ -1,0 +1,5 @@
+source_person_key;scope_key;permission;valid_from;valid_until;approval_ref
+parent-01;student:student-01;acknowledge;2026-09-01T00:00:00Z;;testni-uvoz-potrditev
+parent-01;student:student-02;acknowledge;2026-09-01T00:00:00Z;;testni-uvoz-potrditev
+parent-02;student:student-01;acknowledge;2026-09-01T00:00:00Z;;testni-uvoz-potrditev
+parent-04;student:student-04;acknowledge;2026-09-01T00:00:00Z;;testni-uvoz-potrditev

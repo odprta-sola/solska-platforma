@@ -1,6 +1,6 @@
 # Navodila za razvijalce
 
-Status: osnutek, faza 3 (ogrodje, model, prijava in uporabniški API P0). Uvoz CSV in pogodbe M1/M2 sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
+Status: osnutek, faza 4 (ogrodje, model, prijava, API in uvoz CSV P0). Pogodbe M1/M2 (D12) sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Pravila
 
@@ -61,6 +61,25 @@ Znana omejitev: aktivacija in obnova gesla za račune s skupnim predalom še nis
 | `POST /p0/api/v1/authorizations/check` | Telo `{"scope_key", "permission"}`; preveri lastno aktualno upravičenje, odgovor `{"allowed", "reason"}` |
 
 Pravice se odločajo samo v `registry/authz.py`. Povezava sama ne dovoli dejanja; odvzem povezave ali upravičenja prevlada. Preverjanje za drugo osebo in servisna identiteta še nista narejena (D12). Poti še niso zapisane v OpenAPI.
+
+## Uvoz CSV
+
+Format: mapa z datotekami `classes`, `persons`, `roles`, `students`, `memberships`, `relationships`, `staff_assignments`, `grants` (`.csv`; UTF-8, ločilo `;`, datumi ISO 8601 s časovnim pasom). Primer: [data/testni-uvoz](data/testni-uvoz). Dve stopnji, brez izjem:
+
+```bash
+cd p0
+python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNIK   # predogled
+python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNIK --apply-batch ID
+```
+
+`UPORABNIK` je račun osebe z vlogo `office` ali `admin`. Predogled nič ne spremeni; uveljavitev zahteva isto vsebino kot predogled in je vse ali nič.
+
+- Napaka (neznana referenca, neveljaven datum ali šifrant, podvojen ključ) zavrne celotno serijo.
+- Ponovni uvoz ne podvoji oseb; manjkajoča vrstica ne izbriše in ne odvzame ničesar.
+- Starejši uvoz ne obnovi povezave ali upravičenja, ki jo je pooblaščena oseba ročno odvzela (`authz.revoke_*`): to je konflikt in serija se zavrne.
+- Gesla niso del uvoza. Predogled hrani samo imena spremenjenih polj.
+
+Predlog, ki ga mora potrditi D12: datoteka `classes` ni v prvotnem formatu, a oddelki morajo nekje nastati; šifrant dovoljenj je za zdaj `acknowledge`, `decide`; obseg upravičenj je `student:<source_student_key>`. Delni uvoz in popolna uskladitev (zaključki veljavnosti) nista narejena.
 
 ## Preverjanja pred pull requestom
 

@@ -1,0 +1,4 @@
+source_student_key;class_key;school_year;valid_from;valid_until
+student-01;razred-7a;2026/2027;2026-09-01T00:00:00Z;
+student-02;razred-8b;2026/2027;2026-09-01T00:00:00Z;
+student-04;razred-7a;2026/2027;2026-09-01T00:00:00Z;
