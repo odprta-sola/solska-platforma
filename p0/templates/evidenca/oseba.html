@@ -11,6 +11,11 @@
     <dt>Jezik</dt><dd>{{ person.preferred_language }}</dd>
   </dl>
   <p><a href="{% url 'ui-contact' person.pk %}">Popravi kontakt</a></p>
+  <form method="post" action="{% url 'ui-person-export' person.pk %}">
+    {% csrf_token %}
+    <p><button type="submit" aria-describedby="izvoz-opis">Prenesi vse podatke osebe (JSON)</button></p>
+    <p id="izvoz-opis">Za odgovor na zahtevo po dostopu. Prenos se zabeleži v sledi vpogledov.</p>
+  </form>
 
   <h2>Povezave z učenci</h2>
   <div class="tablewrap" role="region" tabindex="0" aria-label="Povezave z učenci (tabela)"><table>

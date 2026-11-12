@@ -7,6 +7,7 @@ urlpatterns = [
     path("evidenca/osebe/", ui.persons, name="ui-persons"),
     path("evidenca/osebe/<uuid:person_id>/", ui.person_detail, name="ui-person"),
     path("evidenca/osebe/<uuid:person_id>/kontakt/", ui.contact, name="ui-contact"),
+    path("evidenca/osebe/<uuid:person_id>/izvoz/", ui.person_export, name="ui-person-export"),
     path(
         "evidenca/osebe/<uuid:person_id>/povezave/<int:rel_id>/odvzem/",
         ui.revoke_relationship,

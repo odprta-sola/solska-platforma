@@ -12,11 +12,12 @@ from django.contrib.auth.views import redirect_to_login
 from django.core.paginator import Paginator
 from django.db import transaction
 from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_http_methods, require_POST
 
-from . import authz, importer, uploads
+from . import authz, export, importer, uploads
 from . import models as m
 from .forms import ContactForm, ImportForm, SearchForm
 
@@ -146,6 +147,23 @@ def person_detail(request, actor, person_id):
             "audit": audit,
         },
     )
+
+
+@require_POST
+@staff_required
+def person_export(request, actor, person_id):
+    """Prenos vseh podatkov osebe v JSON (zahteva po dostopu). Zapis v sled pred izvozom."""
+    person = get_object_or_404(m.Person, pk=person_id)
+    record_view(actor, "izvoz", "person", person.pk)
+    now = timezone.now()
+    response = JsonResponse(
+        export.person_export(person, now),
+        json_dumps_params={"ensure_ascii": False, "indent": 2},
+    )
+    name = f"izvoz-osebe-{person.pk}-{now:%Y%m%d}.json"
+    response["Content-Disposition"] = f'attachment; filename="{name}"'
+    response["Cache-Control"] = "no-store"
+    return response
 
 
 def _not_ended(manager):
