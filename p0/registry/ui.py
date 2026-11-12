@@ -26,6 +26,13 @@ PERMISSION_LABELS = {"acknowledge": "seznanitev (M1)", "decide": "odločanje (M2
 SCREEN_SOURCE = "zaslon"  # vir v sledi; ni "import:", zato šteje kot ročna sprememba
 
 
+def record_view(actor, screen, entity_type, entity_id):
+    """Zapiše vpogled v sled (AccessAudit) pred prikazom podatkov."""
+    m.AccessAudit.objects.create(
+        actor=actor, screen=screen, entity_type=entity_type, entity_id=str(entity_id)
+    )
+
+
 def is_staff(user):
     person = getattr(user, "person", None) if user.is_authenticated else None
     return bool(person) and person.roles.filter(role__in=STAFF_ROLES).exists()
@@ -97,6 +104,7 @@ def _grant_state(grant, active, active_relationships, now=None):
 @staff_required
 def person_detail(request, actor, person_id):
     person = get_object_or_404(m.Person, pk=person_id)
+    record_view(actor, "oseba", "person", person.pk)
     now = timezone.now()
     active_rel = set(m.Relationship.objects.active(now).values_list("pk", flat=True))
     active_grant = set(
@@ -146,6 +154,7 @@ def _not_ended(manager):
 
 
 def _revoke(request, actor, person, obj, kind, label, revoke):
+    record_view(actor, f"odvzem:{obj._meta.model_name}", "person", person.pk)
     if request.method == "POST":
         revoke(obj, actor=actor, source=SCREEN_SOURCE)
         messages.success(request, f"Odvzem je izveden: {label}. Sprememba je zabeležena v sledi.")
@@ -185,6 +194,7 @@ def revoke_grant(request, actor, person_id, grant_id):
 @staff_required
 def contact(request, actor, person_id):
     person = get_object_or_404(m.Person, pk=person_id)
+    record_view(actor, "kontakt", "person", person.pk)
     form = ContactForm(request.POST or None, instance=person)
     if request.method == "POST" and form.is_valid():
         if form.has_changed():
@@ -256,6 +266,7 @@ def import_index(request, actor):
 @staff_required
 def import_batch(request, actor, batch_id):
     batch = get_object_or_404(m.ImportBatch, pk=batch_id)
+    record_view(actor, "uvoz", "import_batch", batch.pk)
     _expire(batch)
     items = batch.items.order_by("pk")
     only_changes = request.GET.get("samo") == "spremembe"

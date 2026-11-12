@@ -18,3 +18,21 @@ for m in (
 ):
     admin.site.register(m)
 admin.site.register(models.ChangeAudit)
+
+
+@admin.register(models.AccessAudit)
+class AccessAuditAdmin(admin.ModelAdmin):
+    """Sled vpogledov je samo za branje: ni dodajanja, urejanja ali brisanja."""
+
+    list_display = ("at", "actor", "screen", "entity_type", "entity_id")
+    list_filter = ("screen", "entity_type")
+    search_fields = ("entity_id",)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

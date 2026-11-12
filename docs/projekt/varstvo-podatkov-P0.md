@@ -28,6 +28,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 | Neprosojni sklici na obseg | starši | da moduli ne uporabljajo ID otrok | `ScopeRef` |
 | Posnetek občinstva (avtor, oddelek, namen, prejemniki) | zaposleni, starši | vezava kontakta na dostavo (D12) | `AudienceSnapshot`, `AudienceMember` (30 dni, predlog) |
 | Sled sprememb: kdo, kaj, kdaj, imena polj (brez vrednosti) | vsi | odgovornost, sledljivost | `ChangeAudit` |
+| Sled vpogledov: kdo je kdaj odprl kateri zaslon osebe ali predogled uvoza (brez vsebine, iskalnega niza, IP) | zaposleni (tajništvo, skrbnik), osebe v evidenci | odgovornost (čl. 5(2)) | `AccessAudit` |
 | Izvorni ključi uvoza | vsi | ponovljiv uvoz | `SourceMapping` (ključi morajo biti neosebni, ne EMŠO) |
 | Povzetek uvoza in postavke predogleda | vsi (ključi) | pregled pred uveljavitvijo | `ImportBatch`, `ImportPreview` |
 | Začasne datoteke CSV z imeni in e-naslovi | vsi v uvozu | uveljavitev predogleda | `ImportUpload` (največ 24 ur) |
@@ -44,6 +45,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 - **Dostop po vlogah:** zasloni evidence samo za tajništvo in skrbnika; vloge `admin` in `office` dodeli z uvozom le skrbnik.
 - Odvzem povezave ali upravičenja prevlada takoj in ga uvoz ne obnovi.
 - Sled sprememb brez starih in novih vrednosti; predogled uvoza hrani imena polj, ne vrednosti.
+- Sled vpogledov: vsak prikaz podrobnosti osebe, obrazca kontakta, potrditve odvzema in predogleda uvoza se zapiše pred prikazom (brez zapisa ni prikaza); sled je v skrbniškem vmesniku samo za branje.
 - Začasne datoteke uvoza: nedostopne po 24 urah, izbrisane najpozneje po 25 urah (samodejno).
 - Posnetki občinstva: neuporabni ob izteku (30 dni, predlog), s člani izbrisani najpozneje uro pozneje (samodejno, `purge_audience_snapshots`).
 - Napake ne razkrivajo tehničnih podrobnosti ali obstoja tujih podatkov.
@@ -61,7 +63,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 | Pravica dostopa in prenosljivosti (čl. 15, 20) | Ni izvoza podatkov posamezne osebe | tehnično (predlog spodaj) |
 | Pravica do popravka (čl. 16) | Popravek kontakta na zaslonu obstaja; uvoz je vir resnice | izvedeno delno |
 | Pravica do izbrisa in omejitve (čl. 17, 18) | Ni postopka; razmerje do hrambe zgodovine odločitev določi D07 | DPO |
-| Sled vpogledov (čl. 5(2)) | Beležijo se spremembe, **ne beleži pa se, kdo je odprl podatke osebe** na zaslonih evidence | tehnično (predlog spodaj) |
+| Sled vpogledov (čl. 5(2)) | Izvedena za zaslone evidence (`AccessAudit`). Ne beležita se seznam oseb z iskanjem (imena in vloge do 50 oseb na stran) in skrbniški vmesnik Django `/admin/`, ki naj ostane le za tehnično vzdrževanje; rok hrambe sledi ni določen | D07; tehnično ob odločitvi |
 | Kršitve (čl. 33, 34) | SECURITY.md ureja ranljivosti, ne pa obveščanja Informacijskega pooblaščenca v 72 urah | šola, nosilec (D14) |
 | Obdelovalci in prenosi (čl. 28, 44) | Gostovanje in e-pošta nista izbrana; prenos v tretje države ni predviden, a ni preverjen | D04 |
 | Mladoletni | Starostna meja 15 let za privolitev pri storitvah informacijske družbe (ZVOP-2) se uporabi le, če je podlaga privolitev | DPO (D16) |
@@ -69,7 +71,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 
 ## 5. Predlagane tehnične dopolnitve (ne potrebujejo čakanja na DPO)
 
-1. Sled vpogledov: zapis, kdo je odprl podrobnosti osebe ali predogled uvoza (brez vsebine).
+1. Sled vpogledov: zapis, kdo je odprl podrobnosti osebe ali predogled uvoza (brez vsebine). Izvedeno (`AccessAudit`).
 2. Izvoz podatkov ene osebe za odgovor na zahtevo po dostopu.
 3. Mehanizem rokov hrambe (seje, zaključeni zapisi), z dejanskimi roki iz D07; čiščenje potekle vsebine po vzoru `purge_import_uploads`. Za posnetke občinstva je izvedeno (`purge_audience_snapshots`).
 4. Dopolnitev SECURITY.md s postopkom ob kršitvi varstva podatkov.
@@ -78,7 +80,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 
 1. Katera pravna podlaga velja za obveščanje (M1) in katera za posamezne vrste obrazcev (M2)?
 2. Ali je potrebna ocena učinka in kdo jo pripravi?
-3. Roki hrambe: povezave in upravičenja po zaključku, sled sprememb, posnetki občinstva, obvestila in potrditve (M1), odločitve in soglasja z zgodovino (M2), računi po izstopu iz šole.
+3. Roki hrambe: povezave in upravičenja po zaključku, sled sprememb, sled vpogledov, posnetki občinstva, obvestila in potrditve (M1), odločitve in soglasja z zgodovino (M2), računi po izstopu iz šole.
 4. Ali ima učenec, ki dopolni 15 oziroma 18 let, lastne pravice v obrazcih, in kako to vpliva na prejemnike (D16)?
 5. Pogoji za gostitelja in ponudnika e-pošte (lokacija, pogodba, varnostne kopije).
 6. Kdo v šoli odgovarja na zahteve posameznikov in v kakšnem roku?

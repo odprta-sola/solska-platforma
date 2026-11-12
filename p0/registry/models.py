@@ -195,6 +195,26 @@ class ChangeAudit(models.Model):
         ordering = ["-at"]
 
 
+class AccessAudit(models.Model):
+    """Sled vpogledov: kdo je na zaslonih evidence odprl podatke osebe ali predogled uvoza.
+
+    Hrani samo zaslon in sklic, nikoli prikazane vsebine, iskalnega niza, naslova IP ali
+    brskalnika. Zapis nastane pred prikazom; brez zapisa ni prikaza. Rok hrambe določi D07.
+    """
+
+    at = models.DateTimeField(default=timezone.now)
+    actor = models.ForeignKey(
+        Person, null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    )
+    screen = models.CharField(max_length=32)
+    entity_type = models.CharField(max_length=32)
+    entity_id = models.CharField(max_length=64)
+
+    class Meta:
+        ordering = ["-at"]
+        indexes = [models.Index(fields=["entity_type", "entity_id", "at"])]
+
+
 class ImportBatch(models.Model):
     """Ena serija uvoza CSV. Hrani povzetek in napake, ne vsebine osebnih podatkov."""
 
