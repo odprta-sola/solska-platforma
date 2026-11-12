@@ -4,8 +4,8 @@ extend-exclude = ["*/migrations"]
 
 [lint]
 select = ["E", "F", "I", "B", "DJ", "S"]
-ignore = ["S101"]
+ignore = ["S101", "DJ008"]  # DJ008: __str__ le tam, kjer je res potreben
 
 [lint.per-file-ignores]
 "config/settings.py" = ["S105"]
-"*/tests/*" = ["S105", "S106"]
+"*/tests/*" = ["S105", "S106", "E501"]

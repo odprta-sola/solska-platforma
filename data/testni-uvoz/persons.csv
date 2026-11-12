@@ -1,0 +1,9 @@
+source_person_key;display_name;contact_email
+staff-01;Učitelj Testni 01;staff01@example.invalid
+staff-03;Tajništvo Testno 03;staff03@example.invalid
+parent-01;Starš Testni 01;family01@example.invalid
+parent-02;Starš Testni 02;family01@example.invalid
+parent-04;Starš Testni 04;
+student-01;Učenec Testni 01;
+student-02;Učenec Testni 02;
+student-04;Učenec Testni 04;

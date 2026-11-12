@@ -19,13 +19,15 @@ services:
     ports: ["127.0.0.1:8025:8025", "127.0.0.1:1025:1025"]
 
   p0:
-    build: ./p0
-    command: python manage.py runserver 0.0.0.0:8000
+    build:
+      context: ./p0
+      args: {INSTALL_DEV: "1"}
+    command: sh -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
     environment:
       DJANGO_DEBUG: "1"
       POSTGRES_HOST: db
       EMAIL_HOST: mail
-    volumes: ["./p0:/app"]
+    volumes: ["./p0:/app", "./data:/data:ro", "./api:/api:ro"]
     ports: ["127.0.0.1:8000:8000"]
     depends_on:
       db: { condition: service_healthy }

@@ -11,6 +11,8 @@ Datum usmeritve: 13. oktober 2026. Dokumenti so delovni predlogi, razen izrecno 
 | Model, API, pravila in 20 skupin preizkusov | [Kratka tehnična specifikacija](arhitektura/kratka-specifikacija-P0-M1-M2.md) |
 | Pogodbeni dogovor pred implementacijo | [Stalni osnutek D12](arhitektura/vmesnik-P0-M1-M2.md) |
 | Priprava in prevzem skupne osnove | [Načrt P0/T](projekt/priprava-referencnega-P0.md) |
+| Razvijalci modulov M1 in M2 | [Navodila](razvijalci/README.md), [ekipa M1](razvijalci/ekipa-M1.md), [ekipa M2](razvijalci/ekipa-M2.md) |
+| Pregled in stanje paketa T | [Kontrolni seznam pregleda](projekt/pregled-P0-kontrolni-seznam.md) in [stanje prevzema T](projekt/stanje-prevzema-T.md) |
 | Potrditve in formalni pogoji | [Register odločitev](projekt/odlocitve.md) in [odgovornosti](projekt/odgovornosti.md) |
 
 Najprej razumemo namen in primere. Mentor oceni primernost, obseg in individualne izdelke; šola preveri postopke in pravila. Šele nato se z ustreznimi ljudmi dogovorijo izvedba, skrbništvo in varnostno nadomeščanje, pri čemer formalni pogoji veljajo pred prvo kodo. Nov splošni krog AI pregledov dolge priloge ni naslednji korak.

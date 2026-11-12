@@ -1,0 +1,5 @@
+source_person_key;source_student_key;relationship_type;valid_from;valid_until
+parent-01;student-01;parent;2026-09-01T00:00:00Z;
+parent-01;student-02;parent;2026-09-01T00:00:00Z;
+parent-02;student-01;parent;2026-09-01T00:00:00Z;
+parent-04;student-04;parent;2026-09-01T00:00:00Z;

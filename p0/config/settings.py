@@ -28,7 +28,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "allauth",
+    "allauth.account",
     "core",
+    "registry",
+    "stubs",
 ]
 
 MIDDLEWARE = [
@@ -38,8 +42,15 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# Nadomestka modulov (stubs): privzeto samo v razvoju. Ko ekipa vgradi pravi modul, ga
+# odstrani s seznama, npr. STUBS=m2 (nadomestek M1 izklopljen).
+STUBS = {x.strip() for x in env("STUBS", "m1,m2" if DEBUG else "").split(",") if x.strip()}
+
+AUTH_USER_MODEL = "registry.Account"
 
 ROOT_URLCONF = "config.urls"
 
@@ -70,6 +81,20 @@ DATABASES = {
         "PORT": env("POSTGRES_PORT", "5432"),
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+# Prijava s uporabniškim imenom: e-naslov ni identiteta in ni enoličen (skupni predal staršev).
+ACCOUNT_LOGIN_METHODS = {"username"}
+ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]
+ACCOUNT_UNIQUE_EMAIL = False
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_ADAPTER = "registry.adapters.ClosedAccountAdapter"
+ACCOUNT_LOGOUT_ON_GET = False
+LOGIN_REDIRECT_URL = "/p0/api/v1/me"
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
