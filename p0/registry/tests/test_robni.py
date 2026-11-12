@@ -61,12 +61,15 @@ class RequestValidation(ContractBase):
         self.author = str(staff.pk)
 
     def cases(self):
-        rid = self.call(
+        created = self.call(
             "post",
             f"{M1}/delivery-requests",
             token=self.t_m2,
             body=delivery_body([(self.p1, self.ref1)], key="osnova"),
-        ).json()["delivery_request_id"]
+        ).json()
+        rid, item = created["delivery_request_id"], created["recipients"][0]["item_id"]
+        aud = self.audience()
+        member = aud["recipients"][0]
         return [
             (
                 "AuthCheckRequest",
@@ -77,14 +80,18 @@ class RequestValidation(ContractBase):
             (
                 "AudienceRequest",
                 f"{P0}/audiences/resolve",
-                {"token": self.t_m1},
-                {"author_id": self.author, "class_id": self.class_id, "purpose": "notice"},
+                {"client": self.session("staff-01")},
+                {"class_id": self.class_id, "purpose": "notice"},
             ),
             (
                 "ContactRequest",
                 f"{P0}/delivery-contacts/resolve",
                 {"token": self.t_m1},
-                {"recipient_id": self.p1, "scope_ref": self.ref1, "delivery_request_id": "dr_x"},
+                {
+                    "recipient_id": member["person_id"],
+                    "scope_ref": member["scope_ref"],
+                    "audience_ref": aud["audience_ref"],
+                },
             ),
             (
                 "DeliveryRequest",
@@ -96,7 +103,7 @@ class RequestValidation(ContractBase):
                 "CancelRequest",
                 f"{M1}/delivery-requests/{rid}/cancel",
                 {"token": self.t_m2},
-                {"recipient_ids": [self.p1]},
+                {"item_ids": [item]},
             ),
             (
                 "ReminderCheckRequest",
@@ -169,9 +176,11 @@ class ApiErrorContract(ContractBase):
             body={"scope_ref": "sr_x", "permission": "m1.confirm", "subject_id": "not-a-uuid"},
         )
         self.assertEqual(r.json()["reason_code"], "NOT_ALLOWED")
-        body = {"author_id": "not-a-uuid", "class_id": "1", "purpose": "notice"}
-        r = self.call("post", f"{P0}/audiences/resolve", token=self.t_m1, client=c, body=body)
-        self.assertEqual(r.status_code, 400)
+        body = {"recipient_id": "not-a-uuid", "scope_ref": "sr_x", "audience_ref": "au_x"}
+        r = self.call(
+            "post", f"{P0}/delivery-contacts/resolve", token=self.t_m1, client=c, body=body
+        )
+        self.assertEqual(r.status_code, 403)
 
     def test_nedosegljiva_evidenca_je_503_ne_zavrnitev(self):
         ref = self.ref("parent-01", "Učenec Testni 01")
@@ -255,24 +264,37 @@ class StubEdgeContract(ContractBase):
             "post", f"{M1}/delivery-requests", token=self.t_m2, body=delivery_body(refs, **kw)
         )
 
-    def test_ista_oseba_dva_obsega_je_izrecno_zavrnjena(self):
+    def test_ista_oseba_dva_obsega_sta_dve_postavki(self):
         r = self.create([(self.p1, self.r1), (self.p1, self.r2)])
-        self.assertEqual(r.status_code, 400)
-        self.assertEqual(r.json()["code"], "duplicate_recipient")
-
-    def test_isti_prejemnik_in_obseg_dvakrat(self):
-        r = self.create([(self.p1, self.r1), (self.p1, self.r1)])
-        self.assertEqual(r.status_code, 400)
-
-    def test_counts_ustreza_postavkam_in_selektiven_preklic(self):
-        p2 = str(person_of("parent-02").pk)
-        r = self.create([(self.p1, self.r1), (p2, self.ref("parent-02", "Učenec Testni 01"))])
+        self.assertEqual(r.status_code, 202)
+        items = r.json()["recipients"]
+        self.assertEqual({x["scope_ref"] for x in items}, {self.r1, self.r2})
+        self.assertEqual(len({x["item_id"] for x in items}), 2)
         rid = r.json()["delivery_request_id"]
         self.call(
             "post",
             f"{M1}/delivery-requests/{rid}/cancel",
             token=self.t_m2,
-            body={"recipient_ids": [self.p1]},
+            body={"item_ids": [items[0]["item_id"]]},
+        )
+        g = self.call("get", f"{M1}/delivery-requests/{rid}", token=self.t_m2).json()
+        self.assertEqual(g["counts"], {"cancelled": 1, "queued": 1})  # drugi obseg ostane
+
+    def test_isti_prejemnik_in_obseg_dvakrat(self):
+        r = self.create([(self.p1, self.r1), (self.p1, self.r1)])
+        self.assertEqual(r.status_code, 400)
+        self.assertEqual(r.json()["code"], "duplicate_recipient")
+
+    def test_counts_ustreza_postavkam_in_selektiven_preklic(self):
+        p2 = str(person_of("parent-02").pk)
+        r = self.create([(self.p1, self.r1), (p2, self.ref("parent-02", "Učenec Testni 01"))])
+        rid = r.json()["delivery_request_id"]
+        first = next(x["item_id"] for x in r.json()["recipients"] if x["person_id"] == self.p1)
+        self.call(
+            "post",
+            f"{M1}/delivery-requests/{rid}/cancel",
+            token=self.t_m2,
+            body={"item_ids": [first]},
         )
         g = self.call("get", f"{M1}/delivery-requests/{rid}", token=self.t_m2).json()
         self.assertEqual(g["counts"], {"cancelled": 1, "queued": 1})

@@ -7,6 +7,7 @@ Servisni klic: Bearer žeton modula, ločeno od seje.
 import json
 import re
 import secrets
+from datetime import timedelta
 from functools import wraps
 
 from django.core.exceptions import ValidationError
@@ -180,33 +181,45 @@ CLASS_ID = re.compile(r"[0-9]{1,18}")  # ASCII števke v obsegu bigint
 PURPOSE_PERMISSION = {"notice": "acknowledge", "form": "decide"}
 
 
-@require_POST
-@service_only("p0.audiences.resolve")
-def audiences_resolve(request, client):
-    """Predogled dovoljenih prejemnikov oddelka za pooblaščenega avtorja.
+AUDIENCE_TTL = timedelta(days=30)  # predlog D12: rok uporabe posnetka za dostavo in opomnike
 
-    Avtor mora imeti veljavno dodelitev oddelka. Vrne scope_ref in prikazno oznako,
-    nikoli kontaktov. Delegiranje avtorja po seji ostaja odprto v D12.
+
+@require_POST
+@session_person
+def audiences_resolve(request, person):
+    """Predogled dovoljenih prejemnikov oddelka za prijavljenega avtorja (seja in CSRF).
+
+    Avtor je oseba iz seje in mora imeti veljavno dodelitev oddelka. P0 shrani posnetek
+    občinstva (`audience_ref`), na katerega se veže razrešitev kontaktov ob dostavi.
+    Odgovor vsebuje sklice in prikazne oznake, nikoli kontaktov.
     """
     body = json_body(request)
     if not valid_request("AudienceRequest", body):
         return error(400, "invalid_request")
-    author = person_by_id(body["author_id"])
     purpose, class_id = body["purpose"], body["class_id"]
-    if author is None:
-        return error(400, "invalid_request")
     now = timezone.now()
-    if not (
-        CLASS_ID.fullmatch(class_id)
-        and m.StaffAssignment.objects.active(now)
-        .filter(person=author, school_class_id=int(class_id))
-        .exists()
-    ):
+    assignment = (
+        m.StaffAssignment.objects.active(now)
+        .filter(person=person, school_class_id=int(class_id))
+        .first()
+        if CLASS_ID.fullmatch(class_id)
+        else None
+    )
+    if assignment is None:
         return error(403, "author_not_assigned")
     permission = PURPOSE_PERMISSION[purpose]
     students = m.Student.objects.filter(
         memberships__in=m.Membership.objects.active(now).filter(school_class_id=int(class_id))
     ).distinct()
+    snapshot = m.AudienceSnapshot.objects.create(
+        ref="au_" + secrets.token_urlsafe(16),
+        author=person,
+        school_class_id=int(class_id),
+        purpose=purpose,
+        permission=permission,
+        created_at=now,
+        expires_at=now + AUDIENCE_TTL,
+    )
     recipients = []
     for student in students.order_by("person__display_name"):
         scope_key = f"student:{student.person_id}"
@@ -226,6 +239,12 @@ def audiences_resolve(request, client):
                 .first()
             )
             ref = issue_scope_ref(rel.guardian, scope_key, grant.valid_until if grant else None)
+            m.AudienceMember.objects.get_or_create(
+                snapshot=snapshot,
+                person=rel.guardian,
+                scope_key=scope_key,
+                defaults={"scope_ref": ref.ref},
+            )
             recipients.append(
                 {
                     "person_id": str(rel.guardian_id),
@@ -236,9 +255,10 @@ def audiences_resolve(request, client):
             )
     return JsonResponse(
         {
-            "audience_ref": "au_" + secrets.token_urlsafe(12),
+            "audience_ref": snapshot.ref,
             "version": 1,
             "previewed_at": now.isoformat().replace("+00:00", "Z"),
+            "expires_at": snapshot.expires_at.isoformat().replace("+00:00", "Z"),
             "recipients": recipients,
         }
     )
@@ -247,43 +267,47 @@ def audiences_resolve(request, client):
 @require_POST
 @service_only("p0.contacts.resolve")
 def delivery_contact_resolve(request, client):
-    """Kontakt za točno določenega prejemnika tik pred pošiljanjem; samo M1.
+    """Kontakt za prejemnika dostave tik pred pošiljanjem; samo M1 (D12, C07).
 
-    Veljati mora aktualno upravičenje za obseg. Kontakta ni mogoče brati z ugibanimi ID.
-
-    Začasno zaprto: kontakt se vrne šele, ko P0 lahko preveri vezavo na evidentirano
-    dostavo (odprto v D12). Do takrat je odgovor 503 brez kontakta, enak za vse vhode.
+    Kontakt se vrne samo, če je prejemnik s tem sklicem v posnetku občinstva (`audience_ref`),
+    posnetek ni potekel in ima prejemnik aktualno upravičenje za namen posnetka. Vsak drug
+    vhod (tuj, neobstoječ, potekel, odvzet) dobi enak odgovor 403.
     """
     body = json_body(request)
     if not valid_request("ContactRequest", body):
         return error(400, "invalid_request")
-    recipient_id, scope_ref = body["recipient_id"], body["scope_ref"]
-    request_id = body["delivery_request_id"]
-    if not delivery_binding_verified(request_id, recipient_id, scope_ref, client):
-        return error(503, "temporarily_unavailable")
-    return _resolve_contact(recipient_id, scope_ref)
+    member = delivery_binding(body["audience_ref"], body["recipient_id"], body["scope_ref"])
+    if member is None:
+        return error(403, "scope_not_allowed")
+    return _resolve_contact(member)
 
 
-def delivery_binding_verified(request_id, recipient_id, scope_ref, client):
-    """Ali je zahteva preverljivo vezana na evidentirano dostavo tega odjemalca.
-
-    Preverljivega mehanizma še ni (D12), zato vedno False. Ne nadomeščaj z obliko ID.
-    """
-    return False
-
-
-def _resolve_contact(recipient_id, scope_ref):
+def delivery_binding(audience_ref, recipient_id, scope_ref, at=None):
+    """Član veljavnega posnetka občinstva za prejemnika in sklic ali None."""
+    at = at or timezone.now()
     person = person_by_id(recipient_id)
-    ref = m.ScopeRef.objects.filter(ref=scope_ref, person=person).first() if person else None
-    if person is None or ref is None:
-        return error(403, "scope_not_allowed")
-    now = timezone.now()
-    if ref.expires_at is not None and ref.expires_at <= now:
-        return error(403, "scope_not_allowed")
-    entitled = any(
-        authz.check_grant(person, ref.scope_key, perm, now)[0] for perm in authz.GRANT_TO_CODE
+    if person is None:
+        return None
+    return (
+        m.AudienceMember.objects.select_related("snapshot", "person")
+        .filter(
+            snapshot__ref=audience_ref,
+            snapshot__expires_at__gt=at,
+            person=person,
+            scope_ref=scope_ref,
+        )
+        .first()
     )
-    if not entitled:
+
+
+def _resolve_contact(member):
+    """Kontakt za člana posnetka, če ima aktualno upravičenje za namen posnetka."""
+    person, snapshot = member.person, member.snapshot
+    now = timezone.now()
+    ref = m.ScopeRef.objects.filter(ref=member.scope_ref, person=person).first()
+    if ref is None or (ref.expires_at is not None and ref.expires_at <= now):
+        return error(403, "scope_not_allowed")
+    if not authz.check_grant(person, member.scope_key, snapshot.permission, now)[0]:
         return error(403, "scope_not_allowed")
     if not person.contact_email:
         return JsonResponse({"deliverable": False, "reason_code": "NO_CONTACT"})

@@ -23,25 +23,25 @@ REQUESTS = {
     },
     "AudienceRequest": {
         "type": "object",
-        "required": ["author_id", "class_id", "purpose"],
+        "required": ["class_id", "purpose"],
         "additionalProperties": False,
         "properties": {
-            "author_id": ID,
             "class_id": ID,
             "purpose": {"type": "string", "enum": ["notice", "form"]},
         },
     },
     "ContactRequest": {
         "type": "object",
-        "required": ["recipient_id", "scope_ref", "delivery_request_id"],
+        "required": ["recipient_id", "scope_ref", "audience_ref"],
         "additionalProperties": False,
-        "properties": {"recipient_id": ID, "scope_ref": ID, "delivery_request_id": ID},
+        "properties": {"recipient_id": ID, "scope_ref": ID, "audience_ref": ID},
     },
     "DeliveryRequest": {
         "type": "object",
         "required": [
             "idempotency_key",
             "kind",
+            "audience_ref",
             "recipients",
             "template_id",
             "locale",
@@ -52,6 +52,7 @@ REQUESTS = {
         "additionalProperties": False,
         "properties": {
             "idempotency_key": ID,
+            "audience_ref": ID,
             "kind": {
                 "type": "string",
                 "enum": ["notification", "reminder", "receipt", "change_notice"],
@@ -85,11 +86,9 @@ REQUESTS = {
     },
     "CancelRequest": {
         "type": "object",
-        "required": ["recipient_ids"],
+        "required": ["item_ids"],
         "additionalProperties": False,
-        "properties": {
-            "recipient_ids": {"type": "array", "minItems": 1, "maxItems": 200, "items": ID}
-        },
+        "properties": {"item_ids": {"type": "array", "minItems": 1, "maxItems": 200, "items": ID}},
     },
     "ReminderCheckRequest": {
         "type": "object",

@@ -277,3 +277,33 @@ class ImportUpload(models.Model):
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=["batch", "name"], name="uniq_upload_name")]
+
+
+class AudienceSnapshot(models.Model):
+    """Posnetek občinstva, ki ga je avtor potrdil v predogledu (D12, C07).
+
+    Kontakt za dostavo se razreši samo za prejemnika iz posnetka, z aktualnim upravičenjem
+    za namen posnetka in pred iztekom. P0 ne bere tabel M1/M2.
+    """
+
+    ref = models.CharField(max_length=64, unique=True)
+    author = models.ForeignKey(Person, on_delete=models.PROTECT, related_name="audiences")
+    school_class = models.ForeignKey(SchoolClass, on_delete=models.PROTECT)
+    purpose = models.CharField(max_length=16)
+    permission = models.CharField(max_length=64)
+    created_at = models.DateTimeField(default=timezone.now)
+    expires_at = models.DateTimeField()
+
+
+class AudienceMember(models.Model):
+    snapshot = models.ForeignKey(AudienceSnapshot, on_delete=models.CASCADE, related_name="members")
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    scope_key = models.CharField(max_length=128)
+    scope_ref = models.CharField(max_length=64)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["snapshot", "person", "scope_key"], name="uniq_audience_member"
+            )
+        ]

@@ -60,8 +60,8 @@ Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnil
 | --- | --- | --- |
 | `GET /me`, `/me/relationships`, `/me/classes` | seja | Lastna oseba, povezave z `scope_ref` in oddelki |
 | `POST /authorizations/check` | seja ali servis | `{subject_id?, scope_ref, permission}` -> `{allowed, reason_code, checked_at}` |
-| `POST /audiences/resolve` | servis | Predogled prejemnikov oddelka za avtorja; brez kontaktov |
-| `POST /delivery-contacts/resolve` | servis (M1) | **Začasno 503** za vse vhode, dokler D12 ne določi preverljive vezave kontakta na dostavo, ki jo evidentira P0; pravila upravičenosti so pripravljena in testirana |
+| `POST /audiences/resolve` | seja avtorja (CSRF) | `{class_id, purpose}` → predogled prejemnikov oddelka in shranjen posnetek občinstva `audience_ref` (rok 30 dni, predlog); brez kontaktov; avtor je oseba iz seje |
+| `POST /delivery-contacts/resolve` | servis (M1) | `{recipient_id, scope_ref, audience_ref}` → kontakt samo za prejemnika iz neizteklega posnetka, z aktualnim upravičenjem za namen posnetka; sicer enak 403 |
 
 `scope_ref` je neprosojen sklic, ki ga izda P0 za par (oseba, obseg); tuj ali ugiban sklic vrne `NOT_ALLOWED`. Šifrant dovoljenj: `m1.confirm`, `m2.decide`.
 
@@ -76,7 +76,7 @@ cd p0
 python manage.py create_service_client m2 --scope m1.delivery --scope p0.authorizations.check
 ```
 
-Žeton se izpiše enkrat; ne shranjujte ga v repozitorij. Dovoljenja: `p0.authorizations.check`, `p0.audiences.resolve`, `p0.contacts.resolve`, `m1.delivery`, `m2.reminders.check`.
+Žeton se izpiše enkrat; ne shranjujte ga v repozitorij. Dovoljenja: `p0.authorizations.check`, `p0.contacts.resolve`, `m1.delivery`, `m2.reminders.check`.
 
 Nadomestka M1 (`/m1/api/v1/`) in M2 (`/m2/api/v1/`) sta v `p0/stubs/` in se vklopita s `STUBS=m1,m2` (samo z `DJANGO_DEBUG=1`, sicer se aplikacija ne zažene; privzeto v razvoju; pravi modul odstrani svoj nadomestek, npr. `STUBS=m2`). Ne pošiljata e-pošte, stanje je v pomnilniku procesa. Za preizkus stanj sta na voljo samo v nadomestkih `POST /m1/api/v1/_stub/advance` in `POST /m2/api/v1/_stub/mark-done`. Ekipa M1 zamenja nadomestek M1 s pravim modulom, ekipa M2 nadomestek M2, z istimi shemami.
 

@@ -1,7 +1,6 @@
 """Varovala uvoza, kontaktov in prijave (regresijski testi)."""
 
 import json
-from unittest import mock
 
 from allauth.account.forms import default_token_generator as allauth_tokens
 from django.core import mail
@@ -32,6 +31,40 @@ def shift(files, name, person_key, new_from=NEW_FROM, until="", rel_type=None):
         out.append(line)
     files[name] = ("\n".join(out) + "\n").encode()
     return files
+
+
+def staff_session(staff, username="avtor-test"):
+    account = m.Account.objects.create(username=username, person=staff)
+    client = Client()
+    client.force_login(account)
+    return client
+
+
+def audience_of(client, staff):
+    klass = m.StaffAssignment.objects.get(person=staff).school_class_id
+    r = client.post(
+        "/p0/api/v1/audiences/resolve",
+        data=json.dumps({"class_id": str(klass), "purpose": "notice"}),
+        content_type="application/json",
+    )
+    assert r.status_code == 200, r.content
+    return r.json()
+
+
+def contact_for(snapshot, person, token):
+    member = next(x for x in snapshot["recipients"] if x["person_id"] == str(person.pk))
+    return Client().post(
+        "/p0/api/v1/delivery-contacts/resolve",
+        data=json.dumps(
+            {
+                "recipient_id": member["person_id"],
+                "scope_ref": member["scope_ref"],
+                "audience_ref": snapshot["audience_ref"],
+            }
+        ),
+        content_type="application/json",
+        HTTP_AUTHORIZATION=f"Bearer {token}",
+    )
 
 
 class ImportRestrictionTests(ImportBase):
@@ -153,6 +186,10 @@ class ImportRestrictionTests(ImportBase):
         )
 
     def test_vse_stiri_poti_po_poskusu_uvoza(self):
+        staff = m.Person.objects.get(pk=self.key("person", "staff-01"))
+        author = staff_session(staff)
+        before = audience_of(author, staff)  # posnetek pred odvzemom
+        _, token = services.create_service_client("m1", ["p0.contacts.resolve"])
         self.revoke_relationship_p2()
         files = shift(load(), "relationships", "parent-02")
         shift(files, "grants", "parent-02")
@@ -169,35 +206,10 @@ class ImportRestrictionTests(ImportBase):
             content_type="application/json",
         )
         self.assertFalse(r.json()["allowed"])
-        _, token = services.create_service_client(
-            "m1", ["p0.audiences.resolve", "p0.contacts.resolve"]
-        )
-        auth = {"HTTP_AUTHORIZATION": f"Bearer {token}"}
-        staff = m.Person.objects.get(pk=self.key("person", "staff-01"))
-        klass = m.StaffAssignment.objects.get(person=staff).school_class_id
-        r = client.post(
-            f"{P0}/audiences/resolve",
-            data=json.dumps(
-                {"author_id": str(staff.pk), "class_id": str(klass), "purpose": "notice"}
-            ),
-            content_type="application/json",
-            **auth,
-        )
-        self.assertNotIn(str(self.p2.pk), {x["person_id"] for x in r.json()["recipients"]})
-        with mock.patch("registry.api.delivery_binding_verified", return_value=True):
-            r = Client().post(
-                f"{P0}/delivery-contacts/resolve",
-                data=json.dumps(
-                    {
-                        "recipient_id": str(self.p2.pk),
-                        "scope_ref": ref.ref,
-                        "delivery_request_id": "dr_x",
-                    }
-                ),
-                content_type="application/json",
-                **auth,
-            )
-        self.assertEqual(r.status_code, 403)
+        after = audience_of(author, staff)
+        self.assertNotIn(str(self.p2.pk), {x["person_id"] for x in after["recipients"]})
+        self.assertEqual(contact_for(before, self.p2, token).status_code, 403)
+        self.assertEqual(contact_for(before, self.p1, token).status_code, 200)  # drug starš
 
 
 class ImportRoleTests(ImportBase):
