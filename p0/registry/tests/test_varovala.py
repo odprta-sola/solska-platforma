@@ -3,7 +3,7 @@
 import json
 from unittest import mock
 
-from django.contrib.auth.tokens import default_token_generator
+from allauth.account.forms import default_token_generator as allauth_tokens
 from django.core import mail
 from django.core.management import call_command
 from django.test import Client, TestCase, override_settings
@@ -86,7 +86,29 @@ class ImportRestrictionTests(ImportBase):
         self.shifted_after_relationship_revoke("relationships")
 
     def test_premaknjen_zacetek_granta(self):
-        self.shifted_after_relationship_revoke("grants")
+        """Odvzem granta, premaknjen začetek samo v grants: konflikt mora sprožiti grant."""
+        grant = m.Grant.objects.get(person=self.p2, scope_key=self.scope1)
+        authz.revoke_grant(grant, actor=self.actor, source="rocno")
+        files = shift(load(), "grants", "parent-02")
+        _, result = importer.preview(files, SRC, self.actor)
+        conflicts = {(p.file, p.code) for p in result.problems}
+        self.assertEqual(conflicts, {("grants", "manual_restriction")})
+        self.assertFalse(self.allowed(self.p2, self.scope1))
+
+    def test_premaknjen_grant_po_odvzemu_povezave_brez_vrstice_povezave(self):
+        """Brez vrstice povezave v CSV nov grant ostane vezan na odvzeto povezavo in ne velja."""
+        self.revoke_relationship_p2()
+        files = shift(load(), "grants", "parent-02")
+        files["relationships"] = (
+            "\n".join(
+                line
+                for line in files["relationships"].decode().splitlines()
+                if not line.startswith("parent-02;")
+            )
+            + "\n"
+        ).encode()
+        self.attempt(files)
+        self.assertFalse(self.allowed(self.p2, self.scope1))
 
     def test_premaknjen_zacetek_obeh(self):
         self.shifted_after_relationship_revoke("relationships", "grants")
@@ -240,7 +262,8 @@ class PasswordRecoveryTests(TestCase):
     def test_neposredne_poti_zaprte(self):
         account = m.Account.objects.get(username="parent-01")
         uid = int_to_base36(account.pk)
-        key = default_token_generator.make_token(account)  # prej izdana povezava
+        key = allauth_tokens.make_token(account)  # prej izdana povezava (generator allauth)
+        self.assertTrue(allauth_tokens.check_token(account, key))  # ključ je zares veljaven
         for path in (
             "/accounts/password/reset/",
             "/accounts/password/reset/done/",
@@ -256,6 +279,7 @@ class PasswordRecoveryTests(TestCase):
                 self.assertEqual(r.status_code, 404)
         account.refresh_from_db()
         self.assertTrue(account.check_password("testno-geslo-123!"))
+        self.assertEqual(len(mail.outbox), 0)
 
     def test_adapter_ne_poslje_obnove(self):
         account = m.Account.objects.get(username="parent-01")

@@ -7,14 +7,13 @@ preizkusiti preklic ob handed_off, expired in failed.
 import hashlib
 import json
 import uuid
-from datetime import datetime
 
 from django.http import JsonResponse
 from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
 
 from registry.api import json_body
-from registry.contract_schemas import valid_request
+from registry.contract_schemas import parse_date_time, valid_request
 from registry.services import error, service_only
 
 from . import state
@@ -23,12 +22,8 @@ TERMINAL = {"handed_off", "failed", "cancelled", "expired"}
 
 
 def _expires(body):
-    """Rok dostave kot datum s časovnim pasom ali None."""
-    try:
-        expires = datetime.fromisoformat(body["expires_at"].replace("Z", "+00:00"))
-    except ValueError:
-        return None
-    return expires if expires.tzinfo is not None else None
+    """Rok dostave po RFC 3339 (kot v pogodbi) ali None."""
+    return parse_date_time(body["expires_at"])
 
 
 def _invalid(body):

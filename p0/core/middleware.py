@@ -14,7 +14,12 @@ from .http import error, is_api
 
 log = logging.getLogger("p0.api")
 
-CONVERT = {404: "not_found", 405: "method_not_allowed"}
+CONVERT = {
+    400: "bad_request",  # npr. preveliko telo zahteve (RequestDataTooBig)
+    403: "forbidden",
+    404: "not_found",
+    405: "method_not_allowed",
+}
 
 
 class ApiErrorMiddleware:
