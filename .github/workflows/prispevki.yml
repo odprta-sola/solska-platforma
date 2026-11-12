@@ -1,0 +1,55 @@
+name: Prispevki
+
+# Pogoji za združitev iz CONTRIBUTING.md: podpis DCO v vsakem commitu in urejen status
+# avtorja (oznaka avtor-urejen) za avtorje, ki niso vzdrževalci. Podatki iz dogodka gredo
+# v skripte samo prek spremenljivk okolja.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  dco:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event.pull_request.user.type != 'Bot'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Vsak commit ima Signed-off-by
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          missing=0
+          for c in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            if ! git log -1 --format=%B "$c" | grep -Eq '^Signed-off-by: .+ <.+>$'; then
+              echo "::error::Commit $(git log -1 --format='%h %s' "$c") nima vrstice Signed-off-by (git commit -s)."
+              missing=1
+            fi
+          done
+          exit $missing
+
+  avtor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Status avtorja je urejen
+        env:
+          ASSOCIATION: ${{ github.event.pull_request.author_association }}
+          USER_TYPE: ${{ github.event.pull_request.user.type }}
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: |
+          case "$ASSOCIATION" in OWNER|MEMBER|COLLABORATOR) echo "Vzdrževalec."; exit 0;; esac
+          [ "$USER_TYPE" = "Bot" ] && { echo "Samodejni posodobitveni PR."; exit 0; }
+          if echo "$LABELS" | grep -q '"avtor-urejen"'; then
+            echo "Status avtorja je urejen."
+          else
+            echo "::error::Pred združitvijo mora mentor ali vzdrževalec urediti status avtorja (polnoletnost ali izjava s soglasjem staršev) in dodati oznako avtor-urejen. Glej CONTRIBUTING.md."
+            exit 1
+          fi
