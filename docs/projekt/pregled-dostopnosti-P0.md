@@ -38,13 +38,13 @@ Priprava: `docker compose up --build -d`, `seed_test_data` z lastnim `SEED_PASSW
 | 8 | Kontrast | Besedilo in obrobe polj ustrezajo WCAG 2.2 AA |
 | 9 | Razumljivost | Testni uporabnik (npr. starš) razume navodilo in napake |
 
-## Predlog minimalnega obsega zaslonov za T
+## Obseg zaslonov za T
 
-Točka 9 zahteva »prijavo in osnovna opravila«. Predlog, ki ga potrdi pobudnik (ni odločitev):
+Točka 9 zahteva »prijavo in osnovna opravila«. Obseg je osebno sprejel pobudnik 12. 11. 2026 ([register odločitev](odlocitve.md#osebni-sprejemi-pobudnika-12-novembra-2026)):
 
 1. Prijava in odjava (narejeno).
 2. Uvoz CSV za tajništvo: izbira datotek, predogled s težavami in spremembami, uveljavitev ali zavrnitev.
 3. Seznam oseb z iskanjem in podrobnosti osebe (vloge, povezave, upravičenja) za tajništvo, z odvzemom povezave ali upravičenja in potrditvijo.
 4. Popravek kontakta osebe s sledjo spremembe.
 
-Ni v predlogu za T: celoten administrativni portal, izvoz, zasloni za starše zunaj M1/M2 (ti so v modulih). Vsak zaslon dobi enake avtomatske preizkuse in vrstico v ročnem pregledu.
+Ni v obsegu T: celoten administrativni portal, izvoz, zasloni za starše zunaj M1/M2 (ti so v modulih). Vsak zaslon dobi enake avtomatske preizkuse in vrstico v ročnem pregledu.
