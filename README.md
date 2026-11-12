@@ -67,4 +67,4 @@ CSV ostane osnovna pot uvoza. Vsaka šola ima svojo namestitev in v izvedbenem d
 
 ## Licenca
 
-Predvidena licenca za programsko kodo je EUPL 1.2. Besedilo licence in pogoji za prispevke bodo dodani pred vključevanjem kode.
+Programska koda je pod licenco EUPL 1.2 (glej [LICENSE](LICENSE)). Pogoji za prispevke dijakov in licenca dokumentacije so še odprti (D08, D15).
