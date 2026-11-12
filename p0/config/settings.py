@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "core",
     "registry",
+    "stubs",
 ]
 
 MIDDLEWARE = [
@@ -44,6 +45,9 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# Nadomestka M1/M2 (stubs): privzeto samo v razvoju.
+ENABLE_STUBS = env("ENABLE_STUBS", "1" if DEBUG else "0") == "1"
 
 AUTH_USER_MODEL = "registry.Account"
 

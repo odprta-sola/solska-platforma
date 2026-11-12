@@ -231,3 +231,33 @@ class ImportPreview(models.Model):
     source_key = models.CharField(max_length=256)
     action = models.CharField(max_length=16)  # create | update | unchanged
     changed_fields = models.JSONField(default=list)
+
+
+class ScopeRef(models.Model):
+    """Neprosojen sklic na potrjeni obseg osebe (D12). Poljuben niz ni dokaz pravice.
+
+    Sklic izda P0 za par (oseba, scope_key) in velja samo za to osebo.
+    """
+
+    ref = models.CharField(max_length=64, unique=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="scope_refs")
+    scope_key = models.CharField(max_length=128)
+    issued_at = models.DateTimeField(default=timezone.now)
+    expires_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["person", "scope_key"], name="uniq_scoperef_person_scope"
+            )
+        ]
+
+
+class ServiceClient(models.Model):
+    """Servisna identiteta modula (M1, M2). Žeton se hrani samo kot zgoščena vrednost."""
+
+    name = models.CharField(max_length=64, unique=True)
+    token_hash = models.CharField(max_length=64, unique=True)
+    scopes = models.JSONField(default=list)
+    active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(default=timezone.now)

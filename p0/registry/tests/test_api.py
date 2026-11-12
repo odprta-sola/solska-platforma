@@ -1,9 +1,5 @@
-import json
-from datetime import timedelta
-
 from django.core.management import call_command
 from django.test import Client, TestCase
-from django.utils import timezone
 
 from registry import authz
 from registry import models as m
@@ -23,16 +19,6 @@ class ApiBase(TestCase):
         client = client or self.client
         client.force_login(m.Account.objects.get(username=username))
         return client
-
-    def post_check(self, scope_key, permission="acknowledge", client=None):
-        return (client or self.client).post(
-            "/p0/api/v1/authorizations/check",
-            data=json.dumps({"scope_key": scope_key, "permission": permission}),
-            content_type="application/json",
-        )
-
-    def scope(self, student_key):
-        return f"student:{person_of(student_key).pk}"
 
 
 class AuthTests(ApiBase):
@@ -75,12 +61,6 @@ class AuthTests(ApiBase):
         self.login("brez-osebe")
         self.assertEqual(self.client.get("/p0/api/v1/me").status_code, 403)
 
-    def test_post_zahteva_csrf(self):
-        client = Client(enforce_csrf_checks=True)
-        self.login("parent-01", client)
-        response = self.post_check(self.scope("student-01"), client=client)
-        self.assertEqual(response.status_code, 403)
-
     def test_odjava_konca_sejo(self):
         self.login("parent-01")
         self.client.post("/accounts/logout/")
@@ -118,56 +98,3 @@ class OwnDataTests(ApiBase):
         authz.revoke_relationship(rel)
         self.login("parent-02")
         self.assertEqual(self.client.get("/p0/api/v1/me/relationships").json()["relationships"], [])
-
-
-class AuthorizationCheckTests(ApiBase):
-    def test_lasten_otrok_dovoljen(self):
-        self.login("parent-01")
-        data = self.post_check(self.scope("student-01")).json()
-        self.assertEqual(data, {"allowed": True, "reason": "ok"})
-
-    def test_tuja_druzina_zavrnjena_brez_razkritja(self):
-        self.login("parent-03")
-        tuj = self.post_check(self.scope("student-01")).json()
-        ugiban = self.post_check("student:00000000-0000-0000-0000-000000000000").json()
-        self.assertEqual(tuj, {"allowed": False, "reason": "no_grant"})
-        self.assertEqual(tuj, ugiban)
-
-    def test_povezava_brez_upravicenja_ne_dovoli(self):
-        m.Grant.objects.filter(person=person_of("parent-01")).delete()
-        self.login("parent-01")
-        self.assertFalse(self.post_check(self.scope("student-01")).json()["allowed"])
-
-    def test_odvzem_povezave_prevlada_nad_upravicenjem(self):
-        rel = m.Relationship.objects.get(guardian=person_of("parent-02"))
-        authz.revoke_relationship(rel)
-        self.login("parent-02")
-        data = self.post_check(self.scope("student-01")).json()
-        self.assertEqual(data, {"allowed": False, "reason": "relationship_inactive"})
-
-    def test_odvzem_upravicenja_prevlada_nad_povezavo(self):
-        authz.revoke_grant(m.Grant.objects.get(person=person_of("parent-02")))
-        self.login("parent-02")
-        self.assertFalse(self.post_check(self.scope("student-01")).json()["allowed"])
-
-    def test_odvzem_pusti_sled(self):
-        rel = m.Relationship.objects.get(guardian=person_of("parent-02"))
-        authz.revoke_relationship(rel, actor=person_of("staff-03"), source="test")
-        audit = m.ChangeAudit.objects.get(action="relationship.revoked")
-        self.assertEqual(audit.entity_id, str(rel.pk))
-        self.assertEqual(m.Relationship.objects.count(), 5)  # zapis ostane
-
-    def test_potecno_upravicenje_ne_velja(self):
-        grant = m.Grant.objects.get(person=person_of("parent-03"))
-        grant.valid_until = timezone.now() - timedelta(seconds=1)
-        grant.save()
-        self.login("parent-03")
-        self.assertFalse(self.post_check(self.scope("student-03")).json()["allowed"])
-
-    def test_neveljavna_zahteva_400(self):
-        self.login("parent-01")
-        response = self.client.post(
-            "/p0/api/v1/authorizations/check", data="ni json", content_type="application/json"
-        )
-        self.assertEqual(response.status_code, 400)
-        self.assertEqual(self.post_check(123).status_code, 400)

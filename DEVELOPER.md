@@ -1,6 +1,6 @@
 # Navodila za razvijalce
 
-Status: osnutek, faza 4 (ogrodje, model, prijava, API in uvoz CSV P0). Pogodbe M1/M2 (D12) sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
+Status: osnutek, faza 5 (ogrodje, model, prijava, API, uvoz CSV, osnutek pogodbe D12 z nadomestkoma M1/M2). Navodila po ekipah sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Pravila
 
@@ -53,14 +53,33 @@ Prijava: `django-allauth` (samo `allauth.account`), prijava z uporabniškim imen
 
 Znana omejitev: aktivacija in obnova gesla za račune s skupnim predalom še nista individualni postopek; to je dopolnitev pred B ([načrt](docs/projekt/priprava-referencnega-P0.md)). V razvoju ne uporabljajte skupnega predala za resnično obnovo.
 
-| Pot | Pomen |
-| --- | --- |
-| `GET /p0/api/v1/me` | Lastna oseba iz seje |
-| `GET /p0/api/v1/me/relationships` | Lastne veljavne povezave |
-| `GET /p0/api/v1/me/classes` | Dodeljeni oddelki zaposlenega |
-| `POST /p0/api/v1/authorizations/check` | Telo `{"scope_key", "permission"}`; preveri lastno aktualno upravičenje, odgovor `{"allowed", "reason"}` |
+Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnila v [pogodbi vmesnikov](docs/arhitektura/vmesnik-P0-M1-M2.md). **Osnutek D12, ni potrjena**; odvisna ekipa se nanjo veže šele po potrditvi.
 
-Pravice se odločajo samo v `registry/authz.py`. Povezava sama ne dovoli dejanja; odvzem povezave ali upravičenja prevlada. Preverjanje za drugo osebo in servisna identiteta še nista narejena (D12). Poti še niso zapisane v OpenAPI.
+| Pot P0 | Klicatelj | Pomen |
+| --- | --- | --- |
+| `GET /me`, `/me/relationships`, `/me/classes` | seja | Lastna oseba, povezave z `scope_ref` in oddelki |
+| `POST /authorizations/check` | seja ali servis | `{subject_id?, scope_ref, permission}` -> `{allowed, reason_code, checked_at}` |
+| `POST /audiences/resolve` | servis | Predogled prejemnikov oddelka za avtorja; brez kontaktov |
+| `POST /delivery-contacts/resolve` | servis (M1) | Kontakt za točno prejemnika in veljaven obseg tik pred pošiljanjem |
+
+`scope_ref` je neprosojen sklic, ki ga izda P0 za par (oseba, obseg); tuj ali ugiban sklic vrne `NOT_ALLOWED`. Šifrant dovoljenj: `m1.confirm`, `m2.decide`.
+
+### Servisne identitete in nadomestka M1/M2
+
+Servisni klic uporablja `Authorization: Bearer <žeton>`, nikoli seje. Žeton se hrani zgoščen. Neveljaven žeton je 401 in ne preide na sejo.
+
+```bash
+cd p0
+python manage.py create_service_client m2 --scope m1.delivery --scope p0.authorizations.check
+```
+
+Žeton se izpiše enkrat; ne shranjujte ga v repozitorij. Dovoljenja: `p0.authorizations.check`, `p0.audiences.resolve`, `p0.contacts.resolve`, `m1.delivery`, `m2.reminders.check`.
+
+Nadomestka M1 (`/m1/api/v1/`) in M2 (`/m2/api/v1/`) sta v `p0/stubs/` in se vklopita z `ENABLE_STUBS=1` (privzeto v razvoju). Ne pošiljata e-pošte, stanje je v pomnilniku procesa. Za preizkus stanj sta na voljo samo v nadomestkih `POST /m1/api/v1/_stub/advance` in `POST /m2/api/v1/_stub/mark-done`. Ekipa M1 zamenja nadomestek M1 s pravim modulom, ekipa M2 nadomestek M2, z istimi shemami.
+
+Pogodbeni testi (`registry/tests/test_contract.py`) preverjajo vsak odgovor proti shemi in scenarije: tuj sklic, servisni klic brez seje, nepooblaščen kontaktni klic, podvojena zahteva in konflikt ključa, delna stanja, ponovljen in selektivni preklic, iztek, odsoten kontakt.
+
+Pravice se odločajo samo v `registry/authz.py`. Povezava sama ne dovoli dejanja; odvzem povezave ali upravičenja prevlada. Zaščitenih dejanj se ne dovoli na slepo: neznan ali tuj obseg ni nikoli »dovoljeno«.
 
 ## Uvoz CSV
 

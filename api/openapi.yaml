@@ -1,0 +1,332 @@
+openapi: 3.1.0
+info:
+  title: Odprta šola – pogodba P0, M1, M2
+  version: 1.0.0-osnutek
+  description: >
+    OSNUTEK D12. Ni potrjena pogodba: potrdijo jo skupni tehnični nosilec in mentorji, šele
+    nato smejo odvisne ekipe nanjo vezati implementacijo. Vsebinska razlaga je v
+    docs/arhitektura/vmesnik-P0-M1-M2.md. Pot /_stub/* obstaja samo v nadomestkih in ni del pogodbe.
+    Vrednosti v primerih so izmišljene.
+servers:
+  - url: http://localhost:8000
+paths:
+  /p0/api/v1/me:
+    get:
+      summary: Lastna identiteta iz seje
+      security: [{sessionCookie: []}]
+      responses:
+        "200": {description: Oseba, content: {application/json: {schema: {$ref: "#/components/schemas/Me"}}}}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+  /p0/api/v1/me/relationships:
+    get:
+      summary: Lastne veljavne povezave z otroki in sklici na obsege
+      security: [{sessionCookie: []}]
+      responses:
+        "200": {description: Povezave, content: {application/json: {schema: {$ref: "#/components/schemas/Relationships"}}}}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+  /p0/api/v1/me/classes:
+    get:
+      summary: Dodeljeni oddelki zaposlenega
+      security: [{sessionCookie: []}]
+      responses:
+        "200": {description: Oddelki, content: {application/json: {schema: {$ref: "#/components/schemas/Classes"}}}}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+  /p0/api/v1/authorizations/check:
+    post:
+      summary: Aktualna pravica osebe za obseg in dejanje
+      description: >
+        Uporabniški klic (seja, CSRF) preverja lastno pravico; subject_id je neobvezen in mora
+        biti lastni. Servisni klic zahteva subject_id. Nedosegljivost je 503, ne NOT_ALLOWED.
+      security: [{sessionCookie: []}, {serviceBearer: []}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {$ref: "#/components/schemas/AuthCheckRequest"}}}
+      responses:
+        "200": {description: Rezultat, content: {application/json: {schema: {$ref: "#/components/schemas/AuthCheckResponse"}}}}
+        "400": {$ref: "#/components/responses/Error"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+  /p0/api/v1/audiences/resolve:
+    post:
+      summary: Predogled dovoljenih prejemnikov oddelka (servisni klic za pooblaščenega avtorja)
+      security: [{serviceBearer: []}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {$ref: "#/components/schemas/AudienceRequest"}}}
+      responses:
+        "200": {description: Predogled, content: {application/json: {schema: {$ref: "#/components/schemas/AudienceResponse"}}}}
+        "400": {$ref: "#/components/responses/Error"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+  /p0/api/v1/delivery-contacts/resolve:
+    post:
+      summary: Kontakt za točno določenega prejemnika tik pred pošiljanjem (samo M1)
+      security: [{serviceBearer: []}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {$ref: "#/components/schemas/ContactRequest"}}}
+      responses:
+        "200": {description: Kontakt ali odsotnost, content: {application/json: {schema: {$ref: "#/components/schemas/ContactResponse"}}}}
+        "400": {$ref: "#/components/responses/Error"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+  /m1/api/v1/delivery-requests:
+    post:
+      summary: Trajni prevzem zahteve za dostavo
+      description: 202 šele po zapisu, potrebnem za obnovo. Isti idempotency_key in vsebina vrneta isti rezultat; drugačna vsebina 409.
+      security: [{serviceBearer: []}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {$ref: "#/components/schemas/DeliveryRequest"}}}
+      responses:
+        "202": {description: Prevzeto, content: {application/json: {schema: {$ref: "#/components/schemas/DeliveryStatus"}}}}
+        "400": {$ref: "#/components/responses/Error"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+        "409": {$ref: "#/components/responses/Error"}
+  /m1/api/v1/delivery-requests/{id}:
+    get:
+      summary: Stanje lastne zahteve po prejemnikih
+      security: [{serviceBearer: []}]
+      parameters: [{name: id, in: path, required: true, schema: {type: string}}]
+      responses:
+        "200": {description: Stanje, content: {application/json: {schema: {$ref: "#/components/schemas/DeliveryStatus"}}}}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+        "404": {$ref: "#/components/responses/Error"}
+  /m1/api/v1/delivery-requests/{id}/cancel:
+    post:
+      summary: Selektivni, ponovljiv preklic izbranih prejemnikov
+      security: [{serviceBearer: []}]
+      parameters: [{name: id, in: path, required: true, schema: {type: string}}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {$ref: "#/components/schemas/CancelRequest"}}}
+      responses:
+        "200": {description: Rezultat po prejemniku, content: {application/json: {schema: {$ref: "#/components/schemas/CancelResponse"}}}}
+        "400": {$ref: "#/components/responses/Error"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+        "404": {$ref: "#/components/responses/Error"}
+  /m2/api/v1/reminders/check:
+    post:
+      summary: Ali je opomnik še potreben (samo REQUIRED ali NO_LONGER_REQUIRED)
+      description: Napaka ali nedosegljivost ni odgovor »nepotreben«. Ne razkrije vsebine odločitve.
+      security: [{serviceBearer: []}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {$ref: "#/components/schemas/ReminderCheckRequest"}}}
+      responses:
+        "200": {description: Potreba, content: {application/json: {schema: {$ref: "#/components/schemas/ReminderCheckResponse"}}}}
+        "400": {$ref: "#/components/responses/Error"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+components:
+  securitySchemes:
+    sessionCookie: {type: apiKey, in: cookie, name: sessionid}
+    serviceBearer: {type: http, scheme: bearer}
+  responses:
+    Error:
+      description: Napaka. Sporočilo ne razkriva tujih virov ali skrivnosti.
+      content: {application/json: {schema: {$ref: "#/components/schemas/Error"}}}
+  schemas:
+    Error:
+      type: object
+      required: [code, message, trace_id]
+      properties:
+        code: {type: string}
+        message: {type: string}
+        trace_id: {type: string}
+    Id: {type: string, minLength: 1}
+    Permission:
+      type: string
+      description: Šifrant dovoljenj modulov (osnutek).
+      enum: [m1.confirm, m2.decide]
+    Me:
+      type: object
+      required: [person_id, display_name, roles, preferred_language]
+      properties:
+        person_id: {$ref: "#/components/schemas/Id"}
+        display_name: {type: string}
+        roles: {type: array, items: {type: string, enum: [parent, student, teacher, office, admin]}}
+        preferred_language: {type: string}
+    Scope:
+      type: object
+      required: [scope_ref, permission]
+      properties:
+        scope_ref: {$ref: "#/components/schemas/Id"}
+        permission: {$ref: "#/components/schemas/Permission"}
+    Relationships:
+      type: object
+      required: [relationships]
+      properties:
+        relationships:
+          type: array
+          items:
+            type: object
+            required: [relationship_id, student_id, student_display_name, relationship_type, valid_from, valid_until, scopes]
+            properties:
+              relationship_id: {type: integer}
+              student_id: {$ref: "#/components/schemas/Id"}
+              student_display_name: {type: string}
+              relationship_type: {type: string, enum: [parent, guardian]}
+              valid_from: {type: string, format: date-time}
+              valid_until: {type: [string, "null"], format: date-time}
+              scopes: {type: array, items: {$ref: "#/components/schemas/Scope"}}
+    Classes:
+      type: object
+      required: [classes]
+      properties:
+        classes:
+          type: array
+          items:
+            type: object
+            required: [class_id, class_key, name, school_year]
+            properties:
+              class_id: {$ref: "#/components/schemas/Id"}
+              class_key: {type: string}
+              name: {type: string}
+              school_year: {type: string}
+    AuthCheckRequest:
+      type: object
+      required: [scope_ref, permission]
+      additionalProperties: false
+      properties:
+        subject_id: {$ref: "#/components/schemas/Id"}
+        scope_ref: {$ref: "#/components/schemas/Id"}
+        permission: {type: string}
+    AuthCheckResponse:
+      type: object
+      required: [allowed, reason_code, checked_at]
+      properties:
+        allowed: {type: boolean}
+        reason_code: {type: string, enum: [ALLOWED, NOT_ALLOWED, SCOPE_INACTIVE]}
+        checked_at: {type: string, format: date-time}
+    AudienceRequest:
+      type: object
+      required: [author_id, class_id, purpose]
+      additionalProperties: false
+      properties:
+        author_id: {$ref: "#/components/schemas/Id"}
+        class_id: {$ref: "#/components/schemas/Id"}
+        purpose: {type: string, enum: [notice, form]}
+    AudienceResponse:
+      type: object
+      required: [audience_ref, version, previewed_at, recipients]
+      properties:
+        audience_ref: {$ref: "#/components/schemas/Id"}
+        version: {type: integer}
+        previewed_at: {type: string, format: date-time}
+        recipients:
+          type: array
+          items:
+            type: object
+            required: [person_id, scope_ref, display_label, student_label]
+            properties:
+              person_id: {$ref: "#/components/schemas/Id"}
+              scope_ref: {$ref: "#/components/schemas/Id"}
+              display_label: {type: string}
+              student_label: {type: string}
+    ContactRequest:
+      type: object
+      required: [recipient_id, scope_ref, delivery_request_id]
+      additionalProperties: false
+      properties:
+        recipient_id: {$ref: "#/components/schemas/Id"}
+        scope_ref: {$ref: "#/components/schemas/Id"}
+        delivery_request_id: {$ref: "#/components/schemas/Id"}
+    ContactResponse:
+      type: object
+      required: [deliverable, reason_code]
+      properties:
+        deliverable: {type: boolean}
+        reason_code: {type: string, enum: [OK, NO_CONTACT]}
+        email: {type: string, format: email}
+        locale: {type: string}
+    DeliveryRequest:
+      type: object
+      required: [idempotency_key, kind, recipients, template_id, locale, params, target, expires_at]
+      additionalProperties: false
+      properties:
+        idempotency_key: {$ref: "#/components/schemas/Id"}
+        kind: {type: string, enum: [notification, reminder, receipt, change_notice]}
+        recipients:
+          type: array
+          minItems: 1
+          maxItems: 200
+          items:
+            type: object
+            required: [person_id, scope_ref]
+            additionalProperties: false
+            properties:
+              person_id: {$ref: "#/components/schemas/Id"}
+              scope_ref: {$ref: "#/components/schemas/Id"}
+        template_id: {$ref: "#/components/schemas/Id"}
+        locale: {type: string}
+        params: {type: object}
+        target:
+          type: object
+          required: [module, resource_id]
+          additionalProperties: false
+          properties:
+            module: {type: string, enum: [M1, M2]}
+            resource_id: {$ref: "#/components/schemas/Id"}
+        need_ref: {$ref: "#/components/schemas/Id"}
+        expires_at: {type: string, format: date-time}
+    RecipientState:
+      type: string
+      enum: [queued, held, handed_off, failed, cancelled, expired]
+    DeliveryStatus:
+      type: object
+      required: [delivery_request_id, state, recipients, counts]
+      properties:
+        delivery_request_id: {$ref: "#/components/schemas/Id"}
+        state: {type: string}
+        recipients:
+          type: array
+          items:
+            type: object
+            required: [person_id, state]
+            properties:
+              person_id: {$ref: "#/components/schemas/Id"}
+              state: {$ref: "#/components/schemas/RecipientState"}
+        counts:
+          type: object
+          additionalProperties: {type: integer}
+    CancelRequest:
+      type: object
+      required: [recipient_ids]
+      additionalProperties: false
+      properties:
+        recipient_ids: {type: array, minItems: 1, items: {$ref: "#/components/schemas/Id"}}
+    CancelResponse:
+      type: object
+      required: [delivery_request_id, recipients]
+      properties:
+        delivery_request_id: {$ref: "#/components/schemas/Id"}
+        recipients:
+          type: array
+          items:
+            type: object
+            required: [person_id, state, cancel_result]
+            properties:
+              person_id: {$ref: "#/components/schemas/Id"}
+              state: {$ref: "#/components/schemas/RecipientState"}
+              cancel_result: {type: string, enum: [cancelled_now, already_cancelled, too_late, already_terminal]}
+    ReminderCheckRequest:
+      type: object
+      required: [need_ref, recipient_id, scope_ref]
+      additionalProperties: false
+      properties:
+        need_ref: {$ref: "#/components/schemas/Id"}
+        recipient_id: {$ref: "#/components/schemas/Id"}
+        scope_ref: {$ref: "#/components/schemas/Id"}
+    ReminderCheckResponse:
+      type: object
+      required: [needed, reason_code]
+      properties:
+        needed: {type: boolean}
+        reason_code: {type: string, enum: [REQUIRED, NO_LONGER_REQUIRED]}

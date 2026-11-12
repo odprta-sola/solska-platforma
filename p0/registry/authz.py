@@ -12,6 +12,10 @@ from django.utils import timezone
 
 from . import models as m
 
+# Šifrant dovoljenj modulov (D12): koda v pogodbi -> dovoljenje v upravičenju.
+PERMISSION_CODES = {"m1.confirm": "acknowledge", "m2.decide": "decide"}
+GRANT_TO_CODE = {v: k for k, v in PERMISSION_CODES.items()}
+
 OK = "ok"
 NO_GRANT = "no_grant"
 RELATIONSHIP_INACTIVE = "relationship_inactive"
@@ -66,3 +70,20 @@ def revoke_grant(grant, actor=None, source="", at=None):
         source=source,
         changed_fields=["valid_until"],
     )
+
+
+def check_scope(subject, scope_ref, permission_code, at=None):
+    """Preverjanje po pogodbi D12. Vrne (dovoljeno, reason_code).
+
+    Neznan ali tuj sklic je NOT_ALLOWED, da ne razkrije obstoja tujih obsegov.
+    Razlogi so ALLOWED, NOT_ALLOWED, SCOPE_INACTIVE.
+    """
+    at = at or timezone.now()
+    permission = PERMISSION_CODES.get(permission_code)
+    ref = m.ScopeRef.objects.filter(ref=scope_ref, person=subject).first()
+    if permission is None or ref is None:
+        return False, "NOT_ALLOWED"
+    if ref.expires_at is not None and ref.expires_at <= at:
+        return False, "SCOPE_INACTIVE"
+    allowed, _ = check_grant(subject, ref.scope_key, permission, at)
+    return (True, "ALLOWED") if allowed else (False, "NOT_ALLOWED")
