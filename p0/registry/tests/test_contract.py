@@ -1,31 +1,26 @@
 """Pogodbeni testi za osnutek D12 (api/openapi.yaml): P0 (pravi), M1 in M2 (nadomestka).
 
-Vsak odgovor se preveri proti shemi. To so testi osnutka pogodbe, ne potrditev D12.
+Vsak odgovor, ki gre skozi ContractBase.call ali scope_refs, se preveri proti operaciji v
+pogodbi (status, vsebinski tip, shema s formati); glej contract_check. Klici neposredno prek
+Django odjemalca drugje niso samodejno preverjeni. To so testi osnutka, ne potrditev D12.
 """
 
 import json
 from datetime import timedelta
-from pathlib import Path
 from unittest import mock
 
-import yaml
 from django.core.management import call_command
 from django.test import Client, TestCase
 from django.urls import Resolver404, resolve
 from django.utils import timezone
-from jsonschema import Draft202012Validator
 
 from registry import authz, services
 from registry import models as m
 from stubs import state
 
-SPEC = yaml.safe_load((Path(__file__).resolve().parents[3] / "api" / "openapi.yaml").read_text())
+from .contract_check import SPEC, check, validate
+
 P0, M1, M2 = "/p0/api/v1", "/m1/api/v1", "/m2/api/v1"
-
-
-def validate(schema, data):
-    root = {"$ref": f"#/components/schemas/{schema}", "components": SPEC["components"]}
-    Draft202012Validator(root).validate(data)
 
 
 def person_of(key):
@@ -58,9 +53,10 @@ class ContractBase(TestCase):
         client = client or Client()
         headers = {"HTTP_AUTHORIZATION": f"Bearer {token}"} if token else {}
         data = json.dumps(body) if body is not None else None
-        return getattr(client, method)(
+        response = getattr(client, method)(
             path, data=data, content_type="application/json", **headers, **extra
         )
+        return check(method, path, response)
 
     def session(self, username):
         client = Client()
@@ -69,7 +65,8 @@ class ContractBase(TestCase):
 
     def scope_refs(self, username):
         """scope_ref-i staršev iz GET /me/relationships (po imenu otroka)."""
-        data = self.session(username).get(f"{P0}/me/relationships").json()
+        path = f"{P0}/me/relationships"
+        data = check("get", path, self.session(username).get(path)).json()
         return {r["student_display_name"]: r["scopes"] for r in data["relationships"]}
 
     def ref(self, username, student_name, permission="m1.confirm"):
@@ -521,7 +518,8 @@ class DeliveryStubContract(ContractBase):
         counts = self.call("get", f"{M1}/delivery-requests/{rid}", token=self.t_m2).json()["counts"]
         self.assertEqual(counts, {"cancelled": 1, "queued": 1})
 
-    def test_potekel_je_koncno_stanje(self):
+    def test_rocno_nastavljen_iztek_je_koncno_stanje(self):
+        """Stanje expired nastavi _stub/advance; samodejni iztek ni preizkušen (ni ga)."""
         rid = self.create().json()["delivery_request_id"]
         self.call(
             "post",
@@ -548,7 +546,7 @@ class DeliveryStubContract(ContractBase):
             self.call("post", url, token=self.t_m2, body={"recipient_ids": []}).status_code, 400
         )
 
-    def test_zadrzek_dostave_ob_izpadu_ni_uspesen_preklic(self):
+    def test_preklic_tuje_zahteve_je_404(self):
         rid = self.create().json()["delivery_request_id"]
         r = self.call(
             "post",
