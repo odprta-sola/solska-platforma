@@ -194,6 +194,24 @@ class ImportRoleTests(ImportBase):
         _, result = importer.preview(self.with_role("admin"), SRC, self.actor)
         self.assertTrue(result.clean, [p.as_dict() for p in result.problems])
 
+    def test_tajnistvo_ne_dodeli_tajnistva(self):
+        _, result = importer.preview(self.with_role("office"), SRC, self.actor)
+        self.assertIn("role_not_authorized", {p.code for p in result.problems})
+
+    def test_skrbnik_sme_dodeliti_tajnistvo(self):
+        m.PersonRole.objects.create(person=self.actor, role=m.Role.ADMIN)
+        _, result = importer.preview(self.with_role("office"), SRC, self.actor)
+        self.assertTrue(result.clean, [p.as_dict() for p in result.problems])
+
+    def test_ponovni_uvoz_obstojece_vloge_je_dovoljen(self):
+        m.PersonRole.objects.create(person=self.actor, role=m.Role.ADMIN)
+        files = self.with_role("office")
+        batch, _ = importer.preview(files, SRC, self.actor)
+        importer.apply_batch(batch, files, self.actor)
+        m.PersonRole.objects.filter(person=self.actor, role=m.Role.ADMIN).delete()
+        _, result = importer.preview(files, SRC, self.actor)  # tajništvo, ista vsebina
+        self.assertTrue(result.clean, [p.as_dict() for p in result.problems])
+
     def test_tajnistvo_sme_dodeliti_ucitelja(self):
         _, result = importer.preview(self.with_role("teacher", "parent-04"), SRC, self.actor)
         self.assertTrue(result.clean)

@@ -32,8 +32,9 @@ ROLES = {r.value for r in m.Role}
 RELATIONSHIP_TYPES = {t.value for t in m.Relationship.Type}
 STAFF_ROLES = {m.Role.TEACHER.value, m.Role.OFFICE.value}
 IMPORTER_ROLES = {m.Role.OFFICE.value, m.Role.ADMIN.value}
-# Vloge, ki jih sme z uvozom dodeliti samo tehnični skrbnik.
-ADMIN_ONLY_ROLES = {m.Role.ADMIN.value}
+# Vloge, ki jih sme z uvozom na novo dodeliti samo tehnični skrbnik (dajejo pravice uvoza
+# ali skrbništva). Ponovni uvoz že dodeljene vloge je dovoljen.
+ADMIN_ONLY_ROLES = {m.Role.ADMIN.value, m.Role.OFFICE.value}
 
 # datoteka -> (obvezna polja, neobvezna polja, identiteta vrstice)
 SCHEMA = {
@@ -633,6 +634,16 @@ class _Applier:
         )
 
 
+def _has_role(source, row):
+    """Ali ima oseba iz vira vlogo iz vrstice že dodeljeno."""
+    mp = m.SourceMapping.objects.filter(
+        source=source, entity_type="person", source_key=row["source_person_key"]
+    ).first()
+    return (
+        bool(mp) and m.PersonRole.objects.filter(person_id=mp.target_id, role=row["role"]).exists()
+    )
+
+
 def process(files, source, actor, apply=False):
     """Razčleni, validira in v transakciji izvede uvoz; uveljavi le pri `apply` in čisti seriji."""
     problems = []
@@ -650,7 +661,7 @@ def process(files, source, actor, apply=False):
     validate_rows(tables, problems)
     if m.Role.ADMIN.value not in roles:
         for i, r in tables.get("roles", []):
-            if r["role"] in ADMIN_ONLY_ROLES:
+            if r["role"] in ADMIN_ONLY_ROLES and not _has_role(source, r):
                 problems.append(
                     Problem(
                         "error",
