@@ -32,6 +32,9 @@ ROLES = {r.value for r in m.Role}
 RELATIONSHIP_TYPES = {t.value for t in m.Relationship.Type}
 STAFF_ROLES = {m.Role.TEACHER.value, m.Role.OFFICE.value}
 IMPORTER_ROLES = {m.Role.OFFICE.value, m.Role.ADMIN.value}
+# Vloge, ki jih sme z uvozom na novo dodeliti samo tehnični skrbnik (dajejo pravice uvoza
+# ali skrbništva). Ponovni uvoz že dodeljene vloge je dovoljen.
+ADMIN_ONLY_ROLES = {m.Role.ADMIN.value, m.Role.OFFICE.value}
 
 # datoteka -> (obvezna polja, neobvezna polja, identiteta vrstice)
 SCHEMA = {
@@ -378,6 +381,24 @@ def _manually_revoked(entity_type, pk, source):
     )
 
 
+def _manual_revocation_at(entity_type, model, scope):
+    """Čas zadnjega ročnega odvzema v poslovnem obsegu (ne glede na vrstico uvoza) ali None."""
+    if not scope:
+        return None
+    pks = [str(pk) for pk in model.objects.filter(**scope).values_list("pk", flat=True)]
+    if not pks:
+        return None
+    audit = (
+        m.ChangeAudit.objects.filter(
+            action=f"{entity_type}.revoked", entity_type=entity_type, entity_id__in=pks
+        )
+        .exclude(source__startswith="import:")
+        .order_by("-at")
+        .first()
+    )
+    return audit.at if audit else None
+
+
 def _stamp(obj, **fields):
     changed = []
     for name, value in fields.items():
@@ -428,17 +449,27 @@ class _Applier:
             )
         )
 
-    def upsert_validity(self, name, i, entity, key, model, lookup, row, extra=None):
+    def upsert_validity(self, name, i, entity, key, model, lookup, row, extra=None, scope=None):
+        """`scope` je poslovni obseg ročne omejitve (npr. skrbnik in učenec).
+
+        Ročni odvzem v obsegu velja ne glede na začetek veljavnosti ali vrsto uvozne vrstice:
+        uvoz ne sme ustvariti ali podaljšati zapisa, ki bi veljal po odvzemu.
+        """
         until = row.get("valid_until_parsed")
+        revoked_at = _manual_revocation_at(entity, model, scope)
+        restores = revoked_at is not None and (until is None or until > revoked_at)
         obj = model.objects.filter(**lookup, valid_from=row["valid_from_parsed"]).first()
         if obj is None:
+            if restores:
+                self.conflict(name, i, entity, None)
+                return None
             obj = model.objects.create(
                 **lookup, valid_from=row["valid_from_parsed"], valid_until=until, **(extra or {})
             )
             self.record(entity, key, "create", ["*"], obj.pk)
             return obj
         extends = obj.valid_until is not None and (until is None or until > obj.valid_until)
-        if extends and _manually_revoked(entity, obj.pk, self.source):
+        if extends and (restores or _manually_revoked(entity, obj.pk, self.source)):
             self.conflict(name, i, entity, obj)
             return obj
         changed = _stamp(obj, valid_until=until)
@@ -555,6 +586,7 @@ class _Applier:
                 "relationship_type": row["relationship_type"],
             },
             row,
+            scope={"guardian": guardian, "student": student},
         )
 
     def do_staff_assignments(self, name, i, row):
@@ -584,24 +616,44 @@ class _Applier:
             reference=row["approval_ref"], defaults={"approved_by": self.actor}
         )
         key = f"{row['source_person_key']}/{row['scope_key']}/{row['permission']}"
+        lookup = {
+            "person": person,
+            "scope_key": f"student:{student.person_id}",
+            "permission": row["permission"],
+        }
         self.upsert_validity(
             name,
             i,
             "grant",
             key,
             m.Grant,
-            {
-                "person": person,
-                "scope_key": f"student:{student.person_id}",
-                "permission": row["permission"],
-            },
+            lookup,
             row,
             extra={"relationship": relationship, "approval": approval},
+            scope=lookup,
         )
 
 
-def process(files, source, actor, apply=False):
-    """Razčleni, validira in v transakciji izvede uvoz; uveljavi le pri `apply` in čisti seriji."""
+def _has_role(source, row):
+    """Ali ima oseba iz vira vlogo iz vrstice že dodeljeno."""
+    mp = m.SourceMapping.objects.filter(
+        source=source, entity_type="person", source_key=row["source_person_key"]
+    ).first()
+    return (
+        bool(mp) and m.PersonRole.objects.filter(person_id=mp.target_id, role=row["role"]).exists()
+    )
+
+
+def plan_of(ops):
+    """Kanoničen načrt sprememb: izvorni ključi in dejanja, brez notranjih (naključnih) ID."""
+    return [(o.entity_type, o.key, o.action, sorted(o.changed_fields)) for o in ops]
+
+
+def process(files, source, actor, apply=False, expected_plan=None):
+    """Razčleni, validira in v transakciji izvede uvoz; uveljavi le pri `apply` in čisti seriji.
+
+    Z `expected_plan` se uveljavi le, če so izračunane operacije enake potrjenemu predogledu.
+    """
     problems = []
     tables = parse_files(files, problems)
     chash = content_hash(files)
@@ -615,6 +667,18 @@ def process(files, source, actor, apply=False):
             )
         )
     validate_rows(tables, problems)
+    if m.Role.ADMIN.value not in roles:
+        for i, r in tables.get("roles", []):
+            if r["role"] in ADMIN_ONLY_ROLES and not _has_role(source, r):
+                problems.append(
+                    Problem(
+                        "error",
+                        "roles",
+                        i,
+                        "role_not_authorized",
+                        "To vlogo sme dodeliti samo tehnični skrbnik.",
+                    )
+                )
     if problems:
         return Result(problems, [], chash)
     validate_references(tables, source, problems)
@@ -627,6 +691,16 @@ def process(files, source, actor, apply=False):
             applier = _Applier(tables, source, actor, problems)
             applier.run()
             ops = applier.ops
+            if expected_plan is not None and not problems and plan_of(ops) != expected_plan:
+                problems.append(
+                    Problem(
+                        "error",
+                        "",
+                        0,
+                        "preview_stale",
+                        "Evidenca se je od predogleda spremenila; potreben je nov predogled.",
+                    )
+                )
             if problems or not apply:
                 raise Rollback
     except Rollback:
@@ -663,24 +737,38 @@ def preview(files, source, actor):
 
 
 def apply_batch(batch, files, actor):
-    """Uveljavi prej pregledano serijo. Vsebina mora biti enaka tisti iz predogleda."""
-    if batch.status != m.ImportBatch.Status.PREVIEWED:
-        raise ValueError("Uveljaviti je mogoče samo čist predogled.")
-    if batch.content_hash != content_hash(files):
-        raise ValueError("Vsebina se razlikuje od predogleda.")
+    """Uveljavi prej pregledano serijo.
+
+    Vsebina mora biti enaka tisti iz predogleda in izračunane operacije enake potrjenim.
+    Serija je med uveljavitvijo zaklenjena; podatki in končno stanje serije se zapišejo v isti
+    transakciji, zato sočasna ali ponovna uveljavitev ne uspe.
+    """
     try:
-        result = process(files, batch.source, actor, apply=True)
-    except Exception:
-        batch.status = m.ImportBatch.Status.FAILED
-        batch.save(update_fields=["status"])
+        with transaction.atomic():
+            locked = m.ImportBatch.objects.select_for_update().get(pk=batch.pk)
+            if locked.status != m.ImportBatch.Status.PREVIEWED:
+                raise ValueError("Uveljaviti je mogoče samo čist predogled.")
+            if locked.content_hash != content_hash(files):
+                raise ValueError("Vsebina se razlikuje od predogleda.")
+            expected = [
+                (i.entity_type, i.source_key, i.action, sorted(i.changed_fields))
+                for i in locked.items.order_by("pk")
+            ]
+            result = process(files, locked.source, actor, apply=True, expected_plan=expected)
+            if not result.clean:
+                locked.status = m.ImportBatch.Status.REJECTED
+                locked.problems = [p.as_dict() for p in result.problems]
+            else:
+                locked.status = m.ImportBatch.Status.APPLIED
+                locked.applied_at = timezone.now()
+                locked.applied_by = actor
+                locked.counts = result.counts
+            locked.save()
+    except ValueError:
         raise
-    if not result.clean:
-        batch.status = m.ImportBatch.Status.REJECTED
-        batch.problems = [p.as_dict() for p in result.problems]
-    else:
-        batch.status = m.ImportBatch.Status.APPLIED
-        batch.applied_at = timezone.now()
-        batch.applied_by = actor
-        batch.counts = result.counts
-    batch.save()
-    return batch, result
+    except Exception:  # noqa: BLE001 - zabeleži neuspeh in napako posreduje naprej
+        m.ImportBatch.objects.filter(pk=batch.pk, status=m.ImportBatch.Status.PREVIEWED).update(
+            status=m.ImportBatch.Status.FAILED
+        )
+        raise
+    return locked, result

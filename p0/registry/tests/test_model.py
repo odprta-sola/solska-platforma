@@ -5,6 +5,7 @@ from django.db import IntegrityError, transaction
 from django.test import TestCase
 from django.utils import timezone
 
+from registry import authz
 from registry import models as m
 
 
@@ -62,6 +63,11 @@ class ValidityTests(TestCase):
     def test_povezava_sama_ne_podeli_pravice(self):
         self._rel(self.now - timedelta(days=1))
         self.assertFalse(m.Grant.objects.filter(person=self.parent).exists())
+        scope = f"student:{self.student.person_id}"
+        for permission in ("acknowledge", "decide"):
+            self.assertEqual(
+                authz.check_grant(self.parent, scope, permission), (False, authz.NO_GRANT)
+            )
 
     def test_upravicenje_zahteva_potrditev(self):
         with self.assertRaises(IntegrityError), transaction.atomic():

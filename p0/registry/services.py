@@ -6,21 +6,14 @@ Uporabniški klic uporablja sejo; servisni klic uporablja Bearer žeton modula i
 
 import hashlib
 import secrets
-import uuid
 from functools import wraps
 
-from django.http import JsonResponse
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
+from core.http import error
+
 from . import models as m
-
-
-def error(status, code, message=""):
-    """Napaka po pogodbi: code, message, trace_id. Sporočilo ne razkriva tujih virov."""
-    return JsonResponse(
-        {"code": code, "message": message, "trace_id": uuid.uuid4().hex}, status=status
-    )
 
 
 def hash_token(token):

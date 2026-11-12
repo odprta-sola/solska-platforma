@@ -5,6 +5,8 @@ from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
 
+from config.checks import stubs_in_production
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "core.middleware.ApiErrorMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -49,15 +52,21 @@ MIDDLEWARE = [
 # Nadomestka modulov (stubs): privzeto samo v razvoju. Ko ekipa vgradi pravi modul, ga
 # odstrani s seznama, npr. STUBS=m2 (nadomestek M1 izklopljen).
 STUBS = {x.strip() for x in env("STUBS", "m1,m2" if DEBUG else "").split(",") if x.strip()}
+if stubs_in_production(DEBUG, STUBS):
+    raise ImproperlyConfigured(
+        "STUBS je dovoljen samo z DJANGO_DEBUG=1 (nadomestka nista za produkcijo)."
+    )
 
 AUTH_USER_MODEL = "registry.Account"
+
+CSRF_FAILURE_VIEW = "core.views.csrf_failure"
 
 ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

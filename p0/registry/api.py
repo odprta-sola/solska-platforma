@@ -8,6 +8,7 @@ import json
 import secrets
 from functools import wraps
 
+from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
@@ -15,6 +16,7 @@ from django.views.decorators.http import require_GET, require_POST
 
 from . import authz
 from . import models as m
+from .contract_schemas import valid_request
 from .services import error, issue_scope_ref, service_client, service_only
 
 
@@ -42,9 +44,10 @@ def json_body(request):
 
 
 def person_by_id(value):
+    """Oseba po ID ali None; neveljavna oblika ID je enaka neobstoječi osebi."""
     try:
         return m.Person.objects.filter(pk=value).first()
-    except (ValueError, TypeError):
+    except (ValueError, TypeError, ValidationError):
         return None
 
 
@@ -132,15 +135,9 @@ def _check_response(allowed, reason):
 
 def _check_body(request):
     body = json_body(request)
-    if body is None:
+    if not valid_request("AuthCheckRequest", body):
         return None
-    scope_ref, permission = body.get("scope_ref"), body.get("permission")
-    subject_id = body.get("subject_id")
-    if not isinstance(scope_ref, str) or not isinstance(permission, str):
-        return None
-    if subject_id is not None and not isinstance(subject_id, str):
-        return None
-    return scope_ref, permission, subject_id
+    return body["scope_ref"], body["permission"], body.get("subject_id")
 
 
 @csrf_exempt
@@ -190,12 +187,11 @@ def audiences_resolve(request, client):
     nikoli kontaktov. Delegiranje avtorja po seji ostaja odprto v D12.
     """
     body = json_body(request)
-    if body is None:
+    if not valid_request("AudienceRequest", body):
         return error(400, "invalid_request")
-    author = person_by_id(body.get("author_id")) if isinstance(body.get("author_id"), str) else None
-    purpose = body.get("purpose")
-    class_id = body.get("class_id")
-    if purpose not in PURPOSE_PERMISSION or not isinstance(class_id, str) or author is None:
+    author = person_by_id(body["author_id"])
+    purpose, class_id = body["purpose"], body["class_id"]
+    if author is None:
         return error(400, "invalid_request")
     now = timezone.now()
     if not (
@@ -252,14 +248,29 @@ def delivery_contact_resolve(request, client):
     """Kontakt za točno določenega prejemnika tik pred pošiljanjem; samo M1.
 
     Veljati mora aktualno upravičenje za obseg. Kontakta ni mogoče brati z ugibanimi ID.
+
+    Začasno zaprto: kontakt se vrne šele, ko P0 lahko preveri vezavo na evidentirano
+    dostavo (odprto v D12). Do takrat je odgovor 503 brez kontakta, enak za vse vhode.
     """
     body = json_body(request)
-    if body is None:
+    if not valid_request("ContactRequest", body):
         return error(400, "invalid_request")
-    recipient_id, scope_ref = body.get("recipient_id"), body.get("scope_ref")
-    request_id = body.get("delivery_request_id")
-    if not all(isinstance(v, str) and v for v in (recipient_id, scope_ref, request_id)):
-        return error(400, "invalid_request")
+    recipient_id, scope_ref = body["recipient_id"], body["scope_ref"]
+    request_id = body["delivery_request_id"]
+    if not delivery_binding_verified(request_id, recipient_id, scope_ref, client):
+        return error(503, "temporarily_unavailable")
+    return _resolve_contact(recipient_id, scope_ref)
+
+
+def delivery_binding_verified(request_id, recipient_id, scope_ref, client):
+    """Ali je zahteva preverljivo vezana na evidentirano dostavo tega odjemalca.
+
+    Preverljivega mehanizma še ni (D12), zato vedno False. Ne nadomeščaj z obliko ID.
+    """
+    return False
+
+
+def _resolve_contact(recipient_id, scope_ref):
     person = person_by_id(recipient_id)
     ref = m.ScopeRef.objects.filter(ref=scope_ref, person=person).first() if person else None
     if person is None or ref is None:

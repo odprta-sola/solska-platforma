@@ -7,6 +7,9 @@ info:
     nato smejo odvisne ekipe nanjo vezati implementacijo. Vsebinska razlaga je v
     docs/arhitektura/vmesnik-P0-M1-M2.md. Pot /_stub/* obstaja samo v nadomestkih in ni del pogodbe.
     Vrednosti v primerih so izmišljene.
+    Splošne napake (predlog): neznana pot API vrne 404, napačna metoda 405, zavrnitev CSRF
+    pri sejnem klicu 403, nepričakovana napaka 500 in nedosegljiva evidenca 503; vse z
+    vsebino Error (application/json). Omejitve dolžin in števil so predlog D12.
 servers:
   - url: http://localhost:8000
 paths:
@@ -49,6 +52,7 @@ paths:
         "400": {$ref: "#/components/responses/Error"}
         "401": {$ref: "#/components/responses/Error"}
         "403": {$ref: "#/components/responses/Error"}
+        "503": {$ref: "#/components/responses/Error"}
   /p0/api/v1/audiences/resolve:
     post:
       summary: Predogled dovoljenih prejemnikov oddelka (servisni klic za pooblaščenega avtorja)
@@ -61,6 +65,7 @@ paths:
         "400": {$ref: "#/components/responses/Error"}
         "401": {$ref: "#/components/responses/Error"}
         "403": {$ref: "#/components/responses/Error"}
+        "503": {$ref: "#/components/responses/Error"}
   /p0/api/v1/delivery-contacts/resolve:
     post:
       summary: Kontakt za točno določenega prejemnika tik pred pošiljanjem (samo M1)
@@ -73,10 +78,15 @@ paths:
         "400": {$ref: "#/components/responses/Error"}
         "401": {$ref: "#/components/responses/Error"}
         "403": {$ref: "#/components/responses/Error"}
+        "503": {$ref: "#/components/responses/Error"}
   /m1/api/v1/delivery-requests:
     post:
       summary: Trajni prevzem zahteve za dostavo
-      description: 202 šele po zapisu, potrebnem za obnovo. Isti idempotency_key in vsebina vrneta isti rezultat; drugačna vsebina 409.
+      description: >
+        202 šele po zapisu, potrebnem za obnovo. Isti idempotency_key in vsebina vrneta isti
+        rezultat; drugačna vsebina 409. Predlog D12: ponovitev že prevzete zahteve vrne isti
+        prevzem tudi po expires_at (brez nove dostave in brez podaljšanja roka); nova zahteva s
+        pretečenim rokom je 400. Okno hrambe ključa po izteku še ni določeno.
       security: [{serviceBearer: []}]
       requestBody:
         required: true
@@ -140,7 +150,7 @@ components:
         code: {type: string}
         message: {type: string}
         trace_id: {type: string}
-    Id: {type: string, minLength: 1}
+    Id: {type: string, minLength: 1, maxLength: 256}
     Permission:
       type: string
       description: Šifrant dovoljenj modulov (osnutek).
@@ -197,7 +207,7 @@ components:
       properties:
         subject_id: {$ref: "#/components/schemas/Id"}
         scope_ref: {$ref: "#/components/schemas/Id"}
-        permission: {type: string}
+        permission: {type: string, minLength: 1, maxLength: 64}
     AuthCheckResponse:
       type: object
       required: [allowed, reason_code, checked_at]
@@ -205,6 +215,9 @@ components:
         allowed: {type: boolean}
         reason_code: {type: string, enum: [ALLOWED, NOT_ALLOWED, SCOPE_INACTIVE]}
         checked_at: {type: string, format: date-time}
+      if: {properties: {allowed: {const: true}}}
+      then: {properties: {reason_code: {const: ALLOWED}}}
+      else: {properties: {reason_code: {enum: [NOT_ALLOWED, SCOPE_INACTIVE]}}}
     AudienceRequest:
       type: object
       required: [author_id, class_id, purpose]
@@ -246,6 +259,9 @@ components:
         reason_code: {type: string, enum: [OK, NO_CONTACT]}
         email: {type: string, format: email}
         locale: {type: string}
+      if: {properties: {deliverable: {const: true}}}
+      then: {required: [email, locale], properties: {reason_code: {const: OK}}}
+      else: {not: {anyOf: [{required: [email]}, {required: [locale]}]}, properties: {reason_code: {const: NO_CONTACT}}}
     DeliveryRequest:
       type: object
       required: [idempotency_key, kind, recipients, template_id, locale, params, target, expires_at]
@@ -255,6 +271,7 @@ components:
         kind: {type: string, enum: [notification, reminder, receipt, change_notice]}
         recipients:
           type: array
+          description: Isti person_id se ne sme ponoviti (predlog D12; identiteta postavke ni določena).
           minItems: 1
           maxItems: 200
           items:
@@ -265,8 +282,8 @@ components:
               person_id: {$ref: "#/components/schemas/Id"}
               scope_ref: {$ref: "#/components/schemas/Id"}
         template_id: {$ref: "#/components/schemas/Id"}
-        locale: {type: string}
-        params: {type: object}
+        locale: {type: string, minLength: 2, maxLength: 16}
+        params: {type: object, maxProperties: 50}
         target:
           type: object
           required: [module, resource_id]
@@ -275,7 +292,7 @@ components:
             module: {type: string, enum: [M1, M2]}
             resource_id: {$ref: "#/components/schemas/Id"}
         need_ref: {$ref: "#/components/schemas/Id"}
-        expires_at: {type: string, format: date-time}
+        expires_at: {type: string, format: date-time, maxLength: 64}
     RecipientState:
       type: string
       enum: [queued, held, handed_off, failed, cancelled, expired]
@@ -301,7 +318,7 @@ components:
       required: [recipient_ids]
       additionalProperties: false
       properties:
-        recipient_ids: {type: array, minItems: 1, items: {$ref: "#/components/schemas/Id"}}
+        recipient_ids: {type: array, minItems: 1, maxItems: 200, items: {$ref: "#/components/schemas/Id"}}
     CancelResponse:
       type: object
       required: [delivery_request_id, recipients]
