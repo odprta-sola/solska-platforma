@@ -1,6 +1,6 @@
 # Varnostne težave
 
-Projekt je v fazi dokumentacije in še nima produkcijske kode ali podatkov. Pravila veljajo že zdaj, da bodo urejena pred prvo kodo.
+Projekt ima referenčno kodo P0 za razvoj na izmišljenih podatkih; produkcijske namestitve in resničnih podatkov ni. Pravila veljajo že zdaj.
 
 ## Kako sporočiti varnostno težavo
 

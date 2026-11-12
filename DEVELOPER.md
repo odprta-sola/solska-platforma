@@ -1,6 +1,6 @@
 # Navodila za razvijalce
 
-Status: osnutek, faza 5 (ogrodje, model, prijava, API, uvoz CSV, osnutek pogodbe D12 z nadomestkoma M1/M2). Navodila po ekipah sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
+Status: osnutek, 12. november 2026, po popravkih prvega neodvisnega pregleda (ogrodje, model, prijava, API, uvoz CSV, osnutek pogodbe D12 z nadomestkoma M1/M2). Navodila po ekipah sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Pravila
 
@@ -64,6 +64,8 @@ Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnil
 
 `scope_ref` je neprosojen sklic, ki ga izda P0 za par (oseba, obseg); tuj ali ugiban sklic vrne `NOT_ALLOWED`. Šifrant dovoljenj: `m1.confirm`, `m2.decide`.
 
+Zahteve se preverijo proti shemam pogodbe (`registry/contract_schemas.py`, enakost s `api/openapi.yaml` preveri test): manjkajoče ali dodatno polje, napačen tip ali predolg niz je 400. Napake na poteh API so vedno JSON `{code, message, trace_id}`: 404 neznana pot, 405 napačna metoda (z `Allow`), 403 `csrf_failed` pri sejnem klicu brez CSRF, 503 nedosegljiva evidenca (nikoli `allowed=false`), 500 brez tehničnih podrobnosti (sled je v dnevniku strežnika `p0.api`).
+
 ### Servisne identitete in nadomestka M1/M2
 
 Servisni klic uporablja `Authorization: Bearer <žeton>`, nikoli seje. Žeton se hrani zgoščen. Neveljaven žeton je 401 in ne preide na sejo.
@@ -75,9 +77,9 @@ python manage.py create_service_client m2 --scope m1.delivery --scope p0.authori
 
 Žeton se izpiše enkrat; ne shranjujte ga v repozitorij. Dovoljenja: `p0.authorizations.check`, `p0.audiences.resolve`, `p0.contacts.resolve`, `m1.delivery`, `m2.reminders.check`.
 
-Nadomestka M1 (`/m1/api/v1/`) in M2 (`/m2/api/v1/`) sta v `p0/stubs/` in se vklopita s `STUBS=m1,m2` (privzeto v razvoju; pravi modul odstrani svoj nadomestek, npr. `STUBS=m2`). Ne pošiljata e-pošte, stanje je v pomnilniku procesa. Za preizkus stanj sta na voljo samo v nadomestkih `POST /m1/api/v1/_stub/advance` in `POST /m2/api/v1/_stub/mark-done`. Ekipa M1 zamenja nadomestek M1 s pravim modulom, ekipa M2 nadomestek M2, z istimi shemami.
+Nadomestka M1 (`/m1/api/v1/`) in M2 (`/m2/api/v1/`) sta v `p0/stubs/` in se vklopita s `STUBS=m1,m2` (samo z `DJANGO_DEBUG=1`, sicer se aplikacija ne zažene; privzeto v razvoju; pravi modul odstrani svoj nadomestek, npr. `STUBS=m2`). Ne pošiljata e-pošte, stanje je v pomnilniku procesa. Za preizkus stanj sta na voljo samo v nadomestkih `POST /m1/api/v1/_stub/advance` in `POST /m2/api/v1/_stub/mark-done`. Ekipa M1 zamenja nadomestek M1 s pravim modulom, ekipa M2 nadomestek M2, z istimi shemami.
 
-Pogodbeni testi (`registry/tests/test_contract.py`) preverjajo vsak odgovor proti shemi in scenarije: tuj sklic, servisni klic brez seje, nepooblaščen kontaktni klic, podvojena zahteva in konflikt ključa, delna stanja, ponovljen in selektivni preklic, iztek, odsoten kontakt.
+Pogodbeni testi (`registry/tests/test_contract.py`, `test_robni.py`) vsak odgovor, ki gre skozi `ContractBase.call`, preverijo proti operaciji v pogodbi (`registry/tests/contract_check.py`: status, vsebinski tip, shema s formati, pogojne sheme, `counts`). Odgovori, pridobljeni neposredno z Django odjemalcem, niso samodejno preverjeni. Nadomestka dokazujeta le sheme in omejena stanja, ne trajnosti, obnove, izpada ali urnika. Scenariji: tuj sklic, servisni klic brez seje, nepooblaščen kontaktni klic, podvojena zahteva in konflikt ključa, delna stanja, ponovljen in selektivni preklic, iztek, odsoten kontakt.
 
 Pravice se odločajo samo v `registry/authz.py`. Povezava sama ne dovoli dejanja; odvzem povezave ali upravičenja prevlada. Zaščitenih dejanj se ne dovoli na slepo: neznan ali tuj obseg ni nikoli »dovoljeno«.
 
@@ -91,7 +93,7 @@ python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNI
 python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNIK --apply-batch ID
 ```
 
-`UPORABNIK` je račun osebe z vlogo `office` ali `admin`. Predogled nič ne spremeni; uveljavitev zahteva isto vsebino kot predogled in je vse ali nič.
+`UPORABNIK` je račun osebe z vlogo `office` ali `admin`. Predogled nič ne spremeni; uveljavitev zahteva isto vsebino kot predogled in je vse ali nič. Če se je evidenca od predogleda spremenila tako, da bi uveljavitev izvedla drugačne operacije, je serija zavrnjena (`preview_stale`) in je potreben nov predogled. Serija je med uveljavitvijo zaklenjena; ponovna ali sočasna uveljavitev ne uspe.
 
 - Napaka (neznana referenca, neveljaven datum ali šifrant, podvojen ključ) zavrne celotno serijo.
 - Ponovni uvoz ne podvoji oseb; manjkajoča vrstica ne izbriše in ne odvzame ničesar.

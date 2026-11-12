@@ -15,7 +15,7 @@ docker compose exec -T -e SEED_PASSWORD="<izberite-testno-geslo>" p0 python mana
 docker compose exec -T p0 python manage.py test
 ```
 
-Pričakovano: vsi testi zeleni (82 ob pisanju). Geslo je samo testno in ne sme biti uporabljeno nikjer drugje. Pošta je v http://localhost:8025. Po koncu: `docker compose down -v`.
+Pričakovano: vsi testi zeleni; število na posameznem commitu je v [zapisu o odpravi](../pregledi/2026-11-odprava-prvega-pregleda-P0.md), preskočeni testi so označeni z razlogom. Geslo je samo testno in ne sme biti uporabljeno nikjer drugje. Pošta je v http://localhost:8025. Po koncu: `docker compose down -v`.
 
 ## Točke pregleda
 
@@ -29,7 +29,7 @@ Pri vsaki točki zapišite: izvedeno / ni izvedeno, ugotovitev, ponovljiv ukaz a
 | 4 | Napačen CSV ne povzroči delnega prepisa; ponovni uvoz ne podvoji; sprememba kontakta je sledljiva | `import_csv` na `data/testni-uvoz` (predogled, uveljavitev, ponovitev), nato pokvarjena datoteka. Preglejte `ChangeAudit` | `registry/tests/test_import.py` (22 testov) |
 | 5 | Servisni klic za kontakt samo za evidentirano zahtevo in prejemnika; tuj obseg zavrnjen | `create_service_client` z/brez `p0.contacts.resolve`; poskusite brez žetona, s tujim in ugibanim `scope_ref` | `ContactContract`, `AuthorizationCheckContract.test_servisni_klic_*` |
 | 6 | Neodvisen pregled izvorne kode | Preberite `registry/authz.py`, `registry/api.py`, `registry/services.py`, `registry/importer.py`; vprašanja spodaj | Ni (človeška presoja) |
-| 7 | Po ponastavitvi podatkov pogodbeni testi proti nadomestkoma | `down -v`, ponovna priprava, `test registry.tests.test_contract` | pogodbeni testi v `registry/tests/test_contract.py` |
+| 7 | Po ponastavitvi podatkov pogodbeni testi proti nadomestkoma | `down -v`, ponovna priprava, `test registry.tests.test_contract registry.tests.test_robni` | `test_contract.py`, `test_robni.py`, preverjevalnik `contract_check.py` |
 | 8 | Ob izpadu P0 moduli ne dovolijo zaščitenega dejanja in ne pošljejo na slepo | Za zdaj nepreverljivo: pravi M1/M2 še ne obstajata; nadomestki ne kličejo P0 | Ni |
 | 9 | Prijava in osnovna opravila s tipkovnico, fokus, razumljive napake, bralnik zaslona | Ročno. Obstaja samo privzeta prijava allauth; zaslonov P0 (seznam oseb, uvoz) ni | Ni |
 
