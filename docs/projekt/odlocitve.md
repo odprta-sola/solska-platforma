@@ -11,18 +11,18 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | --- | --- | --- | --- |
 | D01 | Obseg učnega izdelka in prvega pilota M1 | Odprto | Mentor in pilotna šola |
 | D02 | Mentor, dijaki in roki | Odprto | Razvojni zavod |
-| D03 | Skupni tehnični nosilec in skupni gradniki | Odprto | Sodelujoči zavodi |
+| D03 | Skupni tehnični nosilec in skupni gradniki | Osebni sprejem pobudnika 12. 11. 2026 (nosilec: pobudnik); potrditev sodelujočih zavodov odprta | Sodelujoči zavodi |
 | D04 | Gostovanje, e-pošta in kopije | Odprto | Pilotna šola in skupni tehnični nosilec |
 | D05 | Jeziki in dostopnost pilota (podatkovni model je večjezičen od začetka; zahtevani jeziki za namestitve po državi, npr. italijanščina in madžarščina, se pravno preverijo) | Odprto | Pilotna šola in nosilec projekta |
 | D06 | Upravičeni prejemniki in pravila potrjevanja | Odprto | Pilotna šola |
 | D07 | Hramba, dostopi in podatkovne poti | Odprto | Pilotna šola ob posvetu z DPO |
-| D08 | Licenca EUPL 1.2 in pravice prispevkov | Predlog | Nosilec projekta in avtorji |
-| D09 | Vzdrževanje, podpora in namestnik | Odprto | Sodelujoči zavodi |
+| D08 | Licenca EUPL 1.2 in pravice prispevkov | EUPL 1.2 za kodo osebno potrjena 12. 11. 2026; pravice prispevkov dijakov odprte | Nosilec projekta in avtorji |
+| D09 | Vzdrževanje, podpora in namestnik | Pobudnik osebno prevzema vlogo nosilca; drugi skrbnik/namestnik ni imenovan, ostaja odprto | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema M1 in M2 | Predlog v specifikacijah | Skupni tehnični nosilec in pilotna šola |
 | D11 | Postopek pilota M2, besedilo obrazca in pravila odločanja | Odprto | Pilotna šola ob vsebinskem in pravnem pregledu |
 | D12 | [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md): minimalno obveščanje in skupni vir identitet ter upravičenj | Odprto | Skupni tehnični nosilec in mentorji ekip |
 | D13 | Razdelitev ekip, nosilci modulov in ocena ur po fazah | Odprto | Sodelujoči zavodi in mentorji |
-| D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; obravnava odprta, pred prvo kodo oziroma vključitvijo zunanjih ekip | Nosilec projekta in skrbnik repozitorija |
+| D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; nosilec: pobudnik (osebni sprejem 12. 11. 2026); namestnik in roki odziva odprti | Nosilec projekta in skrbnik repozitorija |
 | D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | Predlog/Odprto | Nosilec projekta in avtorji |
 | D16 | Prejemniki in odločevalci pri polnoletnih dijakih, prehod med letom in ustreznost privolitve za postopek | Odprto | Pilotna šola ob pravnem in podatkovnem pregledu |
 
@@ -51,6 +51,19 @@ Pobudnik je predložil dopolnjeno predstavitev in nadaljnje korake ter izrecno n
 Opis »prve različice« v predstavitvi pomeni ciljni B, ne samodejne širitve T/A. Aktivacija/obnova ostaneta dopolnitev pred B; v T so računi pripravljeni vnaprej. Sedanji neodvisni človeški prevzem T pred A/I ostane; predlog avtorjevega pregleda z AI še ni potrjen.
 
 Noben D01–D16 se s to posodobitvijo ne zapre. Potrebna pravna in podatkovna pravila za šolo niso potrjena z uredniško objavo.
+
+## Osebni sprejemi pobudnika 12. novembra 2026
+
+Pobudnik Mitja Pirih je v pogovoru z Claude AI, ki pripravlja P0 in navodila, sprejel naslednje. To so osebni sprejemi, ne institucionalna potrditev šol ali mentorjev. Povezani issuei (#12, #17, #18, #23) ostajajo odprti do ustrezne potrditve.
+
+| Odločitev | Sprejeto | Kaj ostaja odprto |
+| --- | --- | --- |
+| D03 | Pobudnik je skupni tehnični nosilec in nosilec skupnih gradnikov. Osnova: Django 5.2 LTS, PostgreSQL, Docker Compose. Predlagana prijavna komponenta django-allauth še čaka na izrecno potrditev v pregledu pull requesta. | Potrditev sodelujočih zavodov in mentorjev |
+| D08 | Za programsko kodo velja EUPL 1.2; besedilo je v datoteki LICENSE. | Pravice prispevkov in izjave dijakov (dogovor z mentorjem), licenca dokumentacije (D15) |
+| D09 | Pobudnik je vzdrževalec in skrbnik repozitorija. | Drugi skrbnik/namestnik ni imenovan; Aleksandar ostaja kandidat do izrecnega sprejema. |
+| D14 | Pobudnik obravnava zasebne prijave ranljivosti. | Namestnik in roki odziva; dostop drugega računa |
+
+Pobudnik šteje pogoje D03, D08, D09 in D14 za zadostne za pripravo in lokalni razvoj osnove P0 na izmišljenih podatkih. Pogoj »drugi skrbnik« iz D09 ostaja nepopolno izpolnjen, zato velja pred vključitvijo zunanjih ekip (dijakov) še imenovanje namestnika. Neodvisni človeški prevzem T pred A/I ostane; zanj je predviden drug AI s pomočjo kontrolnega seznama, mentor je rezerva, vsakokratno odločitev o ustreznosti pa sprejme pobudnik.
 
 ## Roki in sledenje
 

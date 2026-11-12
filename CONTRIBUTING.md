@@ -20,7 +20,7 @@ Aktivna dokumentacija je v docs/ v obliki Markdown. PDF in Word sta obliki za po
 
 ## Koda in licenca
 
-Predvidena licenca kode je EUPL 1.2. Uradno besedilo licence in dogovor o pravicah prispevkov še nista vključena; ta navodila sama ne predstavljajo licenčne izjave.
+Programska koda je pod licenco EUPL 1.2 ([LICENSE](LICENSE)); pobudnik jo je osebno potrdil 12. novembra 2026 (D08). Dogovor o pravicah prispevkov dijakov in licenca dokumentacije (D15) še nista sprejeta. Z oddajo prispevka potrjujete, da imate pravico do njegove objave pod to licenco.
 
 Pred sprejemom kode se preveri pravica avtorja za objavo, pogoji prispevka in licence odvisnosti. Pri dijaškem delu nosilec z mentorjem uredi potrebne izjave. Skupnih varnostnih funkcij ne razvijajte na novo brez dogovora s tehničnim nosilcem.
 
