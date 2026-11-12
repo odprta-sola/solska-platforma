@@ -36,7 +36,7 @@
       <form method="post" action="{% url 'ui-import-discard' batch.pk %}">{% csrf_token %}<button type="submit" class="secondary">Zavrzi predogled</button></form>
     </div>
   {% elif batch.status == "previewed" %}
-    <p>Datoteke predogleda niso več na voljo. <a href="{% url 'ui-import' %}">Naredite nov predogled.</a></p>
+    <p>Datoteke predogleda niso več na voljo (hranijo se največ 24 ur). <a href="{% url 'ui-import' %}">Naredite nov predogled.</a></p>
   {% endif %}
 
   {% if item_count %}

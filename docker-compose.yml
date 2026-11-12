@@ -29,8 +29,27 @@ services:
       EMAIL_HOST: mail
     volumes: ["./p0:/app", "./data:/data:ro", "./api:/api:ro"]
     ports: ["127.0.0.1:8000:8000"]
+    # Zdrav šele po migracijah (migrate teče pred runserver) in z dosegljivo zbirko.
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/p0/api/v1/health')"]
+      interval: 3s
+      retries: 40
     depends_on:
       db: { condition: service_healthy }
+
+  cleanup:
+    # Čiščenje začasnih datotek predogleda uvoza brez uporabniškega prometa (vsako uro).
+    build:
+      context: ./p0
+      args: {INSTALL_DEV: "1"}
+    command: sh -c "while true; do python manage.py purge_import_uploads; sleep 3600; done"
+    environment:
+      DJANGO_DEBUG: "1"
+      POSTGRES_HOST: db
+    volumes: ["./p0:/app"]
+    depends_on:
+      db: { condition: service_healthy }
+      p0: { condition: service_healthy }
 
 volumes:
   dbdata:
