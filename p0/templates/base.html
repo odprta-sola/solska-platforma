@@ -37,9 +37,9 @@
     .actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.25rem; }
     .actions button, .actions form { margin: 0; }
     .status-ok { border: 2px solid #1f6f3a; padding: .75rem 1rem; }
-    dl.facts { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1rem; }
+    dl.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .25rem 1rem; }
     dl.facts dt { font-weight: 600; }
-    dl.facts dd { margin: 0; }
+    dl.facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
   </style>
   {% block extra_head %}{% endblock extra_head %}
 </head>

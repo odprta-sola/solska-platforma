@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth.views import redirect_to_login
 from django.core.paginator import Paginator
 from django.db import transaction
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_http_methods, require_POST
@@ -20,6 +21,7 @@ from . import models as m
 from .forms import ContactForm, ImportForm, SearchForm
 
 STAFF_ROLES = {m.Role.OFFICE.value, m.Role.ADMIN.value}
+ITEMS_PER_PAGE = 200  # predogled: vse postavke so dosegljive po straneh
 PERMISSION_LABELS = {"acknowledge": "seznanitev (M1)", "decide": "odločanje (M2)"}
 SCREEN_SOURCE = "zaslon"  # vir v sledi; ni "import:", zato šteje kot ročna sprememba
 
@@ -69,8 +71,21 @@ def _student_names(scope_keys):
     return dict((f"student:{p.pk}", p.display_name) for p in m.Person.objects.filter(pk__in=ids))
 
 
-def _grant_state(grant, active, active_relationships):
+def _open(obj, now):
+    """Zapis še ni zaključen: velja zdaj ali začne veljati pozneje (odvzem je še smiseln)."""
+    return obj.valid_until is None or obj.valid_until > now
+
+
+def _rel_state(rel, active, now):
+    if rel.valid_from > now:
+        return "še ne velja"
+    return "veljavna" if active else "zaključena"
+
+
+def _grant_state(grant, active, active_relationships, now=None):
     """Stanje, kot ga vidi authz: upravičenje na zaključeni povezavi ne velja."""
+    if now and grant.valid_from > now:
+        return "še ne velja"
     if not active:
         return "zaključeno"
     if grant.relationship_id and grant.relationship_id not in active_relationships:
@@ -106,13 +121,15 @@ def person_detail(request, actor, person_id):
         {
             "person": person,
             "roles": person.roles.all(),
-            "as_guardian": [(r, r.pk in active_rel) for r in as_guardian],
-            "as_student": [(r, r.pk in active_rel) for r in as_student],
+            "as_guardian": [
+                (r, _open(r, now), _rel_state(r, r.pk in active_rel, now)) for r in as_guardian
+            ],
+            "as_student": [(r, _rel_state(r, r.pk in active_rel, now)) for r in as_student],
             "grants": [
                 (
                     g,
-                    g.pk in active_grant,
-                    _grant_state(g, g.pk in active_grant, active_rel),
+                    _open(g, now),
+                    _grant_state(g, g.pk in active_grant, active_rel, now),
                     names.get(g.scope_key, "—"),
                     PERMISSION_LABELS.get(g.permission, g.permission),
                 )
@@ -121,6 +138,11 @@ def person_detail(request, actor, person_id):
             "audit": audit,
         },
     )
+
+
+def _not_ended(manager):
+    now = timezone.now()
+    return manager.filter(Q(valid_until__isnull=True) | Q(valid_until__gt=now))
 
 
 def _revoke(request, actor, person, obj, kind, label, revoke):
@@ -140,7 +162,7 @@ def _revoke(request, actor, person, obj, kind, label, revoke):
 def revoke_relationship(request, actor, person_id, rel_id):
     person = get_object_or_404(m.Person, pk=person_id)
     rel = get_object_or_404(
-        m.Relationship.objects.active().select_related("guardian", "student__person"),
+        _not_ended(m.Relationship.objects).select_related("guardian", "student__person"),
         pk=rel_id,
         guardian=person,
     )
@@ -152,7 +174,7 @@ def revoke_relationship(request, actor, person_id, rel_id):
 @staff_required
 def revoke_grant(request, actor, person_id, grant_id):
     person = get_object_or_404(m.Person, pk=person_id)
-    grant = get_object_or_404(m.Grant.objects.active(), pk=grant_id, person=person)
+    grant = get_object_or_404(_not_ended(m.Grant.objects), pk=grant_id, person=person)
     student = _student_names([grant.scope_key]).get(grant.scope_key, "—")
     perm = PERMISSION_LABELS.get(grant.permission, grant.permission)
     label = f"Upravičenje »{perm}« za {student}"
@@ -236,12 +258,16 @@ def import_batch(request, actor, batch_id):
     batch = get_object_or_404(m.ImportBatch, pk=batch_id)
     _expire(batch)
     items = batch.items.order_by("pk")
+    only_changes = request.GET.get("samo") == "spremembe"
+    shown = items.exclude(action="unchanged") if only_changes else items
+    page = Paginator(shown, ITEMS_PER_PAGE).get_page(request.GET.get("stran"))
     return render(
         request,
         "evidenca/serija.html",
         {
             "batch": batch,
-            "items": items[:500],
+            "page": page,
+            "only_changes": only_changes,
             "item_count": items.count(),
             "changes": items.exclude(action="unchanged").count(),
             "can_apply": batch.status == m.ImportBatch.Status.PREVIEWED and batch.uploads.exists(),
@@ -281,7 +307,8 @@ def import_apply(request, actor, batch_id):
 def import_discard(request, actor, batch_id):
     with transaction.atomic():
         batch = get_object_or_404(m.ImportBatch.objects.select_for_update(), pk=batch_id)
-        if batch.status == m.ImportBatch.Status.PREVIEWED:
+        previewed = batch.status == m.ImportBatch.Status.PREVIEWED
+        if previewed:
             batch.status = m.ImportBatch.Status.REJECTED
             batch.problems = [
                 {
@@ -294,5 +321,11 @@ def import_discard(request, actor, batch_id):
             ]
             batch.save(update_fields=["status", "problems"])
         m.ImportUpload.objects.filter(batch=batch).delete()
+    if not previewed:
+        messages.error(
+            request,
+            f"Zavrženje ni bilo izvedeno: serija je že v stanju »{batch.get_status_display()}«.",
+        )
+        return redirect("ui-import-batch", batch_id=batch.pk)
     messages.success(request, "Predogled je zavržen; nič ni bilo spremenjeno.")
     return redirect("ui-import")
