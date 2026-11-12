@@ -30,7 +30,7 @@
 
   {% if can_apply %}
     <h2>Odločitev</h2>
-    <p>Uveljavitev izvede natanko spremembe spodaj. Če se je evidenca medtem spremenila, bo serija zavrnjena in bo potreben nov predogled.</p>
+    <p>Uveljavitev izvede natanko spremembe, navedene spodaj na vseh straneh. Če se je evidenca medtem spremenila, bo serija zavrnjena in bo potreben nov predogled.</p>
     <div class="actions">
       <form method="post" action="{% url 'ui-import-apply' batch.pk %}">{% csrf_token %}<button type="submit">Uveljavi serijo</button></form>
       <form method="post" action="{% url 'ui-import-discard' batch.pk %}">{% csrf_token %}<button type="submit" class="secondary">Zavrzi predogled</button></form>
@@ -40,16 +40,30 @@
   {% endif %}
 
   {% if item_count %}
-    <h2>Spremembe po zapisih</h2>
+    <h2 id="postavke">Spremembe po zapisih</h2>
+    <p>
+      {% if only_changes %}Prikazane so samo spremembe ({{ changes }}). <a href="?#postavke">Prikaži vse zapise ({{ item_count }})</a>.
+      {% else %}Prikazani so vsi zapisi ({{ item_count }}). <a href="?samo=spremembe#postavke">Prikaži samo spremembe ({{ changes }})</a>.{% endif %}
+    </p>
     <div class="tablewrap" role="region" tabindex="0" aria-label="Spremembe po zapisih (tabela)"><table>
-      <caption class="visually-hidden">Načrtovane ali izvedene spremembe; prikazanih največ 500</caption>
+      <caption class="visually-hidden">Stran {{ page.number }} od {{ page.paginator.num_pages }}</caption>
       <thead><tr><th scope="col">Vrsta zapisa</th><th scope="col">Ključ</th><th scope="col">Dejanje</th><th scope="col">Spremenjena polja</th></tr></thead>
       <tbody>
-        {% for i in items %}
+        {% for i in page %}
           <tr><td>{{ i.entity_type }}</td><td>{{ i.source_key }}</td><td>{{ i.action }}</td><td>{{ i.changed_fields|join:", "|default:"—" }}</td></tr>
+        {% empty %}
+          <tr><td colspan="4">Ni sprememb.</td></tr>
         {% endfor %}
       </tbody>
     </table></div>
-    {% if item_count > 500 %}<p>Prikazanih je prvih 500 od {{ item_count }} zapisov.</p>{% endif %}
+    {% if page.paginator.num_pages > 1 %}
+      <nav aria-label="Strani zapisov">
+        <p>Stran {{ page.number }} od {{ page.paginator.num_pages }}.</p>
+        <ul class="actions">
+          {% if page.has_previous %}<li><a href="?{% if only_changes %}samo=spremembe&amp;{% endif %}stran={{ page.previous_page_number }}#postavke">Prejšnja stran</a></li>{% endif %}
+          {% if page.has_next %}<li><a href="?{% if only_changes %}samo=spremembe&amp;{% endif %}stran={{ page.next_page_number }}#postavke">Naslednja stran</a></li>{% endif %}
+        </ul>
+      </nav>
+    {% endif %}
   {% endif %}
 {% endblock %}

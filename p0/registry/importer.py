@@ -26,6 +26,28 @@ from . import models as m
 
 MAX_FILE_BYTES = 5 * 1024 * 1024
 MAX_ROWS = 50_000
+# Posamezno polje lahko zasede celotno dovoljeno velikost datoteke; dolžino preverimo spodaj.
+csv.field_size_limit(MAX_FILE_BYTES)
+
+# Največje dolžine polj CSV (iz modelov). Izvorni ključi so krajši od modela (128), ker se
+# sestavljajo v ključ postavke predogleda (največ 256 znakov).
+KEY_MAX = 64
+FIELD_LIMITS = {
+    "source_person_key": KEY_MAX,
+    "source_student_key": KEY_MAX,
+    "display_name": 200,
+    "contact_email": 254,
+    "class_key": 64,
+    "name": 100,
+    "school_year": 9,
+    "role": 16,
+    "relationship_type": 16,
+    "permission": 64,
+    "scope_key": len("student:") + KEY_MAX,
+    "approval_ref": 200,
+    "valid_from": 64,
+    "valid_until": 64,
+}
 
 # Verzionirani šifranti; neznana vrednost je napaka.
 PERMISSIONS = {"acknowledge", "decide"}
@@ -147,7 +169,11 @@ def parse_files(files, problems):
             continue
         required, optional, _ = SCHEMA[name]
         reader = csv.DictReader(io.StringIO(text, newline=""), delimiter=";")
-        header = reader.fieldnames or []
+        try:
+            header = reader.fieldnames or []
+        except csv.Error:
+            problems.append(Problem("error", name, 1, "bad_csv", "Glave ni mogoče razčleniti."))
+            continue
         missing = [c for c in required if c not in header]
         unknown = [c for c in header if c not in required + optional]
         if missing or unknown:
@@ -162,14 +188,20 @@ def parse_files(files, problems):
             )
             continue
         rows = []
-        for i, raw_row in enumerate(reader, start=2):
-            if len(rows) >= MAX_ROWS:
-                problems.append(Problem("error", name, i, "too_many_rows", "Preveč vrstic."))
-                break
-            if None in raw_row or None in raw_row.values():
-                problems.append(Problem("error", name, i, "bad_row", "Napačno število polj."))
-                continue
-            rows.append((i, {k: (v or "").strip() for k, v in raw_row.items()}))
+        try:
+            for i, raw_row in enumerate(reader, start=2):
+                if len(rows) >= MAX_ROWS:
+                    problems.append(Problem("error", name, i, "too_many_rows", "Preveč vrstic."))
+                    break
+                if None in raw_row or None in raw_row.values():
+                    problems.append(Problem("error", name, i, "bad_row", "Napačno število polj."))
+                    continue
+                rows.append((i, {k: (v or "").strip() for k, v in raw_row.items()}))
+        except csv.Error:
+            problems.append(
+                Problem("error", name, reader.line_num, "bad_csv", "Datoteke ni mogoče razčleniti.")
+            )
+            continue
         tables[name] = rows
     return tables
 
@@ -181,6 +213,15 @@ def validate_rows(tables, problems):
         seen = {}
         for i, row in rows:
             ok = True
+            for col, value in row.items():
+                limit = FIELD_LIMITS.get(col)
+                if limit and len(value) > limit:
+                    problems.append(
+                        Problem("error", name, i, "too_long", f"Polje {col} je daljše od {limit}.")
+                    )
+                    ok = False
+            if not ok:
+                continue
             for col in required:
                 if not row[col]:
                     problems.append(
