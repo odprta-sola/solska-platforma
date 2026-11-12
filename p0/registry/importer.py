@@ -644,8 +644,16 @@ def _has_role(source, row):
     )
 
 
-def process(files, source, actor, apply=False):
-    """Razčleni, validira in v transakciji izvede uvoz; uveljavi le pri `apply` in čisti seriji."""
+def plan_of(ops):
+    """Kanoničen načrt sprememb: izvorni ključi in dejanja, brez notranjih (naključnih) ID."""
+    return [(o.entity_type, o.key, o.action, sorted(o.changed_fields)) for o in ops]
+
+
+def process(files, source, actor, apply=False, expected_plan=None):
+    """Razčleni, validira in v transakciji izvede uvoz; uveljavi le pri `apply` in čisti seriji.
+
+    Z `expected_plan` se uveljavi le, če so izračunane operacije enake potrjenemu predogledu.
+    """
     problems = []
     tables = parse_files(files, problems)
     chash = content_hash(files)
@@ -683,6 +691,16 @@ def process(files, source, actor, apply=False):
             applier = _Applier(tables, source, actor, problems)
             applier.run()
             ops = applier.ops
+            if expected_plan is not None and not problems and plan_of(ops) != expected_plan:
+                problems.append(
+                    Problem(
+                        "error",
+                        "",
+                        0,
+                        "preview_stale",
+                        "Evidenca se je od predogleda spremenila; potreben je nov predogled.",
+                    )
+                )
             if problems or not apply:
                 raise Rollback
     except Rollback:
@@ -719,24 +737,38 @@ def preview(files, source, actor):
 
 
 def apply_batch(batch, files, actor):
-    """Uveljavi prej pregledano serijo. Vsebina mora biti enaka tisti iz predogleda."""
-    if batch.status != m.ImportBatch.Status.PREVIEWED:
-        raise ValueError("Uveljaviti je mogoče samo čist predogled.")
-    if batch.content_hash != content_hash(files):
-        raise ValueError("Vsebina se razlikuje od predogleda.")
+    """Uveljavi prej pregledano serijo.
+
+    Vsebina mora biti enaka tisti iz predogleda in izračunane operacije enake potrjenim.
+    Serija je med uveljavitvijo zaklenjena; podatki in končno stanje serije se zapišejo v isti
+    transakciji, zato sočasna ali ponovna uveljavitev ne uspe.
+    """
     try:
-        result = process(files, batch.source, actor, apply=True)
-    except Exception:
-        batch.status = m.ImportBatch.Status.FAILED
-        batch.save(update_fields=["status"])
+        with transaction.atomic():
+            locked = m.ImportBatch.objects.select_for_update().get(pk=batch.pk)
+            if locked.status != m.ImportBatch.Status.PREVIEWED:
+                raise ValueError("Uveljaviti je mogoče samo čist predogled.")
+            if locked.content_hash != content_hash(files):
+                raise ValueError("Vsebina se razlikuje od predogleda.")
+            expected = [
+                (i.entity_type, i.source_key, i.action, sorted(i.changed_fields))
+                for i in locked.items.order_by("pk")
+            ]
+            result = process(files, locked.source, actor, apply=True, expected_plan=expected)
+            if not result.clean:
+                locked.status = m.ImportBatch.Status.REJECTED
+                locked.problems = [p.as_dict() for p in result.problems]
+            else:
+                locked.status = m.ImportBatch.Status.APPLIED
+                locked.applied_at = timezone.now()
+                locked.applied_by = actor
+                locked.counts = result.counts
+            locked.save()
+    except ValueError:
         raise
-    if not result.clean:
-        batch.status = m.ImportBatch.Status.REJECTED
-        batch.problems = [p.as_dict() for p in result.problems]
-    else:
-        batch.status = m.ImportBatch.Status.APPLIED
-        batch.applied_at = timezone.now()
-        batch.applied_by = actor
-        batch.counts = result.counts
-    batch.save()
-    return batch, result
+    except Exception:  # noqa: BLE001 - zabeleži neuspeh in napako posreduje naprej
+        m.ImportBatch.objects.filter(pk=batch.pk, status=m.ImportBatch.Status.PREVIEWED).update(
+            status=m.ImportBatch.Status.FAILED
+        )
+        raise
+    return locked, result
