@@ -1,6 +1,6 @@
 # Navodila za razvijalce
 
-Status: osnutek, faza 2 (ogrodje in podatkovni model P0). Prijava, API in uvoz sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
+Status: osnutek, faza 3 (ogrodje, model, prijava in uporabniški API P0). Uvoz CSV in pogodbe M1/M2 sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Pravila
 
@@ -46,6 +46,21 @@ Naloži izmišljeni nabor (staff-01…03, parent-01…04, student-01…04), pono
 ## Model v kratkem
 
 `Account` je prijavni uporabnik (`AUTH_USER_MODEL`), vezan na največ eno `Person`; e-naslov ni enoličen. `Relationship` ne podeli pravic: ta je ločen `Grant` s šolsko `Approval`. Povezave in upravičenja imajo `valid_from`/`valid_until` in se zaključijo, ne brišejo.
+
+## Prijava in API
+
+Prijava: `django-allauth` (samo `allauth.account`), prijava z uporabniškim imenom na `/accounts/login/`, odjava je POST. Samoregistracije ni; račune ustvari pooblaščena oseba. E-naslov ni enoličen in ni identiteta.
+
+Znana omejitev: aktivacija in obnova gesla za račune s skupnim predalom še nista individualni postopek; to je dopolnitev pred B ([načrt](docs/projekt/priprava-referencnega-P0.md)). V razvoju ne uporabljajte skupnega predala za resnično obnovo.
+
+| Pot | Pomen |
+| --- | --- |
+| `GET /p0/api/v1/me` | Lastna oseba iz seje |
+| `GET /p0/api/v1/me/relationships` | Lastne veljavne povezave |
+| `GET /p0/api/v1/me/classes` | Dodeljeni oddelki zaposlenega |
+| `POST /p0/api/v1/authorizations/check` | Telo `{"scope_key", "permission"}`; preveri lastno aktualno upravičenje, odgovor `{"allowed", "reason"}` |
+
+Pravice se odločajo samo v `registry/authz.py`. Povezava sama ne dovoli dejanja; odvzem povezave ali upravičenja prevlada. Preverjanje za drugo osebo in servisna identiteta še nista narejena (D12). Poti še niso zapisane v OpenAPI.
 
 ## Preverjanja pred pull requestom
 
