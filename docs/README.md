@@ -16,6 +16,7 @@ Datum usmeritve: 13. oktober 2026. Dokumenti so delovni predlogi, razen izrecno 
 | Navodilo za prvi pregled z OpenAI in register prispevkov | [Navodilo](projekt/navodilo-za-pregled-OpenAI.md) in [prispevki](projekt/prispevki.md) |
 | Poročila pregledov, odprava in ponovni pregled | [Pregledi](pregledi/), zapisa o odpravi ([prvi](pregledi/2026-11-odprava-prvega-pregleda-P0.md), [ponovni](pregledi/2026-11-odprava-ponovnega-pregleda-P0.md)), [navodilo za ponovni pregled](projekt/navodilo-za-ponovni-pregled.md) |
 | Potrditve in formalni pogoji | [Register odločitev](projekt/odlocitve.md) in [odgovornosti](projekt/odgovornosti.md) |
+| Varstvo osebnih podatkov (za šolo in DPO) | [Stanje in vrzeli](projekt/varstvo-podatkov-P0.md) |
 
 Najprej razumemo namen in primere. Mentor oceni primernost, obseg in individualne izdelke; šola preveri postopke in pravila. Šele nato se z ustreznimi ljudmi dogovorijo izvedba, skrbništvo in varnostno nadomeščanje, pri čemer formalni pogoji veljajo pred prvo kodo. Nov splošni krog AI pregledov dolge priloge ni naslednji korak.
 

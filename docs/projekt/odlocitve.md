@@ -15,7 +15,7 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D04 | Gostovanje, e-pošta in kopije | Odprto | Pilotna šola in skupni tehnični nosilec |
 | D05 | Jeziki in dostopnost pilota (podatkovni model je večjezičen od začetka; zahtevani jeziki za namestitve po državi, npr. italijanščina in madžarščina, se pravno preverijo) | Odprto | Pilotna šola in nosilec projekta |
 | D06 | Upravičeni prejemniki in pravila potrjevanja | Odprto | Pilotna šola |
-| D07 | Hramba, dostopi in podatkovne poti | Odprto | Pilotna šola ob posvetu z DPO |
+| D07 | Hramba, dostopi in podatkovne poti | Odprto; gradivo za posvet: [varstvo podatkov, stanje in vrzeli](varstvo-podatkov-P0.md) | Pilotna šola ob posvetu z DPO |
 | D08 | Licenca EUPL 1.2 in pravice prispevkov | EUPL 1.2 za kodo osebno potrjena 12. 11. 2026; pravice prispevkov dijakov odprte | Nosilec projekta in avtorji |
 | D09 | Vzdrževanje, podpora in namestnik | Pobudnik osebno prevzema vlogo nosilca; drugi skrbnik/namestnik ni imenovan, ostaja odprto | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema M1 in M2 | Predlog v specifikacijah | Skupni tehnični nosilec in pilotna šola |
