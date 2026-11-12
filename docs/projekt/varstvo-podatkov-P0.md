@@ -26,7 +26,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 | Povezava skrbnik–učenec z vrsto in veljavnostjo | starši, učenci | kdo sme prejemati in odločati | `Relationship` |
 | Upravičenja (seznanitev, odločanje) s sklicem na šolsko potrditev | starši | pravica dejanja | `Grant`, `Approval` |
 | Neprosojni sklici na obseg | starši | da moduli ne uporabljajo ID otrok | `ScopeRef` |
-| Posnetek občinstva (avtor, oddelek, namen, prejemniki) | zaposleni, starši | vezava kontakta na dostavo (D12) | `AudienceSnapshot`, `AudienceMember` |
+| Posnetek občinstva (avtor, oddelek, namen, prejemniki) | zaposleni, starši | vezava kontakta na dostavo (D12) | `AudienceSnapshot`, `AudienceMember` (30 dni, predlog) |
 | Sled sprememb: kdo, kaj, kdaj, imena polj (brez vrednosti) | vsi | odgovornost, sledljivost | `ChangeAudit` |
 | Izvorni ključi uvoza | vsi | ponovljiv uvoz | `SourceMapping` (ključi morajo biti neosebni, ne EMŠO) |
 | Povzetek uvoza in postavke predogleda | vsi (ključi) | pregled pred uveljavitvijo | `ImportBatch`, `ImportPreview` |
@@ -45,6 +45,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 - Odvzem povezave ali upravičenja prevlada takoj in ga uvoz ne obnovi.
 - Sled sprememb brez starih in novih vrednosti; predogled uvoza hrani imena polj, ne vrednosti.
 - Začasne datoteke uvoza: nedostopne po 24 urah, izbrisane najpozneje po 25 urah (samodejno).
+- Posnetki občinstva: neuporabni ob izteku (30 dni, predlog), s člani izbrisani najpozneje uro pozneje (samodejno, `purge_audience_snapshots`).
 - Napake ne razkrivajo tehničnih podrobnosti ali obstoja tujih podatkov.
 - Varnost: zaklenjene in skenirane odvisnosti, piškotki `Secure`/`HttpOnly`/`SameSite` v produkcijskem načinu, CSRF, postopek zasebnih varnostnih prijav ([SECURITY.md](../../SECURITY.md)); šest ranljivosti je bilo odpravljenih pred kakršnimikoli pravimi podatki.
 
@@ -56,7 +57,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 | Evidenca dejavnosti obdelave (čl. 30) | Ni vodena; osnutek v razdelku 7 | šola |
 | Ocena učinka (čl. 35) | Ni izvedena; zaradi mladoletnih in sistematične obdelave verjetno potrebna | DPO |
 | Obvestilo posameznikom (čl. 13) | Ni pripravljeno (starši, zaposleni, dijaki) | šola, DPO |
-| Roki hrambe in izbris (čl. 5(1)(e)) | Niso določeni. Zapisi se zaključijo, ne izbrišejo; posnetki občinstva se po izteku (30 dni) še ne brišejo; seje veljajo privzeto 2 tedna | D07; tehnično izvedba po odločitvi |
+| Roki hrambe in izbris (čl. 5(1)(e)) | Niso določeni. Zapisi se zaključijo, ne izbrišejo; posnetki občinstva se po izteku (30 dni, predlog) samodejno izbrišejo, rok potrdi D07; seje veljajo privzeto 2 tedna | D07; tehnično izvedba po odločitvi |
 | Pravica dostopa in prenosljivosti (čl. 15, 20) | Ni izvoza podatkov posamezne osebe | tehnično (predlog spodaj) |
 | Pravica do popravka (čl. 16) | Popravek kontakta na zaslonu obstaja; uvoz je vir resnice | izvedeno delno |
 | Pravica do izbrisa in omejitve (čl. 17, 18) | Ni postopka; razmerje do hrambe zgodovine odločitev določi D07 | DPO |
@@ -70,7 +71,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 
 1. Sled vpogledov: zapis, kdo je odprl podrobnosti osebe ali predogled uvoza (brez vsebine).
 2. Izvoz podatkov ene osebe za odgovor na zahtevo po dostopu.
-3. Mehanizem rokov hrambe (posnetki občinstva, seje, zaključeni zapisi), z dejanskimi roki iz D07; čiščenje potekle vsebine po vzoru `purge_import_uploads`.
+3. Mehanizem rokov hrambe (seje, zaključeni zapisi), z dejanskimi roki iz D07; čiščenje potekle vsebine po vzoru `purge_import_uploads`. Za posnetke občinstva je izvedeno (`purge_audience_snapshots`).
 4. Dopolnitev SECURITY.md s postopkom ob kršitvi varstva podatkov.
 
 ## 6. Vprašanja za DPO

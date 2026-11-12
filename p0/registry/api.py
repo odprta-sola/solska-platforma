@@ -181,7 +181,7 @@ CLASS_ID = re.compile(r"[0-9]{1,18}")  # ASCII števke v obsegu bigint
 PURPOSE_PERMISSION = {"notice": "acknowledge", "form": "decide"}
 
 
-AUDIENCE_TTL = timedelta(days=30)  # predlog D12: rok uporabe posnetka za dostavo in opomnike
+AUDIENCE_TTL = timedelta(days=30)  # predlog D12: rok uporabe posnetka; nato izbris (audiences)
 
 
 @require_POST
