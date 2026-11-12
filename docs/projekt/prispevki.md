@@ -8,6 +8,7 @@ Status: osnutek, 12. november 2026. Namen: sledljivost avtorstva in uporabe AI, 
 | --- | --- | --- | --- | --- | --- |
 | Mitja Pirih | Človek | Pobudnik, koordinator, tehnični nosilec (osebni sprejem D03) | Cilj, obseg, odločitve, usmerjanje in sprejem dela | od 5. 10. 2026 | Mitja Pirih |
 | Claude (Anthropic), model Claude Sonnet 5.5 | AI | Pisec kode in dokumentacije po navodilih pobudnika | Faze 0 do 6: ogrodje P0, model, prijava, API, uvoz CSV, osnutek pogodbe D12, nadomestka M1/M2, testi, navodila za razvijalce (PR #31 do #37) | 12. 11. 2026 | Mitja Pirih |
+| DeepSeek (DeepSeek), različica modela: ni znano | AI | neodvisni pregledovalec | bral in zaganjal kodo, napisal poročilo; kode ni spreminjal | 12. 11. 2026 | Mitja Pirih |
 
 Kode, ki jo je napisal AI, ni pregledal drug človek ali neodvisen sistem; pregled je predviden v [kontrolnem seznamu](pregled-P0-kontrolni-seznam.md).
 
