@@ -60,7 +60,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 | Ocena učinka (čl. 35) | Ni izvedena; zaradi mladoletnih in sistematične obdelave verjetno potrebna | DPO |
 | Obvestilo posameznikom (čl. 13) | Ni pripravljeno (starši, zaposleni, dijaki) | šola, DPO |
 | Roki hrambe in izbris (čl. 5(1)(e)) | Niso določeni. Zapisi se zaključijo, ne izbrišejo; posnetki občinstva se po izteku (30 dni, predlog) samodejno izbrišejo, rok potrdi D07; seje veljajo privzeto 2 tedna | D07; tehnično izvedba po odločitvi |
-| Pravica dostopa in prenosljivosti (čl. 15, 20) | Ni izvoza podatkov posamezne osebe | tehnično (predlog spodaj) |
+| Pravica dostopa in prenosljivosti (čl. 15, 20) | Izvoz P0 je izveden (JSON na strani osebe, zabeležen v sledi vpogledov). Odprto: postopek preverjanja istovetnosti prosilca, rok odgovora, ali izvoz vsebuje imena zaposlenih iz sledi; podatki M1/M2 bodo potrebovali lasten izvoz | šola, DPO; M1/M2 |
 | Pravica do popravka (čl. 16) | Popravek kontakta na zaslonu obstaja; uvoz je vir resnice | izvedeno delno |
 | Pravica do izbrisa in omejitve (čl. 17, 18) | Ni postopka; razmerje do hrambe zgodovine odločitev določi D07 | DPO |
 | Sled vpogledov (čl. 5(2)) | Izvedena za zaslone evidence (`AccessAudit`). Ne beležita se seznam oseb z iskanjem (imena in vloge do 50 oseb na stran) in skrbniški vmesnik Django `/admin/`, ki naj ostane le za tehnično vzdrževanje; rok hrambe sledi ni določen | D07; tehnično ob odločitvi |
@@ -72,7 +72,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 ## 5. Predlagane tehnične dopolnitve (ne potrebujejo čakanja na DPO)
 
 1. Sled vpogledov: zapis, kdo je odprl podrobnosti osebe ali predogled uvoza (brez vsebine). Izvedeno (`AccessAudit`).
-2. Izvoz podatkov ene osebe za odgovor na zahtevo po dostopu.
+2. Izvoz podatkov ene osebe za odgovor na zahtevo po dostopu. Izvedeno (`registry/export.py`, gumb »Prenesi vse podatke osebe« na strani osebe).
 3. Mehanizem rokov hrambe (seje, zaključeni zapisi), z dejanskimi roki iz D07; čiščenje potekle vsebine po vzoru `purge_import_uploads`. Za posnetke občinstva je izvedeno (`purge_audience_snapshots`).
 4. Dopolnitev SECURITY.md s postopkom ob kršitvi varstva podatkov.
 
@@ -85,6 +85,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 5. Pogoji za gostitelja in ponudnika e-pošte (lokacija, pogodba, varnostne kopije).
 6. Kdo v šoli odgovarja na zahteve posameznikov in v kakšnem roku?
 7. Ali so izvorni ključi iz šolskega informacijskega sistema primerni ali jih je treba psevdonimizirati?
+8. Ali naj izvoz za zahtevo po dostopu vsebuje imena zaposlenih, ki so podatke spreminjali ali gledali? Zdaj jih ne vsebuje (samo čas, dejanje, zaslon in vir), pri lastnih dejanjih zaposlenega pa so izpuščeni sklici na druge osebe.
 
 ## 7. Osnutek evidence dejavnosti obdelave
 
