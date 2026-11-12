@@ -1,7 +1,7 @@
 # Razvojno okolje P0 na izmišljenih podatkih. Ni za produkcijo.
 services:
   db:
-    image: postgres:16
+    image: postgres:16@sha256:f9a7b9ebf6f56201f949db745e47bc423c0f0f8294bafe991cc10bf74b029657  # 16.15
     environment:
       POSTGRES_DB: p0
       POSTGRES_USER: p0
@@ -15,7 +15,7 @@ services:
 
   mail:
     # Prestrezni predal: vsa razvojna e-pošta konča tu, nikoli pri resničnem naslovniku.
-    image: axllent/mailpit:latest
+    image: axllent/mailpit:v1.33.1@sha256:aef2aacc11f075ec0fb6874275ee4a421e688e11a96ebb296134d1735c7761ce
     ports: ["127.0.0.1:8025:8025", "127.0.0.1:1025:1025"]
 
   p0:

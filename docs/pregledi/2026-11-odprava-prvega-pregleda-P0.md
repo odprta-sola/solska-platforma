@@ -36,7 +36,7 @@ ID se nanašajo na poročilo OpenAI; DeepSeek P0-01 je enak OpenAI P0-02, DeepSe
 | P0-08 nadomestki | odprto | omejitve navedene v [stanju T](../projekt/stanje-prevzema-T.md) | prava M1/M2 (ekipi, mentorji) |
 | P0-09 dokumentacija | popravljeno | DEVELOPER, stanje T, kontrolni seznam, SECURITY, specifikacija, register | — |
 | P0-10 dostopnost | delno | `lang`, struktura, oznake, fokus in povezane napake prijave; `test_dostopnost.py`; omejen preizkus s tipkovnico ([pregled dostopnosti](../projekt/pregled-dostopnosti-P0.md)) | ročni pregled z bralnikom (človek); zasloni za T narejeni (`test_zasloni.py`), uvoz v brskalniku ni preizkušen |
-| P0-11 odvisnosti, slike, licence | delno | `STUBS` brez `DJANGO_DEBUG=1` ustavi zagon; `check --deploy` s sintetičnimi skrivnostmi: W004 (HSTS), W008 (HTTPS) | zaklep s hashi, digesti slik, popis licenc slike, HTTPS ob dejanski namestitvi |
+| P0-11 odvisnosti, slike, licence | delno | zaklepi s hashi, digesti slik in Actions, pip 26.3 (6 opozoril osnovne slike odpravljenih), produkcijska slika brez pip in s popravljenim zlib; pip-audit brez zadetkov; Trivy: brez popravljivih opozoril v sliki P0 ([odvisnosti in licence](../projekt/odvisnosti-in-licence.md)); `STUBS` brez `DJANGO_DEBUG=1` ustavi zagon | HSTS/HTTPS ob dejanski namestitvi (D04); SBOM in pravni pregled licenc pred distribucijo slike; vklop samodejnih posodobitev (skrbnik) |
 
 ## Izvedeni ukazi in rezultati
 
@@ -54,7 +54,7 @@ python manage.py check --deploy   [DJANGO_DEBUG=0, sintetične skrivnosti]   W00
 python3 scripts/check_docs_links.py         veljavno
 ```
 
-Pozneje izvedeno: `docker compose build --no-cache p0`, `docker compose up -d`, `seed_test_data` z naključnim `SEED_PASSWORD`, celotna zbirka in preverjanja v vsebniku, na koncu `docker compose down -v`. Ni izvedeno, z razlogom: pregled odvisnosti in slik (`pip-audit`, pregledovalnik slik); ročni pregled dostopnosti. Nova razvojna odvisnost `rfc3339-validator` (MIT) omogoči preverjanje formata `date-time` v `jsonschema`; sprejem odvisnosti potrdi pobudnik.
+Pozneje izvedeno: `docker compose build --no-cache p0`, `docker compose up -d`, `seed_test_data` z naključnim `SEED_PASSWORD`, celotna zbirka in preverjanja v vsebniku, na koncu `docker compose down -v`. Ni izvedeno, z razlogom: ročni pregled dostopnosti (potreben človek z bralnikom zaslona); pregled vgrajenih knjižnic `psycopg-binary`. Nova razvojna odvisnost `rfc3339-validator` (MIT) omogoči preverjanje formata `date-time` v `jsonschema`; sprejem odvisnosti potrdi pobudnik.
 
 ## Ocena devetih točk po popravkih
 

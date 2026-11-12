@@ -28,7 +28,8 @@ docker compose up --build
 ```bash
 docker compose up -d db mail
 python3 -m venv .venv && . .venv/bin/activate
-pip install -r p0/requirements-dev.txt
+python -m pip install --require-hashes -r p0/requirements-build.lock
+python -m pip install --require-hashes --no-deps -r p0/requirements-dev.lock
 cd p0
 export DJANGO_DEBUG=1
 python manage.py migrate
@@ -105,6 +106,10 @@ python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNI
 - Gesla niso del uvoza. Predogled hrani samo imena spremenjenih polj.
 
 Predlog, ki ga mora potrditi D12: datoteka `classes` ni v prvotnem formatu, a oddelki morajo nekje nastati; šifrant dovoljenj je za zdaj `acknowledge`, `decide`; obseg upravičenj je `student:<source_student_key>`. Delni uvoz in popolna uskladitev (zaključki veljavnosti) nista narejena.
+
+## Odvisnosti in slike
+
+Nameščamo samo iz zaklepov s hashi (`p0/requirements*.lock`); slike in GitHub Actions so pripete na digest oziroma commit. Vhodne zahteve so v `p0/requirements*.txt`; po njihovi spremembi zaklepe ustvarite z `pip-compile`. Postopek posodobitve, rezultati skeniranja in popis licenc: [odvisnosti in licence](docs/projekt/odvisnosti-in-licence.md).
 
 ## Preverjanja pred pull requestom
 
