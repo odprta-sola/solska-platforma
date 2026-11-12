@@ -267,7 +267,7 @@ class ImportUpload(models.Model):
     """Začasna kopija datoteke predogleda, dokler serija ni uveljavljena ali zavržena.
 
     Vsebuje osebne podatke, zato se izbriše ob uveljavitvi, zavrnitvi ali po izteku
-    (UPLOAD_RETENTION v registry.ui). Ni arhiv uvozov.
+    (UPLOAD_RETENTION v registry.uploads). Ni arhiv uvozov.
     """
 
     batch = models.ForeignKey(ImportBatch, on_delete=models.CASCADE, related_name="uploads")

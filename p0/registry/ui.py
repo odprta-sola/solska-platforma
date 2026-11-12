@@ -4,7 +4,6 @@ Odločanje o pravicah ostane v authz.py in importer.py; zasloni so le vmesnik do
 Vsak zaslon zahteva prijavo in vlogo office ali admin; CSRF velja za vse obrazce.
 """
 
-from datetime import timedelta
 from functools import wraps
 from pathlib import Path
 
@@ -16,12 +15,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_http_methods, require_POST
 
-from . import authz, importer
+from . import authz, importer, uploads
 from . import models as m
 from .forms import ContactForm, ImportForm, SearchForm
 
 STAFF_ROLES = {m.Role.OFFICE.value, m.Role.ADMIN.value}
-UPLOAD_RETENTION = timedelta(hours=24)
 PERMISSION_LABELS = {"acknowledge": "seznanitev (M1)", "decide": "odločanje (M2)"}
 SCREEN_SOURCE = "zaslon"  # vir v sledi; ni "import:", zato šteje kot ročna sprememba
 
@@ -189,7 +187,15 @@ def contact(request, actor, person_id):
 
 
 def _purge_stale_uploads():
-    m.ImportUpload.objects.filter(created_at__lt=timezone.now() - UPLOAD_RETENTION).delete()
+    uploads.purge_expired()
+
+
+def _expire(batch):
+    """Če je predogled potekel, takoj izbriše njegove datoteke. Vrne True ob izteku."""
+    if uploads.expired(batch):
+        m.ImportUpload.objects.filter(batch=batch).delete()
+        return True
+    return False
 
 
 def _read_uploads(uploaded, form):
@@ -228,6 +234,7 @@ def import_index(request, actor):
 @staff_required
 def import_batch(request, actor, batch_id):
     batch = get_object_or_404(m.ImportBatch, pk=batch_id)
+    _expire(batch)
     items = batch.items.order_by("pk")
     return render(
         request,
@@ -246,13 +253,19 @@ def import_batch(request, actor, batch_id):
 @staff_required
 def import_apply(request, actor, batch_id):
     batch = get_object_or_404(m.ImportBatch, pk=batch_id)
+    not_after = uploads.deadline(batch)
+    if _expire(batch):
+        messages.error(request, "Predogled je potekel (starejši od 24 ur). Naredite nov predogled.")
+        return redirect("ui-import-batch", batch_id=batch.pk)
     files = {u.name: bytes(u.content) for u in batch.uploads.all()}
     if not files:
         messages.error(request, "Datoteke predogleda niso več na voljo. Naredite nov predogled.")
         return redirect("ui-import-batch", batch_id=batch.pk)
     try:
-        batch, result = importer.apply_batch(batch, files, actor)
+        batch, result = importer.apply_batch(batch, files, actor, not_after=not_after)
     except ValueError as exc:
+        if uploads.expired(batch):
+            m.ImportUpload.objects.filter(batch=batch).delete()
         messages.error(request, f"Serije ni bilo mogoče uveljaviti: {exc}")
         return redirect("ui-import-batch", batch_id=batch.pk)
     m.ImportUpload.objects.filter(batch=batch).delete()

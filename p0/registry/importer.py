@@ -21,6 +21,7 @@ from django.core.validators import validate_email
 from django.db import transaction
 from django.utils import timezone
 
+from . import authz
 from . import models as m
 
 MAX_FILE_BYTES = 5 * 1024 * 1024
@@ -449,12 +450,16 @@ class _Applier:
             )
         )
 
-    def upsert_validity(self, name, i, entity, key, model, lookup, row, extra=None, scope=None):
+    def upsert_validity(
+        self, name, i, entity, key, model, lookup, row, extra=None, scope=None, lock=None
+    ):
         """`scope` je poslovni obseg ročne omejitve (npr. skrbnik in učenec).
 
         Ročni odvzem v obsegu velja ne glede na začetek veljavnosti ali vrsto uvozne vrstice:
         uvoz ne sme ustvariti ali podaljšati zapisa, ki bi veljal po odvzemu.
         """
+        if lock:
+            lock()  # pred branjem odvzema: sočasni ročni odvzem počaka ali je že viden
         until = row.get("valid_until_parsed")
         revoked_at = _manual_revocation_at(entity, model, scope)
         restores = revoked_at is not None and (until is None or until > revoked_at)
@@ -587,6 +592,7 @@ class _Applier:
             },
             row,
             scope={"guardian": guardian, "student": student},
+            lock=lambda: authz.lock_relationship_scope(guardian.pk, student.pk),
         )
 
     def do_staff_assignments(self, name, i, row):
@@ -631,6 +637,7 @@ class _Applier:
             row,
             extra={"relationship": relationship, "approval": approval},
             scope=lookup,
+            lock=lambda: authz.lock_grant_scope(person.pk, lookup["scope_key"], row["permission"]),
         )
 
 
@@ -736,8 +743,10 @@ def preview(files, source, actor):
     return _save_batch(source, actor, result, status), result
 
 
-def apply_batch(batch, files, actor):
+def apply_batch(batch, files, actor, not_after=None):
     """Uveljavi prej pregledano serijo.
+
+    Z `not_after` (rok predogleda) se uveljavitev zavrne, če je rok v trenutku zaklepa potekel.
 
     Vsebina mora biti enaka tisti iz predogleda in izračunane operacije enake potrjenim.
     Serija je med uveljavitvijo zaklenjena; podatki in končno stanje serije se zapišejo v isti
@@ -748,6 +757,8 @@ def apply_batch(batch, files, actor):
             locked = m.ImportBatch.objects.select_for_update().get(pk=batch.pk)
             if locked.status != m.ImportBatch.Status.PREVIEWED:
                 raise ValueError("Uveljaviti je mogoče samo čist predogled.")
+            if not_after is not None and timezone.now() >= not_after:
+                raise ValueError("Predogled je potekel; naredite nov predogled.")
             if locked.content_hash != content_hash(files):
                 raise ValueError("Vsebina se razlikuje od predogleda.")
             expected = [
