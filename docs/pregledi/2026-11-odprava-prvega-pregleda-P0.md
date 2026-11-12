@@ -18,7 +18,16 @@ Poročili se ujemata pri: vseh 85 obstoječih testih in 39 pogodbenih testih, ne
 
 ## Zasebne varnostne ugotovitve
 
-Tri visoke (poročilo OpenAI) in ena srednja (dodatno ugotovljena ob preverjanju). Vse so potrjene; popravki in regresijski testi so pripravljeni in preverjeni, objava se uskladi po [SECURITY.md](../../SECURITY.md). Podrobnosti do takrat niso javne.
+Tri visoke (poročilo OpenAI) in ena srednja (dodatno ugotovljena ob preverjanju), obravnavane zasebno po [SECURITY.md](../../SECURITY.md) in objavljene kot varnostni nasveti repozitorija.
+
+| ID | Resnost | Ugotovitev | Odprava | Dokaz |
+| --- | --- | --- | --- | --- |
+| S-01 | visoka | Kontakt je bil dosegljiv brez obstoječe dostavne zahteve | klic začasno zaprt (503) do D12 | `ContactBindingContract` |
+| S-02 | visoka | Uvoz z drugačnim začetkom veljavnosti je obnovil ročno odvzeto pravico | varovalo za poslovni obseg | `test_varovala.ImportRestrictionTests` |
+| S-03 | visoka, znana pred B | Obnova gesla prek skupnega e-naslova za vse račune s tem naslovom | samopostrežna obnova izklopljena | `test_varovala.PasswordRecoveryTests` |
+| S-04 | srednja | Tajništvo je z uvozom lahko dodelilo vlogo skrbnika | vlogo `admin` dodeli samo skrbnik | `test_varovala.ImportRoleTests` |
+
+Preostanek: S-01 potrebuje odločitev D12 (predlog: vezava na posnetek občinstva, ki ga hrani P0, in avtor iz delegirane seje); S-03 potrebuje individualni postopek pred B.
 
 ## Tabela odprave javnih ugotovitev
 
@@ -64,7 +73,7 @@ Pozneje izvedeno: `docker compose build --no-cache p0`, `docker compose up -d`, 
 | 2 | Skupen kontakt, ločena računa | avtomatski dokaz obstaja |
 | 3 | Odvzem povezave/granta | avtomatski dokaz obstaja |
 | 4 | CSV brez delnega prepisa, ponovitev, sled | dopolnjeno z vezavo na potrjen načrt in sočasnostjo |
-| 5 | Omejen servisni kontaktni klic | stanje se objavi skupaj z zasebnimi popravki |
+| 5 | Omejen servisni kontaktni klic | ni izpolnjeno: klic je zaprt (503), dokler D12 ne določi preverljive vezave na dostavo; tuj in neobstoječ vhod brez razlike, brez kontakta |
 | 6 | Pregled kode | opravila sta ga sistema AI; ponovni pregled ni izveden |
 | 7 | Pogodbeni testi po ponastavitvi | izvedeno: `docker compose down -v`, ponovna namestitev in `seed_test_data`, nato `test_contract`, `test_robni`, `test_zasloni`: 98 OK |
 | 8 | Izpad P0, brez zaščitenega dejanja in slepe dostave | ni izpolnjeno (prava M1/M2 ne obstajata) |
@@ -72,4 +81,4 @@ Pozneje izvedeno: `docker compose build --no-cache p0`, `docker compose up -d`, 
 
 ## Dvajset skupin preizkusov
 
-Spremenjene glede na poročilo OpenAI: 5 (odnos brez granta zdaj preveri zavrnitev avtorizacije; odvzem v vseh štirih poteh) postane pokrit; 6 se oceni ob objavi zasebnih popravkov; 17 in 18 ostaneta delno (iztek in izpad nista samodejno preizkušena); 20 ostane delno (gradnja brez predpomnilnika, izvoz in dostopnost niso). Druge ocene poročila OpenAI ostanejo nespremenjene. Brez izmišljene pokritosti: skupaj 3 pokrite, 8 delno, 1 nepokrita, 8 zunaj obsega T.
+Spremenjene glede na poročilo OpenAI: 5 (odnos brez granta zdaj preveri zavrnitev avtorizacije; odvzem v vseh štirih poteh) postane pokrit; 6 (starejši uvoz po ročni omejitvi) postane pokrit, ker varovalo velja za poslovni obseg (`test_varovala.py`); 17 in 18 ostaneta delno (iztek in izpad nista samodejno preizkušena); 20 ostane delno (gradnja brez predpomnilnika, izvoz in dostopnost niso). Druge ocene poročila OpenAI ostanejo nespremenjene. Brez izmišljene pokritosti: skupaj 4 pokrite, 7 delno, 1 nepokrita, 8 zunaj obsega T.
