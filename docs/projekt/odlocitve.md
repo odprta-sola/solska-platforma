@@ -67,6 +67,8 @@ Neodvisni pregled P0/T (paket T) po kontrolnem seznamu opravi drug AI, mentor je
 
 Pobudnik šteje pogoje D03, D08, D09 in D14 za zadostne za pripravo in lokalni razvoj osnove P0 na izmišljenih podatkih. Pogoj »drugi skrbnik« iz D09 ostaja nepopolno izpolnjen, zato velja pred vključitvijo zunanjih ekip (dijakov) še imenovanje namestnika. Neodvisni človeški prevzem T pred A/I ostane; zanj je predviden drug AI s pomočjo kontrolnega seznama, mentor je rezerva, vsakokratno odločitev o ustreznosti pa sprejme pobudnik.
 
+Obseg zaslonov P0 za prvi prevzem T (osebni sprejem pobudnika, 12. 11. 2026, po prvem neodvisnem pregledu): prijava in odjava; uvoz CSV s predogledom in uveljavitvijo; seznam in podrobnosti oseb z odvzemom povezave ali upravičenja; popravek kontakta s sledjo. Celoten administrativni portal, izvoz in zasloni za starše zunaj M1/M2 niso v obsegu T. Točka 9 ostane odprta do izvedbe teh zaslonov in ročnega pregleda dostopnosti ([pregled dostopnosti](pregled-dostopnosti-P0.md)).
+
 ## Roki in sledenje
 
 D01–D03, D11–D14 in D16 blokirajo začetek odvisnega razvoja. D07, D09 in D10 se zaključijo pred produkcijskim pilotom; imenovanje drugega skrbnika iz D09 je izjema in je potrebno že pred prvo kodo oziroma vključitvijo zunanjih ekip. D04–D06 se rešijo pred razvojem odvisnih funkcij, D08 pred sprejemom kode in D15 pred potrditvijo pogojev ponovne uporabe besedil. Koledarske roke in GitHub dodelitve določijo potrjeni nosilci; vloge niso samodejno imenovanja oseb.

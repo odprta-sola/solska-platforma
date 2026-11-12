@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block head_title %}{{ person.display_name }}{% endblock %}
+{% block wide_header %} class="wide"{% endblock %}
+{% block wide_main %} class="wide"{% endblock %}
+{% block content %}
+  <p><a href="{% url 'ui-persons' %}">Nazaj na osebe</a></p>
+  <h1>{{ person.display_name }}</h1>
+  <dl class="facts">
+    <dt>Vloge</dt><dd>{% for r in roles %}{{ r.get_role_display }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}</dd>
+    <dt>E-naslov</dt><dd>{{ person.contact_email|default:"ni e-naslova (papirna pot)" }}</dd>
+    <dt>Jezik</dt><dd>{{ person.preferred_language }}</dd>
+  </dl>
+  <p><a href="{% url 'ui-contact' person.pk %}">Popravi kontakt</a></p>
+
+  <h2>Povezave z učenci</h2>
+  <div class="tablewrap" role="region" tabindex="0" aria-label="Povezave z učenci (tabela)"><table>
+    <caption class="visually-hidden">Povezave, kjer je oseba starš ali skrbnik</caption>
+    <thead><tr><th scope="col">Učenec</th><th scope="col">Vrsta</th><th scope="col">Velja</th><th scope="col">Stanje</th><th scope="col">Dejanje</th></tr></thead>
+    <tbody>
+      {% for r, active in as_guardian %}
+        <tr>
+          <th scope="row">{{ r.student.person.display_name }}</th>
+          <td>{{ r.get_relationship_type_display }}</td>
+          <td>od {{ r.valid_from|date:"j. n. Y" }}{% if r.valid_until %} do {{ r.valid_until|date:"j. n. Y H:i" }}{% endif %}</td>
+          <td>{% if active %}veljavna{% else %}zaključena{% endif %}</td>
+          <td>{% if active %}<a href="{% url 'ui-revoke-relationship' person.pk r.pk %}">Odvzemi povezavo<span class="visually-hidden"> z {{ r.student.person.display_name }}</span></a>{% else %}—{% endif %}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">Oseba nima povezav z učenci.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table></div>
+
+  {% if as_student %}
+    <h2>Starši in skrbniki</h2>
+    <ul>
+      {% for r, active in as_student %}
+        <li><a href="{% url 'ui-person' r.guardian.pk %}">{{ r.guardian.display_name }}</a> ({{ r.get_relationship_type_display }}, {% if active %}veljavna{% else %}zaključena{% endif %})</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <h2>Upravičenja</h2>
+  <div class="tablewrap" role="region" tabindex="0" aria-label="Upravičenja (tabela)"><table>
+    <caption class="visually-hidden">Upravičenja osebe po učencih in dejanjih</caption>
+    <thead><tr><th scope="col">Učenec</th><th scope="col">Dejanje</th><th scope="col">Velja</th><th scope="col">Stanje</th><th scope="col">Dejanje na zapisu</th></tr></thead>
+    <tbody>
+      {% for g, active, state, student, perm in grants %}
+        <tr>
+          <th scope="row">{{ student }}</th>
+          <td>{{ perm }}</td>
+          <td>od {{ g.valid_from|date:"j. n. Y" }}{% if g.valid_until %} do {{ g.valid_until|date:"j. n. Y H:i" }}{% endif %}</td>
+          <td>{{ state }}</td>
+          <td>{% if active %}<a href="{% url 'ui-revoke-grant' person.pk g.pk %}">Odvzemi upravičenje<span class="visually-hidden"> {{ perm }} za {{ student }}</span></a>{% else %}—{% endif %}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">Oseba nima upravičenj. Povezava sama ne dovoli dejanj.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table></div>
+
+  <h2>Zadnje spremembe</h2>
+  {% if audit %}
+    <ul>
+      {% for a in audit %}
+        <li>{{ a.at|date:"j. n. Y H:i" }}: {{ a.action }}{% if a.changed_fields %} ({{ a.changed_fields|join:", " }}){% endif %}{% if a.actor %}, {{ a.actor.display_name }}{% endif %}{% if a.source %}, vir {{ a.source }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Ni zabeleženih sprememb.</p>
+  {% endif %}
+{% endblock %}

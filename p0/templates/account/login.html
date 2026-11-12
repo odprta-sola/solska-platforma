@@ -1,0 +1,13 @@
+{% extends "account/base_entrance.html" %}
+{% block head_title %}Prijava{% endblock head_title %}
+{% block content %}
+  <h1>Prijava</h1>
+  <p>Prijavite se z uporabniškim imenom, ki ste ga prejeli od šole.</p>
+  {% include "_napake.html" with naslov="Prijava ni uspela" %}
+  <form method="post" action="{% url 'account_login' %}" novalidate>
+    {% csrf_token %}
+    {% include "_polja.html" %}
+    {{ redirect_field }}
+    <button type="submit">Prijava</button>
+  </form>
+{% endblock content %}

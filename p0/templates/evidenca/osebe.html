@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block head_title %}Osebe{% endblock %}
+{% block wide_header %} class="wide"{% endblock %}
+{% block wide_main %} class="wide"{% endblock %}
+{% block content %}
+  <h1>Osebe</h1>
+  <form method="get" role="search" aria-label="Iskanje oseb">
+    {% include "_polja.html" %}
+    <button type="submit">Išči</button>
+  </form>
+  <div class="tablewrap" role="region" tabindex="0" aria-label="Seznam oseb (tabela)"><table>
+    <caption>{% if q %}Rezultati za »{{ q }}«{% else %}Vse osebe{% endif %}: {{ page.paginator.count }}</caption>
+    <thead><tr><th scope="col">Ime</th><th scope="col">Vloge</th><th scope="col">E-naslov</th></tr></thead>
+    <tbody>
+      {% for p in page %}
+        <tr>
+          <th scope="row"><a href="{% url 'ui-person' p.pk %}">{{ p.display_name }}</a></th>
+          <td>{% for r in p.roles.all %}{{ r.get_role_display }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}</td>
+          <td>{{ p.contact_email|default:"ni e-naslova" }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="3">Ni oseb, ki bi ustrezale iskanju.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table></div>
+  {% if page.paginator.num_pages > 1 %}
+    <nav aria-label="Strani rezultatov">
+      <p>Stran {{ page.number }} od {{ page.paginator.num_pages }}.</p>
+      <ul class="actions">
+        {% if page.has_previous %}<li><a href="?q={{ q|urlencode }}&amp;stran={{ page.previous_page_number }}">Prejšnja stran</a></li>{% endif %}
+        {% if page.has_next %}<li><a href="?q={{ q|urlencode }}&amp;stran={{ page.next_page_number }}">Naslednja stran</a></li>{% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+{% endblock %}

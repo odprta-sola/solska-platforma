@@ -4,7 +4,7 @@ Datum: 13. oktober 2026
 
 Status: delovni osnutek za pogovor in dopolnitev D12; ni dokončen OpenAPI ali dovoljenje za odvisno implementacijo
 
-Ta dokument povzame model, vmesnike, sprejemna pravila in 20 skupin prihodnjih preizkusov. [Predstavitev](../mentorji/predstavitev-projekta.md) pojasni uporabniške postopke, [naročilo](../projekt/razvojno-narocilo-P0-M1-M2.md) določa T/A/I/B/C. Podrobni [osnutek pogodbe](vmesnik-P0-M1-M2.md) ostaja stalno mesto D12; preostale sheme, šifranti, omejitve in podpisi se potrdijo tam. Noben test aplikacije še ni izveden.
+Ta dokument povzame model, vmesnike, sprejemna pravila in 20 skupin prihodnjih preizkusov. [Predstavitev](../mentorji/predstavitev-projekta.md) pojasni uporabniške postopke, [naročilo](../projekt/razvojno-narocilo-P0-M1-M2.md) določa T/A/I/B/C. Podrobni [osnutek pogodbe](vmesnik-P0-M1-M2.md) ostaja stalno mesto D12; preostale sheme, šifranti, omejitve in podpisi se potrdijo tam. Ob pisanju (13. 10. 2026) noben test aplikacije še ni bil izveden; dejansko stanje izvedbe in testov je v [stanju paketa T](../projekt/stanje-prevzema-T.md).
 
 ## Okolje in meje
 
