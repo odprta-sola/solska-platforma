@@ -1,0 +1,4 @@
+# Vzdrževalci repozitorija (uporabniška imena GitHub), ena vrstica na osebo.
+# Njihovi PR-ji ne potrebujejo oznake avtor-urejen. Spremembe samo prek pull requesta.
+Mitja-dev
+alexlandich

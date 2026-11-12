@@ -1,0 +1,65 @@
+name: Prispevki
+
+# Pogoji za združitev iz CONTRIBUTING.md: podpis DCO v vsakem commitu in urejen status
+# avtorja (oznaka avtor-urejen) za avtorje, ki niso vzdrževalci. Podatki iz dogodka gredo
+# v skripte samo prek spremenljivk okolja.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  dco:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event.pull_request.user.type != 'Bot'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Vsak commit ima Signed-off-by
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          missing=0
+          for c in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            if ! git log -1 --format=%B "$c" | grep -Eq '^Signed-off-by: .+ <.+>$'; then
+              echo "::error::Commit $(git log -1 --format='%h %s' "$c") nima vrstice Signed-off-by (git commit -s)."
+              missing=1
+            fi
+          done
+          exit $missing
+
+  avtor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      # Seznam vzdrževalcev iz osnovne veje (ne iz PR), da ga PR ne more sam razširiti.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+          sparse-checkout: .github/vzdrzevalci.txt
+          sparse-checkout-cone-mode: false
+      - name: Status avtorja je urejen
+        env:
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          USER_TYPE: ${{ github.event.pull_request.user.type }}
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: |
+          # author_association ni zanesljiv (zasebno članstvo v organizaciji je CONTRIBUTOR).
+          if [ -f .github/vzdrzevalci.txt ] && grep -vE '^\s*(#|$)' .github/vzdrzevalci.txt | grep -qxF "$AUTHOR"; then
+            echo "Vzdrževalec."; exit 0
+          fi
+          [ "$USER_TYPE" = "Bot" ] && { echo "Samodejni posodobitveni PR."; exit 0; }
+          if echo "$LABELS" | grep -q '"avtor-urejen"'; then
+            echo "Status avtorja je urejen."
+          else
+            echo "::error::Pred združitvijo mora mentor ali vzdrževalec urediti status avtorja (polnoletnost ali izjava s soglasjem staršev) in dodati oznako avtor-urejen. Glej CONTRIBUTING.md."
+            exit 1
+          fi

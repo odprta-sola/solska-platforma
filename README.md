@@ -67,4 +67,4 @@ CSV ostane osnovna pot uvoza. Vsaka šola ima svojo namestitev in v izvedbenem d
 
 ## Licenca
 
-Programska koda je pod licenco EUPL 1.2 (glej [LICENSE](LICENSE)). Pogoji za prispevke dijakov in licenca dokumentacije so še odprti (D08, D15).
+Programska koda je pod licenco EUPL 1.2 ([LICENSE](LICENSE)), dokumentacija pod CC BY-SA 4.0 ([LICENSE-dokumentacija.md](LICENSE-dokumentacija.md)). Prispevki se licencirajo pod istimi pogoji; postopek za mladoletne avtorje je v [CONTRIBUTING.md](CONTRIBUTING.md#licenciranje-prispevkov).

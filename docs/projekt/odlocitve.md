@@ -16,14 +16,14 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D05 | Jeziki in dostopnost pilota (podatkovni model je večjezičen od začetka; zahtevani jeziki za namestitve po državi, npr. italijanščina in madžarščina, se pravno preverijo) | Odprto | Pilotna šola in nosilec projekta |
 | D06 | Upravičeni prejemniki in pravila potrjevanja | Odprto | Pilotna šola |
 | D07 | Hramba, dostopi in podatkovne poti | Odprto; gradivo za posvet: [varstvo podatkov, stanje in vrzeli](varstvo-podatkov-P0.md) | Pilotna šola ob posvetu z DPO |
-| D08 | Licenca EUPL 1.2 in pravice prispevkov | EUPL 1.2 za kodo osebno potrjena 12. 11. 2026; pravice prispevkov dijakov odprte | Nosilec projekta in avtorji |
+| D08 | Licenca EUPL 1.2 in pravice prispevkov | EUPL 1.2 za kodo potrjena 12. 11. 2026; postopek prispevkov (inbound = outbound, DCO, vzdevek, izjava s soglasjem staršev ob prvem prispevku, brez praga) sprejel pobudnik 12. 11. 2026; pravni pregled obrazca pri šoli odprt | Nosilec projekta in avtorji |
 | D09 | Vzdrževanje, podpora in namestnik | Pobudnik je nosilec; za drugega skrbnika je 12. 11. 2026 določil Aleksandra (`alexlandich`), ki ima od tega dne vlogo admin na repozitoriju; njegov izrecni pisni sprejem vloge je odprt | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema M1 in M2 | Predlog v specifikacijah | Skupni tehnični nosilec in pilotna šola |
 | D11 | Postopek pilota M2, besedilo obrazca in pravila odločanja | Odprto | Pilotna šola ob vsebinskem in pravnem pregledu |
 | D12 | [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md): minimalno obveščanje in skupni vir identitet ter upravičenj | Točke A ([paket](d12-paket-za-odlocitev.md)) sprejel tehnični nosilec 12. 11. 2026 in izvedene; potrditev mentorjev in zamrznitev odprti | Skupni tehnični nosilec in mentorji ekip |
 | D13 | Razdelitev ekip, nosilci modulov in ocena ur po fazah | Odprto | Sodelujoči zavodi in mentorji |
 | D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; nosilec: pobudnik; namestnik: Aleksandar (`alexlandich`, določen 12. 11. 2026, z dostopom do zasebnih prijav kot admin repozitorija; sprejem odprt); roki odziva odprti | Nosilec projekta in skrbnik repozitorija |
-| D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | Predlog/Odprto | Nosilec projekta in avtorji |
+| D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | CC BY-SA 4.0 za dokumentacijo, osebni sprejem pobudnika 12. 11. 2026 ([LICENSE-dokumentacija.md](../../LICENSE-dokumentacija.md)); potrditev zavodov odprta | Nosilec projekta in avtorji |
 | D16 | Prejemniki in odločevalci pri polnoletnih dijakih, prehod med letom in ustreznost privolitve za postopek | Odprto | Pilotna šola ob pravnem in podatkovnem pregledu |
 
 Osnutek D12 z dne 8. oktobra 2026 konkretizira že predvidene skupne identitete in obveščanje. Sheme, prijavni protokol, nosilci, testni nadomestki in pogodbeni preizkusi še niso potrjeni; D12 ostaja odprt. Izhodišča za razdelitev dijaškega dela so v [vodniku za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md).
@@ -84,6 +84,8 @@ Odločitve pobudnika po prvem neodvisnem pregledu (osebni sprejem predlogov, ki 
 | Poročili prvega pregleda (PR #39, #40) | Obe se ohranita pod ločenima imenoma; v registru prispevkov ostaneta oba vpisa |
 | Ponovni neodvisni pregled | Po združitvi popravkov, z istima pregledovalcema in posodobljenim navodilom |
 | Točka 8 | Počaka na prava M1 in M2 |
+
+Licenciranje prispevkov (D08, D15; osebni sprejem pobudnika 12. 11. 2026): koda pod EUPL 1.2, dokumentacija pod CC BY-SA 4.0; prispevek se licencira pod licenco dela projekta, v katerega spada (inbound = outbound). Vsak commit ima podpis DCO; ime je lahko vzdevek, identiteto mladoletnega pozna šola. Za združitev prispevka mladoletnega avtorja je potrebna enkratna izjava avtorja s soglasjem staršev, ki se pridobi ob prvem prispevku ali s šolsko prijavnico; praga »majhnih« prispevkov ni. Izjave hrani šola, v repozitoriju je le oznaka `avtor-urejen`. Ocena ne sme biti odvisna od soglasja. Obrazec mora pred uporabo pravno pregledati šola. Postopek: [CONTRIBUTING.md](../../CONTRIBUTING.md#licenciranje-prispevkov).
 
 ## Roki in sledenje
 
