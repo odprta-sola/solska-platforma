@@ -50,9 +50,9 @@ trace_id ustvari strežnik za sledenje obdelavi. Napaka vsebuje code, message in
 | GET /me | Prijavljen uporabnik | person_id, vloge |
 | GET /me/relationships | Uporabnik, lastne povezave | student_id, dovoljeni obsegi in veljavnost |
 | GET /me/classes | Zaposleni, lastne dodelitve | class_id in dovoljeni obsegi |
-| POST /audiences/resolve | Modul z delegiranim zaposlenim | Predogled dovoljenih prejemnikov in obsegov |
+| POST /audiences/resolve | Prijavljen zaposleni (seja modula v isti namestitvi) | Predogled dovoljenih prejemnikov in obsegov; shranjen posnetek občinstva |
 | POST /authorizations/check | Uporabniški ali servisni klic v omejenem obsegu | allowed, reason_code, checked_at |
-| POST /delivery-contacts/resolve | Samo pooblaščena dostavna storitev M1 | Veljavni kontakt za točno določenega prejemnika in zahtevo |
+| POST /delivery-contacts/resolve | Samo pooblaščena dostavna storitev M1 | Veljavni kontakt za prejemnika iz posnetka občinstva |
 
 Razreševanje občinstva prejme class_id oziroma odobren group_id, namen, pooblaščenega avtorja iz preverjenega konteksta ter predlagani obseg. Preveri dodelitve avtorja in vrne person_id z dovoljenimi scope_ref, brez kontaktov ali občutljivih utemeljitev. Rezultat ima audience_ref, različico in čas predogleda. Ob objavi se shrani izbrani nabor; novi člani oddelka ne pridobijo samodejnega dostopa do starih objav. Pravice izbranih prejemnikov se ob uporabi ponovno preverjajo.
 
@@ -69,7 +69,7 @@ Primer preverjanja:
 ```
 P0 uporablja dogovorjen šifrant dovoljenj modulov; ne presoja njihove poslovne logike. Dovoljeni razlogi so ALLOWED, NOT_ALLOWED, SCOPE_INACTIVE; nedosegljivost je 503, ne NOT_ALLOWED. Odgovor ne razkriva razloga skrbniške omejitve.
 
-Servisni kontaktni klic vsebuje recipient_id, scope_ref in delivery_request_id. M1 preveri lastništvo zahteve, P0 pa servisno dovoljenje in veljavni obseg prejemnika. Stikov ni mogoče množično brati zgolj s seznamom ugibanih ID. Kontakt se uporablja tik pred pošiljanjem; ne kopira se v splošno evidenco M1/M2. M2 kontaktov za dostavo ne potrebuje.
+Servisni kontaktni klic vsebuje recipient_id, scope_ref in audience_ref. P0 vrne kontakt samo, če je prejemnik s tem sklicem v shranjenem, neizteklem posnetku občinstva in ima aktualno upravičenje za namen posnetka; vsak drug vhod dobi enak 403. Predogled občinstva kliče avtor s svojo sejo, zato servis ne more sam izbrati avtorja (D12, C04/C05/C07, sprejel tehnični nosilec 12. 11. 2026). Dostavna zahteva M2 nosi audience_ref obrazca. Postavka dostave je par (person_id, scope_ref) z lastnim item_id; preklic in stanje sta po postavkah (C12). Stikov ni mogoče množično brati zgolj s seznamom ugibanih ID. Kontakt se uporablja tik pred pošiljanjem; ne kopira se v splošno evidenco M1/M2. M2 kontaktov za dostavo ne potrebuje.
 
 ## Zahteve M2 za dostavo v M1
 

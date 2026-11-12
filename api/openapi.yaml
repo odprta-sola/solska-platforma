@@ -55,8 +55,12 @@ paths:
         "503": {$ref: "#/components/responses/Error"}
   /p0/api/v1/audiences/resolve:
     post:
-      summary: Predogled dovoljenih prejemnikov oddelka (servisni klic za pooblaščenega avtorja)
-      security: [{serviceBearer: []}]
+      summary: Predogled dovoljenih prejemnikov oddelka za prijavljenega avtorja; shrani posnetek občinstva
+      description: >
+        Uporabniški klic (seja, CSRF); avtor je oseba iz seje z veljavno dodelitvijo oddelka.
+        P0 shrani posnetek občinstva (audience_ref, rok expires_at), na katerega se veže razrešitev
+        kontaktov ob dostavi (D12, C07). Rok posnetka 30 dni je predlog.
+      security: [{sessionCookie: []}]
       requestBody:
         required: true
         content: {application/json: {schema: {$ref: "#/components/schemas/AudienceRequest"}}}
@@ -68,7 +72,10 @@ paths:
         "503": {$ref: "#/components/responses/Error"}
   /p0/api/v1/delivery-contacts/resolve:
     post:
-      summary: Kontakt za točno določenega prejemnika tik pred pošiljanjem (samo M1)
+      summary: Kontakt za prejemnika iz posnetka občinstva tik pred pošiljanjem (samo M1)
+      description: >
+        Kontakt se vrne samo za prejemnika s tem sklicem v neizteklem posnetku audience_ref in ob
+        aktualnem upravičenju za namen posnetka. Tuj, neobstoječ, potekel ali odvzet vhod: enak 403.
       security: [{serviceBearer: []}]
       requestBody:
         required: true
@@ -109,7 +116,7 @@ paths:
         "404": {$ref: "#/components/responses/Error"}
   /m1/api/v1/delivery-requests/{id}/cancel:
     post:
-      summary: Selektivni, ponovljiv preklic izbranih prejemnikov
+      summary: Selektivni, ponovljiv preklic izbranih postavk (oseba in obseg)
       security: [{serviceBearer: []}]
       parameters: [{name: id, in: path, required: true, schema: {type: string}}]
       requestBody:
@@ -220,19 +227,19 @@ components:
       else: {properties: {reason_code: {enum: [NOT_ALLOWED, SCOPE_INACTIVE]}}}
     AudienceRequest:
       type: object
-      required: [author_id, class_id, purpose]
+      required: [class_id, purpose]
       additionalProperties: false
       properties:
-        author_id: {$ref: "#/components/schemas/Id"}
         class_id: {$ref: "#/components/schemas/Id"}
         purpose: {type: string, enum: [notice, form]}
     AudienceResponse:
       type: object
-      required: [audience_ref, version, previewed_at, recipients]
+      required: [audience_ref, version, previewed_at, expires_at, recipients]
       properties:
         audience_ref: {$ref: "#/components/schemas/Id"}
         version: {type: integer}
         previewed_at: {type: string, format: date-time}
+        expires_at: {type: string, format: date-time}
         recipients:
           type: array
           items:
@@ -245,12 +252,12 @@ components:
               student_label: {type: string}
     ContactRequest:
       type: object
-      required: [recipient_id, scope_ref, delivery_request_id]
+      required: [recipient_id, scope_ref, audience_ref]
       additionalProperties: false
       properties:
         recipient_id: {$ref: "#/components/schemas/Id"}
         scope_ref: {$ref: "#/components/schemas/Id"}
-        delivery_request_id: {$ref: "#/components/schemas/Id"}
+        audience_ref: {$ref: "#/components/schemas/Id"}
     ContactResponse:
       type: object
       required: [deliverable, reason_code]
@@ -264,14 +271,17 @@ components:
       else: {not: {anyOf: [{required: [email]}, {required: [locale]}]}, properties: {reason_code: {const: NO_CONTACT}}}
     DeliveryRequest:
       type: object
-      required: [idempotency_key, kind, recipients, template_id, locale, params, target, expires_at]
+      required: [idempotency_key, kind, audience_ref, recipients, template_id, locale, params, target, expires_at]
       additionalProperties: false
       properties:
         idempotency_key: {$ref: "#/components/schemas/Id"}
+        audience_ref: {$ref: "#/components/schemas/Id"}
         kind: {type: string, enum: [notification, reminder, receipt, change_notice]}
         recipients:
           type: array
-          description: Isti person_id se ne sme ponoviti (predlog D12; identiteta postavke ni določena).
+          description: >
+            Postavka je par (person_id, scope_ref); ista oseba z več obsegi je več postavk, ponovljen
+            par je 400 (D12, C12).
           minItems: 1
           maxItems: 200
           items:
@@ -306,19 +316,21 @@ components:
           type: array
           items:
             type: object
-            required: [person_id, state]
+            required: [item_id, person_id, scope_ref, state]
             properties:
+              item_id: {$ref: "#/components/schemas/Id"}
               person_id: {$ref: "#/components/schemas/Id"}
+              scope_ref: {$ref: "#/components/schemas/Id"}
               state: {$ref: "#/components/schemas/RecipientState"}
         counts:
           type: object
           additionalProperties: {type: integer}
     CancelRequest:
       type: object
-      required: [recipient_ids]
+      required: [item_ids]
       additionalProperties: false
       properties:
-        recipient_ids: {type: array, minItems: 1, maxItems: 200, items: {$ref: "#/components/schemas/Id"}}
+        item_ids: {type: array, minItems: 1, maxItems: 200, items: {$ref: "#/components/schemas/Id"}}
     CancelResponse:
       type: object
       required: [delivery_request_id, recipients]
@@ -328,8 +340,9 @@ components:
           type: array
           items:
             type: object
-            required: [person_id, state, cancel_result]
+            required: [item_id, person_id, state, cancel_result]
             properties:
+              item_id: {$ref: "#/components/schemas/Id"}
               person_id: {$ref: "#/components/schemas/Id"}
               state: {$ref: "#/components/schemas/RecipientState"}
               cancel_result: {type: string, enum: [cancelled_now, already_cancelled, too_late, already_terminal]}

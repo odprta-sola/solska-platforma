@@ -31,7 +31,7 @@ Programska koda je pod licenco **EUPL 1.2** ([LICENSE](LICENSE)), dokumentacija 
 5. **Uporaba orodij AI.** V opisu pull requesta navedite, ali in kako ste uporabili orodja AI. Za prispevek odgovarjate vi, tudi za del, ki ga je predlagalo orodje.
 6. **Prostovoljnost.** Ocena pri pouku ali v krožku ne sme biti odvisna od soglasja z javno licenco. Dijak brez izjave lahko dela v svoji veji ali kopiji in je ocenjen enako; njegov prispevek se le ne združi v projekt.
 
-Dijaki prispevajo prek lastnega forka; pravic sodelavca repozitorija jim ne dodeljujemo, ker bi s tem obšli preverjanje statusa avtorja.
+Dijaki prispevajo prek lastnega forka. Oznake `avtor-urejen` ne potrebujejo samo vzdrževalci, navedeni v [`.github/vzdrzevalci.txt`](.github/vzdrzevalci.txt); seznam se spremeni samo prek pull requesta.
 
 Pred sprejemom kode se preverijo tudi licence odvisnosti. Skupnih varnostnih funkcij ne razvijajte na novo brez dogovora s tehničnim nosilcem.
 

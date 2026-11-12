@@ -85,24 +85,23 @@ class ApiErrorEdgeTests(ContractBase):
                 self.assertEqual(r["Content-Type"], "application/json")
                 validate("Error", r.json())
 
-    def audience(self, class_id):
-        staff = person_of("staff-01")
-        client = Client(raise_request_exception=False)
+    def audience_with(self, class_id):
+        client = self.session("staff-01")
+        client.raise_request_exception = False
         return self.call(
             "post",
             f"{P0}/audiences/resolve",
-            token=self.t_m1,
             client=client,
-            body={"author_id": str(staff.pk), "class_id": class_id, "purpose": "notice"},
+            body={"class_id": class_id, "purpose": "notice"},
         )
 
     def test_class_id_ni_500(self):
         for value in ("²", "١", " 1", "1 ", "-1", "1.0", "9" * 19, "9" * 400):
             with self.subTest(value=value):
-                r = self.audience(value)
+                r = self.audience_with(value)
                 self.assertIn(r.status_code, (400, 403))
                 validate("Error", r.json())
-        self.assertEqual(self.audience("").status_code, 400)
+        self.assertEqual(self.audience_with("").status_code, 400)
 
     def test_obstojece_napake_ostanejo(self):
         c = Client(enforce_csrf_checks=True)

@@ -12,7 +12,7 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Odvzem povezave in dovoljenja | Narejeno v logiki, testih in na zaslonu `/p0/evidenca/osebe/` |
 | Osnovni CSV uvoz s predogledom, validacijo, celovito potrditvijo, ponovitvijo | Narejeno (ukaz `import_csv` in zaslon `/p0/evidenca/uvoz/`) |
 | Sprememba kontakta (sledljiva) | Prek uvoza (`person.import_updated`) in zaslona (`person.contact_updated`); vir resnice je uvoz (odločitev 12. 11. 2026) |
-| Omejen kontaktni klic | Začasno zaprto (503) do odločitve D12 o preverljivi vezavi na dostavo; pravila upravičenosti testirana |
+| Omejen kontaktni klic | Narejeno: kontakt samo za prejemnika iz posnetka občinstva z aktualnim upravičenjem za namen (D12, C07; sprejel tehnični nosilec, potrditev mentorjev odprta) |
 | API, testni podatki, ponovljiva namestitev | Narejeno; testi so bili izmerjeni na določenem commitu (glej zapis o odpravi), gradnja brez predpomnilnika izvedena (zapisa o odpravi) |
 | Nadomestka M1/M2 in pogodbeni testi | Narejeno kot osnutek pogodbe D12 (`api/openapi.yaml`, `p0/stubs`); nadomestka ne dokazujeta vedenjske zamenljivosti (glej spodaj) |
 
@@ -40,4 +40,4 @@ Individualna aktivacija in obnova gesla pri skupnem predalu (samopostrežna obno
 
 Stanje nadomestka M1 je v pomnilniku procesa. Niso preizkušeni: tihi čas, obnova po izpadu, trajni zapis pred 202, samodejni iztek (stanje `expired` nastavi le pomožna pot nadomestka), negotov izid poštne predaje, hramba idempotenčnih ključev, vir jezika in prikaznih oznak, več otrok v eni dostavi, delegiranje seje avtorja. Nadomestek M2 odloča po globalnem `need_ref`, brez modela naročene potrebe. Vse so odprte v D12.
 
-Predlogi D12 po prvem pregledu (niso potrjeni): isti `person_id` se v eni dostavni zahtevi ne ponovi (nadomestek ga zavrne z `duplicate_recipient`, dokler identiteta postavke ni določena); ponovitev že prevzete zahteve vrne isti prevzem tudi po `expires_at`, nova zahteva s pretečenim rokom je 400; omejitve dolžin in števil v shemah zahtev; splošne napake 404/405/500/503 v opisu pogodbe.
+Odločitve D12, točke A (sprejel tehnični nosilec 12. 11. 2026, potrditev mentorjev odprta): predogled občinstva z avtorjevo sejo in shranjen posnetek; kontakt vezan na posnetek in namen; postavka dostave (person_id, scope_ref) z `item_id`; meje dolžin in splošne napake 404/405/500/503. Ponovitev že prevzete zahteve po `expires_at` vrne isti prevzem; okno hrambe ključa in rok posnetka (30 dni) sta predloga za točke B.

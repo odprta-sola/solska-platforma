@@ -17,12 +17,12 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D06 | Upravičeni prejemniki in pravila potrjevanja | Odprto | Pilotna šola |
 | D07 | Hramba, dostopi in podatkovne poti | Odprto | Pilotna šola ob posvetu z DPO |
 | D08 | Licenca EUPL 1.2 in pravice prispevkov | EUPL 1.2 za kodo potrjena 12. 11. 2026; postopek prispevkov (inbound = outbound, DCO, vzdevek, izjava s soglasjem staršev ob prvem prispevku, brez praga) sprejel pobudnik 12. 11. 2026; pravni pregled obrazca pri šoli odprt | Nosilec projekta in avtorji |
-| D09 | Vzdrževanje, podpora in namestnik | Pobudnik osebno prevzema vlogo nosilca; drugi skrbnik/namestnik ni imenovan, ostaja odprto | Sodelujoči zavodi |
+| D09 | Vzdrževanje, podpora in namestnik | Pobudnik je nosilec; za drugega skrbnika je 12. 11. 2026 določil Aleksandra (`alexlandich`), ki ima od tega dne vlogo admin na repozitoriju; njegov izrecni pisni sprejem vloge je odprt | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema M1 in M2 | Predlog v specifikacijah | Skupni tehnični nosilec in pilotna šola |
 | D11 | Postopek pilota M2, besedilo obrazca in pravila odločanja | Odprto | Pilotna šola ob vsebinskem in pravnem pregledu |
-| D12 | [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md): minimalno obveščanje in skupni vir identitet ter upravičenj | Odprto | Skupni tehnični nosilec in mentorji ekip |
+| D12 | [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md): minimalno obveščanje in skupni vir identitet ter upravičenj | Točke A ([paket](d12-paket-za-odlocitev.md)) sprejel tehnični nosilec 12. 11. 2026 in izvedene; potrditev mentorjev in zamrznitev odprti | Skupni tehnični nosilec in mentorji ekip |
 | D13 | Razdelitev ekip, nosilci modulov in ocena ur po fazah | Odprto | Sodelujoči zavodi in mentorji |
-| D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; nosilec: pobudnik (osebni sprejem 12. 11. 2026); namestnik in roki odziva odprti | Nosilec projekta in skrbnik repozitorija |
+| D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; nosilec: pobudnik; namestnik: Aleksandar (`alexlandich`, določen 12. 11. 2026, z dostopom do zasebnih prijav kot admin repozitorija; sprejem odprt); roki odziva odprti | Nosilec projekta in skrbnik repozitorija |
 | D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | CC BY-SA 4.0 za dokumentacijo, osebni sprejem pobudnika 12. 11. 2026 ([LICENSE-dokumentacija.md](../../LICENSE-dokumentacija.md)); potrditev zavodov odprta | Nosilec projekta in avtorji |
 | D16 | Prejemniki in odločevalci pri polnoletnih dijakih, prehod med letom in ustreznost privolitve za postopek | Odprto | Pilotna šola ob pravnem in podatkovnem pregledu |
 

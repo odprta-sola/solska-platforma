@@ -39,13 +39,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
+      # Seznam vzdrževalcev iz osnovne veje (ne iz PR), da ga PR ne more sam razširiti.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+          sparse-checkout: .github/vzdrzevalci.txt
+          sparse-checkout-cone-mode: false
       - name: Status avtorja je urejen
         env:
-          ASSOCIATION: ${{ github.event.pull_request.author_association }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
           USER_TYPE: ${{ github.event.pull_request.user.type }}
           LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
         run: |
-          case "$ASSOCIATION" in OWNER|MEMBER|COLLABORATOR) echo "Vzdrževalec."; exit 0;; esac
+          # author_association ni zanesljiv (zasebno članstvo v organizaciji je CONTRIBUTOR).
+          if [ -f .github/vzdrzevalci.txt ] && grep -vE '^\s*(#|$)' .github/vzdrzevalci.txt | grep -qxF "$AUTHOR"; then
+            echo "Vzdrževalec."; exit 0
+          fi
           [ "$USER_TYPE" = "Bot" ] && { echo "Samodejni posodobitveni PR."; exit 0; }
           if echo "$LABELS" | grep -q '"avtor-urejen"'; then
             echo "Status avtorja je urejen."
