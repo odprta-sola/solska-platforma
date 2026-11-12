@@ -38,11 +38,12 @@ services:
       db: { condition: service_healthy }
 
   cleanup:
-    # Čiščenje začasnih datotek predogleda uvoza brez uporabniškega prometa (vsako uro).
+    # Čiščenje brez uporabniškega prometa (vsako uro): začasne datoteke predogleda uvoza
+    # in potekli posnetki občinstva.
     build:
       context: ./p0
       args: {INSTALL_DEV: "1"}
-    command: sh -c "while true; do python manage.py purge_import_uploads; sleep 3600; done"
+    command: sh -c "while true; do python manage.py purge_import_uploads; python manage.py purge_audience_snapshots; sleep 3600; done"
     environment:
       DJANGO_DEBUG: "1"
       POSTGRES_HOST: db
