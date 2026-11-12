@@ -1,8 +1,17 @@
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.http import Http404
+from django.urls import include, path, re_path
+
+
+def closed(request, *args, **kwargs):
+    """Samopostrežna obnova gesla je začasno izklopljena (individualni postopek pred B)."""
+    raise Http404
+
 
 urlpatterns = [
+    # Pred allauth: zapre vse poti obnove gesla, tudi potrditev s ključem ali kodo.
+    re_path(r"^accounts/password/reset/", closed),
     path("accounts/", include("allauth.account.urls")),
     path("admin/", admin.site.urls),
     path("p0/api/v1/", include("core.urls")),

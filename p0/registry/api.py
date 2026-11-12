@@ -252,6 +252,9 @@ def delivery_contact_resolve(request, client):
     """Kontakt za točno določenega prejemnika tik pred pošiljanjem; samo M1.
 
     Veljati mora aktualno upravičenje za obseg. Kontakta ni mogoče brati z ugibanimi ID.
+
+    Začasno zaprto: kontakt se vrne šele, ko P0 lahko preveri vezavo na evidentirano
+    dostavo (odprto v D12). Do takrat je odgovor 503 brez kontakta, enak za vse vhode.
     """
     body = json_body(request)
     if body is None:
@@ -260,6 +263,20 @@ def delivery_contact_resolve(request, client):
     request_id = body.get("delivery_request_id")
     if not all(isinstance(v, str) and v for v in (recipient_id, scope_ref, request_id)):
         return error(400, "invalid_request")
+    if not delivery_binding_verified(request_id, recipient_id, scope_ref, client):
+        return error(503, "temporarily_unavailable")
+    return _resolve_contact(recipient_id, scope_ref)
+
+
+def delivery_binding_verified(request_id, recipient_id, scope_ref, client):
+    """Ali je zahteva preverljivo vezana na evidentirano dostavo tega odjemalca.
+
+    Preverljivega mehanizma še ni (D12), zato vedno False. Ne nadomeščaj z obliko ID.
+    """
+    return False
+
+
+def _resolve_contact(recipient_id, scope_ref):
     person = person_by_id(recipient_id)
     ref = m.ScopeRef.objects.filter(ref=scope_ref, person=person).first() if person else None
     if person is None or ref is None:
