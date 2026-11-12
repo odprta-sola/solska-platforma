@@ -33,7 +33,7 @@ Najmanj mesečno in ob objavi varnostnega opozorila za uporabljeno komponento; v
 4. Preverite: gradnja brez predpomnilnika, celotna zbirka testov, `pip-audit` za vse tri zaklepe, Trivy za sliko P0; rezultate zapišite v pull request.
 5. Licence: ob novem ali zamenjanem paketu dopolnite popis spodaj.
 
-Samodejno odpiranje posodobitvenih pull requestov (npr. Dependabot) ni vklopljeno; to je odločitev skrbnika repozitorija.
+Dependabot (`.github/dependabot.yml`) mesečno odpre pull requeste za GitHub Actions in slike (Dockerfile, Compose); paketi Python ostanejo ročni postopek zgoraj, dokler Dependabot z zaklepi s hashi ni preizkušen.
 
 ## Skeniranje 12. 11. 2026
 

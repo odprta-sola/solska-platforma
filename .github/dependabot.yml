@@ -1,0 +1,13 @@
+# Samodejni posodobitveni pull requesti za pripete GitHub Actions in slike (odločitev pobudnika
+# 12. 11. 2026). Paketi Python se posodabljajo ročno po docs/projekt/odvisnosti-in-licence.md.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: {interval: monthly}
+  - package-ecosystem: docker
+    directory: /p0
+    schedule: {interval: monthly}
+  - package-ecosystem: docker-compose
+    directory: /
+    schedule: {interval: monthly}

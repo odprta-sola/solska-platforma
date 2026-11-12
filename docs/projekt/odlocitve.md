@@ -69,6 +69,22 @@ Pobudnik šteje pogoje D03, D08, D09 in D14 za zadostne za pripravo in lokalni r
 
 Obseg zaslonov P0 za prvi prevzem T (osebni sprejem pobudnika, 12. 11. 2026, po prvem neodvisnem pregledu): prijava in odjava; uvoz CSV s predogledom in uveljavitvijo; seznam in podrobnosti oseb z odvzemom povezave ali upravičenja; popravek kontakta s sledjo. Celoten administrativni portal, izvoz in zasloni za starše zunaj M1/M2 niso v obsegu T. Točka 9 ostane odprta do izvedbe teh zaslonov in ročnega pregleda dostopnosti ([pregled dostopnosti](pregled-dostopnosti-P0.md)).
 
+Odločitve pobudnika po prvem neodvisnem pregledu (osebni sprejem predlogov, ki jih je pripravil Claude, 12. 11. 2026; formalni sprejem poročil pregledovalcev ostaja odprt):
+
+| Vprašanje | Odločitev |
+| --- | --- |
+| Prijavna komponenta `django-allauth` (D03) | Potrjena |
+| Razvojna odvisnost `rfc3339-validator` (MIT) | Sprejeta |
+| Predlogi pogodbe po pregledu (meje dolžin, splošne napake, podvojen prejemnik, ponovitev po izteku) | Ostanejo predlog D12 za pogovor z mentorji; ekipe se nanje ne vežejo |
+| Ročni popravek kontakta in poznejši uvoz | Uvoz ostane vir resnice; predogled pokaže spremembo, tajništvo popravi tudi izvorni sistem |
+| Samodejne posodobitve | Dependabot za GitHub Actions in slike; paketi Python ročno, mesečno ([postopek](odvisnosti-in-licence.md)) |
+| HSTS in HTTPS | Ob odločitvi o gostovanju (D04) |
+| SBOM in pravni pregled licenc | Pred prvo distribucijo slike šoli |
+| Ročni pregled dostopnosti z bralnikom zaslona | Mentor ali učitelj z izkušnjo NVDA ali Orca; oseba še ni imenovana |
+| Poročili prvega pregleda (PR #39, #40) | Obe se ohranita pod ločenima imenoma; v registru prispevkov ostaneta oba vpisa |
+| Ponovni neodvisni pregled | Po združitvi popravkov, z istima pregledovalcema in posodobljenim navodilom |
+| Točka 8 | Počaka na prava M1 in M2 |
+
 ## Roki in sledenje
 
 D01–D03, D11–D14 in D16 blokirajo začetek odvisnega razvoja. D07, D09 in D10 se zaključijo pred produkcijskim pilotom; imenovanje drugega skrbnika iz D09 je izjema in je potrebno že pred prvo kodo oziroma vključitvijo zunanjih ekip. D04–D06 se rešijo pred razvojem odvisnih funkcij, D08 pred sprejemom kode in D15 pred potrditvijo pogojev ponovne uporabe besedil. Koledarske roke in GitHub dodelitve določijo potrjeni nosilci; vloge niso samodejno imenovanja oseb.

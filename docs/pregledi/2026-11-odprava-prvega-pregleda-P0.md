@@ -42,7 +42,7 @@ ID se nanašajo na poročilo OpenAI; DeepSeek P0-01 je enak OpenAI P0-02, DeepSe
 
 ```text
 python manage.py test                      [DJANGO_DEBUG=1, izolirana PostgreSQL 16]
-  Found 170 test(s). Ran 170 tests. OK (skipped=2)   [docker compose, slika brez predpomnilnika]
+  Found 173 test(s). Ran 173 tests. OK (skipped=2)   [izolirana PostgreSQL 16; prej 170 v docker compose, slika brez predpomnilnika]
   preskočena: meja modulov M1 in M2 (mapi pravih modulov ne obstajata)
 python manage.py test registry.tests.test_robni   [na kodi pred javnimi popravki]
   FAILED (failures=26, errors=8)           pričakovano: dokaz, da testi zaznajo napake
