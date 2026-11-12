@@ -14,6 +14,7 @@ Datum usmeritve: 13. oktober 2026. Dokumenti so delovni predlogi, razen izrecno 
 | Razvijalci modulov M1 in M2 | [Navodila](razvijalci/README.md), [ekipa M1](razvijalci/ekipa-M1.md), [ekipa M2](razvijalci/ekipa-M2.md) |
 | Pregled in stanje paketa T | [Kontrolni seznam pregleda](projekt/pregled-P0-kontrolni-seznam.md) in [stanje prevzema T](projekt/stanje-prevzema-T.md) |
 | Navodilo za prvi pregled z OpenAI in register prispevkov | [Navodilo](projekt/navodilo-za-pregled-OpenAI.md) in [prispevki](projekt/prispevki.md) |
+| Poročila pregledov, odprava in ponovni pregled | [Pregledi](pregledi/), [zapis o odpravi](pregledi/2026-11-odprava-prvega-pregleda-P0.md), [navodilo za ponovni pregled](projekt/navodilo-za-ponovni-pregled.md) |
 | Potrditve in formalni pogoji | [Register odločitev](projekt/odlocitve.md) in [odgovornosti](projekt/odgovornosti.md) |
 
 Najprej razumemo namen in primere. Mentor oceni primernost, obseg in individualne izdelke; šola preveri postopke in pravila. Šele nato se z ustreznimi ljudmi dogovorijo izvedba, skrbništvo in varnostno nadomeščanje, pri čemer formalni pogoji veljajo pred prvo kodo. Nov splošni krog AI pregledov dolge priloge ni naslednji korak.
