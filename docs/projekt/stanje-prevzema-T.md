@@ -25,7 +25,7 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Pogodba proti izvedbi (vhod, napake, formati) | Popravljeno za preizkušene poti; omejitve dolžin in splošne napake so predlog D12 |
 | Zaklep odvisnosti s hashi, določene slike, popis licenc slike, HSTS/HTTPS | Ni narejeno |
 | Točka 8: obnašanje modulov ob izpadu P0 | Nepreverljivo, dokler pravi M1/M2 ne obstajata |
-| Točka 9: zasloni in dostopnost | Ni zaslonov P0 (prijava je privzeta allauth); osnovni pregled s tipkovnico in bralnikom ni narejen |
+| Točka 9: zasloni in dostopnost | Prijava in odjava imata dostopni predlogi z avtomatskimi preizkusi; ročni pregled z bralnikom ni narejen; zasloni za osnovna opravila ne obstajajo ([pregled dostopnosti](pregled-dostopnosti-P0.md), predlog obsega) |
 | Potrditev D12 (sheme, šifranti, servisni mehanizem, topologija) | Pogodba je osnutek; ekipe se ne smejo vezati nanjo |
 | Potrditev `django-allauth`, strukture `p0/m1`, `p0/m2` in imen dovoljenj | Predlogi v PR-jih, ne odločitve |
 | Drugi skrbnik/namestnik (D09), namestnik in roki D14 | Pogoj za vključitev dijakov ([register](odlocitve.md)) |

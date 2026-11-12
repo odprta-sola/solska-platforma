@@ -31,7 +31,7 @@ Pri vsaki točki zapišite: izvedeno / ni izvedeno, ugotovitev, ponovljiv ukaz a
 | 6 | Neodvisen pregled izvorne kode | Preberite `registry/authz.py`, `registry/api.py`, `registry/services.py`, `registry/importer.py`; vprašanja spodaj | Ni (človeška presoja) |
 | 7 | Po ponastavitvi podatkov pogodbeni testi proti nadomestkoma | `down -v`, ponovna priprava, `test registry.tests.test_contract registry.tests.test_robni` | `test_contract.py`, `test_robni.py`, preverjevalnik `contract_check.py` |
 | 8 | Ob izpadu P0 moduli ne dovolijo zaščitenega dejanja in ne pošljejo na slepo | Za zdaj nepreverljivo: pravi M1/M2 še ne obstajata; nadomestki ne kličejo P0 | Ni |
-| 9 | Prijava in osnovna opravila s tipkovnico, fokus, razumljive napake, bralnik zaslona | Ročno. Obstaja samo privzeta prijava allauth; zaslonov P0 (seznam oseb, uvoz) ni | Ni |
+| 9 | Prijava in osnovna opravila s tipkovnico, fokus, razumljive napake, bralnik zaslona | Ročno po [pregledu dostopnosti](pregled-dostopnosti-P0.md). Obstajata prijava in odjava; zaslonov P0 (seznam oseb, uvoz) ni | `test_dostopnost.py` (struktura, ne nadomesti ročnega pregleda) |
 
 Točke 8 in 9 trenutno ne morejo biti izpolnjene; to je ugotovitev, ne napaka pregledovalca ([stanje](stanje-prevzema-T.md)).
 

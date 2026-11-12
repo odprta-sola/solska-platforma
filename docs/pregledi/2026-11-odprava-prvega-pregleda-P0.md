@@ -35,14 +35,14 @@ ID se nanašajo na poročilo OpenAI; DeepSeek P0-01 je enak OpenAI P0-02, DeepSe
 | P0-07 lažno pomirjujoči testi | popravljeno | preimenovana testa preklica in izteka, test odnosa brez granta kliče avtorizacijo, manjkajoča modula M1/M2 izrecno preskočena | pravi izpad ostaja točka 8 |
 | P0-08 nadomestki | odprto | omejitve navedene v [stanju T](../projekt/stanje-prevzema-T.md) | prava M1/M2 (ekipi, mentorji) |
 | P0-09 dokumentacija | popravljeno | DEVELOPER, stanje T, kontrolni seznam, SECURITY, specifikacija, register | — |
-| P0-10 dostopnost | odprto | — | obseg zaslonov P0 za T (pobudnik) |
+| P0-10 dostopnost | delno | `lang`, struktura, oznake, fokus in povezane napake prijave; `test_dostopnost.py`; omejen preizkus s tipkovnico ([pregled dostopnosti](../projekt/pregled-dostopnosti-P0.md)) | ročni pregled z bralnikom (človek), obseg zaslonov za T (pobudnik) |
 | P0-11 odvisnosti, slike, licence | delno | `STUBS` brez `DJANGO_DEBUG=1` ustavi zagon; `check --deploy` s sintetičnimi skrivnostmi: W004 (HSTS), W008 (HTTPS) | zaklep s hashi, digesti slik, popis licenc slike, HTTPS ob dejanski namestitvi |
 
 ## Izvedeni ukazi in rezultati
 
 ```text
 python manage.py test                      [DJANGO_DEBUG=1, izolirana PostgreSQL 16]
-  Found 137 test(s). Ran 137 tests. OK (skipped=2)
+  Found 145 test(s). Ran 145 tests. OK (skipped=2)   [s preizkusi dostopnosti prijave]
   preskočena: meja modulov M1 in M2 (mapi pravih modulov ne obstajata)
 python manage.py test registry.tests.test_robni   [na kodi pred javnimi popravki]
   FAILED (failures=26, errors=8)           pričakovano: dokaz, da testi zaznajo napake
@@ -68,7 +68,7 @@ Ni izvedeno, z razlogom: `docker compose up --build` z repozitorijsko konfigurac
 | 6 | Pregled kode | opravila sta ga sistema AI; ponovni pregled ni izveden |
 | 7 | Pogodbeni testi po ponastavitvi | testi zeleni v izolirani zbirki; `compose down -v` po popravkih ni izveden |
 | 8 | Izpad P0, brez zaščitenega dejanja in slepe dostave | ni izpolnjeno (prava M1/M2 ne obstajata) |
-| 9 | Tipkovnica, fokus, napake, bralnik | ni izpolnjeno (manjka `lang`, ni zaslonov P0, ni ročnega pregleda) |
+| 9 | Tipkovnica, fokus, napake, bralnik | ni izpolnjeno: prijava popravljena in preizkušena s tipkovnico, ročni pregled z bralnikom ni izveden, zasloni za osnovna opravila ne obstajajo |
 
 ## Dvajset skupin preizkusov
 
