@@ -1,0 +1,2 @@
+# Orodje za namestitev v sliki (zaklenjeno v requirements-build.lock).
+pip
