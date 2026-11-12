@@ -52,7 +52,7 @@ Naloži izmišljeni nabor (staff-01…03, parent-01…04, student-01…04), pono
 
 Prijava: `django-allauth` (samo `allauth.account`), prijava z uporabniškim imenom na `/accounts/login/`, odjava je POST. Samoregistracije ni; račune ustvari pooblaščena oseba. E-naslov ni enoličen in ni identiteta.
 
-Znana omejitev: aktivacija in obnova gesla za račune s skupnim predalom še nista individualni postopek; to je dopolnitev pred B ([načrt](docs/projekt/priprava-referencnega-P0.md)). V razvoju ne uporabljajte skupnega predala za resnično obnovo.
+Samopostrežna obnova gesla je izklopljena: vse poti pod `/accounts/password/reset/` vrnejo 404, sporočilo se ne pošlje, prijava ne kaže povezave. Razlog: računi lahko delijo e-naslov, zato obnova po naslovu ni individualna. Novo geslo nastavi šola; individualna aktivacija in obnova sta dopolnitev pred B ([načrt](docs/projekt/priprava-referencnega-P0.md)).
 
 Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnila v [pogodbi vmesnikov](docs/arhitektura/vmesnik-P0-M1-M2.md). **Osnutek D12, ni potrjena**; odvisna ekipa se nanjo veže šele po potrditvi.
 
@@ -61,7 +61,7 @@ Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnil
 | `GET /me`, `/me/relationships`, `/me/classes` | seja | Lastna oseba, povezave z `scope_ref` in oddelki |
 | `POST /authorizations/check` | seja ali servis | `{subject_id?, scope_ref, permission}` -> `{allowed, reason_code, checked_at}` |
 | `POST /audiences/resolve` | servis | Predogled prejemnikov oddelka za avtorja; brez kontaktov |
-| `POST /delivery-contacts/resolve` | servis (M1) | Kontakt za točno prejemnika in veljaven obseg tik pred pošiljanjem |
+| `POST /delivery-contacts/resolve` | servis (M1) | **Začasno 503** za vse vhode, dokler D12 ne določi preverljive vezave kontakta na dostavo, ki jo evidentira P0; pravila upravičenosti so pripravljena in testirana |
 
 `scope_ref` je neprosojen sklic, ki ga izda P0 za par (oseba, obseg); tuj ali ugiban sklic vrne `NOT_ALLOWED`. Šifrant dovoljenj: `m1.confirm`, `m2.decide`.
 
@@ -98,11 +98,11 @@ python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNI
 python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNIK --apply-batch ID
 ```
 
-`UPORABNIK` je račun osebe z vlogo `office` ali `admin`. Predogled nič ne spremeni; uveljavitev zahteva isto vsebino kot predogled in je vse ali nič. Če se je evidenca od predogleda spremenila tako, da bi uveljavitev izvedla drugačne operacije, je serija zavrnjena (`preview_stale`) in je potreben nov predogled. Serija je med uveljavitvijo zaklenjena; ponovna ali sočasna uveljavitev ne uspe.
+`UPORABNIK` je račun osebe z vlogo `office` ali `admin`; vlogi `admin` in `office` lahko z uvozom na novo dodeli samo uvoznik z vlogo `admin` (ponovni uvoz že dodeljene vloge je dovoljen). Predogled nič ne spremeni; uveljavitev zahteva isto vsebino kot predogled in je vse ali nič. Če se je evidenca od predogleda spremenila tako, da bi uveljavitev izvedla drugačne operacije, je serija zavrnjena (`preview_stale`) in je potreben nov predogled. Serija je med uveljavitvijo zaklenjena; ponovna ali sočasna uveljavitev ne uspe.
 
 - Napaka (neznana referenca, neveljaven datum ali šifrant, podvojen ključ) zavrne celotno serijo.
 - Ponovni uvoz ne podvoji oseb; manjkajoča vrstica ne izbriše in ne odvzame ničesar.
-- Starejši uvoz ne obnovi povezave ali upravičenja, ki jo je pooblaščena oseba ročno odvzela (`authz.revoke_*`): to je konflikt in serija se zavrne.
+- Uvoz ne obnovi povezave ali upravičenja, ki jo je pooblaščena oseba ročno odvzela (`authz.revoke_*` ali zaslon): varovalo velja za poslovni obseg (skrbnik in učenec; oseba, obseg in dovoljenje), ne glede na začetek veljavnosti ali vrsto v CSV. Uvoz, ki bi zapis ustvaril ali podaljšal po odvzemu, je konflikt in serija se zavrne; zgodovinski zapis, ki se konča pred odvzemom, je dovoljen.
 - Gesla niso del uvoza. Predogled hrani samo imena spremenjenih polj.
 
 Predlog, ki ga mora potrditi D12: datoteka `classes` ni v prvotnem formatu, a oddelki morajo nekje nastati; šifrant dovoljenj je za zdaj `acknowledge`, `decide`; obseg upravičenj je `student:<source_student_key>`. Delni uvoz in popolna uskladitev (zaključki veljavnosti) nista narejena.

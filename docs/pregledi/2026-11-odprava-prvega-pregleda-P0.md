@@ -7,7 +7,7 @@ Status: osnutek, 12. november 2026. Ta zapis ne spreminja izvirnih poročil preg
 | Podatek | Vrednost |
 | --- | --- |
 | Izhodišče | `main` = `e854f60c7f2e9918b09f0b7db0108c6ab8f62b8f` |
-| Popravki | lokalne veje; ob objavi se commiti ponovno zložijo, zato se SHA spremenijo in se tu posodobijo |
+| Popravki | zasebni: `07e421b` (prek nasveta GHSA-8h4f-w469-mr34); javni: PR #41, #42, #43 in ta PR; poročili pregledovalcev: PR #39, #40 |
 | Izvedel | Claude (Anthropic), model Claude Opus 5.5, po navodilih pobudnika |
 | Odgovorni človek | Mitja Pirih; sprejem tega zapisa še ni potrjen |
 | Okolje preverjanja | izolirana PostgreSQL 16 in slika iz `p0/Dockerfile` (Python 3.12, Django 5.2.19, django-allauth 65.22.0); ločeno od okolij pregledovalcev, po koncu odstranjeno |
@@ -18,7 +18,16 @@ Poročili se ujemata pri: vseh 85 obstoječih testih in 39 pogodbenih testih, ne
 
 ## Zasebne varnostne ugotovitve
 
-Tri visoke (poročilo OpenAI) in ena srednja (dodatno ugotovljena ob preverjanju). Vse so potrjene; popravki in regresijski testi so pripravljeni in preverjeni, objava se uskladi po [SECURITY.md](../../SECURITY.md). Podrobnosti do takrat niso javne.
+Tri visoke (poročilo OpenAI) in ena srednja (dodatno ugotovljena ob preverjanju), obravnavane zasebno po [SECURITY.md](../../SECURITY.md) in objavljene kot varnostni nasveti repozitorija.
+
+| ID | Resnost | Ugotovitev | Odprava | Dokaz |
+| --- | --- | --- | --- | --- |
+| [S-01](https://github.com/odprta-sola/solska-platforma/security/advisories/GHSA-h7jp-rfj3-89xr) | visoka | Kontakt je bil dosegljiv brez obstoječe dostavne zahteve | klic začasno zaprt (503) do D12 | `ContactBindingContract` |
+| [S-02](https://github.com/odprta-sola/solska-platforma/security/advisories/GHSA-8h4f-w469-mr34) | visoka | Uvoz z drugačnim začetkom veljavnosti je obnovil ročno odvzeto pravico | varovalo za poslovni obseg | `test_varovala.ImportRestrictionTests` |
+| [S-03](https://github.com/odprta-sola/solska-platforma/security/advisories/GHSA-gfrq-669g-95fq) | visoka, znana pred B | Obnova gesla prek skupnega e-naslova za vse račune s tem naslovom | samopostrežna obnova izklopljena | `test_varovala.PasswordRecoveryTests` |
+| [S-04](https://github.com/odprta-sola/solska-platforma/security/advisories/GHSA-42r3-qhw4-9xx2) | srednja | Tajništvo je z uvozom lahko dodelilo vlogo skrbnika ali tajništva | vlogi `admin` in `office` na novo dodeli samo skrbnik | `test_varovala.ImportRoleTests` |
+
+Preostanek: S-01 potrebuje odločitev D12 (predlog: vezava na posnetek občinstva, ki ga hrani P0, in avtor iz delegirane seje); S-03 potrebuje individualni postopek pred B.
 
 ## Tabela odprave javnih ugotovitev
 
@@ -42,7 +51,7 @@ ID se nanašajo na poročilo OpenAI; DeepSeek P0-01 je enak OpenAI P0-02, DeepSe
 
 ```text
 python manage.py test                      [DJANGO_DEBUG=1, izolirana PostgreSQL 16]
-  Found 170 test(s). Ran 170 tests. OK (skipped=2)   [docker compose, slika brez predpomnilnika]
+  Found 173 test(s). Ran 173 tests. OK (skipped=2)   [izolirana PostgreSQL 16; prej 170 v docker compose, slika brez predpomnilnika]
   preskočena: meja modulov M1 in M2 (mapi pravih modulov ne obstajata)
 python manage.py test registry.tests.test_robni   [na kodi pred javnimi popravki]
   FAILED (failures=26, errors=8)           pričakovano: dokaz, da testi zaznajo napake
@@ -64,7 +73,7 @@ Pozneje izvedeno: `docker compose build --no-cache p0`, `docker compose up -d`, 
 | 2 | Skupen kontakt, ločena računa | avtomatski dokaz obstaja |
 | 3 | Odvzem povezave/granta | avtomatski dokaz obstaja |
 | 4 | CSV brez delnega prepisa, ponovitev, sled | dopolnjeno z vezavo na potrjen načrt in sočasnostjo |
-| 5 | Omejen servisni kontaktni klic | stanje se objavi skupaj z zasebnimi popravki |
+| 5 | Omejen servisni kontaktni klic | ni izpolnjeno: klic je zaprt (503), dokler D12 ne določi preverljive vezave na dostavo; tuj in neobstoječ vhod brez razlike, brez kontakta |
 | 6 | Pregled kode | opravila sta ga sistema AI; ponovni pregled ni izveden |
 | 7 | Pogodbeni testi po ponastavitvi | izvedeno: `docker compose down -v`, ponovna namestitev in `seed_test_data`, nato `test_contract`, `test_robni`, `test_zasloni`: 98 OK |
 | 8 | Izpad P0, brez zaščitenega dejanja in slepe dostave | ni izpolnjeno (prava M1/M2 ne obstajata) |
@@ -72,4 +81,4 @@ Pozneje izvedeno: `docker compose build --no-cache p0`, `docker compose up -d`, 
 
 ## Dvajset skupin preizkusov
 
-Spremenjene glede na poročilo OpenAI: 5 (odnos brez granta zdaj preveri zavrnitev avtorizacije; odvzem v vseh štirih poteh) postane pokrit; 6 se oceni ob objavi zasebnih popravkov; 17 in 18 ostaneta delno (iztek in izpad nista samodejno preizkušena); 20 ostane delno (gradnja brez predpomnilnika, izvoz in dostopnost niso). Druge ocene poročila OpenAI ostanejo nespremenjene. Brez izmišljene pokritosti: skupaj 3 pokrite, 8 delno, 1 nepokrita, 8 zunaj obsega T.
+Spremenjene glede na poročilo OpenAI: 5 (odnos brez granta zdaj preveri zavrnitev avtorizacije; odvzem v vseh štirih poteh) postane pokrit; 6 (starejši uvoz po ročni omejitvi) postane pokrit, ker varovalo velja za poslovni obseg (`test_varovala.py`); 17 in 18 ostaneta delno (iztek in izpad nista samodejno preizkušena); 20 ostane delno (gradnja brez predpomnilnika, izvoz in dostopnost niso). Druge ocene poročila OpenAI ostanejo nespremenjene. Brez izmišljene pokritosti: skupaj 4 pokrite, 7 delno, 1 nepokrita, 8 zunaj obsega T.

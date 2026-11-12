@@ -12,7 +12,7 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Odvzem povezave in dovoljenja | Narejeno v logiki, testih in na zaslonu `/p0/evidenca/osebe/` |
 | Osnovni CSV uvoz s predogledom, validacijo, celovito potrditvijo, ponovitvijo | Narejeno (ukaz `import_csv` in zaslon `/p0/evidenca/uvoz/`) |
 | Sprememba kontakta (sledljiva) | Prek uvoza (`person.import_updated`) in zaslona (`person.contact_updated`); razmerje med ročnim popravkom in poznejšim uvozom ni določeno |
-| Omejen kontaktni klic | Narejeno (`delivery-contacts/resolve`) |
+| Omejen kontaktni klic | Začasno zaprto (503) do odločitve D12 o preverljivi vezavi na dostavo; pravila upravičenosti testirana |
 | API, testni podatki, ponovljiva namestitev | Narejeno; testi so bili izmerjeni na določenem commitu (glej zapis o odpravi), gradnja brez predpomnilnika ni preverjena |
 | Nadomestka M1/M2 in pogodbeni testi | Narejeno kot osnutek pogodbe D12 (`api/openapi.yaml`, `p0/stubs`); nadomestka ne dokazujeta vedenjske zamenljivosti (glej spodaj) |
 
@@ -34,7 +34,7 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 
 ## Pred B (ne za prvi prevzem T)
 
-Individualna aktivacija in obnova gesla pri skupnem predalu (reset gesla je zdaj nevaren za račune s skupnim predalom in se ne sme uporabljati za resnične račune), administrativni zasloni (seznam oseb, uvoz, popravki, izvoz), dokumentiran izvoz, politika popolne uskladitve uvoza, računi učencev (predlog D01/D06/D07/D16).
+Individualna aktivacija in obnova gesla pri skupnem predalu (samopostrežna obnova je do takrat izklopljena), administrativni zasloni (seznam oseb, uvoz, popravki, izvoz), dokumentiran izvoz, politika popolne uskladitve uvoza, računi učencev (predlog D01/D06/D07/D16).
 
 ## Znane omejitve nadomestkov in pogodbe
 
