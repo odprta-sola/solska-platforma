@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block head_title %}Uvoz CSV{% endblock %}
+{% block wide_header %} class="wide"{% endblock %}
+{% block wide_main %} class="wide"{% endblock %}
+{% block content %}
+  <h1>Uvoz CSV</h1>
+  <p>Uvoz ima dva koraka. Najprej naredite predogled; evidenca se ne spremeni. Nato predogled preglejte in serijo uveljavite ali zavrzite. Napaka v katerikoli vrstici zavrne celotno serijo.</p>
+  {% include "_napake.html" with naslov="Predogleda ni bilo mogoče narediti" %}
+  <form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% include "_polja.html" %}
+    <button type="submit">Naredi predogled</button>
+  </form>
+  <h2>Zadnje serije</h2>
+  <div class="tablewrap" role="region" tabindex="0" aria-label="Zadnje serije (tabela)"><table>
+    <caption class="visually-hidden">Zadnjih 20 serij uvoza</caption>
+    <thead><tr><th scope="col">Ustvarjeno</th><th scope="col">Vir</th><th scope="col">Stanje</th><th scope="col">Pripravil</th></tr></thead>
+    <tbody>
+      {% for b in batches %}
+        <tr>
+          <th scope="row"><a href="{% url 'ui-import-batch' b.pk %}">{{ b.created_at|date:"j. n. Y H:i" }}</a></th>
+          <td>{{ b.source }}</td>
+          <td>{{ b.get_status_display }}</td>
+          <td>{{ b.created_by.display_name|default:"—" }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">Ni serij.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table></div>
+{% endblock %}

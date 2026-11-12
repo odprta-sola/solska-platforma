@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block head_title %}Serija uvoza{% endblock %}
+{% block wide_header %} class="wide"{% endblock %}
+{% block wide_main %} class="wide"{% endblock %}
+{% block content %}
+  <p><a href="{% url 'ui-import' %}">Nazaj na uvoz</a></p>
+  <h1>Serija uvoza: {{ batch.get_status_display }}</h1>
+  <dl class="facts">
+    <dt>Vir</dt><dd>{{ batch.source }}</dd>
+    <dt>Ustvarjeno</dt><dd>{{ batch.created_at|date:"j. n. Y H:i" }}{% if batch.created_by %}, {{ batch.created_by.display_name }}{% endif %}</dd>
+    {% if batch.applied_at %}<dt>Uveljavljeno</dt><dd>{{ batch.applied_at|date:"j. n. Y H:i" }}{% if batch.applied_by %}, {{ batch.applied_by.display_name }}{% endif %}</dd>{% endif %}
+    <dt>Sprememb</dt><dd>{{ changes }} od {{ item_count }} zapisov</dd>
+  </dl>
+
+  {% if batch.problems %}
+    <div class="errors" id="napake" role="alert" aria-labelledby="napake-naslov" tabindex="-1">
+      <h2 id="napake-naslov">Težave: {{ batch.problems|length }}</h2>
+      <div class="tablewrap" role="region" tabindex="0" aria-label="Težave (tabela)"><table>
+        <caption class="visually-hidden">Težave po datotekah in vrsticah</caption>
+        <thead><tr><th scope="col">Datoteka</th><th scope="col">Vrstica</th><th scope="col">Koda</th><th scope="col">Opis</th></tr></thead>
+        <tbody>
+          {% for p in batch.problems %}
+            <tr><td>{{ p.file|default:"—" }}</td><td>{{ p.row|default:"—" }}</td><td>{{ p.code }}</td><td>{{ p.message }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table></div>
+    </div>
+    <script>document.getElementById("napake").focus();</script>
+  {% endif %}
+
+  {% if can_apply %}
+    <h2>Odločitev</h2>
+    <p>Uveljavitev izvede natanko spremembe spodaj. Če se je evidenca medtem spremenila, bo serija zavrnjena in bo potreben nov predogled.</p>
+    <div class="actions">
+      <form method="post" action="{% url 'ui-import-apply' batch.pk %}">{% csrf_token %}<button type="submit">Uveljavi serijo</button></form>
+      <form method="post" action="{% url 'ui-import-discard' batch.pk %}">{% csrf_token %}<button type="submit" class="secondary">Zavrzi predogled</button></form>
+    </div>
+  {% elif batch.status == "previewed" %}
+    <p>Datoteke predogleda niso več na voljo. <a href="{% url 'ui-import' %}">Naredite nov predogled.</a></p>
+  {% endif %}
+
+  {% if item_count %}
+    <h2>Spremembe po zapisih</h2>
+    <div class="tablewrap" role="region" tabindex="0" aria-label="Spremembe po zapisih (tabela)"><table>
+      <caption class="visually-hidden">Načrtovane ali izvedene spremembe; prikazanih največ 500</caption>
+      <thead><tr><th scope="col">Vrsta zapisa</th><th scope="col">Ključ</th><th scope="col">Dejanje</th><th scope="col">Spremenjena polja</th></tr></thead>
+      <tbody>
+        {% for i in items %}
+          <tr><td>{{ i.entity_type }}</td><td>{{ i.source_key }}</td><td>{{ i.action }}</td><td>{{ i.changed_fields|join:", "|default:"—" }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table></div>
+    {% if item_count > 500 %}<p>Prikazanih je prvih 500 od {{ item_count }} zapisov.</p>{% endif %}
+  {% endif %}
+{% endblock %}

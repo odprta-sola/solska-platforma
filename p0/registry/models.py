@@ -261,3 +261,19 @@ class ServiceClient(models.Model):
     scopes = models.JSONField(default=list)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
+
+
+class ImportUpload(models.Model):
+    """Začasna kopija datoteke predogleda, dokler serija ni uveljavljena ali zavržena.
+
+    Vsebuje osebne podatke, zato se izbriše ob uveljavitvi, zavrnitvi ali po izteku
+    (UPLOAD_RETENTION v registry.ui). Ni arhiv uvozov.
+    """
+
+    batch = models.ForeignKey(ImportBatch, on_delete=models.CASCADE, related_name="uploads")
+    name = models.CharField(max_length=32)
+    content = models.BinaryField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["batch", "name"], name="uniq_upload_name")]

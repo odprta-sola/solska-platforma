@@ -83,6 +83,10 @@ Pogodbeni testi (`registry/tests/test_contract.py`, `test_robni.py`) vsak odgovo
 
 Pravice se odločajo samo v `registry/authz.py`. Povezava sama ne dovoli dejanja; odvzem povezave ali upravičenja prevlada. Zaščitenih dejanj se ne dovoli na slepo: neznan ali tuj obseg ni nikoli »dovoljeno«.
 
+## Zasloni evidence
+
+Po prijavi vodi `/p0/` na začetno stran. Tajništvo in skrbnik (vlogi `office`, `admin`) imata pod `/p0/evidenca/` zaslone za osebe (iskanje, podrobnosti, odvzem povezave ali upravičenja, popravek kontakta) in uvoz CSV. Odločanje ostane v `authz.py` in `importer.py`; zasloni so le vmesnik (`registry/ui.py`, predloge v `p0/templates/`). Ročni odvzem in popravek kontakta se v sledi zapišeta z virom `zaslon`. Datoteke predogleda uvoza se začasno hranijo v zbirki (`ImportUpload`) in se izbrišejo ob uveljavitvi, zavrženju ali po 24 urah. Popravek kontakta lahko naslednji uvoz iz istega vira spremeni; politika uskladitve je odprta. Dostopnost: [pregled dostopnosti](docs/projekt/pregled-dostopnosti-P0.md).
+
 ## Uvoz CSV
 
 Format: mapa z datotekami `classes`, `persons`, `roles`, `students`, `memberships`, `relationships`, `staff_assignments`, `grants` (`.csv`; UTF-8, ločilo `;`, datumi ISO 8601 s časovnim pasom). Primer: [data/testni-uvoz](data/testni-uvoz). Dve stopnji, brez izjem:

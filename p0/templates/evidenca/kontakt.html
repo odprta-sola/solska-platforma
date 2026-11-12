@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block head_title %}Kontakt: {{ person.display_name }}{% endblock %}
+{% block content %}
+  <p><a href="{% url 'ui-person' person.pk %}">Nazaj na osebo</a></p>
+  <h1>Kontakt: {{ person.display_name }}</h1>
+  {% include "_napake.html" %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include "_polja.html" %}
+    <div class="actions">
+      <button type="submit">Shrani</button>
+      <a href="{% url 'ui-person' person.pk %}">Prekliči</a>
+    </div>
+  </form>
+{% endblock %}

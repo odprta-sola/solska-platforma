@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block head_title %}Začetek{% endblock %}
+{% block content %}
+  <h1>Odprta šola</h1>
+  <p>Prijavljeni ste kot {{ user.person.display_name|default:user.username }}.</p>
+  {% if staff %}
+    <h2>Evidenca</h2>
+    <ul>
+      <li><a href="{% url 'ui-persons' %}">Osebe</a>: iskanje, povezave in upravičenja, kontakt</li>
+      <li><a href="{% url 'ui-import' %}">Uvoz CSV</a>: predogled in uveljavitev</li>
+    </ul>
+  {% else %}
+    <p>Obvestila in obrazci bodo na voljo v modulih šole. Ta stran zaenkrat nima drugih opravil.</p>
+  {% endif %}
+{% endblock %}

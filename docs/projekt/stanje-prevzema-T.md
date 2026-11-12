@@ -9,9 +9,9 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Ena izmišljena šola, osebe, učenci, oddelki, povezave, dodelitve, dovoljenja | Narejeno (`registry`, `seed_test_data`) |
 | Lokalna prijava z vzdrževano rešitvijo | Narejeno (`django-allauth`, prijava z uporabniškim imenom, brez samoregistracije) |
 | Preverjanje uporabniških in servisnih pravic | Narejeno (`authz.py`, `authorizations/check`, servisni žetoni) |
-| Odvzem povezave in dovoljenja | Narejeno v logiki in testih; **brez zaslona** (samo koda) |
-| Osnovni CSV uvoz s predogledom, validacijo, celovito potrditvijo, ponovitvijo | Narejeno (ukaz `import_csv`); **brez zaslona** |
-| Sprememba kontakta (sledljiva) | Prek uvoza (`person.import_updated`); **brez ločenega postopka ali zaslona** |
+| Odvzem povezave in dovoljenja | Narejeno v logiki, testih in na zaslonu `/p0/evidenca/osebe/` |
+| Osnovni CSV uvoz s predogledom, validacijo, celovito potrditvijo, ponovitvijo | Narejeno (ukaz `import_csv` in zaslon `/p0/evidenca/uvoz/`) |
+| Sprememba kontakta (sledljiva) | Prek uvoza (`person.import_updated`) in zaslona (`person.contact_updated`); razmerje med ročnim popravkom in poznejšim uvozom ni določeno |
 | Omejen kontaktni klic | Narejeno (`delivery-contacts/resolve`) |
 | API, testni podatki, ponovljiva namestitev | Narejeno; testi so bili izmerjeni na določenem commitu (glej zapis o odpravi), gradnja brez predpomnilnika ni preverjena |
 | Nadomestka M1/M2 in pogodbeni testi | Narejeno kot osnutek pogodbe D12 (`api/openapi.yaml`, `p0/stubs`); nadomestka ne dokazujeta vedenjske zamenljivosti (glej spodaj) |
@@ -25,7 +25,7 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Pogodba proti izvedbi (vhod, napake, formati) | Popravljeno za preizkušene poti; omejitve dolžin in splošne napake so predlog D12 |
 | Zaklep odvisnosti s hashi, določene slike, popis licenc slike, HSTS/HTTPS | Ni narejeno |
 | Točka 8: obnašanje modulov ob izpadu P0 | Nepreverljivo, dokler pravi M1/M2 ne obstajata |
-| Točka 9: zasloni in dostopnost | Prijava in odjava imata dostopni predlogi z avtomatskimi preizkusi; ročni pregled z bralnikom ni narejen; zasloni za osnovna opravila (uvoz, seznam in podrobnosti oseb z odvzemom, popravek kontakta; obseg sprejet 12. 11. 2026) ne obstajajo ([pregled dostopnosti](pregled-dostopnosti-P0.md)) |
+| Točka 9: zasloni in dostopnost | Prijava in odjava imata dostopni predlogi z avtomatskimi preizkusi; ročni pregled z bralnikom ni narejen; zasloni za osnovna opravila (obseg sprejet 12. 11. 2026) so narejeni in preizkušeni s tipkovnico, ne z bralnikom ([pregled dostopnosti](pregled-dostopnosti-P0.md)) |
 | Potrditev D12 (sheme, šifranti, servisni mehanizem, topologija) | Pogodba je osnutek; ekipe se ne smejo vezati nanjo |
 | Potrditev `django-allauth`, strukture `p0/m1`, `p0/m2` in imen dovoljenj | Predlogi v PR-jih, ne odločitve |
 | Drugi skrbnik/namestnik (D09), namestnik in roki D14 | Pogoj za vključitev dijakov ([register](odlocitve.md)) |

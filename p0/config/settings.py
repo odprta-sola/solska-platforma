@@ -73,6 +73,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "registry.context.ui",
             ],
         },
     },
@@ -103,7 +104,7 @@ ACCOUNT_UNIQUE_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_ADAPTER = "registry.adapters.ClosedAccountAdapter"
 ACCOUNT_LOGOUT_ON_GET = False
-LOGIN_REDIRECT_URL = "/p0/api/v1/me"
+LOGIN_REDIRECT_URL = "/p0/"
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

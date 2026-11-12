@@ -16,6 +16,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("p0/api/v1/", include("core.urls")),
     path("p0/api/v1/", include("registry.urls")),
+    path("p0/", include("registry.ui_urls")),
 ]
 
 # Nadomestka M1 in M2 za razvoj in pogodbene teste; nikoli v produkciji.

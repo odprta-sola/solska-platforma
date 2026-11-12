@@ -3,34 +3,11 @@
 {% block content %}
   <h1>Prijava</h1>
   <p>Prijavite se z uporabniškim imenom, ki ste ga prejeli od šole.</p>
-  {% if form.errors %}
-    <div class="errors" id="napake" role="alert" aria-labelledby="napake-naslov" tabindex="-1">
-      <h2 id="napake-naslov">Prijava ni uspela</h2>
-      <ul>
-        {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
-        {% for field in form %}{% for error in field.errors %}
-          <li><a href="#{{ field.auto_id }}">{{ field.label }}: {{ error }}</a></li>
-        {% endfor %}{% endfor %}
-      </ul>
-    </div>
-  {% endif %}
+  {% include "_napake.html" with naslov="Prijava ni uspela" %}
   <form method="post" action="{% url 'account_login' %}" novalidate>
     {% csrf_token %}
-    {% for field in form %}
-      {% if field.is_hidden %}{{ field }}{% else %}
-      <div{% if field.widget_type == "checkbox" %} class="check"{% endif %}>
-        {% if field.widget_type == "checkbox" %}{{ field }} {{ field.label_tag }}{% else %}{{ field.label_tag }}{{ field }}{% endif %}
-        {% if field.help_text %}<span class="help" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</span>{% endif %}
-        {% if field.errors %}<ul class="field-error" id="{{ field.auto_id }}_error">{% for error in field.errors %}<li>Napaka: {{ error }}</li>{% endfor %}</ul>{% endif %}
-      </div>
-      {% endif %}
-    {% endfor %}
+    {% include "_polja.html" %}
     {{ redirect_field }}
     <button type="submit">Prijava</button>
   </form>
 {% endblock content %}
-{% block extra_body %}
-  {% if form.errors %}
-    <script>document.getElementById("napake").focus();</script>
-  {% endif %}
-{% endblock extra_body %}

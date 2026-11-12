@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block head_title %}Odvzem: {{ kind }}{% endblock %}
+{% block content %}
+  <h1>Potrdite odvzem</h1>
+  <p><strong>{{ label }}</strong></p>
+  <p>Odvzem velja takoj. Oseba novega dejanja na tej podlagi ne bo mogla več izvesti. Zapis in sled ostaneta; poznejši uvoz odvzema ne obnovi brez pooblaščene razrešitve.</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="actions">
+      <button type="submit" class="danger">Odvzemi</button>
+      <a href="{% url 'ui-person' person.pk %}">Prekliči</a>
+    </div>
+  </form>
+{% endblock %}

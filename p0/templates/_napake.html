@@ -1,0 +1,12 @@
+{% if form.errors %}
+  <div class="errors" id="napake" role="alert" aria-labelledby="napake-naslov" tabindex="-1">
+    <h2 id="napake-naslov">{{ naslov|default:"Obrazca ni bilo mogoče shraniti" }}</h2>
+    <ul>
+      {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+      {% for field in form %}{% for error in field.errors %}
+        <li><a href="#{{ field.auto_id }}">{{ field.label }}: {{ error }}</a></li>
+      {% endfor %}{% endfor %}
+    </ul>
+  </div>
+  <script>document.getElementById("napake").focus();</script>
+{% endif %}
