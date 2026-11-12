@@ -21,7 +21,7 @@ Pripete reference:
 | Popravek Debiana v sliki | `zlib1g=1:1.3.dfsg+really1.3.1-1+deb13u1` (dokler ga osnovna slika nima) |
 | PostgreSQL (razvoj, CI) | `postgres:16@sha256:f9a7b9ebf6f56201f949db745e47bc423c0f0f8294bafe991cc10bf74b029657` (16.15) |
 | Mailpit (razvoj) | `axllent/mailpit:v1.33.1@sha256:aef2aacc11f075ec0fb6874275ee4a421e688e11a96ebb296134d1735c7761ce` |
-| GitHub Actions | `actions/checkout@11d5960a…` (v4.4.0), `actions/setup-python@a26af69b…` (v5.6.0); Python 3.12.16 |
+| GitHub Actions | `p0.yml`: `actions/checkout@11d5960a…` (v4.4.0), `actions/setup-python@a26af69b…` (v5.6.0), Python 3.12.16; `docs-links.yml`: `actions/checkout@d23441a4…` (v6) |
 
 ## Postopek posodobitve
 
@@ -48,6 +48,8 @@ Orodji: `pip-audit` 2.10.1 (baza PyPI/OSV), Trivy 0.76.2 (`aquasec/trivy@sha256:
 | Mailpit 1.33.1 (Trivy, samo razvoj) | 2 opozorili neznane resnosti v binarni datoteki Go |
 
 Presoja uporabnosti: preostalih opozoril sistemskih paketov ni mogoče odpraviti brez novih paketov Debiana; P0 ne izvaja `util-linux` ali `login` med delovanjem, SQLite ne uporablja. Opozorila `pip` (vgrajen `pkg_resources` iz setuptools 70.3.0) produkcijske slike ne zadevajo več. Sliki PostgreSQL in Mailpit nista del produkcijske namestitve; ta še ni določena (D04). To ni dokaz neizkoristljivosti.
+
+Razvojna slika (`INSTALL_DEV=1`) obdrži pip 26.3, ki ima vgrajen `pkg_resources` iz setuptools 70.3.0; Trivy zato v njej prijavi tri opozorila setuptools (ponovni pregled DeepSeek). Zadevajo `package_index`, gradnjo sdist in poti v Windows, ki jih `pkg_resources` ne uporablja; produkcijska slika pip nima. Opomba, ne ugotovitev.
 
 Ni preverjeno: knjižnice, ki jih prinaša `psycopg-binary` (`psycopg_binary.libs`: libpq, OpenSSL, Kerberos, OpenLDAP, Cyrus SASL, libcrypt, keyutils, com_err), ker jih Trivy kot nepaketirane datoteke ne prepozna zanesljivo; njihove različice niso popisane.
 
