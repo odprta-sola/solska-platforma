@@ -1,7 +1,7 @@
 # Razvojno okolje P0 na izmišljenih podatkih. Ni za produkcijo.
 services:
   db:
-    image: postgres:16@sha256:f9a7b9ebf6f56201f949db745e47bc423c0f0f8294bafe991cc10bf74b029657  # 16.15
+    image: postgres:18@sha256:e3d24f6906d0760bf4da0dae872415391ededefad23fd471c47dc53b0ddf3c42  # 16.15
     environment:
       POSTGRES_DB: p0
       POSTGRES_USER: p0
