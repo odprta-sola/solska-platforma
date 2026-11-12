@@ -5,6 +5,9 @@ Pogodbeni test preveri, da so enake shemam v api/openapi.yaml. Preverjevalnik po
 samo podmnožico JSON Schema, ki jo pogodba uporablja za zahteve.
 """
 
+import re
+from datetime import datetime
+
 ID = {"type": "string", "minLength": 1, "maxLength": 256}
 
 REQUESTS = {
@@ -98,6 +101,19 @@ REQUESTS = {
 
 TYPES = {"object": dict, "array": list, "string": str, "boolean": bool}
 
+# RFC 3339 date-time (format OpenAPI); ločilo T ter časovni pas Z ali odmik sta obvezna.
+DATE_TIME = re.compile(r"\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(\.\d+)?([Zz]|[+-]\d{2}:\d{2})")
+
+
+def parse_date_time(value):
+    """Datum in čas po RFC 3339 ali None (tudi neobstoječ datum ali čas)."""
+    if not isinstance(value, str) or not DATE_TIME.fullmatch(value):
+        return None
+    try:
+        return datetime.fromisoformat(value.upper().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
 
 def _valid(value, schema):
     kind = schema.get("type")
@@ -106,6 +122,8 @@ def _valid(value, schema):
     if "enum" in schema and value not in schema["enum"]:
         return False
     if kind == "string":
+        if schema.get("format") == "date-time" and parse_date_time(value) is None:
+            return False
         return schema.get("minLength", 0) <= len(value) <= schema.get("maxLength", 10**9)
     if kind == "array":
         if not schema.get("minItems", 0) <= len(value) <= schema.get("maxItems", 10**9):
@@ -124,5 +142,5 @@ def _valid(value, schema):
 
 
 def valid_request(name, body):
-    """Ali telo ustreza shemi zahteve `name`. Format date-time preveri klicatelj."""
+    """Ali telo ustreza shemi zahteve `name`, vključno s formatom date-time (RFC 3339)."""
     return isinstance(body, dict) and _valid(body, REQUESTS[name])

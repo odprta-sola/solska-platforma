@@ -5,6 +5,7 @@ Servisni klic: Bearer žeton modula, ločeno od seje.
 """
 
 import json
+import re
 import secrets
 from functools import wraps
 
@@ -175,6 +176,7 @@ def _session_check(request, person):
     return _check_response(*authz.check_scope(person, scope_ref, permission))
 
 
+CLASS_ID = re.compile(r"[0-9]{1,18}")  # ASCII števke v obsegu bigint
 PURPOSE_PERMISSION = {"notice": "acknowledge", "form": "decide"}
 
 
@@ -195,7 +197,7 @@ def audiences_resolve(request, client):
         return error(400, "invalid_request")
     now = timezone.now()
     if not (
-        class_id.isdigit()
+        CLASS_ID.fullmatch(class_id)
         and m.StaffAssignment.objects.active(now)
         .filter(person=author, school_class_id=int(class_id))
         .exists()

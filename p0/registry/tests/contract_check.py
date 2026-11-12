@@ -13,7 +13,14 @@ from jsonschema import Draft202012Validator
 from jsonschema.exceptions import ValidationError
 
 SPEC = yaml.safe_load((Path(__file__).resolve().parents[3] / "api" / "openapi.yaml").read_text())
-GENERIC = {"405", "503"}  # splošni napaki po opisu pogodbe; 500 ni nikoli sprejemljiv
+GENERIC = {"405", "503"}
+API_PREFIXES = ("/p0/api/", "/m1/api/", "/m2/api/")
+# Namerne pomožne poti zunaj pogodbe (nadomestka in health); vse druge neznane poti API padejo.
+HELPER_PATHS = (
+    "/m1/api/v1/_stub/",
+    "/m2/api/v1/_stub/",
+    "/p0/api/v1/health",
+)  # splošni napaki po opisu pogodbe; 500 ni nikoli sprejemljiv
 FORMATS = Draft202012Validator.FORMAT_CHECKER
 
 
@@ -46,7 +53,10 @@ def check_response(method, path, status, content_type, body):
     """Dvigne ContractViolation, če odgovor ne ustreza pogodbi."""
     found = operation(method, path)
     if found is None:
-        return
+        bare = path.split("?", 1)[0]
+        if not bare.startswith(API_PREFIXES) or bare.startswith(HELPER_PATHS):
+            return
+        raise ContractViolation(f"{method.upper()} {bare}: pot ni v pogodbi")
     template, op = found
     where = f"{method.upper()} {template} {status}"
     if op is None:
