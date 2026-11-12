@@ -34,7 +34,7 @@ Ni preverjeno: bralnik zaslona, povečava 200 % in 400 %, kontrast z orodjem, vi
 
 Izvede ga oseba, ki kode ni pisala. Zapišite datum, brskalnik, operacijski sistem, bralnik zaslona z različico in rezultat vsake vrstice (uspešno, ne, opomba).
 
-Priprava: `docker compose up --build -d`, `seed_test_data` z lastnim `SEED_PASSWORD`, odprite `http://localhost:8000/accounts/login/`. Priporočeni par: NVDA s Firefoxom (Windows) ali Orca s Firefoxom (Linux); po možnosti še VoiceOver s Safarijem.
+Priprava: `docker compose up --build -d --wait`, `seed_test_data` z lastnim `SEED_PASSWORD`, odprite `http://localhost:8000/accounts/login/`. Priporočeni par: NVDA s Firefoxom (Windows) ali Orca s Firefoxom (Linux); po možnosti še VoiceOver s Safarijem.
 
 | # | Korak | Pričakovano |
 | --- | --- | --- |

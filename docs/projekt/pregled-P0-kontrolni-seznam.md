@@ -10,12 +10,12 @@ Pregledovalec ne sme biti avtor pregledovane kode. Pobudnik je določil, da preg
 
 ```bash
 git clone https://github.com/odprta-sola/solska-platforma.git && cd solska-platforma
-docker compose up --build -d
+docker compose up --build -d --wait   # počaka na migracije in zdravo aplikacijo
 docker compose exec -T -e SEED_PASSWORD="<izberite-testno-geslo>" p0 python manage.py seed_test_data
 docker compose exec -T p0 python manage.py test
 ```
 
-Pričakovano: vsi testi zeleni; število na posameznem commitu je v [zapisu o odpravi](../pregledi/2026-11-odprava-prvega-pregleda-P0.md), preskočeni testi so označeni z razlogom. Geslo je samo testno in ne sme biti uporabljeno nikjer drugje. Pošta je v http://localhost:8025. Po koncu: `docker compose down -v`.
+Pričakovano: vsi testi zeleni; število na posameznem commitu je v zapisih o odpravi ([prvi](../pregledi/2026-11-odprava-prvega-pregleda-P0.md), [ponovni](../pregledi/2026-11-odprava-ponovnega-pregleda-P0.md)), preskočeni testi so označeni z razlogom. Geslo je samo testno in ne sme biti uporabljeno nikjer drugje. Pošta je v http://localhost:8025. Po koncu: `docker compose down -v`.
 
 ## Točke pregleda
 

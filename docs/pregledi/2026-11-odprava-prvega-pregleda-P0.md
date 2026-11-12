@@ -1,6 +1,6 @@
 # Odprava ugotovitev prvega neodvisnega pregleda P0
 
-Status: osnutek, 12. november 2026. Ta zapis ne spreminja izvirnih poročil pregledovalcev (PR #39, Codex/OpenAI; PR #40, DeepSeek), ki ostaneta zgodovinski dokaz za commit `e854f60`. **Ni človeški prevzem, ni potrditev D12 in ne zapira paketa T.** Po popravkih je potreben ponovni neodvisni pregled.
+Status: osnutek, 12. november 2026. Nadaljevanje: [odprava ponovnega pregleda](2026-11-odprava-ponovnega-pregleda-P0.md). Ta zapis ne spreminja izvirnih poročil pregledovalcev (PR #39, Codex/OpenAI; PR #40, DeepSeek), ki ostaneta zgodovinski dokaz za commit `e854f60`. **Ni človeški prevzem, ni potrditev D12 in ne zapira paketa T.** Po popravkih je potreben ponovni neodvisni pregled.
 
 ## Podatki
 
@@ -45,7 +45,7 @@ ID se nanašajo na poročilo OpenAI; DeepSeek P0-01 je enak OpenAI P0-02, DeepSe
 | P0-08 nadomestki | odprto | omejitve navedene v [stanju T](../projekt/stanje-prevzema-T.md) | prava M1/M2 (ekipi, mentorji) |
 | P0-09 dokumentacija | popravljeno | DEVELOPER, stanje T, kontrolni seznam, SECURITY, specifikacija, register | — |
 | P0-10 dostopnost | delno | `lang`, struktura, oznake, fokus in povezane napake prijave; `test_dostopnost.py`; omejen preizkus s tipkovnico ([pregled dostopnosti](../projekt/pregled-dostopnosti-P0.md)) | ročni pregled z bralnikom (človek); zasloni za T narejeni (`test_zasloni.py`), uvoz v brskalniku ni preizkušen |
-| P0-11 odvisnosti, slike, licence | delno | zaklepi s hashi, digesti slik in Actions, pip 26.3 (6 opozoril osnovne slike odpravljenih), produkcijska slika brez pip in s popravljenim zlib; pip-audit brez zadetkov; Trivy: brez popravljivih opozoril v sliki P0 ([odvisnosti in licence](../projekt/odvisnosti-in-licence.md)); `STUBS` brez `DJANGO_DEBUG=1` ustavi zagon | HSTS/HTTPS ob dejanski namestitvi (D04); SBOM in pravni pregled licenc pred distribucijo slike; vklop samodejnih posodobitev (skrbnik) |
+| P0-11 odvisnosti, slike, licence | delno | zaklepi s hashi, digesti slik in Actions, pip 26.3 (6 opozoril osnovne slike odpravljenih), produkcijska slika brez pip in s popravljenim zlib; pip-audit brez zadetkov; Trivy: brez popravljivih opozoril v sliki P0 ([odvisnosti in licence](../projekt/odvisnosti-in-licence.md)); `STUBS` brez `DJANGO_DEBUG=1` ustavi zagon | HSTS/HTTPS ob dejanski namestitvi (D04); SBOM in pravni pregled licenc pred distribucijo slike; samodejne posodobitve vklopljene pozneje (Dependabot, PR #44 in #50) |
 
 ## Izvedeni ukazi in rezultati
 
