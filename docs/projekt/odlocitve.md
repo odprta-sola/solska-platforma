@@ -63,6 +63,8 @@ Pobudnik Mitja Pirih je v pogovoru z Claude AI, ki pripravlja P0 in navodila, sp
 | D09 | Pobudnik je vzdrževalec in skrbnik repozitorija. | Drugi skrbnik/namestnik ni imenovan; Aleksandar ostaja kandidat do izrecnega sprejema. |
 | D14 | Pobudnik obravnava zasebne prijave ranljivosti. | Namestnik in roki odziva; dostop drugega računa |
 
+Neodvisni pregled P0/T (paket T) po kontrolnem seznamu opravi drug AI, mentor je rezerva (osebna odločitev pobudnika, 12. 11. 2026). To ni potrjeno kot enakovredno človeškemu prevzemu iz načrta; ugotovitve mora prebrati in sprejeti človek ([kontrolni seznam](pregled-P0-kontrolni-seznam.md)).
+
 Pobudnik šteje pogoje D03, D08, D09 in D14 za zadostne za pripravo in lokalni razvoj osnove P0 na izmišljenih podatkih. Pogoj »drugi skrbnik« iz D09 ostaja nepopolno izpolnjen, zato velja pred vključitvijo zunanjih ekip (dijakov) še imenovanje namestnika. Neodvisni človeški prevzem T pred A/I ostane; zanj je predviden drug AI s pomočjo kontrolnega seznama, mentor je rezerva, vsakokratno odločitev o ustreznosti pa sprejme pobudnik.
 
 ## Roki in sledenje

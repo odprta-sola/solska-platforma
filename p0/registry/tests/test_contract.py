@@ -167,6 +167,13 @@ class AuthorizationCheckContract(ContractBase):
             ]
         )
 
+    def test_odvzem_pusti_sled(self):
+        rel = m.Relationship.objects.get(guardian=person_of("parent-02"))
+        authz.revoke_relationship(rel, actor=person_of("staff-03"), source="test")
+        audit = m.ChangeAudit.objects.get(action="relationship.revoked")
+        self.assertEqual(audit.entity_id, str(rel.pk))
+        self.assertEqual(m.Relationship.objects.count(), 5)  # zapis ostane
+
     def test_potecen_sklic_je_neaktiven(self):
         ref = self.ref("parent-01", "Učenec Testni 01")
         m.ScopeRef.objects.filter(ref=ref).update(expires_at=timezone.now() - timedelta(seconds=1))

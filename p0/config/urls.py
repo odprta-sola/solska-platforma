@@ -9,9 +9,6 @@ urlpatterns = [
     path("p0/api/v1/", include("registry.urls")),
 ]
 
-if settings.ENABLE_STUBS:
-    # Nadomestka M1 in M2 za razvoj in pogodbene teste; nikoli v produkciji.
-    urlpatterns += [
-        path("m1/api/v1/", include("stubs.urls_m1")),
-        path("m2/api/v1/", include("stubs.urls_m2")),
-    ]
+# Nadomestka M1 in M2 za razvoj in pogodbene teste; nikoli v produkciji.
+for module in sorted(settings.STUBS):
+    urlpatterns.append(path(f"{module}/api/v1/", include(f"stubs.urls_{module}")))

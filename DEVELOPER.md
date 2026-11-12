@@ -75,7 +75,7 @@ python manage.py create_service_client m2 --scope m1.delivery --scope p0.authori
 
 Žeton se izpiše enkrat; ne shranjujte ga v repozitorij. Dovoljenja: `p0.authorizations.check`, `p0.audiences.resolve`, `p0.contacts.resolve`, `m1.delivery`, `m2.reminders.check`.
 
-Nadomestka M1 (`/m1/api/v1/`) in M2 (`/m2/api/v1/`) sta v `p0/stubs/` in se vklopita z `ENABLE_STUBS=1` (privzeto v razvoju). Ne pošiljata e-pošte, stanje je v pomnilniku procesa. Za preizkus stanj sta na voljo samo v nadomestkih `POST /m1/api/v1/_stub/advance` in `POST /m2/api/v1/_stub/mark-done`. Ekipa M1 zamenja nadomestek M1 s pravim modulom, ekipa M2 nadomestek M2, z istimi shemami.
+Nadomestka M1 (`/m1/api/v1/`) in M2 (`/m2/api/v1/`) sta v `p0/stubs/` in se vklopita s `STUBS=m1,m2` (privzeto v razvoju; pravi modul odstrani svoj nadomestek, npr. `STUBS=m2`). Ne pošiljata e-pošte, stanje je v pomnilniku procesa. Za preizkus stanj sta na voljo samo v nadomestkih `POST /m1/api/v1/_stub/advance` in `POST /m2/api/v1/_stub/mark-done`. Ekipa M1 zamenja nadomestek M1 s pravim modulom, ekipa M2 nadomestek M2, z istimi shemami.
 
 Pogodbeni testi (`registry/tests/test_contract.py`) preverjajo vsak odgovor proti shemi in scenarije: tuj sklic, servisni klic brez seje, nepooblaščen kontaktni klic, podvojena zahteva in konflikt ključa, delna stanja, ponovljen in selektivni preklic, iztek, odsoten kontakt.
 

@@ -46,8 +46,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# Nadomestka M1/M2 (stubs): privzeto samo v razvoju.
-ENABLE_STUBS = env("ENABLE_STUBS", "1" if DEBUG else "0") == "1"
+# Nadomestka modulov (stubs): privzeto samo v razvoju. Ko ekipa vgradi pravi modul, ga
+# odstrani s seznama, npr. STUBS=m2 (nadomestek M1 izklopljen).
+STUBS = {x.strip() for x in env("STUBS", "m1,m2" if DEBUG else "").split(",") if x.strip()}
 
 AUTH_USER_MODEL = "registry.Account"
 
