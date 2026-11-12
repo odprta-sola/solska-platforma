@@ -1,6 +1,6 @@
 # Navodila za razvijalce
 
-Status: osnutek, faza 1 (ogrodje P0). Aplikacija še nima funkcij; model, prijava in uvoz sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
+Status: osnutek, faza 2 (ogrodje in podatkovni model P0). Prijava, API in uvoz sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Pravila
 
@@ -35,6 +35,18 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+## Testni podatki
+
+```bash
+cd p0 && python manage.py seed_test_data
+```
+
+Naloži izmišljeni nabor (staff-01…03, parent-01…04, student-01…04), ponovljivo in idempotentno. Računi imajo neuporabno geslo; za lokalni razvoj ga lahko nastavite z `SEED_PASSWORD` v okolju.
+
+## Model v kratkem
+
+`Account` je prijavni uporabnik (`AUTH_USER_MODEL`), vezan na največ eno `Person`; e-naslov ni enoličen. `Relationship` ne podeli pravic: ta je ločen `Grant` s šolsko `Approval`. Povezave in upravičenja imajo `valid_from`/`valid_until` in se zaključijo, ne brišejo.
+
 ## Preverjanja pred pull requestom
 
 Isto teče v CI ([p0.yml](.github/workflows/p0.yml)).
@@ -51,7 +63,8 @@ python manage.py test
 | Pot | Vsebina |
 | --- | --- |
 | `p0/config/` | Nastavitve in usmerjanje; vse skrivnosti iz okolja |
-| `p0/core/` | Zasnova P0; API pod `/p0/api/v1/` |
+| `p0/core/` | Skupne poti API pod `/p0/api/v1/` |
+| `p0/registry/` | Evidenca: osebe, računi, oddelki, povezave, upravičenja, sled sprememb |
 | `docker-compose.yml` | Razvojna zbirka PostgreSQL in prestrezni poštni predal |
 
 ## Prispevek
