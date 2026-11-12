@@ -73,6 +73,7 @@ paths:
         "400": {$ref: "#/components/responses/Error"}
         "401": {$ref: "#/components/responses/Error"}
         "403": {$ref: "#/components/responses/Error"}
+        "503": {$ref: "#/components/responses/Error"}
   /m1/api/v1/delivery-requests:
     post:
       summary: Trajni prevzem zahteve za dostavo

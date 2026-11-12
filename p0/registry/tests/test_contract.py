@@ -6,6 +6,7 @@ Vsak odgovor se preveri proti shemi. To so testi osnutka pogodbe, ne potrditev D
 import json
 from datetime import timedelta
 from pathlib import Path
+from unittest import mock
 
 import yaml
 from django.core.management import call_command
@@ -278,6 +279,14 @@ class AudiencesContract(ContractBase):
 
 
 class ContactContract(ContractBase):
+    """Pravila upravičenosti ob simulirani preverjeni vezavi na dostavo (mehanizem: D12)."""
+
+    def setUp(self):
+        super().setUp()
+        patcher = mock.patch("registry.api.delivery_binding_verified", return_value=True)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def contact(self, username, student, token=None, ref=None):
         ref = ref or self.ref(username, student)
         return self.call(
@@ -338,6 +347,64 @@ class ContactContract(ContractBase):
             )
             self.assertIn(r.status_code, (400, 403))
             self.assertNotIn("example.invalid", r.content.decode())
+
+
+class ContactBindingContract(ContractBase):
+    """Brez preverljive vezave na dostavo P0 kontakta ne vrne, ne glede na vhod."""
+
+    def resolve(self, body, token=None, client=None):
+        return self.call(
+            "post",
+            f"{P0}/delivery-contacts/resolve",
+            token=token if client is None else None,
+            client=client,
+            body=body,
+        )
+
+    def body(self, username="parent-01", student="Učenec Testni 01", request_id="dr_x"):
+        return {
+            "recipient_id": str(person_of(username).pk),
+            "scope_ref": self.ref(username, student),
+            "delivery_request_id": request_id,
+        }
+
+    def assert_no_contact(self, r, status):
+        self.assertEqual(r.status_code, status)
+        self.assertEqual(r["Content-Type"], "application/json")
+        validate("Error", r.json())
+        self.assertNotIn("example.invalid", r.content.decode())
+        self.assertNotIn("email", r.json())
+
+    def test_veljaven_prejemnik_brez_preverjene_vezave(self):
+        for rid in ("dr_x", "dr_" + "0" * 16, "x"):
+            self.assert_no_contact(self.resolve(self.body(request_id=rid), self.t_m1), 503)
+
+    def test_odsoten_kontakt_ni_razkrit_pred_preverjanjem(self):
+        r = self.resolve(self.body("parent-04", "Učenec Testni 04"), self.t_m1)
+        self.assert_no_contact(r, 503)
+
+    def test_tuj_in_neobstojec_sklic_enak_odgovor(self):
+        tuj = self.body()
+        tuj["recipient_id"] = str(person_of("parent-03").pk)
+        neobstojec = {**self.body(), "scope_ref": "sr_ugibam"}
+        a, b = self.resolve(tuj, self.t_m1), self.resolve(neobstojec, self.t_m1)
+        self.assert_no_contact(a, 503)
+        self.assert_no_contact(b, 503)
+        self.assertEqual(a.json()["code"], b.json()["code"])
+
+    def test_odvzem_pred_razresitvijo(self):
+        body = self.body("parent-02", "Učenec Testni 01")
+        authz.revoke_relationship(m.Relationship.objects.get(guardian=person_of("parent-02")))
+        self.assert_no_contact(self.resolve(body, self.t_m1), 503)
+
+    def test_neupravicen_napacen_ali_neaktiven_zeton_in_seja(self):
+        body = self.body()
+        self.assert_no_contact(self.resolve(body, self.t_m2), 403)
+        self.assert_no_contact(self.resolve(body, "svc_napacen"), 401)
+        self.assert_no_contact(self.resolve(body, None), 401)
+        self.assert_no_contact(self.resolve(body, client=self.session("staff-01")), 401)
+        m.ServiceClient.objects.filter(name="m1").update(active=False)
+        self.assert_no_contact(self.resolve(body, self.t_m1), 401)
 
 
 def delivery_body(parent_refs, key="k1", expires_at=None, **over):

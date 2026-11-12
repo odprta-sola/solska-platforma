@@ -32,6 +32,8 @@ ROLES = {r.value for r in m.Role}
 RELATIONSHIP_TYPES = {t.value for t in m.Relationship.Type}
 STAFF_ROLES = {m.Role.TEACHER.value, m.Role.OFFICE.value}
 IMPORTER_ROLES = {m.Role.OFFICE.value, m.Role.ADMIN.value}
+# Vloge, ki jih sme z uvozom dodeliti samo tehnični skrbnik.
+ADMIN_ONLY_ROLES = {m.Role.ADMIN.value}
 
 # datoteka -> (obvezna polja, neobvezna polja, identiteta vrstice)
 SCHEMA = {
@@ -378,6 +380,24 @@ def _manually_revoked(entity_type, pk, source):
     )
 
 
+def _manual_revocation_at(entity_type, model, scope):
+    """Čas zadnjega ročnega odvzema v poslovnem obsegu (ne glede na vrstico uvoza) ali None."""
+    if not scope:
+        return None
+    pks = [str(pk) for pk in model.objects.filter(**scope).values_list("pk", flat=True)]
+    if not pks:
+        return None
+    audit = (
+        m.ChangeAudit.objects.filter(
+            action=f"{entity_type}.revoked", entity_type=entity_type, entity_id__in=pks
+        )
+        .exclude(source__startswith="import:")
+        .order_by("-at")
+        .first()
+    )
+    return audit.at if audit else None
+
+
 def _stamp(obj, **fields):
     changed = []
     for name, value in fields.items():
@@ -428,17 +448,27 @@ class _Applier:
             )
         )
 
-    def upsert_validity(self, name, i, entity, key, model, lookup, row, extra=None):
+    def upsert_validity(self, name, i, entity, key, model, lookup, row, extra=None, scope=None):
+        """`scope` je poslovni obseg ročne omejitve (npr. skrbnik in učenec).
+
+        Ročni odvzem v obsegu velja ne glede na začetek veljavnosti ali vrsto uvozne vrstice:
+        uvoz ne sme ustvariti ali podaljšati zapisa, ki bi veljal po odvzemu.
+        """
         until = row.get("valid_until_parsed")
+        revoked_at = _manual_revocation_at(entity, model, scope)
+        restores = revoked_at is not None and (until is None or until > revoked_at)
         obj = model.objects.filter(**lookup, valid_from=row["valid_from_parsed"]).first()
         if obj is None:
+            if restores:
+                self.conflict(name, i, entity, None)
+                return None
             obj = model.objects.create(
                 **lookup, valid_from=row["valid_from_parsed"], valid_until=until, **(extra or {})
             )
             self.record(entity, key, "create", ["*"], obj.pk)
             return obj
         extends = obj.valid_until is not None and (until is None or until > obj.valid_until)
-        if extends and _manually_revoked(entity, obj.pk, self.source):
+        if extends and (restores or _manually_revoked(entity, obj.pk, self.source)):
             self.conflict(name, i, entity, obj)
             return obj
         changed = _stamp(obj, valid_until=until)
@@ -555,6 +585,7 @@ class _Applier:
                 "relationship_type": row["relationship_type"],
             },
             row,
+            scope={"guardian": guardian, "student": student},
         )
 
     def do_staff_assignments(self, name, i, row):
@@ -584,19 +615,21 @@ class _Applier:
             reference=row["approval_ref"], defaults={"approved_by": self.actor}
         )
         key = f"{row['source_person_key']}/{row['scope_key']}/{row['permission']}"
+        lookup = {
+            "person": person,
+            "scope_key": f"student:{student.person_id}",
+            "permission": row["permission"],
+        }
         self.upsert_validity(
             name,
             i,
             "grant",
             key,
             m.Grant,
-            {
-                "person": person,
-                "scope_key": f"student:{student.person_id}",
-                "permission": row["permission"],
-            },
+            lookup,
             row,
             extra={"relationship": relationship, "approval": approval},
+            scope=lookup,
         )
 
 
@@ -615,6 +648,18 @@ def process(files, source, actor, apply=False):
             )
         )
     validate_rows(tables, problems)
+    if m.Role.ADMIN.value not in roles:
+        for i, r in tables.get("roles", []):
+            if r["role"] in ADMIN_ONLY_ROLES:
+                problems.append(
+                    Problem(
+                        "error",
+                        "roles",
+                        i,
+                        "role_not_authorized",
+                        "To vlogo sme dodeliti samo tehnični skrbnik.",
+                    )
+                )
     if problems:
         return Result(problems, [], chash)
     validate_references(tables, source, problems)
