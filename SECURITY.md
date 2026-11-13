@@ -32,12 +32,13 @@ Ranljivost v kodi še ni kršitev. Kršitev je dejanski dostop nepooblaščene o
 2. **Rok teče od zavedanja.** Šola Informacijskega pooblaščenca obvesti brez nepotrebnega odlašanja, po možnosti najpozneje v **72 urah** od trenutka, ko se je kršitve zavedla. Obvestilo ni potrebno, če kršitev verjetno ne pomeni tveganja za posameznike. Če niso znana vsa dejstva, šola v roku pošlje delno obvestilo in ga pozneje dopolni (čl. 33(4)).
 3. **Zajezitev.** Skrbnik namestitve ukrepa po potrebi:
    - onemogoči prizadete račune (`is_active`);
-   - izbriše seje, s čimer odjavi vse uporabnike;
-   - onemogoči ali zamenja servisne žetone M1/M2 (`ServiceClient.active` in nov žeton z `create_service_client`);
+   - izbriše vse seje in s tem odjavi vse uporabnike: `python manage.py purge_all_sessions --yes` (sledi ostanejo);
+   - onemogoči servisni račun M1/M2: `python manage.py deactivate_service_client m1`;
+   - zamenja servisni žeton: `python manage.py rotate_service_client m1` (stari žeton takoj ne velja, nov se izpiše enkrat; nastavite ga v okolje modula);
    - odvzame povezave ali upravičenja na zaslonih evidence;
    - zamenja `DJANGO_SECRET_KEY` in druge skrivnosti, če so izpostavljene.
 
-   Dokazov ne briše: dnevnikov, sledi sprememb in sledi vpogledov.
+   Dokazov ne briše: dnevnikov, sledi sprememb in sledi vpogledov. V skrbniškem vmesniku sta obe sledi samo za branje; osebe, povezave, upravičenja in potrditve se tam ne brišejo.
 4. **Ocena tveganja.** Šola z DPO oceni, katere vrste podatkov in koliko oseb je prizadetih ter kakšne so verjetne posledice. Ali gre za mladoletne, zviša tveganje. Pri tem si pomaga s sledjo vpogledov (`AccessAudit`: kdo je odprl katero osebo), sledjo sprememb (`ChangeAudit`) in izvozom podatkov posamezne osebe. Ti prikažejo, kateri zapisi so bili vidni, ne pa, kaj je bilo kopirano.
 5. **Obvestilo posameznikom.** Ob verjetnem velikem tveganju šola brez nepotrebnega odlašanja obvesti prizadete starše, dijake oziroma zaposlene (čl. 34). Obvestilo v jasnem jeziku pove:
    - kaj se je zgodilo;

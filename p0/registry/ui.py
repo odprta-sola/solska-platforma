@@ -34,6 +34,14 @@ def record_view(actor, screen, entity_type, entity_id):
     )
 
 
+def record_views(actor, screen, entity_type, entity_ids):
+    """Zapiše vpogled za vsak prikazani zapis seznama (en zapis na prikazano osebo)."""
+    m.AccessAudit.objects.bulk_create(
+        m.AccessAudit(actor=actor, screen=screen, entity_type=entity_type, entity_id=str(pk))
+        for pk in entity_ids
+    )
+
+
 def is_staff(user):
     person = getattr(user, "person", None) if user.is_authenticated else None
     return bool(person) and person.roles.filter(role__in=STAFF_ROLES).exists()
@@ -71,6 +79,9 @@ def persons(request, actor):
     if q:
         qs = qs.filter(display_name__icontains=q)
     page = Paginator(qs, 50).get_page(request.GET.get("stran"))
+    page.object_list = list(page.object_list)
+    # Seznam prikaže ime, vloge in e-naslov: vsaka prikazana oseba dobi zapis, iskalni niz ne.
+    record_views(actor, "seznam", "person", [p.pk for p in page.object_list])
     return render(request, "evidenca/osebe.html", {"form": form, "page": page, "q": q})
 
 
