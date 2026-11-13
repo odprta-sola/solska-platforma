@@ -25,11 +25,11 @@ Status: navodila za izvajalce (mentorji in ekipe), 13. november 2026, po pogodbi
 ## Kaj mora veljati za vsako ekipo
 
 - **Samo izmišljeni podatki.** Brez resničnih oseb, naslovov, izvozov, gesel in ključev v repozitoriju, issue-jih in pull requestih.
-- **Meje modulov.** Koda M1 živi v `p0/m1/`, koda M2 v `p0/m2/` (D12, C05: ena namestitev, ločene aplikacije in tabele, klici samo prek API, tudi znotraj procesa). Modul ne uvaža `registry` ali tujega modula in ne bere tujih tabel. Podatke o osebah in pravice dobi prek API-ja P0, drugi modul pokliče prek njegovega API-ja. Test `core/tests/test_boundaries.py` to preverja za mapi `m1` in `m2` in pade ob prepovedanem uvozu.
+- **Meje modulov.** Koda M1 živi v `p0/m1/`, koda M2 v `p0/m2/` (D12, C05: ena namestitev, ločene aplikacije in tabele, klici samo prek API, tudi znotraj procesa). Modul ne uvaža `registry` ali tujega modula in ne bere tujih tabel. Podatke o osebah in pravice dobi prek API-ja P0, drugi modul pokliče prek njegovega API-ja. Test `core/tests/test_boundaries.py` za mapi `m1` in `m2` prebere kodo kot AST in pade ob uvozu `registry`, `stubs` ali sosednjega modula, tudi ob `import a, b`, relativnem uvozu, `importlib.import_module`, `__import__` in `apps.get_model` z literalnim imenom. Test je pomoč, ne varnostna meja: imena, sestavljena med izvajanjem, ali surovi SQL na tuje tabele ostanejo na človeškem pregledu.
 - **Pravice se vedno preverijo.** Za vsak zaščiten vpogled, oddajo in dostavo pokličite `POST /p0/api/v1/authorizations/check`. Če P0 ni dosegljiv, dejanja ne dovolite (ne »dovoli« in ne »nepotrebno«).
 - **Odprtje ni potrditev, potrditev ni soglasje, predaja strežniku ni prejem.** Ločeni podatki, ločeni dogodki.
 - **Brez gesel in kriptografije po svoje.** Prijava je `django-allauth` v P0.
-- **Pogodbe ne spreminjate sami.** Spremembo `api/openapi.yaml` predlagate z issue-jem ali pull requestom; odloči naročnik, druga ekipa je obveščena. Vsaka sprememba zahteva novo različico (test `test_pogodba_je_zamrznjena_razlicica`).
+- **Pogodbe ne spreminjate sami.** Spremembo `api/openapi.yaml` predlagate z issue-jem ali pull requestom; odloči naročnik, druga ekipa je obveščena. Vsaka sprememba zahteva novo različico in novo vrstico v `api/zamrznitve.txt`; objavljenih vrstic se ne spreminja. To preverjata test `test_pogodba_je_zamrznjena_razlicica` in CI `zamrznitev-pogodbe` (`scripts/check_contract_freeze.py`, primerjava z osnovno vejo in oznakami `v*`).
 - **Skupni P0 spreminjate samo po odobritvi naročnika** (omejena razširitev).
 
 ## Struktura modula
