@@ -1,6 +1,6 @@
 # Navodilo za ponovni neodvisni pregled P0
 
-Status: osnutek, 12. november 2026. Navodilo je za oba pregledovalca prvega pregleda (Codex/OpenAI in DeepSeek). Besedilo spodaj pobudnik prilepi vsakemu posebej; razlikujeta se le oznaka sistema v imenu veje in poročila. Pregled z AI je osebna odločitev pobudnika ([register](odlocitve.md)); ni potrjen kot enakovreden človeškemu prevzemu.
+Status: izvedeno (drugi krog, 12. november 2026); za naslednji krog velja [navodilo za tretji pregled](navodilo-za-tretji-pregled.md). Navodilo je za oba pregledovalca prvega pregleda (Codex/OpenAI in DeepSeek). Besedilo spodaj pobudnik prilepi vsakemu posebej; razlikujeta se le oznaka sistema v imenu veje in poročila. Pregled z AI je osebna odločitev pobudnika ([register](odlocitve.md)); ni potrjen kot enakovreden človeškemu prevzemu.
 
 Opomba o neodvisnosti: kodo faz 0 do 6 je napisal Claude Sonnet 5.5, popravke po prvem pregledu Claude Opus 5.5 (oba Anthropic) po navodilih pobudnika. Pregledovalca sta v prvem krogu sama poročala ugotovitve, katerih odpravo zdaj preverjata. To mora pregledovalec razkriti v poročilu.
 
