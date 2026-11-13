@@ -1,7 +1,7 @@
 # Pogodba vmesnikov P0–M1–M2
 
 Datum: 9. oktober 2026
-Status: delovni predlog D12 za potrditev; ni dokončna implementacijska pogodba. Točke A (12. 11. 2026) in B (13. 11. 2026) je sprejel skupni tehnični nosilec ([paket](../projekt/d12-paket-za-odlocitev.md)); potrditev mentorjev in zamrznitev sta odprti.
+Status: **sprejeta pogodba D12, različica `1.0.0`** (naročnik 13. 11. 2026, [paket](../projekt/d12-paket-za-odlocitev.md), [zapis zamrznitve](../../api/zamrznitve.txt)). Strojno berljiva pogodba je [OpenAPI](../../api/openapi.yaml); ta dokument jo pojasni. Spremembe z vplivom na ekipe gredo prek pull requesta z odobritvijo naročnika (C16).
 
 ## Kratka delovna raven
 
@@ -11,13 +11,13 @@ Predlog učenčevih računov in ciljne skupine starši/učenci/oboje zahteva nov
 
 ## Vloga pogodbe v naročilu
 
-Ta pogodba je skupni tehnični predlog v [razvojnem naročilu pobudnika](../projekt/razvojno-narocilo-P0-M1-M2.md). Dopolnitev shem in testov je naloga mejnika T. Pobudnik s pomočjo AI pripravi izhodiščno rešitev; mentorji in skupni tehnični nosilec preverijo izvedljivost in varnost ter potrdijo različico pogodbe v D12 pred odvisno implementacijo. Vmesniki niso prosta izbira posamezne ekipe. Zapisane odprte vrzeli niso s tem zaključene.
+Ta pogodba je skupni tehnični predlog v [razvojnem naročilu pobudnika](../projekt/razvojno-narocilo-P0-M1-M2.md). Dopolnitev shem in testov je naloga mejnika T. Pobudnik s pomočjo AI pripravi izhodiščno rešitev in kot naročnik potrdi različico pogodbe v D12 (13. 11. 2026: `1.0.0`); mentorji kot izvajalci preverijo izvedljivost in predlagajo spremembe. Vmesniki niso prosta izbira posamezne ekipe. Zapisane odprte vrzeli niso s tem zaključene.
 
 ## Obseg in odprte odločitve
 
 Ta dokument je stalno mesto osnutka pogodbe. Nadomešča načrtovani naslov vmesnik-M1-M2.md in vključuje skupni vir identitet ter upravičenj, ki je že del D12. [Vodnik za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md) in [P0](../moduli/P0-uporabniki.md) pojasnita uporabo.
 
-Pred odvisno implementacijo mentorji in skupni tehnični nosilec potrdijo topologijo, prijavno rešitev, delegiranje identitete, sheme, šifrante, meje velikosti in roke hrambe ključev. Pobudnik pripravi tudi testna nadomestka v paketu T s pomočjo AI; izvajanje in človeški pregled se dokumentirata po [načrtu predaje](../projekt/priprava-referencnega-P0.md). Osnutek [OpenAPI](../../api/openapi.yaml), nadomestka M1/M2 in pogodbeni testi obstajajo od 12. novembra 2026 kot predlog za D12; niso potrjeni. Predlogi, dodani po prvem neodvisnem pregledu (meje dolžin, splošne napake, podvojen prejemnik, ponovitev po izteku), so povzeti v [stanju paketa T](../projekt/stanje-prevzema-T.md#znane-omejitve-nadomestkov-in-pogodbe) in prav tako niso potrjeni. Besedilni primeri niso nadomestilo za pogodbeno testiranje.
+Topologijo, prijavno rešitev, delegiranje identitete, sheme, šifrante, meje velikosti in rok hrambe ključev je naročnik potrdil z D12 13. 11. 2026. Pobudnik pripravi tudi testna nadomestka v paketu T s pomočjo AI; izvajanje in človeški pregled se dokumentirata po [načrtu predaje](../projekt/priprava-referencnega-P0.md). [OpenAPI](../../api/openapi.yaml), nadomestka M1/M2 in pogodbeni testi so del sprejete pogodbe `1.0.0`; znane omejitve nadomestkov so v [stanju paketa T](../projekt/stanje-prevzema-T.md#znane-omejitve-nadomestkov-in-pogodbe). Besedilni primeri niso nadomestilo za pogodbeno testiranje.
 
 P0 sam ne določi povezav M2 → M1 in M1 → M2. Paket T mora zagotoviti njuni shemi, nadomestka in pogodbene teste. Pred D12 je treba izrecno določiti vir jezika in prikaznih oznak vsakega prejemnika, slovar poslovnih ID, semantiko `scope_ref` pri več otrocih in `grants.scope_key`, ravnanje ob odsotnem kontaktu, pravilo tihega časa ter zgodovinski dostop. Seznam vprašanj ni dokončana pogodba.
 
@@ -129,4 +129,4 @@ Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (polje 
 
 Skupni preizkusi morajo pokriti: pravico avtorja do oddelka, servisni klic brez seje, podtaknjen ID/obseg, nepooblaščen kontaktni klic, dvojno zahtevo, konflikt ključa, delno dostavo, ponovljen preklic, odziv med čakanjem, izpad P0/M2, iztek v tihem času in manjkajoč prevod.
 
-Predlog shem in dovoljenj se lahko izdela pred potrditvijo D12. Odvisni razvoj A/I začne šele po celotnem človeškem prevzemu T z v D12 potrjeno različico pogodbe; nadomestka M1/M2 uporabita iste sheme, vendar ne nadomestita pravega P0. Pobudnik s pomočjo AI pripravi paket T, neodvisen človeški pregledovalec preveri kodo in pogodbo. Odgovorni nosilci še niso imenovani. Sprememba pogodbe zahteva uskladitev prizadetih ekip; nezdružljiva sprememba novo različico ali potrjen prehod.
+Sheme in dovoljenja so potrjeni z D12 (`1.0.0`). Odvisni razvoj A/I začne šele po celotnem človeškem prevzemu T s potrjeno različico pogodbe; nadomestka M1/M2 uporabita iste sheme, vendar ne nadomestita pravega P0. Pobudnik s pomočjo AI pripravi paket T, neodvisen človeški pregledovalec preveri kodo in pogodbo. Odgovorni nosilci še niso imenovani. Sprememba pogodbe zahteva odobritev naročnika in obvestilo prizadetim ekipam; nezdružljiva sprememba novo različico ali potrjen prehod. Vsaka sprememba `api/openapi.yaml` zahteva novo različico v `info.version` in vrstico v `api/zamrznitve.txt`.

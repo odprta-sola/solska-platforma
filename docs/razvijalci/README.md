@@ -1,6 +1,6 @@
 # Navodila za razvijalce modulov M1 in M2
 
-Status: osnutek za mentorski pregled, 12. november 2026. Navodila pojasnjujejo, kaj ekipa dobi in kaj izdela; ne spreminjajo obsega iz [razvojnega naročila](../projekt/razvojno-narocilo-P0-M1-M2.md). Pogodba je osnutek D12, dokler je tehnični nosilec in mentorji ne potrdijo.
+Status: osnutek za mentorski pregled, 12. november 2026. Navodila pojasnjujejo, kaj ekipa dobi in kaj izdela; ne spreminjajo obsega iz [razvojnega naročila](../projekt/razvojno-narocilo-P0-M1-M2.md). Pogodba D12 je sprejeta in zamrznjena kot `1.0.0` (naročnik, 13. 11. 2026); predloge sprememb oddajte v issueju ali pull requestu, odloči naročnik.
 
 ## Pred prvo vrstico kode
 

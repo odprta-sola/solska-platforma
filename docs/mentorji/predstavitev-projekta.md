@@ -199,7 +199,7 @@ Skici sta opis vsebine, ne delujoča zaslona. M2 ne zahteva predhodne potrditve 
 
 Mitja je osebno prevzel skupno osnovo ter pripravo predloga vmesnikov, testnih primerov, nadomestkov in navodil ob pomoči AI. Mentor oceni primernost za dijake in določi njihove samostojne izdelke. Dijaki razvijajo predvsem M1/M2 in povezavo; šola uporabnica določa svoje postopke, pravice in poznejšo uporabo.
 
-Predlagana osnova je Django 5.2 LTS/Python, PostgreSQL in Docker Compose za razvojno okolje. Mitja jo je osebno izbral; mentorji in tehnični nosilec morajo potrditi skupni dogovor. Točne podprte izdaje in cilj namestitve še niso določeni. Za razvoj uporabljamo lokalne račune, CSV in testno pošto, brez dejanskih šolskih podatkov ali integracije eAsistent.
+Predlagana osnova je Django 5.2 LTS/Python, PostgreSQL in Docker Compose za razvojno okolje. Mitja jo je izbral kot naročnik in skupni tehnični nosilec; mentorji kot izvajalci ocenijo izvedljivost in predlagajo spremembe. Točne podprte izdaje in cilj namestitve še niso določeni. Za razvoj uporabljamo lokalne račune, CSV in testno pošto, brez dejanskih šolskih podatkov ali integracije eAsistent.
 
 Približno tri Mitjeve ure tedensko so okvir za vodenje, usklajevanje in preglede; ne pokrivajo izdelave P0. Predlog 2–3 dijakov na modul ni potrjena razpoložljivost ali rok.
 

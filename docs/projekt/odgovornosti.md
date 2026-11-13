@@ -1,6 +1,6 @@
 # Predlog odgovornosti projekta
 
-Status: osnutek za dogovor  
+Status: osnutek za dogovor; vloge naročnik–izvajalec od 13. 11. 2026 ([register](odlocitve.md#vloge-naročnik-in-izvajalec-13-novembra-2026))  
 Datum: 5. oktober 2026
 
 Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo.
@@ -10,8 +10,8 @@ To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obvezno
 | Vloga | Odgovornost | Kdaj mora biti določena |
 | --- | --- | --- |
 | Vodstvo sodelujočega zavoda | Potrdi obseg sodelovanja, vire in uvedbo na svoji šoli | Vire pred razvojem, uvedbo pred produkcijo |
-| Pobudnik in koordinator projekta | Določi izhodiščni cilj in obseg; osebno s pomočjo AI pripravi predlog P0/T; usklajuje vsebinske spremembe in sodelovanje | Pred začetkom razvoja; način izvajanja zabeleži pred prvo kodo |
-| Mentor | Oceni izvedljivost podanega naročila, razdeli individualne izdelke, vodi dijake in predlaga konkretne spremembe | Pred potrditvijo maturitetne teme |
+| Pobudnik in koordinator projekta (naročnik) | Določi cilj in obseg; osebno s pomočjo AI pripravi P0/T; kot naročnik sprejema tehnične odločitve in spremembe pogodbe; usklajuje sodelovanje | Pred začetkom razvoja; način izvajanja zabeleži pred prvo kodo |
+| Mentor (izvajalec) | Oceni izvedljivost podanega naročila, razdeli individualne izdelke, vodi in ocenjuje dijake, izvede modul po pogodbi in naročniku predlaga konkretne spremembe | Pred potrditvijo maturitetne teme |
 | Skupni tehnični nosilec | Potrjuje arhitekturo, skupne gradnike, pogodbe vmesnikov in strokovni pregled povezovanja | Pred začetkom razvoja |
 | Nosilec modula M1 oziroma M2 | Usklajuje obseg svojega modula, naloge ekipe, povezovanje in predajo | Pred razdelitvijo razvoja |
 | Nosilec skupnih gradnikov | Koordinira izvedbo in predajo skupne prijave, identitet in pravic; prihodnje vzdrževanje se posebej dodeli | Pred razvojem odvisnih funkcij |
@@ -33,7 +33,7 @@ Vsaka šola ima svojo namestitev in v dogovoru določi, kdo skrbi za infrastrukt
 
 ## Potrjevanje
 
-Mentor potrjuje izvedljivost učnega izdelka. Skupni tehnični nosilec pregleda tehnično ustreznost. Pilotna šola potrjuje uporabo v svojem procesu in produkcijsko uvedbo po opravljenih preverjanjih.
+Mentor kot izvajalec potrjuje izvedljivost in pedagoški razrez učnega izdelka; tehničnih odločitev ne potrjuje. Naročnik (pobudnik, skupni tehnični nosilec) sprejme tehnične odločitve in pregleda tehnično ustreznost. Pilotna šola potrjuje uporabo v svojem procesu in produkcijsko uvedbo po opravljenih preverjanjih.
 
 Merge v GitHubu je tehničen dogodek. Potrditev dokumenta mora navesti različico oziroma commit, datum, obseg odločitve in odgovorno osebo. GitHub ni nadomestilo za potreben dogovor med zavodoma.
 

@@ -99,4 +99,4 @@ To so merila za pripravo testov in človeške demonstracije, ne uspešno izveden
 
 ## Kaj še preprečuje formalni sprejem
 
-D12 potrebuje dokončan slovar ID/obsegov, sheme OpenAPI in napak, meje, servisni mehanizem, politiko veljavnosti, konkretne dostavne meje in pogodbeno potrditev tehničnega nosilca ter mentorjev. Razširitev za učence dodatno potrebuje D01/D06/D07/D13/D16. D03/D09/D14 še veljajo pred prvo kodo oziroma vključitvijo zunanjih ekip, D08 pred sprejemom kode, celoten neodvisni človeški prevzem T pred A/I. Predloga omilitve prototipov ali avtorskega prevzema T nista sprejeta.
+D12 je sprejel naročnik 13. 11. 2026 (pogodba `1.0.0`, [zapis zamrznitve](../../api/zamrznitve.txt)). Razširitev za učence dodatno potrebuje D01/D06/D07/D13/D16. D03/D09/D14 še veljajo pred prvo kodo oziroma vključitvijo zunanjih ekip, D08 pred sprejemom kode, celoten neodvisni človeški prevzem T pred A/I. Predloga omilitve prototipov ali avtorskega prevzema T nista sprejeta.

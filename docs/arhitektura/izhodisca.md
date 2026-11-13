@@ -32,7 +32,7 @@ Vsak modul upravlja svoj podatkovni model. Moduli se povezujejo prek dokumentira
 
 ## Predlog izvedbe M1
 
-Spletna aplikacija z mobilnim vmesnikom, podatkovna baza, trajna čakalna vrsta za e-pošto, zaščitena shramba prilog in dnevnik dogodkov. Tehnologijo potrdita mentor in skupni tehnični nosilec; Django je kandidat iz izhodiščnega opisa, ne zahteva.
+Spletna aplikacija z mobilnim vmesnikom, podatkovna baza, trajna čakalna vrsta za e-pošto, zaščitena shramba prilog in dnevnik dogodkov. Tehnologijo potrdi naročnik (skupni tehnični nosilec), mentor kot izvajalec oceni izvedljivost; Izbrana osnova je Django 5.2 LTS s PostgreSQL (D03).
 
 Prvi pilot vključuje minimalni dokumentirani vmesnik M1–M2 za obveščanje. Razširjen API za vse prihodnje module ni pogoj pilota. M2 vodi odločitve in določa potrebne opomnike; M1 izvaja pošiljanje, tihi čas in ponovne poskuse.
 
