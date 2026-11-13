@@ -1,6 +1,6 @@
 # Ekipa M2 – eSoglasja
 
-Status: osnutek za mentorski pregled. Obseg je v [razvojnem naročilu](../projekt/razvojno-narocilo-P0-M1-M2.md) (razdelek »Obvezni izdelek M2«), poslovna pravila v [specifikaciji M2](../moduli/M2-eSoglasja.md). Splošna pravila: [README](README.md). M2 za obveščanje potrebuje M1; do takrat dela proti nadomestku.
+Status: navodila za izvajalca (mentor in ekipa M2), pogodba `1.0.0`. Obseg je v [razvojnem naročilu](../projekt/razvojno-narocilo-P0-M1-M2.md) (razdelek »Obvezni izdelek M2«), poslovna pravila v [specifikaciji M2](../moduli/M2-eSoglasja.md). Splošna pravila: [README](README.md). M2 za obveščanje potrebuje M1; do takrat dela proti nadomestku.
 
 ## Naloga
 
@@ -17,7 +17,9 @@ Potek pregledanega obrazca od osnutka do odločitve in dovoljene spremembe: prip
 | M2 → M1 | `POST .../{id}/cancel` | Selektivni preklic nepotrebnih opomnikov po `item_id` |
 | M1 → M2 | `POST /m2/api/v1/reminders/check` | Strežniška stran, ki jo mora izdelati M2: samo `REQUIRED` ali `NO_LONGER_REQUIRED` |
 
-Servisni žeton M2 potrebuje `m1.delivery` in `p0.authorizations.check`. Nadomestek (`p0/stubs/m2.py`) je referenca obnašanja `reminders/check`.
+Servisni žeton M2 potrebuje `m1.delivery` in `p0.authorizations.check`. Nadomestek (`p0/stubs/m2.py`) je referenca obnašanja `reminders/check`; strežniško stran izdelate v `p0/m2/api_urls.py`, klici v P0 in M1 so pripravljeni v `p0/m2/p0_client.py`.
+
+Zahteva za dostavo (pogodba `1.0.0`): `event_key` je poslovni ključ dogodka (npr. `obrazec-1:v1:opomnik:2`; naslednji opomnik ima novo številko), pri opomniku ima vsaka postavka svoj `need_ref` za eno potrebo (oseba, otrok, obrazec, različica), skupnega `locale` ni.
 
 ## Predlog razreza po dijakih (mentor potrdi)
 
@@ -42,4 +44,4 @@ Mejnik I: odločitev se shrani, zahteva za dostavo gre v M1 po pogodbi; ob izpad
 
 ## Odprto (ne rešujte po svoje)
 
-Besedilo obrazca in pravila odločanja (D11), polnoletni dijaki (D16), predstavitev več otrok v eni zahtevi, vstop uporabnika v modul, politika opomnikov po odvzemu pravice. Predlagajte v issueju; odločitve so šolske in pravne, ne tehnične.
+Besedilo obrazca in pravila odločanja (D11), polnoletni dijaki (D16), politika opomnikov po odvzemu pravice in interval periodične ponovne presoje odprtih postopkov (C14). Več otrok je več postavk (ena na `scope_ref`), vstop uporabnika je skupna seja P0 (glej [README](README.md#povezava-z-drugimi-deli)). Predlagajte v issueju; šolske in pravne odločitve niso tehnične.
