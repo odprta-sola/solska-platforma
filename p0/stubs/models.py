@@ -19,6 +19,8 @@ class StubDelivery(models.Model):
     kind = models.CharField(max_length=16)
     audience_ref = models.CharField(max_length=256)
     template_id = models.CharField(max_length=256)
+    params = models.JSONField(default=dict)  # vsebina za predlogo; potrebna za dostavo po obnovi
+    target = models.JSONField(default=dict)  # ciljni modul in vir (npr. module, resource_id)
     expires_at = models.DateTimeField()
     accepted_at = models.DateTimeField(default=timezone.now)
 

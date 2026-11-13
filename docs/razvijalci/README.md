@@ -48,7 +48,7 @@ Status: navodila za izvajalce (mentorji in ekipe), 13. november 2026, po pogodbi
 - **Servis:** servisni klici nosijo žeton modula iz okolja (`M1_SERVICE_TOKEN`, `M2_SERVICE_TOKEN`). Žeton ustvarite lokalno s `create_service_client` (glej [DEVELOPER.md](../../DEVELOPER.md)); ne shranjujte ga v repozitorij.
 - **Napake:** `Unavailable` (izpad ali 5xx) pomeni zavrni dejanje oziroma zadrži dostavo. `ApiError` nosi status in kodo iz pogodbe.
 - **Nadomestek in pravi modul:** dokler pravi sosednji modul ne obstaja, delate proti nadomestku. Ko je vaš API pripravljen, izklopite svoj nadomestek z `STUBS` (npr. `STUBS=m2`, če je M1 pravi). `/m1/api/v1/` se takrat usmeri v `m1/api_urls.py`. Pogodbeni testi morajo ostati zeleni.
-- **Strežnik:** modul v isti namestitvi kliče P0 po HTTP (`P0_API_URL`), zato strežnik potrebuje več niti ali procesov (razvojni `runserver` jih ima).
+- **Strežnik:** modul v isti namestitvi kliče P0 po HTTP (`P0_API_URL`), zato strežnik potrebuje več niti ali procesov (razvojni `runserver` jih ima). Odjemalec pošlje kot `Origin` naslov iz `P0_API_URL`, ne naslova brskalnika (npr. `localhost` proti `127.0.0.1` ali javni HTTPS proti notranjemu HTTP); zaščita CSRF ostane, ker P0 preveri par piškotek in `X-CSRFToken`. Preusmeritev odgovora je napaka (`Unavailable`), zato mora `P0_API_URL` kazati neposredno na P0.
 
 ## Kdaj je prispevek končan
 
