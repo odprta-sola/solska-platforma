@@ -42,7 +42,7 @@ python manage.py runserver
 cd p0 && python manage.py seed_test_data
 ```
 
-Naloži izmišljeni nabor (staff-01…03, parent-01…04, student-01…04), ponovljivo in idempotentno. Računi imajo neuporabno geslo; za lokalni razvoj ga lahko nastavite z `SEED_PASSWORD` v okolju.
+Naloži izmišljeni nabor (staff-01…03, parent-01…04, student-01…04), ponovljivo in idempotentno. Računi imajo neuporabno geslo; za lokalni razvoj ga lahko nastavite z `SEED_PASSWORD` v okolju, tudi ob ponovnem zagonu za že obstoječe račune (brez `SEED_PASSWORD` obstoječe geslo ostane).
 
 ## Model v kratkem
 

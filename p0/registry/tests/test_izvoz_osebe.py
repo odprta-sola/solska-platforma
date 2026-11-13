@@ -6,28 +6,33 @@ from django.apps import apps
 from django.db import models as dj
 from django.test import Client
 
-from registry import authz, export
+from registry import authz, export, importer
 from registry import models as m
 
+from .test_import import load
 from .test_zasloni import BASE, ScreenBase, person_of
 
-# Vsak model s tujim ključem na osebo mora biti v izvozu ali namenoma izpuščen z razlogom.
+# Vsako polje (v vseh aplikacijah), ki kaže na osebo ali učenca, mora biti v izvozu ali namenoma
+# izpuščeno z razlogom. Nov model ali novo polje (tudi v m1/m2) test podre, dokler ni odločeno.
 COVERED = {
-    "PersonRole",
-    "Account",
-    "Student",
-    "StaffAssignment",
-    "Relationship",
-    "Grant",
-    "Approval",
-    "ScopeRef",
-    "AudienceMember",
-    "AudienceSnapshot",
-    "ChangeAudit",
-    "AccessAudit",
-    "ImportBatch",
+    "registry.PersonRole.person",
+    "registry.Account.person",
+    "registry.Student.person",
+    "registry.Membership.student",
+    "registry.StaffAssignment.person",
+    "registry.Relationship.guardian",
+    "registry.Relationship.student",
+    "registry.Approval.approved_by",
+    "registry.Grant.person",
+    "registry.ChangeAudit.actor",
+    "registry.AccessAudit.actor",
+    "registry.ImportBatch.created_by",
+    "registry.ImportBatch.applied_by",
+    "registry.ScopeRef.person",
+    "registry.AudienceSnapshot.author",
+    "registry.AudienceMember.person",
 }
-EXCLUDED = {}  # model: razlog
+EXCLUDED = {}  # "app.Model.polje": razlog
 
 
 class PersonExportTests(ScreenBase):
@@ -166,11 +171,34 @@ class PersonExportTests(ScreenBase):
         r = self.login().get(f"{BASE}/osebe/{self.p1.pk}/")
         self.assertContains(r, f'action="{self.url(self.p1)}"')
 
+    def test_uveljavljena_serija_in_kljuci_ucenca(self):
+        # DS T-10: kdor serijo uveljavi, jo vidi v svojem izvozu; učenec vidi svoje izvorne ključe.
+        applier = person_of("staff-01")
+        m.PersonRole.objects.create(person=applier, role=m.Role.ADMIN)
+        batch, result = importer.preview(load(), "testni-nabor", self.office)
+        self.assertTrue(result.clean, result.problems)
+        applied, outcome = importer.apply_batch(batch, load(), applier)
+        self.assertEqual(applied.status, "applied", outcome.problems)
+        _, own = self.download(applier)
+        self.assertEqual(
+            [(x["vir"], x["stanje"]) for x in own["lastna_dejanja"]["uveljavljeni_uvozi"]],
+            [("testni-nabor", "applied")],
+        )
+        self.assertEqual(own["lastna_dejanja"]["uvozi"], [])  # predogled je ustvarila druga oseba
+        student = m.Relationship.objects.filter(guardian=self.p1).first().student.person
+        _, data = self.download(student)
+        keys = m.SourceMapping.objects.filter(entity_type="student", target_id=student.pk)
+        self.assertTrue(keys.exists())
+        self.assertEqual(
+            data["izvorni_kljuci_ucenca"], [{"vir": k.source, "kljuc": k.source_key} for k in keys]
+        )
+
     def test_vsi_modeli_z_osebo_so_zajeti(self):
         linked = {
-            model.__name__
-            for model in apps.get_app_config("registry").get_models()
+            f"{model._meta.app_label}.{model.__name__}.{f.name}"
+            for model in apps.get_models()
             for f in model._meta.get_fields()
-            if isinstance(f, (dj.ForeignKey, dj.OneToOneField)) and f.related_model is m.Person
+            if isinstance(f, (dj.ForeignKey, dj.OneToOneField))
+            and f.related_model in (m.Person, m.Student)
         }
         self.assertEqual(linked, COVERED | set(EXCLUDED))

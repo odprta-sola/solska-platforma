@@ -122,5 +122,9 @@ class Command(BaseCommand):
                 else:
                     account.set_unusable_password()
                 account.save()
+            elif password:
+                # Ponovni zagon s SEED_PASSWORD nastavi geslo tudi obstoječim testnim računom.
+                account.set_password(password)
+                account.save(update_fields=["password"])
 
         self.stdout.write(self.style.SUCCESS("Testni nabor naložen."))

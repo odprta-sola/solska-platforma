@@ -90,6 +90,12 @@ def person_export(person, now=None):
                 entity_type="person", target_id=person.pk
             ).order_by("source", "source_key")
         ],
+        "izvorni_kljuci_ucenca": [
+            {"vir": s.source, "kljuc": s.source_key}
+            for s in m.SourceMapping.objects.filter(
+                entity_type="student", target_id=person.pk
+            ).order_by("source", "source_key")
+        ],
         "racun": None
         if account is None
         else {
@@ -181,6 +187,10 @@ def person_export(person, now=None):
             "uvozi": [
                 {"cas": _t(b.created_at), "vir": b.source, "stanje": b.status}
                 for b in person.import_batches.order_by("created_at", "pk")
+            ],
+            "uveljavljeni_uvozi": [
+                {"cas": _t(b.applied_at), "vir": b.source, "stanje": b.status}
+                for b in person.applied_batches.order_by("applied_at", "pk")
             ],
             "obcinstva": [
                 {

@@ -56,17 +56,21 @@ def service_only(scope):
 
 
 def issue_scope_ref(person, scope_key, expires_at=None):
-    """Vrne obstoječ ali nov neprosojen sklic za (oseba, obseg)."""
-    existing = m.ScopeRef.objects.filter(person=person, scope_key=scope_key).first()
-    if existing:
-        if existing.expires_at != expires_at:
-            existing.expires_at = expires_at
-            existing.save(update_fields=["expires_at"])
-        return existing
-    return m.ScopeRef.objects.create(
-        ref="sr_" + secrets.token_urlsafe(16),
+    """Vrne obstoječ ali nov neprosojen sklic za (oseba, obseg).
+
+    get_or_create ob sočasni prvi zahtevi ujame kršitev enoličnosti in vrne že ustvarjeni sklic
+    (namesto napake 500).
+    """
+    ref, created = m.ScopeRef.objects.get_or_create(
         person=person,
         scope_key=scope_key,
-        expires_at=expires_at,
-        issued_at=timezone.now(),
+        defaults={
+            "ref": "sr_" + secrets.token_urlsafe(16),
+            "expires_at": expires_at,
+            "issued_at": timezone.now(),
+        },
     )
+    if not created and ref.expires_at != expires_at:
+        ref.expires_at = expires_at
+        ref.save(update_fields=["expires_at"])
+    return ref
