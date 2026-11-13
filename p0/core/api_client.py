@@ -10,6 +10,7 @@ Nedosegljivost ali odgovor 5xx je `Unavailable`: zaščiteno dejanje zavrni ozir
 Žetonov in sej ne zapisujte v dnevnike.
 """
 
+import http.client
 import json
 import urllib.error
 import urllib.request
@@ -50,20 +51,36 @@ class UserSession:
         )
 
 
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    """Preusmeritve se ne sledijo: urllib bi sejo, CSRF in žeton poslal tudi novemu cilju."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None  # urllib vrne odgovor 3xx kot HTTPError
+
+
+_OPENER = urllib.request.build_opener(_NoRedirect)
+
+
 class UrllibTransport:
-    """Privzeti prenos HTTP (standardna knjižnica)."""
+    """Privzeti prenos HTTP (standardna knjižnica). Preusmeritev je napaka, ne nov cilj."""
 
     def send(self, method, url, headers, body):
         if urlsplit(url).scheme not in ("http", "https"):
             raise Unavailable("nedovoljena shema naslova")
-        req = urllib.request.Request(url, data=body, method=method, headers=headers)  # noqa: S310
         try:
-            with urllib.request.urlopen(req, timeout=TIMEOUT_SECONDS) as response:  # noqa: S310
-                return response.status, response.read()
+            req = urllib.request.Request(url, data=body, method=method, headers=headers)  # noqa: S310
+            with _OPENER.open(req, timeout=TIMEOUT_SECONDS) as response:
+                status, raw = response.status, response.read()
         except urllib.error.HTTPError as exc:
-            return exc.code, exc.read()
-        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            status, raw = exc.code, exc.read()
+        except (urllib.error.URLError, http.client.HTTPException, TimeoutError, OSError) as exc:
             raise Unavailable(type(exc).__name__) from exc
+        except ValueError as exc:
+            # Neveljaven naslov ali vrednost glave (npr. CRLF v piškotku); vsebine ne izpišemo.
+            raise Unavailable("neveljavna zahteva") from exc
+        if 300 <= status < 400:
+            raise Unavailable("preusmeritev ni dovoljena")
+        return status, raw
 
 
 class Api:

@@ -117,13 +117,8 @@ def person_detail(request, actor, person_id):
         m.Grant.objects.filter(person=person).select_related("relationship").order_by("-valid_from")
     )
     names = _student_names({g.scope_key for g in grants})
-    entity_ids = (
-        [str(person.pk)]
-        + [str(r.pk) for r in as_guardian]
-        + [str(r.pk) for r in as_student]
-        + [str(g.pk) for g in grants]
-    )
-    audit = m.ChangeAudit.objects.filter(entity_id__in=entity_ids).select_related("actor")[:20]
+    audit = export.changes_of(person, [*as_guardian, *as_student], grants)
+    audit = audit.select_related("actor")[:20]
     return render(
         request,
         "evidenca/oseba.html",

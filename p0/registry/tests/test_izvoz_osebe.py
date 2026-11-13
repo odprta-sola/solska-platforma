@@ -83,6 +83,37 @@ class PersonExportTests(ScreenBase):
         self.assertIn("oseba", screens)
         self.assertEqual(screens[-1], "izvoz")  # zapis nastane pred izvozom
 
+    def test_enak_kljuc_druge_vrste_ni_v_sledi_osebe(self):
+        # Povezava in upravičenje imata neodvisna številska ključa. Dogodek tujega upravičenja
+        # z enakim ključem, kot ga ima lastna povezava, ne sme v izvoz ali na zaslon osebe.
+        template = m.Relationship.objects.filter(guardian=self.p1).first()
+        rel = m.Relationship.objects.create(
+            guardian=self.p1,
+            student=m.Student.objects.exclude(pk=template.student_id).first(),
+            relationship_type=template.relationship_type,
+            valid_from=template.valid_from,
+        )
+        other = m.Grant.objects.exclude(person=self.p1).first()
+        foreign = m.Grant.objects.filter(pk=rel.pk).first() or m.Grant.objects.create(
+            pk=rel.pk,
+            person=other.person,
+            scope_key=other.scope_key,
+            permission="test.trk_kljucev",
+            approval=other.approval,
+            valid_from=other.valid_from,
+        )
+        self.assertNotEqual(foreign.person_id, self.p1.pk)  # dejanski tuj zapis, enak ključ
+        authz.revoke_grant(foreign, actor=self.office)
+        authz.revoke_relationship(rel, actor=self.office)
+        client = self.login()
+        _, data = self.download(self.p1, client)
+        actions = {a["dejanje"] for a in data["spremembe_podatkov"]}
+        self.assertIn("relationship.revoked", actions)
+        self.assertNotIn("grant.revoked", actions)
+        page = client.get(f"{BASE}/osebe/{self.p1.pk}/").content.decode()
+        self.assertIn("relationship.revoked", page)
+        self.assertNotIn("grant.revoked", page)
+
     def test_lastna_dejanja_zaposlenega_brez_sklicev(self):
         client = self.login()
         client.get(f"{BASE}/osebe/{self.p1.pk}/")
