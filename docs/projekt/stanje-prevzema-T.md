@@ -12,7 +12,7 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Odvzem povezave in dovoljenja | Narejeno v logiki, testih in na zaslonu `/p0/evidenca/osebe/` |
 | Osnovni CSV uvoz s predogledom, validacijo, celovito potrditvijo, ponovitvijo | Narejeno (ukaz `import_csv` in zaslon `/p0/evidenca/uvoz/`) |
 | Sprememba kontakta (sledljiva) | Prek uvoza (`person.import_updated`) in zaslona (`person.contact_updated`); vir resnice je uvoz (odločitev 12. 11. 2026) |
-| Omejen kontaktni klic | Narejeno: kontakt samo za prejemnika iz posnetka občinstva z aktualnim upravičenjem za namen (D12, C07; sprejel tehnični nosilec, potrditev mentorjev odprta) |
+| Omejen kontaktni klic | Narejeno: kontakt samo za prejemnika iz posnetka občinstva z aktualnim upravičenjem za namen (D12, C07; sprejeto 13. 11. 2026) |
 | API, testni podatki, ponovljiva namestitev | Narejeno; testi so bili izmerjeni na določenem commitu (glej zapis o odpravi), gradnja brez predpomnilnika izvedena (zapisa o odpravi) |
 | Nadomestka M1/M2 in pogodbeni testi | Narejeno kot osnutek pogodbe D12 (`api/openapi.yaml`, `p0/stubs`); nadomestka ne dokazujeta vedenjske zamenljivosti (glej spodaj) |
 
@@ -40,4 +40,4 @@ Individualna aktivacija in obnova gesla pri skupnem predalu (samopostrežna obno
 
 Nadomestka po točkah B (13. 11. 2026) hranita stanje v bazi (`p0/stubs/models.py`) in preizkušata: trajni zapis pred 202 in izpad zapisa, okno ponovitve 30 dni, poslovni ključ dogodka, `need_ref` na postavko, ponovno presojo ob obdelavi (odvzem, kontakt, potreba, jezik), osnutek urnika z iztekom in poletnim časom ter negotovo predajo (`registry/tests/test_d12_tocke_b.py`). Niso preizkušeni: prava pošta in ponovni poskusi SMTP, prazniki in urnik šole, periodični razporejevalnik (obdelavo sproži pomožna pot `_stub/process`), sočasni klici pri pravem M1, nadomestni jezik (D05). Nadomestek M1 kliče P0 in M2 v istem procesu prek istih funkcij kot njuna API; pravi M1 kliče API.
 
-Odločitve D12, točke A (sprejel tehnični nosilec 12. 11. 2026, potrditev mentorjev odprta): predogled občinstva z avtorjevo sejo in shranjen posnetek; kontakt vezan na posnetek in namen; postavka dostave (person_id, scope_ref) z `item_id`; meje dolžin in splošne napake 404/405/500/503. Ponovitev že prevzete zahteve po `expires_at` vrne isti prevzem. Točke B (13. 11. 2026, enako): glej [paket](d12-paket-za-odlocitev.md#b-odločiti-pred-integracijo-mejnik-i).
+Odločitve D12, točke A (sprejel tehnični nosilec 12. 11. 2026; D12 kot celoto sprejel naročnik 13. 11. 2026, pogodba `1.0.0`): predogled občinstva z avtorjevo sejo in shranjen posnetek; kontakt vezan na posnetek in namen; postavka dostave (person_id, scope_ref) z `item_id`; meje dolžin in splošne napake 404/405/500/503. Ponovitev že prevzete zahteve po `expires_at` vrne isti prevzem. Točke B (13. 11. 2026, enako): glej [paket](d12-paket-za-odlocitev.md#b-odločiti-pred-integracijo-mejnik-i).

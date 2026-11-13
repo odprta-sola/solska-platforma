@@ -32,7 +32,7 @@ Vsak razrez vključuje svoje teste, dostopnost in navodila.
 - Pri več otrocih je nova potrditev za vse dovoljene obsege ali za nobenega.
 - Potrditev starša ne nadomesti potrditve drugega starša.
 - E-pošta vsebuje samo splošno opozorilo in zaščiteno povezavo; brez imen otrok in vsebine.
-- `handed_off` pomeni predajo strežniku, ne prejema. Negotov izid ostane viden, brez samodejne ponovne predaje (politika čaka na D12).
+- `handed_off` pomeni predajo strežniku, ne prejema. Negotov izid ostane viden (`held`, `HANDOFF_UNCERTAIN`), brez samodejne ponovne predaje; ponovitev je ročna odločitev (D12, C13).
 - 202 samo po zapisu, ki preživi izpad. Isti `idempotency_key` in vsebina vrneta isti rezultat; drugačna vsebina 409.
 - Pred pošiljanjem preverite pravico, kontakt, potrebo (M2), preklic, urnik in iztek. Preklic enega prejemnika ne ustavi drugih.
 - Nov član oddelka ne dobi starih obvestil.
@@ -43,4 +43,4 @@ Mejnik A: učitelj objavi → pravi starš se prijavi → vidi samo svoje → po
 
 ## Odprto (ne rešujte po svoje)
 
-Tihi čas in prazniki, največje zadržanje, politika negotove poštne predaje, hramba ključev idempotence, vir jezika in prikaznih oznak, predstavitev več otrok v eni dostavi, vstop uporabnika v modul. Vse so v D12; predlagajte jih v issueju.
+D12 je sprejet (pogodba `1.0.0`): tihi čas (osnutek delavniki 7–20), negotova predaja, okno ključev 30 dni, vir jezika in oznak ter postavke po otrocih so določeni v [pogodbi](../arhitektura/vmesnik-P0-M1-M2.md). Odprti ostajajo prazniki in urnik šole, največje zadržanje in nadomestni jezik (D05); predloge oddajte v issueju.

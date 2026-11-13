@@ -186,7 +186,7 @@ Pred produkcijo se s pooblaščeno osebo za varstvo podatkov presodi potreba po 
 
 Modul ima lastno logično podatkovno shrambo in dokumentiran API. Ne bere tabel drugih modulov. Skupne komponente za prijavo in pravice naj bodo vzdrževane centralno in uporabne tudi v samostojni namestitvi.
 
-Tehnologijo potrdi skupni tehnični nosilec z mentorjem glede na znanje ekipe, vzdrževanje, varnost in ciljno okolje. Django je kandidat, ne potrjena odločitev. Predviden je ponovljiv kontejnerski namestitveni paket.
+Tehnologijo potrdi naročnik (skupni tehnični nosilec); mentor kot izvajalec oceni znanje ekipe, vzdrževanje, varnost in ciljno okolje ter predlaga spremembe. Izbrana osnova je Django 5.2 LTS s PostgreSQL (D03). Predviden je ponovljiv kontejnerski namestitveni paket.
 
 Komunikacija uporablja vzdrževane varne nastavitve TLS. Pri e-pošti se dokumentirajo dejanske možnosti prenosa; ne predpostavlja se zagotovljeno šifriranje vseh zunanjih poštnih poti. Priponke in kopije se zaščitijo s šifriranjem ter upravljanjem ključev. Lastna kriptografija ni dovoljena. Postkvantna izmenjava ključev ni pogoj prvega prevzema.
 

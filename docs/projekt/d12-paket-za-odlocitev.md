@@ -1,6 +1,6 @@
-# D12: paket za odločitev (sestanek z mentorji)
+# D12: paket za odločitev
 
-Status: točke A je 12. 11. 2026, točke B pa 13. 11. 2026 sprejel skupni tehnični nosilec (pobudnik), obakrat tako, kot so predlagane spodaj. Točke A so izvedene v P0, točke B v pogodbi in nadomestkih M1/M2 (pravi M1/M2 jih izvedeta sama). **Potrditev mentorjev obeh ekip je odprta**, pogodba se zamrzne kot `1.0.0` šele po njej. Pripravil Claude (Anthropic) po navodilih pobudnika; potrdita skupni tehnični nosilec in mentorji ([register](odlocitve.md)). Podrobna razlaga točk C01 do C16 je v [pripravi odločitev](priprava-odlocitev-D03-D09-D12-D14.md#d12-seznam-odločitev-in-nasprotnih-primerov), kanonični osnutek v [pogodbi](../arhitektura/vmesnik-P0-M1-M2.md) in [OpenAPI](../../api/openapi.yaml). Ta paket doda stanje izvedbe po prvem neodvisnem pregledu (`main` = `184c8f9`) in loči, kaj je treba odločiti **pred začetkom dela ekip** in kaj šele **pred integracijo** (mejnik I).
+Status: **sprejeto 13. 11. 2026.** Točke A (12. 11.) in B (13. 11.) je sprejel pobudnik, ki je od 13. 11. 2026 naročnik; mentorji so izvajalci in pogodbe ne potrjujejo ([register](odlocitve.md#vloge-naročnik-in-izvajalec-13-novembra-2026)). Točke A so izvedene v P0, točke B v pogodbi in nadomestkih M1/M2 (pravi M1/M2 jih izvedeta sama). Pogodba je zamrznjena kot `1.0.0` ([zapis](../../api/zamrznitve.txt)). Pripravil Claude (Anthropic) po navodilih pobudnika; potrdita skupni tehnični nosilec in mentorji ([register](odlocitve.md)). Podrobna razlaga točk C01 do C16 je v [pripravi odločitev](priprava-odlocitev-D03-D09-D12-D14.md#d12-seznam-odločitev-in-nasprotnih-primerov), kanonični osnutek v [pogodbi](../arhitektura/vmesnik-P0-M1-M2.md) in [OpenAPI](../../api/openapi.yaml). Ta paket doda stanje izvedbe po prvem neodvisnem pregledu (`main` = `184c8f9`) in loči, kaj je treba odločiti **pred začetkom dela ekip** in kaj šele **pred integracijo** (mejnik I).
 
 ## Zakaj zdaj
 
@@ -38,7 +38,7 @@ Sprejel tehnični nosilec 13. 11. 2026 po predlogu. Stolpec »Izvedba« pove, ka
 
 Vidni razlogi so v novem polju `recipients[].reason_code` stanja dostave.
 
-## Kaj sestanek potrebuje
+## Kaj je sestanek potreboval (zgodovinsko, pred 13. 11. 2026)
 
 - Prisotni: skupni tehnični nosilec (pobudnik) in mentorja obeh ekip.
 - Odločitev za vsako točko A: sprejeto / spremenjeno (kako) / zavrnjeno (zakaj).

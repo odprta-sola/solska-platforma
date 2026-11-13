@@ -29,9 +29,9 @@ Ta dokument določa naš izhodiščni cilj, funkcionalni obseg, vloge, zaporedje
 | --- | --- |
 | Namen in prioritete | Določi pobudnik; spremembe uskladi s šolo uporabnico |
 | Obvezne funkcije in demonstracije | Določene spodaj; zmanjšanje obsega je izrecen dogovor, ne tiha opustitev |
-| Vmesniki in pravila dostopa | Skupen tehnični predlog za vse ekipe; pred odvisno implementacijo pregled in potrditev D12 |
+| Vmesniki in pravila dostopa | Skupna pogodba za vse ekipe; D12 sprejel naročnik 13. 11. 2026 (`1.0.0`) |
 | Dijaki, ure, roki in maturitetna primernost | Mentor in razvojni zavod določita na podlagi tega naročila |
-| Tehnologija in prijavna komponenta | Pobudnik predlaga osnovo; skupni tehnični nosilec in mentorji pregledajo in potrdijo skupno izbiro pred izvedbo; ni prosta ločena izbira vsake ekipe |
+| Tehnologija in prijavna komponenta | Naročnik (pobudnik, skupni tehnični nosilec) določi skupno osnovo; mentorji kot izvajalci ocenijo izvedljivost in predlagajo spremembe; ni prosta ločena izbira vsake ekipe |
 | Priprava P0 in paketa T | Pobudnik osebno s pomočjo AI pripravi referenčno osnovo; ne nastopa samodejno njegovo podjetje. Neodvisni človeški pregledovalec jo preveri pred predajo. |
 | Oblikovanje in notranja organizacija kode | Prostor za dijake ob izpolnjenih skupnih pravilih |
 | Dodatne funkcije | Šele po obveznih demonstracijah, brez spremembe pogodbe na lastno pobudo |
@@ -157,7 +157,7 @@ Te vrzeli niso prepuščene domišljiji posamezne ekipe. Pobudnik s pomočjo AI 
 | --- | --- |
 | Pobudnik in koordinator | Cilj, prioritete in izhodiščni obseg; osebna priprava referenčnega P0/T s pomočjo AI; usklajene vsebinske spremembe s šolo uporabnico |
 | Predstavnik šole uporabnice | Preveri realnost postopkov, pravila upravičenj in uporabniški prevzem |
-| Skupni tehnični nosilec | Z mentorji pregleda in potrdi predlagano skupno tehnologijo in pogodbo; vodi integracijske preglede |
+| Skupni tehnični nosilec | Kot naročnik potrdi skupno tehnologijo in pogodbo; vodi integracijske preglede |
 | Nosilec skupnih gradnikov | Koordinira tehnično predajo P0/T in skladnost skupnih gradnikov; prihodnje vzdrževanje se dodeli posebej |
 | Neodvisni pregledovalec T | Človek, ki ni izdelal pregledovane kode; po navodilih preveri namestitev, kodo in demonstracije. Imenovanje je pogoj pred prevzemom T. |
 | Mentorji | Ocenijo izvedljivost podanega naročila, določijo individualne izdelke, dijake in roke ter preverjajo napredek |

@@ -1,0 +1,5 @@
+# Zamrznjene različice pogodbe api/openapi.yaml (D12, C16).
+# Vrstica: različica, SHA-256 datoteke, datum, kdo je sprejel. Test preveri, da različica iz
+# info.version obstaja tukaj in da se kontrolna vsota ujema z datoteko. Sprememba pogodbe brez
+# nove različice in nove vrstice zato pade.
+1.0.0 7c16a8eee671d229a29948ec6a5ee537a17d676500d53f8200457a99f05955fd 2026-11-13 naročnik (pobudnik)

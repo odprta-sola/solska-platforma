@@ -1,17 +1,18 @@
 openapi: 3.1.0
 info:
   title: Odprta šola – pogodba P0, M1, M2
-  version: 1.0.0-osnutek
+  version: 1.0.0
   description: >
-    OSNUTEK D12. Ni potrjena pogodba: potrdijo jo skupni tehnični nosilec in mentorji, šele
-    nato smejo odvisne ekipe nanjo vezati implementacijo. Vsebinska razlaga je v
-    docs/arhitektura/vmesnik-P0-M1-M2.md. Pot /_stub/* obstaja samo v nadomestkih in ni del pogodbe.
-    Vrednosti v primerih so izmišljene.
-    Splošne napake (predlog): neznana pot API vrne 404, napačna metoda 405, zavrnitev CSRF
-    pri sejnem klicu 403, nepričakovana napaka 500 in nedosegljiva evidenca 503; vse z
-    vsebino Error (application/json). Omejitve dolžin in števil so predlog D12.
-    Točke A (12. 11. 2026) in B (13. 11. 2026) je sprejel skupni tehnični nosilec; potrditev
-    mentorjev in zamrznitev 1.0.0 sta odprti (docs/projekt/d12-paket-za-odlocitev.md).
+    Pogodba D12, različica 1.0.0, sprejeta 13. 11. 2026 (naročnik: pobudnik, skupni tehnični
+    nosilec; mentorji so izvajalci). Odvisne ekipe nanjo vežejo implementacijo. Vsebinska
+    razlaga je v docs/arhitektura/vmesnik-P0-M1-M2.md. Pot /_stub/* obstaja samo v nadomestkih
+    in ni del pogodbe. Vrednosti v primerih so izmišljene.
+    Splošne napake: neznana pot API vrne 404, napačna metoda 405, zavrnitev CSRF pri sejnem
+    klicu 403, nepričakovana napaka 500 in nedosegljiva evidenca 503; vse z vsebino Error
+    (application/json).
+    Spremembe: vsaka sprememba te datoteke zahteva novo različico in vrstico v
+    api/zamrznitve.txt; sprememba z vplivom na ekipe potrebuje odobritev naročnika,
+    nezdružljiva pa novo glavno različico ali dogovorjen prehod (C16).
 servers:
   - url: http://localhost:8000
 paths:

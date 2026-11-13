@@ -5,8 +5,10 @@ pogodbi (status, vsebinski tip, shema s formati); glej contract_check. Klici nep
 Django odjemalca drugje niso samodejno preverjeni. To so testi osnutka, ne potrditev D12.
 """
 
+import hashlib
 import json
 from datetime import timedelta
+from pathlib import Path
 
 from django.core.management import call_command
 from django.test import Client, TestCase
@@ -597,6 +599,20 @@ class ReminderCheckContract(ContractBase):
 
 
 class SpecCoverage(TestCase):
+    def test_pogodba_je_zamrznjena_razlicica(self):
+        """Sprememba api/openapi.yaml brez nove različice v api/zamrznitve.txt pade (C16)."""
+        api = Path(__file__).resolve().parents[3] / "api"
+        digest = hashlib.sha256((api / "openapi.yaml").read_bytes()).hexdigest()
+        frozen = {}
+        for line in (api / "zamrznitve.txt").read_text(encoding="utf-8").splitlines():
+            if line.strip() and not line.startswith("#"):
+                version, value = line.split()[:2]
+                frozen[version] = value
+        version = SPEC["info"]["version"]
+        self.assertRegex(version, r"^\d+\.\d+\.\d+$")  # brez »-osnutek«
+        self.assertIn(version, frozen, "nova različica ni zapisana v api/zamrznitve.txt")
+        self.assertEqual(frozen[version], digest, "pogodba se je spremenila brez nove različice")
+
     def test_vsaka_pot_iz_specifikacije_je_usmerjena(self):
         for path in SPEC["paths"]:
             try:

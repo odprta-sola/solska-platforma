@@ -9,7 +9,7 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 
 | ID | Vprašanje | Status | Nosilec potrditve |
 | --- | --- | --- | --- |
-| D01 | Obseg učnega izdelka in prvega pilota M1 | Odprto | Mentor in pilotna šola |
+| D01 | Obseg učnega izdelka in prvega pilota M1 | Odprto | Naročnik (pobudnik) in pilotna šola; mentor oceni izvedljivost |
 | D02 | Mentor, dijaki in roki | Odprto | Razvojni zavod |
 | D03 | Skupni tehnični nosilec in skupni gradniki | Osebni sprejem pobudnika 12. 11. 2026 (nosilec: pobudnik); potrditev sodelujočih zavodov odprta | Sodelujoči zavodi |
 | D04 | Gostovanje, e-pošta in kopije | Odprto | Pilotna šola in skupni tehnični nosilec |
@@ -20,7 +20,7 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D09 | Vzdrževanje, podpora in namestnik | Pobudnik je nosilec; za drugega skrbnika je 12. 11. 2026 določil Aleksandra (`alexlandich`), ki ima od tega dne vlogo admin na repozitoriju; njegov izrecni pisni sprejem vloge je odprt | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema M1 in M2 | Predlog v specifikacijah | Skupni tehnični nosilec in pilotna šola |
 | D11 | Postopek pilota M2, besedilo obrazca in pravila odločanja | Odprto | Pilotna šola ob vsebinskem in pravnem pregledu |
-| D12 | [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md): minimalno obveščanje in skupni vir identitet ter upravičenj | Točke A ([paket](d12-paket-za-odlocitev.md)) sprejel tehnični nosilec 12. 11. 2026, točke B 13. 11. 2026 (po predlogu iz paketa); obe izvedeni v P0, pogodbi in nadomestkih; potrditev mentorjev in zamrznitev `1.0.0` odprti | Skupni tehnični nosilec in mentorji ekip |
+| D12 | [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md): minimalno obveščanje in skupni vir identitet ter upravičenj | **Sprejeto 13. 11. 2026** (naročnik): točke A in B po [paketu](d12-paket-za-odlocitev.md), izvedene v P0, pogodbi in nadomestkih; pogodba zamrznjena kot `1.0.0` ([zapis zamrznitve](../../api/zamrznitve.txt)) | Naročnik (pobudnik) |
 | D13 | Razdelitev ekip, nosilci modulov in ocena ur po fazah | Odprto | Sodelujoči zavodi in mentorji |
 | D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; nosilec: pobudnik; namestnik: Aleksandar (`alexlandich`, določen 12. 11. 2026, z dostopom do zasebnih prijav kot admin repozitorija; sprejem odprt); roki odziva odprti | Nosilec projekta in skrbnik repozitorija |
 | D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | CC BY-SA 4.0 za dokumentacijo, osebni sprejem pobudnika 12. 11. 2026 ([LICENSE-dokumentacija.md](../../LICENSE-dokumentacija.md)); potrditev zavodov odprta | Nosilec projekta in avtorji |
@@ -58,7 +58,7 @@ Pobudnik Mitja Pirih je v pogovoru z Claude AI, ki pripravlja P0 in navodila, sp
 
 | Odločitev | Sprejeto | Kaj ostaja odprto |
 | --- | --- | --- |
-| D03 | Pobudnik je skupni tehnični nosilec in nosilec skupnih gradnikov. Osnova: Django 5.2 LTS, PostgreSQL, Docker Compose. Predlagana prijavna komponenta django-allauth še čaka na izrecno potrditev v pregledu pull requesta. | Potrditev sodelujočih zavodov in mentorjev |
+| D03 | Pobudnik je skupni tehnični nosilec in nosilec skupnih gradnikov. Osnova: Django 5.2 LTS, PostgreSQL, Docker Compose. Predlagana prijavna komponenta django-allauth še čaka na izrecno potrditev v pregledu pull requesta. | Potrditev sodelujočih zavodov (mentorji od 13. 11. 2026 kot izvajalci tehnologije ne potrjujejo) |
 | D08 | Za programsko kodo velja EUPL 1.2; besedilo je v datoteki LICENSE. | Pravice prispevkov in izjave dijakov (dogovor z mentorjem), licenca dokumentacije (D15) |
 | D09 | Pobudnik je vzdrževalec in skrbnik repozitorija. | Drugi skrbnik/namestnik ni imenovan; Aleksandar ostaja kandidat do izrecnega sprejema. |
 | D14 | Pobudnik obravnava zasebne prijave ranljivosti. | Namestnik in roki odziva; dostop drugega računa |
@@ -75,7 +75,7 @@ Odločitve pobudnika po prvem neodvisnem pregledu (osebni sprejem predlogov, ki 
 | --- | --- |
 | Prijavna komponenta `django-allauth` (D03) | Potrjena |
 | Razvojna odvisnost `rfc3339-validator` (MIT) | Sprejeta |
-| Predlogi pogodbe po pregledu (meje dolžin, splošne napake, podvojen prejemnik, ponovitev po izteku) | Ostanejo predlog D12 za pogovor z mentorji; ekipe se nanje ne vežejo |
+| Predlogi pogodbe po pregledu (meje dolžin, splošne napake, podvojen prejemnik, ponovitev po izteku) | Sprejeti z D12 13. 11. 2026 in del pogodbe `1.0.0` |
 | Ročni popravek kontakta in poznejši uvoz | Uvoz ostane vir resnice; predogled pokaže spremembo, tajništvo popravi tudi izvorni sistem |
 | Samodejne posodobitve | Dependabot za GitHub Actions in slike; paketi Python ročno, mesečno ([postopek](odvisnosti-in-licence.md)) |
 | HSTS in HTTPS | Ob odločitvi o gostovanju (D04) |
@@ -86,6 +86,21 @@ Odločitve pobudnika po prvem neodvisnem pregledu (osebni sprejem predlogov, ki 
 | Točka 8 | Počaka na prava M1 in M2 |
 
 Licenciranje prispevkov (D08, D15; osebni sprejem pobudnika 12. 11. 2026): koda pod EUPL 1.2, dokumentacija pod CC BY-SA 4.0; prispevek se licencira pod licenco dela projekta, v katerega spada (inbound = outbound). Vsak commit ima podpis DCO; ime je lahko vzdevek, identiteto mladoletnega pozna šola. Za združitev prispevka mladoletnega avtorja je potrebna enkratna izjava avtorja s soglasjem staršev, ki se pridobi ob prvem prispevku ali s šolsko prijavnico; praga »majhnih« prispevkov ni. Izjave hrani šola, v repozitoriju je le oznaka `avtor-urejen`. Ocena ne sme biti odvisna od soglasja. Obrazec mora pred uporabo pravno pregledati šola. Postopek: [CONTRIBUTING.md](../../CONTRIBUTING.md#licenciranje-prispevkov).
+
+## Vloge naročnik in izvajalec (13. novembra 2026)
+
+Pobudnik Mitja Pirih je kot pobudnik in skupni tehnični nosilec 13. 11. 2026 odločil, da projekt zaradi hitrosti odziva vseh vključenih vodi po razmerju naročnik–izvajalec:
+
+| Vloga | Kdo | Kaj odloča oziroma dela |
+| --- | --- | --- |
+| Naročnik | Pobudnik (skupni tehnični nosilec) | Obseg naročila, arhitektura, tehnologija, pogodba vmesnikov in njene spremembe; sprejme ali zavrne predloge izvajalcev |
+| Izvajalec | Mentorji s svojimi ekipami dijakov | Ocena izvedljivosti, razrez na individualne izdelke, vodenje in ocenjevanje dijakov, izvedba M1/M2 po pogodbi; spremembe predlagajo v issueju ali pull requestu |
+
+Posledice:
+- Tehnične odločitve, ki so čakale na potrditev mentorjev, sprejme naročnik. D12 je s tem sprejet (točke A in B, kot so predlagane) in pogodba zamrznjena kot `1.0.0`.
+- Sprememba pogodbe z vplivom na ekipe gre prek pull requesta z odobritvijo naročnika; nezdružljiva sprememba zahteva novo različico ali dogovorjen prehod (C16). Vsaka zamrznjena različica je zapisana v [`api/zamrznitve.txt`](../../api/zamrznitve.txt), test pa pade, če se pogodba spremeni brez nove različice.
+
+Ne spremeni se: odločitve in potrditve zavodov ter pilotne šole (D04–D07, D10, D11, D15, D16, sodelovanje), maturitetne teme in ocenjevanje (šola in mentor), razpoložljivost mentorjev in dijakov (D02, D13), neodvisni pregled T, pravni pregled obrazca D08 in pogoj namestnika iz D09/D14 pred vključitvijo dijakov.
 
 ## Roki in sledenje
 

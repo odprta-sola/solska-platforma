@@ -211,6 +211,8 @@ Odločitev zavodov vsebuje imenovanje in sprejem mandata, kapaciteto, sprejem za
 
 ## D12: seznam odločitev in nasprotnih primerov
 
+Opomba 13. 11. 2026: D12 je sprejel naročnik (pobudnik); mentorji so izvajalci in tehničnih odločitev ne potrjujejo ([register](odlocitve.md#vloge-naročnik-in-izvajalec-13-novembra-2026)). Spodnje besedilo je ohranjeno kot priprava.
+
 [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md) ostaja kanonični osnutek. Naslednja tabela je priprava pregleda, ne sprememba pogodbe. Tehnične odločitve potrdita skupni tehnični nosilec in mentorji; šola dodatno določi poslovna pravila po D05–D07, D11 in D16. Za učne preizkuse se uporabljajo izrecna izmišljena pravila, brez trditve o produkcijski ustreznosti.
 
 | Točka in sled | Kaj mora biti odločeno | Predlog za pregled | Obvezni nasprotni primer oziroma dokaz |
