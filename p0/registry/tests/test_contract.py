@@ -15,7 +15,6 @@ from django.utils import timezone
 
 from registry import authz, services
 from registry import models as m
-from stubs import state
 
 from .contract_check import SPEC, check, validate
 
@@ -44,9 +43,6 @@ class ContractBase(TestCase):
             "m2", ["m1.delivery", "p0.authorizations.check"]
         )
         _, cls.t_m2b = services.create_service_client("m2-drug", ["m1.delivery"])
-
-    def setUp(self):
-        state.reset()
 
     def call(self, method, path, token=None, body=None, client=None, **extra):
         client = client or Client()
@@ -402,16 +398,20 @@ class ContactContract(ContractBase):
 
 
 def delivery_body(parent_refs, key="k1", expires_at=None, **over):
+    """Veljavna zahteva; pri opomniku ima vsaka postavka svoj need_ref (C09)."""
+    reminder = over.get("kind", "reminder") == "reminder"
     body = {
         "idempotency_key": key,
+        "event_key": f"ev-{key}",
         "kind": "reminder",
         "audience_ref": "au_test",
-        "recipients": [{"person_id": pid, "scope_ref": ref} for pid, ref in parent_refs],
+        "recipients": [
+            {"person_id": pid, "scope_ref": ref, **({"need_ref": f"need-{n}"} if reminder else {})}
+            for n, (pid, ref) in enumerate(parent_refs)
+        ],
         "template_id": "m2.pending-response.v1",
-        "locale": "sl",
         "params": {},
         "target": {"module": "M2", "resource_id": "form-demo-01"},
-        "need_ref": "need-demo-001",
         "expires_at": expires_at
         or (timezone.now() + timedelta(days=1)).isoformat().replace("+00:00", "Z"),
     }
@@ -543,30 +543,56 @@ class DeliveryStubContract(ContractBase):
         self.assertEqual(self.cancel(rid, [items[self.p1]], token=self.t_m2b).status_code, 404)
 
 
+def issue_need(test, recipient_id, scope_ref, resource_id="form-demo-01", **extra):
+    """need_ref iz nadomestka M2 za eno potrebo (C09)."""
+    body = {"recipient_id": recipient_id, "scope_ref": scope_ref, "resource_id": resource_id}
+    r = test.call("post", f"{M2}/_stub/needs", token=test.t_m1, body={**body, **extra})
+    test.assertEqual(r.status_code, 200, r.content)
+    return r.json()["need_ref"]
+
+
 class ReminderCheckContract(ContractBase):
-    def check(self, need_ref="need-1", token=None):
+    def setUp(self):
+        super().setUp()
+        self.a = issue_need(self, "p", "s-otrok-a")
+        self.b = issue_need(self, "p", "s-otrok-b")
+
+    def check(self, need_ref, token=None, recipient_id="p", scope_ref="s-otrok-a"):
         return self.call(
             "post",
             f"{M2}/reminders/check",
             token=token or self.t_m1,
-            body={"need_ref": need_ref, "recipient_id": "p", "scope_ref": "s"},
+            body={"need_ref": need_ref, "recipient_id": recipient_id, "scope_ref": scope_ref},
         )
 
     def test_potreben_in_nepotreben(self):
-        r = self.check()
+        r = self.check(self.a)
         validate("ReminderCheckResponse", r.json())
         self.assertEqual(r.json(), {"needed": True, "reason_code": "REQUIRED"})
-        self.call("post", f"{M2}/_stub/mark-done", token=self.t_m1, body={"need_ref": "need-1"})
+        self.call("post", f"{M2}/_stub/mark-done", token=self.t_m1, body={"need_ref": self.a})
         self.assertEqual(
-            self.check().json(), {"needed": False, "reason_code": "NO_LONGER_REQUIRED"}
+            self.check(self.a).json(), {"needed": False, "reason_code": "NO_LONGER_REQUIRED"}
         )
-        self.assertTrue(self.check("need-2").json()["needed"])  # selektivno
+        # odgovor za otroka A ne ustavi opomnika za otroka B (C09)
+        self.assertTrue(self.check(self.b, scope_ref="s-otrok-b").json()["needed"])
+
+    def test_tuj_neznan_ali_potekel_sklic_ni_nepotreben(self):
+        past = (timezone.now() - timedelta(seconds=1)).isoformat()
+        expired = issue_need(self, "p", "s-otrok-a", expires_at=past)
+        for r in (
+            self.check(self.b),  # sklic drugega obsega
+            self.check(self.a, recipient_id="drug"),  # sklic druge osebe
+            self.check("nd_neznan"),
+            self.check(expired),
+        ):
+            self.assertEqual(r.status_code, 404)
+            self.assertNotIn("needed", r.json())
 
     def test_napaka_ni_nepotreben(self):
         r = self.call("post", f"{M2}/reminders/check", token=self.t_m1, body={"need_ref": 1})
         self.assertEqual(r.status_code, 400)
         self.assertNotIn("needed", r.json())
-        self.assertEqual(self.check(token=self.t_m2).status_code, 403)
+        self.assertEqual(self.check(self.a, token=self.t_m2).status_code, 403)
         self.assertEqual(self.call("post", f"{M2}/reminders/check", body={}).status_code, 401)
 
 
