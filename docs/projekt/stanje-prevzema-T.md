@@ -1,6 +1,6 @@
 # Stanje paketa T (referenčni P0)
 
-Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu priprave P0](priprava-referencnega-P0.md) po prvem neodvisnem pregledu. Izvedba faz 0 do 6 je v `main` (PR #31 do #38). Prvi pregled sta opravila druga sistema AI, Codex (OpenAI) in DeepSeek (PR #39, #40); poročil človek še ni sprejel. Odprava ugotovitev je v [zapisu o odpravi](../pregledi/2026-11-odprava-prvega-pregleda-P0.md); po njej je potreben ponovni neodvisni pregled. Človeški prevzem ni opravljen.
+Datum: 13. november 2026. Status: pregled dejanskega stanja proti [načrtu priprave P0](priprava-referencnega-P0.md) po tretjem neodvisnem pregledu. Izvedba faz 0 do 6 je v `main` (PR #31 do #38), popravki treh krogov pregleda pa v PR #39 do #74. Vse tri preglede sta opravila druga sistema AI, Codex (OpenAI) in DeepSeek; zadnja odprava je v [zapisu o odpravi tretjega pregleda](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md). Človek poročil in zapisov še ni sprejel; človeški prevzem ni opravljen.
 
 ## Kaj je narejeno in preizkušeno
 
@@ -20,11 +20,11 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 
 | Vrzel | Posledica |
 | --- | --- |
-| Neodvisni pregled (9 točk, [kontrolni seznam](pregled-P0-kontrolni-seznam.md)) | Prvi in ponovni pregled z dvema sistemoma AI izvedena (priporočilo obakrat: ne oziroma pogojno); odprava ponovnega pregleda je v [zapisu](../pregledi/2026-11-odprava-ponovnega-pregleda-P0.md); tretji pregled ni izveden |
-| Zasebne varnostne ugotovitve | Šest ugotovitev obeh krogov odpravljenih in objavljenih kot varnostni nasveti repozitorija |
+| Neodvisni pregled (9 točk, [kontrolni seznam](pregled-P0-kontrolni-seznam.md)) | Prvi, ponovni in tretji pregled z dvema sistemoma AI izvedeni (priporočilo vsakič: ne oziroma pogojno); odprava tretjega pregleda je v [zapisu](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md) (299 testov, 0 preskočenih); človeški sprejem ni izveden |
+| Zasebne varnostne ugotovitve | Ugotovitve vseh treh krogov odpravljene; osem objavljenih varnostnih nasvetov repozitorija |
 | Pogodba proti izvedbi (vhod, napake, formati) | Popravljeno za preizkušene poti; omejitve dolžin in splošne napake so del pogodbe `1.0.0` |
 | Zaklep odvisnosti s hashi, določene slike, popis licenc slike, HSTS/HTTPS | Zaklep, digesti in skeniranje narejeni; popis licenc delen (brez vgrajenih knjižnic psycopg-binary in SBOM); HSTS/HTTPS čaka na namestitev ([odvisnosti in licence](odvisnosti-in-licence.md)) |
-| Točka 8: obnašanje modulov ob izpadu P0 | Nepreverljivo, dokler pravi M1/M2 ne obstajata |
+| Točka 8: obnašanje modulov ob izpadu P0 | Delno: ogrodji `p0/m1`, `p0/m2` zavrneta ob nedosegljivosti P0 (503); celota nepreverljiva, dokler pravi M1/M2 ne obstajata |
 | Točka 9: zasloni in dostopnost | Prijava in odjava imata dostopni predlogi z avtomatskimi preizkusi; ročni pregled z bralnikom ni narejen; zasloni za osnovna opravila (obseg sprejet 12. 11. 2026) so narejeni in preizkušeni s tipkovnico, ne z bralnikom ([pregled dostopnosti](pregled-dostopnosti-P0.md)) |
 | Potrditev D12 (sheme, šifranti, servisni mehanizem, topologija) | Izpolnjeno: sprejeto 13. 11. 2026, pogodba `1.0.0` zamrznjena; ekipe se vežejo nanjo |
 | Potrditev strukture `p0/m1`, `p0/m2` in imen dovoljenj | Predlogi, ne odločitve (`django-allauth` potrjen 12. 11. 2026) |
