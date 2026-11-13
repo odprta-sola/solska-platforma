@@ -76,7 +76,7 @@ cd p0
 python manage.py create_service_client m2 --scope m1.delivery --scope p0.authorizations.check
 ```
 
-Žeton se izpiše enkrat; ne shranjujte ga v repozitorij. Dovoljenja: `p0.authorizations.check`, `p0.contacts.resolve`, `m1.delivery`, `m2.reminders.check`.
+Žeton se izpiše enkrat; ne shranjujte ga v repozitorij. Dovoljenja: `p0.authorizations.check`, `p0.contacts.resolve`, `m1.delivery`, `m2.reminders.check`. Obstoječemu računu nov žeton izda `rotate_service_client <ime>` (stari takoj ne velja), onemogoči ga `deactivate_service_client <ime>`. Vse seje izbriše `purge_all_sessions --yes` (zajezitev po [SECURITY.md](SECURITY.md)).
 
 Nadomestka M1 (`/m1/api/v1/`) in M2 (`/m2/api/v1/`) sta v `p0/stubs/` in se vklopita s `STUBS=m1,m2` (samo z `DJANGO_DEBUG=1`, sicer se aplikacija ne zažene; privzeto v razvoju; pravi modul odstrani svoj nadomestek, npr. `STUBS=m2`). Ne pošiljata e-pošte; stanje hranita v bazi (`p0/stubs/models.py`, tabele obstajajo tudi brez vklopljenih nadomestkov). Pomožne poti samo v nadomestkih: `POST /m1/api/v1/_stub/process` (obdela čakajoče postavke ob času `at` po pravilih D12, točke B), `POST /m1/api/v1/_stub/advance` (ročno stanje, npr. `held` z `HANDOFF_UNCERTAIN`, ali ročna ponovitev), `POST /m2/api/v1/_stub/needs` (izda `need_ref` za eno potrebo) in `POST /m2/api/v1/_stub/mark-done`. Ekipa M1 zamenja nadomestek M1 s pravim modulom, ekipa M2 nadomestek M2, z istimi shemami.
 

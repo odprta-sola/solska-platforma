@@ -45,7 +45,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 - **Dostop po vlogah:** zasloni evidence samo za tajništvo in skrbnika; vloge `admin` in `office` dodeli z uvozom le skrbnik.
 - Odvzem povezave ali upravičenja prevlada takoj in ga uvoz ne obnovi.
 - Sled sprememb brez starih in novih vrednosti; predogled uvoza hrani imena polj, ne vrednosti.
-- Sled vpogledov: vsak prikaz podrobnosti osebe, obrazca kontakta, potrditve odvzema in predogleda uvoza se zapiše pred prikazom (brez zapisa ni prikaza); sled je v skrbniškem vmesniku samo za branje.
+- Sled vpogledov: vsak prikaz podrobnosti osebe, obrazca kontakta, potrditve odvzema in predogleda uvoza se zapiše pred prikazom (brez zapisa ni prikaza). Seznam oseb (ime, vloge, e-naslov) zapiše vsako prikazano osebo (zaslon `seznam`), iskalnega niza ne. Skrbniški vmesnik `/admin/` zapiše vsak prikaz seznama in zapisa (zaslon `admin:<model>`). Sledi sprememb in vpogledov sta v skrbniškem vmesniku samo za branje; oseb, povezav, upravičenj in potrditev tam ni mogoče brisati, povezav in upravičenj ne spreminjati (odvzem gre prek zaslonov evidence).
 - Začasne datoteke uvoza: nedostopne po 24 urah, izbrisane najpozneje po 25 urah (samodejno).
 - Posnetki občinstva: neuporabni ob izteku (30 dni, predlog), s člani izbrisani najpozneje uro pozneje (samodejno, `purge_audience_snapshots`).
 - Napake ne razkrivajo tehničnih podrobnosti ali obstoja tujih podatkov.
@@ -63,7 +63,7 @@ Popis iz podatkovnega modela (`p0/registry/models.py`) na commitu z odločitvami
 | Pravica dostopa in prenosljivosti (čl. 15, 20) | Izvoz P0 je izveden (JSON na strani osebe, zabeležen v sledi vpogledov). Odprto: postopek preverjanja istovetnosti prosilca, rok odgovora, ali izvoz vsebuje imena zaposlenih iz sledi; podatki M1/M2 bodo potrebovali lasten izvoz | šola, DPO; M1/M2 |
 | Pravica do popravka (čl. 16) | Popravek kontakta na zaslonu obstaja; uvoz je vir resnice | izvedeno delno |
 | Pravica do izbrisa in omejitve (čl. 17, 18) | Ni postopka; razmerje do hrambe zgodovine odločitev določi D07 | DPO |
-| Sled vpogledov (čl. 5(2)) | Izvedena za zaslone evidence (`AccessAudit`). Ne beležita se seznam oseb z iskanjem (imena in vloge do 50 oseb na stran) in skrbniški vmesnik Django `/admin/`, ki naj ostane le za tehnično vzdrževanje; rok hrambe sledi ni določen | D07; tehnično ob odločitvi |
+| Sled vpogledov (čl. 5(2)) | Izvedena za zaslone evidence, seznam oseb in skrbniški vmesnik `/admin/` (`AccessAudit`). Admin naj ostane le za tehnično vzdrževanje; skrbnik brez osebe v evidenci je v sledi brez imena. Vpogledi pred 13. 11. 2026 (seznam, admin) v sledi manjkajo. Rok hrambe sledi ni določen | D07; tehnično ob odločitvi |
 | Kršitve (čl. 33, 34) | Osnutek postopka je v [SECURITY.md](../../SECURITY.md#kršitev-varstva-osebnih-podatkov) (vloge, 72 ur, zajezitev, ocena, obvestila, evidenca). Odprto: potrditev šole in DPO, kontaktna oseba šole, predloga obvestila in evidence kršitev | šola, DPO, nosilec (D14) |
 | Obdelovalci in prenosi (čl. 28, 44) | Gostovanje in e-pošta nista izbrana; prenos v tretje države ni predviden, a ni preverjen | D04 |
 | Mladoletni | Starostna meja 15 let za privolitev pri storitvah informacijske družbe (ZVOP-2) se uporabi le, če je podlaga privolitev | DPO (D16) |
