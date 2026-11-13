@@ -59,4 +59,4 @@ Točka 9 zahteva »prijavo in osnovna opravila«. Obseg je osebno sprejel pobudn
 3. Seznam oseb z iskanjem in podrobnosti osebe (vloge, povezave, upravičenja) za tajništvo, z odvzemom povezave ali upravičenja in potrditvijo (narejeno).
 4. Popravek kontakta osebe s sledjo spremembe (narejeno).
 
-Ni v obsegu T: celoten administrativni portal, izvoz, zasloni za starše zunaj M1/M2 (ti so v modulih). Vsak zaslon dobi enake avtomatske preizkuse in vrstico v ročnem pregledu.
+Ni v obsegu T: celoten administrativni portal in zasloni za starše zunaj M1/M2 (ti so v modulih). Izvoz podatkov osebe (gumb na strani osebe) je izveden pozneje (PR #61) in je vključen v ročni pregled. Vsak zaslon dobi enake avtomatske preizkuse in vrstico v ročnem pregledu.

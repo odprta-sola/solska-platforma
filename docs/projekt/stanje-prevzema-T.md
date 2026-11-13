@@ -14,7 +14,7 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Sprememba kontakta (sledljiva) | Prek uvoza (`person.import_updated`) in zaslona (`person.contact_updated`); vir resnice je uvoz (odločitev 12. 11. 2026) |
 | Omejen kontaktni klic | Narejeno: kontakt samo za prejemnika iz posnetka občinstva z aktualnim upravičenjem za namen (D12, C07; sprejeto 13. 11. 2026) |
 | API, testni podatki, ponovljiva namestitev | Narejeno; testi so bili izmerjeni na določenem commitu (glej zapis o odpravi), gradnja brez predpomnilnika izvedena (zapisa o odpravi) |
-| Nadomestka M1/M2 in pogodbeni testi | Narejeno kot osnutek pogodbe D12 (`api/openapi.yaml`, `p0/stubs`); nadomestka ne dokazujeta vedenjske zamenljivosti (glej spodaj) |
+| Nadomestka M1/M2 in pogodbeni testi | Narejeno po pogodbi D12 `1.0.0` (`api/openapi.yaml`, `p0/stubs`); nadomestka ne dokazujeta vedenjske zamenljivosti (glej spodaj) |
 
 ## Kar manjka do prevzema T
 
@@ -22,11 +22,11 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | --- | --- |
 | Neodvisni pregled (9 točk, [kontrolni seznam](pregled-P0-kontrolni-seznam.md)) | Prvi in ponovni pregled z dvema sistemoma AI izvedena (priporočilo obakrat: ne oziroma pogojno); odprava ponovnega pregleda je v [zapisu](../pregledi/2026-11-odprava-ponovnega-pregleda-P0.md); tretji pregled ni izveden |
 | Zasebne varnostne ugotovitve | Šest ugotovitev obeh krogov odpravljenih in objavljenih kot varnostni nasveti repozitorija |
-| Pogodba proti izvedbi (vhod, napake, formati) | Popravljeno za preizkušene poti; omejitve dolžin in splošne napake so predlog D12 |
+| Pogodba proti izvedbi (vhod, napake, formati) | Popravljeno za preizkušene poti; omejitve dolžin in splošne napake so del pogodbe `1.0.0` |
 | Zaklep odvisnosti s hashi, določene slike, popis licenc slike, HSTS/HTTPS | Zaklep, digesti in skeniranje narejeni; popis licenc delen (brez vgrajenih knjižnic psycopg-binary in SBOM); HSTS/HTTPS čaka na namestitev ([odvisnosti in licence](odvisnosti-in-licence.md)) |
 | Točka 8: obnašanje modulov ob izpadu P0 | Nepreverljivo, dokler pravi M1/M2 ne obstajata |
 | Točka 9: zasloni in dostopnost | Prijava in odjava imata dostopni predlogi z avtomatskimi preizkusi; ročni pregled z bralnikom ni narejen; zasloni za osnovna opravila (obseg sprejet 12. 11. 2026) so narejeni in preizkušeni s tipkovnico, ne z bralnikom ([pregled dostopnosti](pregled-dostopnosti-P0.md)) |
-| Potrditev D12 (sheme, šifranti, servisni mehanizem, topologija) | Pogodba je osnutek; ekipe se ne smejo vezati nanjo |
+| Potrditev D12 (sheme, šifranti, servisni mehanizem, topologija) | Izpolnjeno: sprejeto 13. 11. 2026, pogodba `1.0.0` zamrznjena; ekipe se vežejo nanjo |
 | Potrditev strukture `p0/m1`, `p0/m2` in imen dovoljenj | Predlogi, ne odločitve (`django-allauth` potrjen 12. 11. 2026) |
 | Drugi skrbnik/namestnik (D09), namestnik in roki D14 | Priznano tveganje enega skrbnika za razvoj na izmišljenih podatkih; pogoj pred produkcijskim pilotom ([vloge skrbnikov](odlocitve.md#vloge-skrbnikov-13-novembra-2026)) |
 | Pravice prispevkov dijakov (D08), izjave | Pred sprejemom dijaške kode |

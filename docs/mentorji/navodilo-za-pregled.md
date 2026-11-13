@@ -24,7 +24,7 @@ Spodnje vrstice beležijo odziv na prejšnjo različico. Ne opisujejo trenutnega
 | B2 | idempotency_key ločen od trace_id; rezultati cancel ločeni od stanj. Konkretno okno hrambe ključa še zahteva odločitev. |
 | B3 | Ohranjen dogovor: M2 načrtuje in odda ob dospelosti. send_not_before zato ni dodan; dodan iztek v tihem času. |
 | B5 | Predlagani skupni vhod, ločene osnovne poti in SSO potek; konkretna rešitev odprta. Enaka API predpona sama ne bi bila napaka pri različnih gostiteljih. |
-| B6 | Pogodba prestavljena na stalno mesto; sklici in D12 usklajeni. D12 ostaja odprt. |
+| B6 | Pogodba prestavljena na stalno mesto; sklici in D12 usklajeni. D12 je bil takrat odprt (sprejet 13. 11. 2026). |
 | P1, P3 | Takrat so bili dodani mejniki A/I/B/C, minimalni sprejem M1 in dodatni preizkusi; poznejša razdelitev jih je spremenila. |
 | P2 | Prejšnje stanje pri c3388ed: nadomestek je omogočal vzporednost in P0 je ostal dijaški razvoj. Nova usmeritev določa pobudnikov referenčni P0 in celoten človeški prevzem T pred A/I. |
 | P4 | Predloge, locale, omejeni parametri in štiri vrste dostave. |

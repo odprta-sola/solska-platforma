@@ -1,6 +1,6 @@
 # Navodila za razvijalce
 
-Status: osnutek, 12. november 2026, po popravkih prvega neodvisnega pregleda (ogrodje, model, prijava, API, uvoz CSV, osnutek pogodbe D12 z nadomestkoma M1/M2). Navodila po ekipah sledijo po [načrtu priprave P0](docs/projekt/priprava-referencnega-P0.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
+Status: 13. november 2026, pogodba D12 `1.0.0` sprejeta in zamrznjena; ogrodje, model, prijava, API, uvoz CSV, nadomestka M1/M2 in ogrodji modulov `p0/m1`, `p0/m2`. Navodila ekipam: [docs/razvijalci](docs/razvijalci/README.md). Za pravila dela glej [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Pravila
 
@@ -54,7 +54,7 @@ Prijava: `django-allauth` (samo `allauth.account`), prijava z uporabniškim imen
 
 Samopostrežna obnova gesla je izklopljena: vse poti pod `/accounts/password/reset/` vrnejo 404, sporočilo se ne pošlje, prijava ne kaže povezave. Razlog: računi lahko delijo e-naslov, zato obnova po naslovu ni individualna. Novo geslo nastavi šola; individualna aktivacija in obnova sta dopolnitev pred B ([načrt](docs/projekt/priprava-referencnega-P0.md)).
 
-Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnila v [pogodbi vmesnikov](docs/arhitektura/vmesnik-P0-M1-M2.md). **Osnutek D12, ni potrjena**; odvisna ekipa se nanjo veže šele po potrditvi.
+Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnila v [pogodbi vmesnikov](docs/arhitektura/vmesnik-P0-M1-M2.md). **D12 je sprejet, pogodba je zamrznjena kot `1.0.0`** (oznaka `v1.0.0`, [api/zamrznitve.txt](api/zamrznitve.txt)); ekipe nanjo vežejo implementacijo. Spremembe samo z novo različico (CI `zamrznitev-pogodbe`).
 
 | Pot P0 | Klicatelj | Pomen |
 | --- | --- | --- |

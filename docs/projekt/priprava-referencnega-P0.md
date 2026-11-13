@@ -50,7 +50,7 @@ Pregledovalec ni izdelal kode, ki jo prevzema. Po navodilih sam namesti osnovo i
 | Dejanje | Pogoj |
 | --- | --- |
 | Prva koda oziroma vključitev zunanjih ekip, tudi primerjalni prototipi | D09/D14: imenovan drugi skrbnik, nosilec zasebnih varnostnih prijav in namestnik, preverjeni dostopi ter odzivni roki; D03: imenovan skupni tehnični nosilec in dogovor o tehnologiji ter skupnih varnostnih funkcijah skladno s [CONTRIBUTING.md](../../CONTRIBUTING.md) |
-| Priprava predloga pogodbe | Dovoljena kot osnutek; D12 ostaja odprt |
+| Priprava predloga pogodbe | Dovoljena kot osnutek; D12 sprejet 13. 11. 2026 (pogodba `1.0.0`) |
 | Implementacija API P0, ki ga uporabljata M1/M2, in druga odvisna implementacija | V D12 potrjena različica pogodbe pred vezavo na ta API; predlog sheme in neodvisne raziskave se lahko pripravijo prej. Selektivni preklic mora biti potrjen pred I. |
 | Sprejem kode v repozitorij | D08: pravice avtorja za objavo, pogoji prispevka in licence odvisnosti |
 | Razdelitev maturitetnih izdelkov | Mentorjeva presoja izvedljivosti in samostojnega prispevka; institucionalni viri niso predpostavljeni |

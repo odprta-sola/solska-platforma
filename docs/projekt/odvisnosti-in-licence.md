@@ -43,7 +43,7 @@ Orodji: `pip-audit` 2.10.1 (baza PyPI/OSV), Trivy 0.76.2 (`aquasec/trivy@sha256:
 | --- | --- |
 | `requirements.lock`, `requirements-dev.lock`, `requirements-build.lock` (pip-audit) | brez znanih ranljivosti |
 | `pip` 25.0.1 v osnovni sliki (pred posodobitvijo) | 6 različnih opozoril (12 zapisov z dvojniki); vsa odpravljena v zaklenjenem pip 26.3; v produkcijski sliki pip ni nameščen |
-| Produkcijska slika P0 (Trivy) | paketi Python: 0; Debian: 205 opozoril (47 visokih, 74 srednjih, 65 nizkih, 19 neznanih), **nobeno nima popravka v Debianu** (stanje `affected` ali `fix_deferred`); največ v `util-linux` in `libsqlite3-0` |
+| Produkcijska slika P0 (Trivy) | paketi Python: 0; Debian: 205 opozoril (47 visokih, 74 srednjih, 65 nizkih, 19 neznanih; ponovitev 13. 11. 2026 s svežo bazo: 47/89/65/4, ista skupna številka), **nobeno nima popravka v Debianu** (stanje `affected` ali `fix_deferred`); največ v `util-linux` in `libsqlite3-0` |
 | PostgreSQL 16.15 (Trivy, samo razvoj in CI) | 2 kritični: `libxml2` (brez popravka v Debianu) in `gosu`, zgrajen s starejšo standardno knjižnico Go (popravljivo le z novo sliko); 65 popravljivih opozoril, od tega 62 v `gosu` |
 | Mailpit 1.33.1 (Trivy, samo razvoj) | 2 opozorili neznane resnosti v binarni datoteki Go |
 
@@ -73,4 +73,4 @@ Samo razvoj in CI: ruff 0.17.4, jsonschema 4.26.0, jsonschema-specifications 202
 
 Sistemski paketi v sliki P0: 87 paketov Debiana; Trivy je prepoznal licence za 91 komponent, med njimi copyleft (GPL-2.0/3.0, LGPL; 320 zapisov kategorije `restricted`), permisivne (134 `notice`) in 173 neprepoznanih. Gre za orodja in knjižnice osnovnega sistema, ki se distribuirajo kot ločena dela v sliki; obveznosti GPL (izvor, besedila v `/usr/share/doc/*/copyright`) veljajo, če se slika distribuira tretjim.
 
-Ocena za EUPL 1.2: pri permisivnih licencah ni prepoznane ovire; LGPL-3.0 je v prilogi EUPL med združljivimi licencami, kar ne pomeni prelicenciranja knjižnice. **Popolna skladnost distribucije slike ni potrjena**: manjkata popis točnih različic vgrajenih binarnih knjižnic in ponudba izvorov za sistemske pakete. Pred distribucijo slike šoli je potreben SBOM (npr. `trivy image --format cyclonedx`) in pravni pregled. Licenca dokumentacije (D15) ostaja odprta.
+Ocena za EUPL 1.2: pri permisivnih licencah ni prepoznane ovire; LGPL-3.0 je v prilogi EUPL med združljivimi licencami, kar ne pomeni prelicenciranja knjižnice. **Popolna skladnost distribucije slike ni potrjena**: manjkata popis točnih različic vgrajenih binarnih knjižnic in ponudba izvorov za sistemske pakete. Pred distribucijo slike šoli je potreben SBOM (npr. `trivy image --format cyclonedx`) in pravni pregled. Dokumentacija je pod CC BY-SA 4.0 (D15, osebni sprejem pobudnika 12. 11. 2026); potrditev sodelujočih zavodov je ločena.
