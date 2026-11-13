@@ -19,6 +19,9 @@ urlpatterns = [
     path("p0/", include("registry.ui_urls")),
 ]
 
-# Nadomestka M1 in M2 za razvoj in pogodbene teste; nikoli v produkciji.
-for module in sorted(settings.STUBS):
-    urlpatterns.append(path(f"{module}/api/v1/", include(f"stubs.urls_{module}")))
+# API modula: nadomestek (razvoj in pogodbeni testi, nikoli v produkciji), dokler ga ekipa ne
+# izklopi s STUBS; nato pravi modul (m1/api_urls.py, m2/api_urls.py). Zasloni so pod /m1/, /m2/.
+for module in ("m1", "m2"):
+    api = f"stubs.urls_{module}" if module in settings.STUBS else f"{module}.api_urls"
+    urlpatterns.append(path(f"{module}/api/v1/", include(api)))
+    urlpatterns.append(path(f"{module}/", include(f"{module}.urls")))

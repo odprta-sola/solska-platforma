@@ -1,6 +1,6 @@
 # Ekipa M1 – eSporočanje
 
-Status: osnutek za mentorski pregled. Obseg je v [razvojnem naročilu](../projekt/razvojno-narocilo-P0-M1-M2.md) (razdelek »Obvezni izdelek M1«), poslovna pravila v [specifikaciji M1](../moduli/M1-eSporocanje.md). Splošna pravila: [README](README.md).
+Status: navodila za izvajalca (mentor in ekipa M1), pogodba `1.0.0`. Obseg je v [razvojnem naročilu](../projekt/razvojno-narocilo-P0-M1-M2.md) (razdelek »Obvezni izdelek M1«), poslovna pravila v [specifikaciji M1](../moduli/M1-eSporocanje.md). Splošna pravila: [README](README.md).
 
 ## Naloga
 
@@ -17,7 +17,7 @@ Celoten potek šolskega organizacijskega obvestila: učitelj objavi, upravičeni
 | M2 → M1 | `POST /m1/api/v1/delivery-requests` | Prevzem zahteve za dostavo; 202 šele po trajnem zapisu |
 | M2 → M1 | `GET .../{id}`, `POST .../{id}/cancel` | Stanje in selektivni preklic po postavkah (`item_id` = oseba in obseg) |
 
-M1 mora izvajati strežniško stran `/m1/api/v1/` po shemi; nadomestek (`p0/stubs/m1.py`) je referenca obnašanja. Servisni žeton M1 potrebuje: `p0.authorizations.check`, `p0.contacts.resolve`, `m2.reminders.check`. Predogled občinstva gre prek seje prijavljenega avtorja, ne prek žetona.
+M1 mora izvajati strežniško stran `/m1/api/v1/` po shemi v `p0/m1/api_urls.py`; nadomestek (`p0/stubs/m1.py`, `_stub/process`) je referenca obnašanja, vključno z vrstnim redom preverjanj in kodami `reason_code`. Klici v P0 in M2 so pripravljeni v `p0/m1/p0_client.py`. Servisni žeton M1 potrebuje: `p0.authorizations.check`, `p0.contacts.resolve`, `m2.reminders.check`. Predogled občinstva gre prek seje prijavljenega avtorja, ne prek žetona.
 
 ## Predlog razreza po dijakih (mentor potrdi)
 
@@ -33,7 +33,8 @@ Vsak razrez vključuje svoje teste, dostopnost in navodila.
 - Potrditev starša ne nadomesti potrditve drugega starša.
 - E-pošta vsebuje samo splošno opozorilo in zaščiteno povezavo; brez imen otrok in vsebine.
 - `handed_off` pomeni predajo strežniku, ne prejema. Negotov izid ostane viden (`held`, `HANDOFF_UNCERTAIN`), brez samodejne ponovne predaje; ponovitev je ročna odločitev (D12, C13).
-- 202 samo po zapisu, ki preživi izpad. Isti `idempotency_key` in vsebina vrneta isti rezultat; drugačna vsebina 409.
+- 202 samo po zapisu, ki preživi izpad (sicer 503). Isti `idempotency_key` in vsebina vrneta isti rezultat 30 dni, nato 409 `replay_window_expired`; drugačna vsebina 409. Postavka istega `event_key` se pod novim ključem ne ponovi (409 `duplicate_event`).
+- Jezik prejemnika je iz P0 (razrešitev kontakta) ali izrecna preglasitev na postavki; brez prevoda postavko zadržite (`TRANSLATION_MISSING`), ne zamenjajte jezika tiho.
 - Pred pošiljanjem preverite pravico, kontakt, potrebo (M2), preklic, urnik in iztek. Preklic enega prejemnika ne ustavi drugih.
 - Nov član oddelka ne dobi starih obvestil.
 

@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     "core",
     "registry",
     "stubs",
+    "m1",
+    "m2",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +58,11 @@ if stubs_in_production(DEBUG, STUBS):
     raise ImproperlyConfigured(
         "STUBS je dovoljen samo z DJANGO_DEBUG=1 (nadomestka nista za produkcijo)."
     )
+
+# Moduli M1/M2 kličejo P0 in drug drugega samo prek API (D12, C05), tudi v isti namestitvi.
+P0_API_URL = env("P0_API_URL", "http://127.0.0.1:8000")
+M1_SERVICE_TOKEN = env("M1_SERVICE_TOKEN", "")  # iz create_service_client; ne v repozitorij
+M2_SERVICE_TOKEN = env("M2_SERVICE_TOKEN", "")
 
 AUTH_USER_MODEL = "registry.Account"
 
