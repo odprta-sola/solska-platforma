@@ -26,7 +26,7 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | CC BY-SA 4.0 za dokumentacijo, osebni sprejem pobudnika 12. 11. 2026 ([LICENSE-dokumentacija.md](../../LICENSE-dokumentacija.md)); potrditev zavodov odprta | Nosilec projekta in avtorji |
 | D16 | Prejemniki in odločevalci pri polnoletnih dijakih, prehod med letom in ustreznost privolitve za postopek | Odprto | Pilotna šola ob pravnem in podatkovnem pregledu |
 
-Osnutek D12 z dne 8. oktobra 2026 konkretizira že predvidene skupne identitete in obveščanje. Sheme, prijavni protokol, nosilci, testni nadomestki in pogodbeni preizkusi še niso potrjeni; D12 ostaja odprt. Izhodišča za razdelitev dijaškega dela so v [vodniku za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md).
+Osnutek D12 z dne 8. oktobra 2026 konkretizira že predvidene skupne identitete in obveščanje. (Zgodovinsko.) D12 je sprejet 13. 11. 2026, pogodba je zamrznjena kot `1.0.0` ([vloge naročnik in izvajalec](#vloge-naročnik-in-izvajalec-13-novembra-2026)). Izhodišča za razdelitev dijaškega dela so v [vodniku za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md).
 
 ## Izhodiščni obseg pobudnika
 
@@ -114,7 +114,7 @@ Posledica: pogoj »drugi skrbnik oziroma namestnik pred vključitvijo dijakov« 
 
 ## Roki in sledenje
 
-D01–D03, D11–D14 in D16 blokirajo začetek odvisnega razvoja. D07, D09 in D10 se zaključijo pred produkcijskim pilotom; imenovanje drugega skrbnika iz D09 je izjema in je potrebno že pred prvo kodo oziroma vključitvijo zunanjih ekip. D04–D06 se rešijo pred razvojem odvisnih funkcij, D08 pred sprejemom kode in D15 pred potrditvijo pogojev ponovne uporabe besedil. Koledarske roke in GitHub dodelitve določijo potrjeni nosilci; vloge niso samodejno imenovanja oseb.
+D12 je sprejet (13. 11. 2026). D07, D09 in D10 se zaključijo pred produkcijskim pilotom; drugi skrbnik iz D09 je pogoj pred produkcijskim pilotom ([vloge skrbnikov](#vloge-skrbnikov-13-novembra-2026)). D04–D06 se rešijo pred razvojem odvisnih funkcij, D08 pred sprejemom kode in D15 pred potrditvijo pogojev ponovne uporabe besedil. Koledarske roke in GitHub dodelitve določijo potrjeni nosilci; vloge niso samodejno imenovanja oseb.
 
 Odločitve se spremljajo v issueih #10–#25 (D01–D16). Dokaz izpolnitve posameznega merila in potrditev se zapišeta v ustrezni issue in register.
 

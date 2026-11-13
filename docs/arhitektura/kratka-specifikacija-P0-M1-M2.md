@@ -2,7 +2,7 @@
 
 Datum: 13. oktober 2026
 
-Status: delovni osnutek za pogovor in dopolnitev D12; ni dokončen OpenAPI ali dovoljenje za odvisno implementacijo
+Status: povzetek za branje, pripravljen pred sprejetjem D12. Pogodba je sprejeta in zamrznjena kot [OpenAPI `1.0.0`](../../api/openapi.yaml) (13. 11. 2026); ob neskladju velja OpenAPI
 
 Ta dokument povzame model, vmesnike, sprejemna pravila in 20 skupin prihodnjih preizkusov. [Predstavitev](../mentorji/predstavitev-projekta.md) pojasni uporabniške postopke, [naročilo](../projekt/razvojno-narocilo-P0-M1-M2.md) določa T/A/I/B/C. Podrobni [osnutek pogodbe](vmesnik-P0-M1-M2.md) ostaja stalno mesto D12; preostale sheme, šifranti, omejitve in podpisi se potrdijo tam. Ob pisanju (13. 10. 2026) noben test aplikacije še ni bil izveden; dejansko stanje izvedbe in testov je v [stanju paketa T](../projekt/stanje-prevzema-T.md).
 
@@ -36,7 +36,7 @@ Račun učenca/dijaka in ciljna skupina M1 sta predlog: šola določi starost/ra
 
 ## Seznam poti vmesnikov za D12
 
-Poti izhajajo iz sedanjega osnutka. Končne zahteve/odgovori, dovoljeni konteksti in administrativne poti še potrebujejo OpenAPI. Uporabniške poti za objave in odločitve določijo ekipe v skupnem dogovoru; spodaj so skupni klici.
+Poti so povzete po pogodbi; točne zahteve, odgovore in napake določa [OpenAPI `1.0.0`](../../api/openapi.yaml). Uporabniške poti za objave in odločitve določijo ekipe v skupnem dogovoru; spodaj so skupni klici.
 
 | Pot | Namen in omejitev |
 | --- | --- |

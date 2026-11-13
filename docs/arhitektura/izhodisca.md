@@ -36,7 +36,7 @@ Spletna aplikacija z mobilnim vmesnikom, podatkovna baza, trajna čakalna vrsta 
 
 Prvi pilot vključuje minimalni dokumentirani vmesnik M1–M2 za obveščanje. Razširjen API za vse prihodnje module ni pogoj pilota. M2 vodi odločitve in določa potrebne opomnike; M1 izvaja pošiljanje, tihi čas in ponovne poskuse.
 
-Osnutek pogodbe in skupnega vira identitet ter upravičenj je v [vmesniku P0–M1–M2](vmesnik-P0-M1-M2.md). Nadomešča načrtovano ime vmesnik-M1-M2.md. Opredeljuje predlagane osnovne poti, prijavo, prejemnike, servisna dovoljenja, dostavo in napake. Topologija in prijavni protokol še potrebujeta potrditev D12; osnutek ni dovoljenje za začetek odvisne implementacije. Prvi predlog preverja upravičenja ob uporabi; način periodične uskladitve odprtih postopkov oziroma dogodkov se potrdi pred pilotom. Testne nadomestke je še treba izdelati.
+Razlaga pogodbe in skupnega vira identitet ter upravičenj je v [vmesniku P0–M1–M2](vmesnik-P0-M1-M2.md). Nadomešča načrtovano ime vmesnik-M1-M2.md. Opredeljuje predlagane osnovne poti, prijavo, prejemnike, servisna dovoljenja, dostavo in napake. D12 je sprejet 13. 11. 2026 in pogodba zamrznjena kot [OpenAPI `1.0.0`](../../api/openapi.yaml); topologija in prijavni protokol sta del nje. Upravičenja se preverjajo ob uporabi; način periodične uskladitve odprtih postopkov oziroma dogodkov se potrdi pred pilotom. Nadomestka M1/M2 sta v `p0/stubs`.
 
 ## Meje okolij
 

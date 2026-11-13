@@ -5,7 +5,7 @@ Status: **sprejeta pogodba D12, različica `1.0.0`** (naročnik 13. 11. 2026, [p
 
 ## Kratka delovna raven
 
-Za prvo tehnično branje uporabite [kratko specifikacijo](kratka-specifikacija-P0-M1-M2.md). Ta dokument ostaja stalno mesto osnutka D12 in ni nadomeščen s potrjeno pogodbo.
+Za prvo tehnično branje uporabite [kratko specifikacijo](kratka-specifikacija-P0-M1-M2.md). Ta dokument je razlaga sprejete pogodbe D12; strojno berljiva pogodba je [OpenAPI `1.0.0`](../../api/openapi.yaml), zamrznjena 13. 11. 2026. Ob neskladju velja OpenAPI.
 
 Predlog učenčevih računov in ciljne skupine starši/učenci/oboje zahteva nove obsege, ločeno naslovljenost in preizkuse. Vsebina za starše ter odločitve M2 se s tem ne odprejo učencem. Sheme se najprej uskladijo v D12; prva faza in šolska pravila še niso sprejeti. Kontaktni klic ostane samo M1.
 
@@ -15,7 +15,7 @@ Ta pogodba je skupni tehnični predlog v [razvojnem naročilu pobudnika](../proj
 
 ## Obseg in odprte odločitve
 
-Ta dokument je stalno mesto osnutka pogodbe. Nadomešča načrtovani naslov vmesnik-M1-M2.md in vključuje skupni vir identitet ter upravičenj, ki je že del D12. [Vodnik za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md) in [P0](../moduli/P0-uporabniki.md) pojasnita uporabo.
+Ta dokument je stalno mesto razlage pogodbe. Nadomešča načrtovani naslov vmesnik-M1-M2.md in vključuje skupni vir identitet ter upravičenj, ki je že del D12. [Vodnik za mentorje](../mentorji/razvojni-paket-P0-M1-M2.md) in [P0](../moduli/P0-uporabniki.md) pojasnita uporabo.
 
 Topologijo, prijavno rešitev, delegiranje identitete, sheme, šifrante, meje velikosti in rok hrambe ključev je naročnik potrdil z D12 13. 11. 2026. Pobudnik pripravi tudi testna nadomestka v paketu T s pomočjo AI; izvajanje in človeški pregled se dokumentirata po [načrtu predaje](../projekt/priprava-referencnega-P0.md). [OpenAPI](../../api/openapi.yaml), nadomestka M1/M2 in pogodbeni testi so del sprejete pogodbe `1.0.0`; znane omejitve nadomestkov so v [stanju paketa T](../projekt/stanje-prevzema-T.md#znane-omejitve-nadomestkov-in-pogodbe). Besedilni primeri niso nadomestilo za pogodbeno testiranje.
 

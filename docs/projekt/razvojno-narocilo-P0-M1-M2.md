@@ -128,7 +128,7 @@ Brez odziva ni zavrnitev ali privolitev. Preklic veljavne privolitve ostane dost
 
 ## Skupni vmesniki
 
-Ekipe dobijo isti [osnutek pogodbe P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md). API je del naročila, ne izbirna dodatna funkcija. Njegov pregled in dopolnitev do prve potrjene sheme je skupna začetna tehnična naloga.
+Ekipe dobijo isto [pogodbo P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md), sprejeto 13. 11. 2026 in zamrznjeno kot [OpenAPI `1.0.0`](../../api/openapi.yaml). API je del naročila, ne izbirna dodatna funkcija. Predloge sprememb ekipe oddajo z issuejem ali pull requestom; odloči naročnik.
 
 | Povezava | Obvezni dogovor |
 | --- | --- |
@@ -149,7 +149,7 @@ Začetni tehnični paket mora pripraviti predlog rešitve tudi za preostale ugot
 - negotov izid poštne predaje in meje zagotovila ene dostave;
 - individualna aktivacija in obnova pri skupnem e-poštnem predalu.
 
-Te vrzeli niso prepuščene domišljiji posamezne ekipe. Pobudnik s pomočjo AI pripravi eno izhodiščno rešitev, skupni tehnični nosilec in mentorji jo preverijo v D12. P0 sam ne določi povezav M2 → M1 in M1 → M2; paket T mora vključiti njuni shemi, nadomestka in pogodbene teste. Obstoječi osnutek še ni dokončni OpenAPI ali delujoč testni strežnik.
+Te vrzeli niso prepuščene domišljiji posamezne ekipe. Pobudnik je s pomočjo AI pripravil eno izhodiščno rešitev, ki jo je kot naročnik sprejel v D12 (13. 11. 2026). Povezavi M2 → M1 in M1 → M2 sta v pogodbi `1.0.0`; paket T vključuje njuni shemi, nadomestka in pogodbene teste.
 
 ## Vloge pri izvedbi
 

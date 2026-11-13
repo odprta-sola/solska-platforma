@@ -8,4 +8,4 @@ Tehnična priloga D12 K 0.6 in AI pregledi so sled razmisleka pri pobudniku; nis
 
 V repozitoriju ostajajo podrobni podporni osnutki [P0](../moduli/P0-uporabniki.md), [M1](../moduli/M1-eSporocanje.md), [M2](../moduli/M2-eSoglasja.md) in [priprava D03/D09/D12/D14](../projekt/priprava-odlocitev-D03-D09-D12-D14.md). Njihova zgodovinska dokazila niso sedanji dostopi ali imenovanja. Sprememba reda branja ne ukinja varnostnih zahtev; neskladje se razreši v registru in pogodbi pred izvedbo.
 
-Register odločitev, načrt prevzema T in stalni osnutek D12 ostajajo aktivni procesni dokumenti. Predkodni pogoji in merila sprejema ne postanejo zgolj arhiv zaradi krajše predstavitve.
+Register odločitev, načrt prevzema T in razlaga pogodbe D12 (sprejeta 13. 11. 2026) ostajajo aktivni procesni dokumenti. Predkodni pogoji in merila sprejema ne postanejo zgolj arhiv zaradi krajše predstavitve.

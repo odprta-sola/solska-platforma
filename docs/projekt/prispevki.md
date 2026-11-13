@@ -12,10 +12,10 @@ Status: osnutek, 12. november 2026. Namen: sledljivost avtorstva in uporabe AI, 
 | DeepSeek (DeepSeek), različica modela: ni znano | AI | neodvisni pregledovalec | bral in zaganjal kodo, napisal poročilo; kode ni spreminjal | 12. 11. 2026 | Mitja Pirih |
 | Claude (Anthropic), model Claude Opus 5.5 | AI | Pisec popravkov po navodilih pobudnika | Preverjanje ugotovitev prvega in ponovnega pregleda, popravki kode in testov ter uskladitev dokumentacije (zapisa o odpravi: [prvi](../pregledi/2026-11-odprava-prvega-pregleda-P0.md), [ponovni](../pregledi/2026-11-odprava-ponovnega-pregleda-P0.md)); poročil pregledovalcev vsebinsko ni spreminjal (le preimenoval datoteki) | 12. 11. 2026 | Mitja Pirih |
 
-Kodo, ki jo je napisal AI, sta prvič pregledala druga sistema AI (Codex/OpenAI in DeepSeek, PR #39 in #40) po [kontrolnem seznamu](pregled-P0-kontrolni-seznam.md); človeški pregled ni opravljen, ponovni pregled po popravkih ni izveden.
+Kodo, ki jo je napisal AI, sta prvič pregledala druga sistema AI (Codex/OpenAI in DeepSeek, PR #39 in #40) po [kontrolnem seznamu](pregled-P0-kontrolni-seznam.md); človeški pregled ni opravljen. Ponovni pregled (PR #51, #52) in tretji pregled (PR #67, #68) sta bila izvedena; zapisi o odpravi so v [docs/pregledi](../pregledi/).
 
 ## Kako se vpiše nov prispevajoči
 
 Vsak prispevajoči (človek ali AI) v svojem pull requestu doda vrstico v tabelo z: imenom ali oznako sistema in ponudnikom, vrsto, vlogo, obsegom (kaj je pisal, kaj samo bral), datumom in odgovornim človekom. Za AI navedite le, kar sistem zanesljivo ve o sebi; verzije ne ugibajte, zapišite »ni znano«. Odgovorni človek vpis prebere in ga z združitvijo pull requesta sprejme.
 
-Glede pravic: prispevek kode je pod EUPL 1.2 ([LICENSE](../../LICENSE)); licenca dokumentacije in pravice dijaških prispevkov sta še odprti (D15, D08).
+Glede pravic: prispevek kode je pod EUPL 1.2 ([LICENSE](../../LICENSE)); dokumentacija je pod CC BY-SA 4.0 (D15, osebni sprejem pobudnika 12. 11. 2026, [LICENSE-dokumentacija.md](../../LICENSE-dokumentacija.md)); pravice dijaških prispevkov (izjave mladoletnih) ostajajo odprte (D08).
