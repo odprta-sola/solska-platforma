@@ -10,7 +10,7 @@ Zasebna prijava ranljivosti v GitHubu je omogočena. V zavihku **Security** izbe
 - Za dokaz uporabite izmišljene oziroma zmanjšane podatke; ne prilagajte produkcijskih izvozov ali osebnih podatkov.
 - Ob opaženi objavi skrivnosti ali osebnih podatkov navedite mesto težave brez ponovnega kopiranja vsebine.
 
-Po D14 prijave obravnava pobudnik. Za namestnika je 12. 11. 2026 določen Aleksandar (`alexlandich`), ki ima kot admin repozitorija dostop do zasebnih prijav; njegov pisni sprejem vloge je še odprt. Roki potrditve prejema, ocene resnosti in odziva še niso potrjeni (predlog: 3 delovni dnevi, 7 dni, 30 dni).
+Po D14 prijave obravnava pobudnik, ki je edini vzdrževalec. Namestnik ni imenovan: ob njegovi odsotnosti prijava počaka ([vloge skrbnikov](docs/projekt/odlocitve.md#vloge-skrbnikov-13-novembra-2026)). Sistemi AI, ki pomagajo pri razvoju in pregledih, niso obravnavalci prijav. Roki potrditve prejema, ocene resnosti in odziva še niso potrjeni (predlog: 3 delovni dnevi, 7 dni, 30 dni).
 
 ## Obravnava
 
