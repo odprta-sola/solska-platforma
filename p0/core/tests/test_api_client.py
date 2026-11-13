@@ -4,7 +4,7 @@ import http.server
 import threading
 
 from django.core.management import call_command
-from django.test import Client, SimpleTestCase, TestCase
+from django.test import Client, LiveServerTestCase, RequestFactory, SimpleTestCase, TestCase
 
 from core.api_client import Api, ApiError, Unavailable, UserSession
 from core.testing import DjangoClientTransport
@@ -38,7 +38,6 @@ class ApiClientTests(TestCase):
         return UserSession(
             session_id=browser.cookies["sessionid"].value,
             csrf_token="a" * 32,
-            origin="http://testserver",
         )
 
     def test_servisni_klic_z_zetonom(self):
@@ -61,7 +60,7 @@ class ApiClientTests(TestCase):
 
     def test_brez_csrf_zavrnjen(self):
         s = self.session_of("staff-01")
-        no_csrf = UserSession(session_id=s.session_id, csrf_token="", origin=s.origin)
+        no_csrf = UserSession(session_id=s.session_id, csrf_token="")
         with self.assertRaises(ApiError) as ctx:
             self.api.call("POST", "/p0/api/v1/audiences/resolve", {}, session=no_csrf)
         self.assertEqual(ctx.exception.status, 403)
@@ -122,7 +121,7 @@ class UrllibTransportTests(SimpleTestCase):
 
     def test_preusmeritev_ne_prenese_poverilnic(self):
         target = self.server(_json)
-        session = UserSession(session_id="sid-x", csrf_token="c" * 32, origin="http://localhost")
+        session = UserSession(session_id="sid-x", csrf_token="c" * 32)
 
         def redirect(handler):
             handler.send_response(302)
@@ -170,7 +169,7 @@ class UrllibTransportTests(SimpleTestCase):
 
     def test_neveljavna_glava_je_nedosegljivost(self):
         s = self.server(_json)
-        bad = UserSession(session_id="s\r\nX-Probe: yes", csrf_token="", origin="http://localhost")
+        bad = UserSession(session_id="s\r\nX-Probe: yes", csrf_token="")
         with self.assertRaises(Unavailable) as ctx:
             Api(base_url=s.url).call("GET", "/p", session=bad)
         self.assertNotIn("X-Probe", str(ctx.exception))
@@ -186,3 +185,42 @@ class UrllibTransportTests(SimpleTestCase):
         s = self.server(truncated)
         with self.assertRaises(Unavailable):
             Api(base_url=s.url).call("GET", "/p", token="svc_x")
+
+
+class LiveUserSessionTests(LiveServerTestCase):
+    """Uporabniški klic po pravem HTTP: brskalnikov izvor se razlikuje od notranjega naslova P0.
+
+    Dokumentiran zagon: prijava na http://localhost:8000, modul kliče P0_API_URL
+    (privzeto http://127.0.0.1:8000). Prej je prvi uporabniški POST vrnil 403 csrf_failed.
+    """
+
+    def setUp(self):
+        call_command("seed_test_data", verbosity=0)
+
+    def browser_request(self, username, host, secure=False):
+        browser = Client()
+        browser.force_login(m.Account.objects.get(username=username))
+        request = RequestFactory().get("/m1/", HTTP_HOST=host, secure=secure)
+        request.COOKIES = {"sessionid": browser.cookies["sessionid"].value, "csrftoken": "b" * 32}
+        return request
+
+    def test_post_z_drugacnim_izvorom_brskalnika(self):
+        api = Api(base_url=self.live_server_url.replace("localhost", "127.0.0.1"))
+        for host, secure in (("localhost:8000", False), ("sola.example.invalid", True)):
+            with self.subTest(host=host):
+                session = UserSession.from_request(self.browser_request("staff-01", host, secure))
+                classes = api.call("GET", "/p0/api/v1/me/classes", session=session)["classes"]
+                body = {"class_id": classes[0]["class_id"], "purpose": "notice"}
+                r = api.call("POST", "/p0/api/v1/audiences/resolve", body, session=session)
+                self.assertTrue(r["audience_ref"].startswith("au_"))
+
+    def test_csrf_ostane_zahtevan(self):
+        api = Api(base_url=self.live_server_url)
+        s = UserSession.from_request(self.browser_request("staff-01", "localhost:8000"))
+        for session in (
+            UserSession(session_id=s.session_id, csrf_token=""),
+            UserSession(session_id="neveljavna", csrf_token=s.csrf_token),
+        ):
+            with self.subTest(session=session.session_id[:4]), self.assertRaises(ApiError) as ctx:
+                api.call("POST", "/p0/api/v1/audiences/resolve", {}, session=session)
+            self.assertIn(ctx.exception.status, (401, 403))

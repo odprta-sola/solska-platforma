@@ -94,6 +94,36 @@ class DurabilityTests(StubBase):
         self.assertEqual(StubDelivery.objects.count(), 1)
         self.assertEqual(StubItem.objects.count(), 2)
 
+    def test_zahteva_se_obnovi_iz_baze(self):
+        # OA T-01: iz trajnega zapisa mora biti mogoče sestaviti celotno zahtevo (C11).
+        body = self.body(
+            [self.item("parent-01", locale="sl"), self.item("parent-02")],
+            params={"naslov": "Roditeljski sestanek", "datum": "2026-12-01"},
+            target={"module": "M1", "resource_id": "obvestilo-42"},
+        )
+        rid = self.create(body).json()["delivery_request_id"]
+        d = StubDelivery.objects.get(id=rid)  # ponovno branje iz baze, ne iz pomnilnika
+        rebuilt = {
+            "idempotency_key": d.idempotency_key,
+            "event_key": d.event_key,
+            "kind": d.kind,
+            "audience_ref": d.audience_ref,
+            "recipients": [
+                {
+                    "person_id": i.person_id,
+                    "scope_ref": i.scope_ref,
+                    **({"locale": i.locale} if i.locale else {}),
+                    **({"need_ref": i.need_ref} if i.need_ref else {}),
+                }
+                for i in d.items.all()
+            ],
+            "template_id": d.template_id,
+            "params": d.params,
+            "target": d.target,
+            "expires_at": iso(d.expires_at),
+        }
+        self.assertEqual(rebuilt, body)
+
     def test_stanje_je_v_bazi(self):
         rid = self.create(self.body([self.item("parent-01")])).json()["delivery_request_id"]
         self.assertTrue(StubDelivery.objects.filter(id=rid).exists())

@@ -119,6 +119,8 @@ def create_delivery(request, client):
                 kind=body["kind"],
                 audience_ref=body["audience_ref"],
                 template_id=body["template_id"],
+                params=body["params"],
+                target=body["target"],
                 expires_at=_expires(body),
                 accepted_at=now,
                 **key,

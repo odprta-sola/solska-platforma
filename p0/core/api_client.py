@@ -36,18 +36,21 @@ class ApiError(Exception):
 
 @dataclass(frozen=True)
 class UserSession:
-    """Seja prijavljenega uporabnika za uporabniški klic v isti namestitvi (C04/C05)."""
+    """Seja prijavljenega uporabnika za uporabniški klic v isti namestitvi (C04/C05).
+
+    Origin ni del seje: brskalnikov izvor (npr. https://sola.example) se ne ujema nujno z
+    notranjim naslovom P0 (`P0_API_URL`). Klic je strežniški, zato Api pošlje izvor cilja;
+    zaščita CSRF ostane, ker P0 preveri par piškotek in glava X-CSRFToken.
+    """
 
     session_id: str
     csrf_token: str
-    origin: str
 
     @classmethod
     def from_request(cls, request):
         return cls(
             session_id=request.COOKIES.get(settings.SESSION_COOKIE_NAME, ""),
             csrf_token=request.COOKIES.get(settings.CSRF_COOKIE_NAME, ""),
-            origin=f"{request.scheme}://{request.get_host()}",
         )
 
 
@@ -88,6 +91,8 @@ class Api:
 
     def __init__(self, base_url=None, transport=None):
         self.base_url = (base_url or settings.P0_API_URL).rstrip("/")
+        parts = urlsplit(self.base_url)
+        self.origin = f"{parts.scheme}://{parts.netloc}"  # izvor cilja, ne brskalnika
         self.transport = transport or UrllibTransport()
 
     def call(self, method, path, body=None, token=None, session=None):
@@ -104,8 +109,8 @@ class Api:
                 cookies[settings.CSRF_COOKIE_NAME] = session.csrf_token
                 headers["X-CSRFToken"] = session.csrf_token
             headers["Cookie"] = "; ".join(f"{k}={v}" for k, v in cookies.items())
-            headers["Origin"] = session.origin
-            headers["Referer"] = session.origin + "/"
+            headers["Origin"] = self.origin
+            headers["Referer"] = self.origin + "/"
         status, raw = self.transport.send(method, self.base_url + path, headers, data)
         if status >= 500:
             raise Unavailable(f"HTTP {status}")
