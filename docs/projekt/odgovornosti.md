@@ -27,7 +27,7 @@ Mentor vsake ekipe vodi učni razrez M1/M2, dijake in pregled njihovega samostoj
 
 ## Predstavitev pred sprejemom dodatnih vlog
 
-Najprej mentor in šola dobita razumljivo predstavitev s primeri in razdelitvijo. Mentorska ocena je ločena od sprejema drugega skrbnika, varnostnega namestnika ali pregledovalca celotne osnove. Aleksandar ostaja kandidat za skrbništvo/nadomeščanje do izrecnega sprejema; njegove obveznosti ne izhajajo iz Mitjevih osebnih odzivnih ciljev ali samega povabila GitHub.
+Najprej mentor in šola dobita razumljivo predstavitev s primeri in razdelitvijo. Mentorska ocena je ločena od sprejema drugega skrbnika, varnostnega namestnika ali pregledovalca celotne osnove. Aleksandar je mentor; določitev za drugega skrbnika in namestnika je 13. 11. 2026 umaknjena ([vloge skrbnikov](odlocitve.md#vloge-skrbnikov-13-novembra-2026)).
 
 Vsaka šola ima svojo namestitev in v dogovoru določi, kdo skrbi za infrastrukturo, kopije, dostope, posodobitve in podporo. Usmeritev pobudnika še ne imenuje skrbnikov ali zaveže šol k konkretnim uram. GitHub Admin ne daje dostopa do produkcijskih podatkov.
 

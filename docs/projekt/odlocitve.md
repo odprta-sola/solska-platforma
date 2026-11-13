@@ -17,12 +17,12 @@ Predlog se odpre v issueju ali pull requestu. Sprejeta odločitev navede datum, 
 | D06 | Upravičeni prejemniki in pravila potrjevanja | Odprto | Pilotna šola |
 | D07 | Hramba, dostopi in podatkovne poti | Odprto; gradivo za posvet: [varstvo podatkov, stanje in vrzeli](varstvo-podatkov-P0.md) | Pilotna šola ob posvetu z DPO |
 | D08 | Licenca EUPL 1.2 in pravice prispevkov | EUPL 1.2 za kodo potrjena 12. 11. 2026; postopek prispevkov (inbound = outbound, DCO, vzdevek, izjava s soglasjem staršev ob prvem prispevku, brez praga) sprejel pobudnik 12. 11. 2026; pravni pregled obrazca pri šoli odprt | Nosilec projekta in avtorji |
-| D09 | Vzdrževanje, podpora in namestnik | Pobudnik je nosilec; za drugega skrbnika je 12. 11. 2026 določil Aleksandra (`alexlandich`), ki ima od tega dne vlogo admin na repozitoriju; njegov izrecni pisni sprejem vloge je odprt | Sodelujoči zavodi |
+| D09 | Vzdrževanje, podpora in namestnik | Pobudnik je edini vzdrževalec in skrbnik repozitorija; drugi skrbnik ni imenovan (določitev z 12. 11. 2026 umaknjena 13. 11. 2026, [vloge skrbnikov](#vloge-skrbnikov-13-novembra-2026)); tveganje enega skrbnika je priznano, drugi skrbnik je pogoj pred produkcijskim pilotom | Sodelujoči zavodi |
 | D10 | Merila produkcijskega prevzema M1 in M2 | Predlog v specifikacijah | Skupni tehnični nosilec in pilotna šola |
 | D11 | Postopek pilota M2, besedilo obrazca in pravila odločanja | Odprto | Pilotna šola ob vsebinskem in pravnem pregledu |
 | D12 | [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md): minimalno obveščanje in skupni vir identitet ter upravičenj | **Sprejeto 13. 11. 2026** (naročnik): točke A in B po [paketu](d12-paket-za-odlocitev.md), izvedene v P0, pogodbi in nadomestkih; pogodba zamrznjena kot `1.0.0` ([zapis zamrznitve](../../api/zamrznitve.txt)) | Naročnik (pobudnik) |
 | D13 | Razdelitev ekip, nosilci modulov in ocena ur po fazah | Odprto | Sodelujoči zavodi in mentorji |
-| D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; nosilec: pobudnik; namestnik: Aleksandar (`alexlandich`, določen 12. 11. 2026, z dostopom do zasebnih prijav kot admin repozitorija; sprejem odprt); roki odziva odprti | Nosilec projekta in skrbnik repozitorija |
+| D14 | Nosilec obravnave zasebnih prijav, namestnik in roki odziva | Kanal omogočen; nosilec: pobudnik; namestnik ni imenovan (določitev z 12. 11. 2026 umaknjena 13. 11. 2026); roki odziva odprti | Nosilec projekta in skrbnik repozitorija |
 | D15 | Licenca dokumentacije in pravice besedil; ločeno od licence kode | CC BY-SA 4.0 za dokumentacijo, osebni sprejem pobudnika 12. 11. 2026 ([LICENSE-dokumentacija.md](../../LICENSE-dokumentacija.md)); potrditev zavodov odprta | Nosilec projekta in avtorji |
 | D16 | Prejemniki in odločevalci pri polnoletnih dijakih, prehod med letom in ustreznost privolitve za postopek | Odprto | Pilotna šola ob pravnem in podatkovnem pregledu |
 
@@ -60,12 +60,12 @@ Pobudnik Mitja Pirih je v pogovoru z Claude AI, ki pripravlja P0 in navodila, sp
 | --- | --- | --- |
 | D03 | Pobudnik je skupni tehnični nosilec in nosilec skupnih gradnikov. Osnova: Django 5.2 LTS, PostgreSQL, Docker Compose. Predlagana prijavna komponenta django-allauth še čaka na izrecno potrditev v pregledu pull requesta. | Potrditev sodelujočih zavodov (mentorji od 13. 11. 2026 kot izvajalci tehnologije ne potrjujejo) |
 | D08 | Za programsko kodo velja EUPL 1.2; besedilo je v datoteki LICENSE. | Pravice prispevkov in izjave dijakov (dogovor z mentorjem), licenca dokumentacije (D15) |
-| D09 | Pobudnik je vzdrževalec in skrbnik repozitorija. | Drugi skrbnik/namestnik ni imenovan; Aleksandar ostaja kandidat do izrecnega sprejema. |
-| D14 | Pobudnik obravnava zasebne prijave ranljivosti. | Namestnik in roki odziva; dostop drugega računa |
+| D09 | Pobudnik je edini vzdrževalec in skrbnik repozitorija. | Drugi skrbnik/namestnik ni imenovan (stanje 13. 11. 2026). |
+| D14 | Pobudnik obravnava zasebne prijave ranljivosti. | Namestnik in roki odziva |
 
 Neodvisni pregled P0/T (paket T) po kontrolnem seznamu opravi drug AI, mentor je rezerva (osebna odločitev pobudnika, 12. 11. 2026). To ni potrjeno kot enakovredno človeškemu prevzemu iz načrta; ugotovitve mora prebrati in sprejeti človek ([kontrolni seznam](pregled-P0-kontrolni-seznam.md)).
 
-Pobudnik šteje pogoje D03, D08, D09 in D14 za zadostne za pripravo in lokalni razvoj osnove P0 na izmišljenih podatkih. Pogoj »drugi skrbnik« iz D09 ostaja nepopolno izpolnjen, zato velja pred vključitvijo zunanjih ekip (dijakov) še imenovanje namestnika. Neodvisni človeški prevzem T pred A/I ostane; zanj je predviden drug AI s pomočjo kontrolnega seznama, mentor je rezerva, vsakokratno odločitev o ustreznosti pa sprejme pobudnik.
+Pobudnik šteje pogoje D03, D08, D09 in D14 za zadostne za pripravo in lokalni razvoj osnove P0 na izmišljenih podatkih. Pogoj »drugi skrbnik« iz D09 ostaja nepopolno izpolnjen, zato velja pred vključitvijo zunanjih ekip (dijakov) še imenovanje namestnika (13. 11. 2026 nadomeščeno s priznanim tveganjem, glej [vloge skrbnikov](#vloge-skrbnikov-13-novembra-2026)). Neodvisni človeški prevzem T pred A/I ostane; zanj je predviden drug AI s pomočjo kontrolnega seznama, mentor je rezerva, vsakokratno odločitev o ustreznosti pa sprejme pobudnik.
 
 Obseg zaslonov P0 za prvi prevzem T (osebni sprejem pobudnika, 12. 11. 2026, po prvem neodvisnem pregledu): prijava in odjava; uvoz CSV s predogledom in uveljavitvijo; seznam in podrobnosti oseb z odvzemom povezave ali upravičenja; popravek kontakta s sledjo. Celoten administrativni portal, izvoz in zasloni za starše zunaj M1/M2 niso v obsegu T. Točka 9 ostane odprta do izvedbe teh zaslonov in ročnega pregleda dostopnosti ([pregled dostopnosti](pregled-dostopnosti-P0.md)).
 
@@ -100,7 +100,17 @@ Posledice:
 - Tehnične odločitve, ki so čakale na potrditev mentorjev, sprejme naročnik. D12 je s tem sprejet (točke A in B, kot so predlagane) in pogodba zamrznjena kot `1.0.0`.
 - Sprememba pogodbe z vplivom na ekipe gre prek pull requesta z odobritvijo naročnika; nezdružljiva sprememba zahteva novo različico ali dogovorjen prehod (C16). Vsaka zamrznjena različica je zapisana v [`api/zamrznitve.txt`](../../api/zamrznitve.txt), test pa pade, če se pogodba spremeni brez nove različice.
 
-Ne spremeni se: odločitve in potrditve zavodov ter pilotne šole (D04–D07, D10, D11, D15, D16, sodelovanje), maturitetne teme in ocenjevanje (šola in mentor), razpoložljivost mentorjev in dijakov (D02, D13), neodvisni pregled T, pravni pregled obrazca D08 in pogoj namestnika iz D09/D14 pred vključitvijo dijakov.
+Ne spremeni se: odločitve in potrditve zavodov ter pilotne šole (D04–D07, D10, D11, D15, D16, sodelovanje), maturitetne teme in ocenjevanje (šola in mentor), razpoložljivost mentorjev in dijakov (D02, D13), neodvisni pregled T in pravni pregled obrazca D08. Pogoj namestnika iz D09/D14 je spremenjen v razdelku [vloge skrbnikov](#vloge-skrbnikov-13-novembra-2026).
+
+## Vloge skrbnikov (13. novembra 2026)
+
+Pobudnik je kot naročnik 13. 11. 2026 odločil:
+
+- **Aleksandar** (`alexlandich`) ostane **mentor** (izvajalec z ekipami dijakov). Določitev za drugega skrbnika (D09) in namestnika obravnave zasebnih prijav (D14) z 12. 11. 2026 je umaknjena; vloge ni pisno sprejel. Na seznamu vzdrževalcev (`.github/vzdrzevalci.txt`) ni več; pravice na GitHubu se uskladijo z mentorsko vlogo (ne admin).
+- **Edini vzdrževalec, skrbnik repozitorija in nosilec D14 je pobudnik.** Namestnik ni imenovan.
+- **Sistemi AI niso vzdrževalci.** Ne morejo sprejeti vloge ali odgovornosti, ne delujejo brez človeka in nimajo lastnega dostopa. So orodja pod odgovornostjo pobudnika: Claude (Anthropic) izvaja, Codex (OpenAI) in DeepSeek neodvisno pregledujeta. Neodvisnost pregledov ostane le, dokler pregledovalca nista soodgovorna za kodo.
+
+Posledica: pogoj »drugi skrbnik oziroma namestnik pred vključitvijo dijakov« (D09/D14) pobudnik nadomesti s **priznanim tveganjem enega skrbnika** za razvojno fazo na izmišljenih podatkih. Ob pobudnikovi odsotnosti zasebne prijave čakajo; roki D14 v tem času ne tečejo zanesljivo. Drugi človeški skrbnik in namestnik sta pogoj **pred produkcijskim pilotom** oziroma pred obdelavo resničnih osebnih podatkov. Pogoja D08 (soglasje za mladoletne avtorje) to ne spremeni.
 
 ## Roki in sledenje
 

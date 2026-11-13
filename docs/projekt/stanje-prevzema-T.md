@@ -28,7 +28,7 @@ Datum: 12. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Točka 9: zasloni in dostopnost | Prijava in odjava imata dostopni predlogi z avtomatskimi preizkusi; ročni pregled z bralnikom ni narejen; zasloni za osnovna opravila (obseg sprejet 12. 11. 2026) so narejeni in preizkušeni s tipkovnico, ne z bralnikom ([pregled dostopnosti](pregled-dostopnosti-P0.md)) |
 | Potrditev D12 (sheme, šifranti, servisni mehanizem, topologija) | Pogodba je osnutek; ekipe se ne smejo vezati nanjo |
 | Potrditev strukture `p0/m1`, `p0/m2` in imen dovoljenj | Predlogi, ne odločitve (`django-allauth` potrjen 12. 11. 2026) |
-| Drugi skrbnik/namestnik (D09), namestnik in roki D14 | Pogoj za vključitev dijakov ([register](odlocitve.md)) |
+| Drugi skrbnik/namestnik (D09), namestnik in roki D14 | Priznano tveganje enega skrbnika za razvoj na izmišljenih podatkih; pogoj pred produkcijskim pilotom ([vloge skrbnikov](odlocitve.md#vloge-skrbnikov-13-novembra-2026)) |
 | Pravice prispevkov dijakov (D08), izjave | Pred sprejemom dijaške kode |
 | Imenovanje pregledovalca ter potrditev, da pregled z drugim AI zadošča | Pobudnikova osebna odločitev; formalna enakovrednost človeškemu pregledu ni potrjena |
 
