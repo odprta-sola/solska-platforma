@@ -7,6 +7,7 @@ ne vsebuje (odločitev za DPO, D07); sklici na tuje entitete pri lastnih dejanji
 Gesla (tudi zgoščena) in seje niso del izvoza. Podatki M1/M2 niso v P0.
 """
 
+from django.db.models import Q
 from django.utils import timezone
 
 from . import models as m
@@ -24,6 +25,24 @@ def _validity(obj):
 
 def _student_name(scope_key, names):
     return names.get(scope_key.split(":", 1)[1]) if scope_key.startswith("student:") else None
+
+
+def changes_of(person, relationships, grants):
+    """Sled sprememb osebe, njenih povezav in upravičenj.
+
+    Številski ključi različnih modelov se lahko ujemajo, zato se filtrira po paru (vrsta, ID),
+    nikoli samo po ID.
+    """
+    entities = {
+        "person": [str(person.pk)],
+        "relationship": [str(r.pk) for r in relationships],
+        "grant": [str(g.pk) for g in grants],
+    }
+    match = Q()
+    for entity_type, ids in entities.items():
+        if ids:
+            match |= Q(entity_type=entity_type, entity_id__in=ids)
+    return m.ChangeAudit.objects.filter(match)
 
 
 def person_export(person, now=None):
@@ -54,11 +73,6 @@ def person_export(person, now=None):
         if k.startswith("student:")
     }
     names = {str(p.pk): p.display_name for p in m.Person.objects.filter(pk__in=student_ids)}
-    entity_ids = (
-        [str(person.pk)]
-        + [str(r.pk) for r in as_guardian + as_student]
-        + [str(g.pk) for g in grants]
-    )
     return {
         "format": FORMAT,
         "izvozeno": _t(now),
@@ -143,7 +157,7 @@ def person_export(person, now=None):
                 "polja": a.changed_fields,
                 "vir": a.source or None,
             }
-            for a in m.ChangeAudit.objects.filter(entity_id__in=entity_ids).order_by("at", "pk")
+            for a in changes_of(person, as_guardian + as_student, grants).order_by("at", "pk")
         ],
         "vpogledi_v_podatke": [
             {"cas": _t(a.at), "zaslon": a.screen}
