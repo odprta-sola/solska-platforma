@@ -1,7 +1,7 @@
 # Pogodba vmesnikov P0–M1–M2
 
 Datum: 9. oktober 2026
-Status: delovni predlog D12 za potrditev; ni dokončna implementacijska pogodba
+Status: delovni predlog D12 za potrditev; ni dokončna implementacijska pogodba. Točke A (12. 11. 2026) in B (13. 11. 2026) je sprejel skupni tehnični nosilec ([paket](../projekt/d12-paket-za-odlocitev.md)); potrditev mentorjev in zamrznitev sta odprti.
 
 ## Kratka delovna raven
 
@@ -39,7 +39,7 @@ Prvi predlog ne zahteva potiskanja dogodkov iz P0: pravice se preverjajo ob dost
 
 JSON, različica v1, stabilni ID, UTC ISO 8601; prikaz in tihi čas Europe/Ljubljana. Prijavne skrivnosti se ne zapisujejo v zahteve za dostavo. Moduli ne berejo tujih tabel.
 
-idempotency_key določi klicatelj in zagotavlja ponovljivost mutacije; obseg je šola, klicoči modul in operacija. Enaka vsebina z istim ključem vrne prvotni logični rezultat; drugačna vsebina vrne 409. Hranimo ključ oziroma zaščiten zapis deduplikacije vsaj do konca dovoljenega okna ponavljanja; njegova konkretna dolžina in hramba sta obvezna odločitev pred potrditvijo pogodbe. Po tem oknu ponavljanje stare operacije ni dovoljeno; tudi nova oznaka ne sme podvojiti istega poslovnega dogodka.
+idempotency_key določi klicatelj in zagotavlja ponovljivost mutacije; obseg je šola, klicoči modul in operacija. Enaka vsebina z istim ključem vrne prvotni logični rezultat; drugačna vsebina vrne 409. Okno ponavljanja je 30 dni od prevzema (C08, sprejel tehnični nosilec 13. 11. 2026); po njem ponovitev stare operacije vrne 409 `replay_window_expired`. Zahteva za dostavo nosi poslovni ključ `event_key` (vir, različica, vrsta, zaporedna številka opomnika). Postavka (klicatelj, `event_key`, `person_id`, `scope_ref`) se ne ponovi niti pod novim `idempotency_key` (409 `duplicate_event`, nič prevzeto); zapis deduplikacije se hrani, dokler se hrani zapis dostave (D07). Naslednji načrtovani opomnik ima novo zaporedno številko.
 
 trace_id ustvari strežnik za sledenje obdelavi. Napaka vsebuje code, message in trace_id. Sporočilo ne razkriva tujih virov ali skrivnosti. Predlog HTTP: 400 napačna shema, 401 neveljavna identiteta, 403 nedovoljeno dejanje, 404 vir ni dostopen/ne obstaja po potrjeni politiki, 409 konflikt, 503 začasna nedosegljivost. Seznamski klici uporabljajo omejen page_size in neprosojen next_cursor; konkretne meje se potrdijo pred implementacijo.
 
@@ -69,7 +69,7 @@ Primer preverjanja:
 ```
 P0 uporablja dogovorjen šifrant dovoljenj modulov; ne presoja njihove poslovne logike. Dovoljeni razlogi so ALLOWED, NOT_ALLOWED, SCOPE_INACTIVE; nedosegljivost je 503, ne NOT_ALLOWED. Odgovor ne razkriva razloga skrbniške omejitve.
 
-Servisni kontaktni klic vsebuje recipient_id, scope_ref in audience_ref. P0 vrne kontakt samo, če je prejemnik s tem sklicem v shranjenem, neizteklem posnetku občinstva in ima aktualno upravičenje za namen posnetka; vsak drug vhod dobi enak 403. Predogled občinstva kliče avtor s svojo sejo, zato servis ne more sam izbrati avtorja (D12, C04/C05/C07, sprejel tehnični nosilec 12. 11. 2026). Dostavna zahteva M2 nosi audience_ref obrazca. Postavka dostave je par (person_id, scope_ref) z lastnim item_id; preklic in stanje sta po postavkah (C12). Stikov ni mogoče množično brati zgolj s seznamom ugibanih ID. Kontakt se uporablja tik pred pošiljanjem; ne kopira se v splošno evidenco M1/M2. M2 kontaktov za dostavo ne potrebuje.
+Servisni kontaktni klic vsebuje recipient_id, scope_ref in audience_ref. P0 vrne kontakt samo, če je prejemnik s tem sklicem v shranjenem, neizteklem posnetku občinstva in ima aktualno upravičenje za namen posnetka; vsak drug vhod dobi enak 403. Predogled občinstva kliče avtor s svojo sejo, zato servis ne more sam izbrati avtorja (D12, C04/C05/C07, sprejel tehnični nosilec 12. 11. 2026). Dostavna zahteva M2 nosi audience_ref obrazca. Postavka dostave je par (person_id, scope_ref) z lastnim item_id; preklic in stanje sta po postavkah (C12). Stikov ni mogoče množično brati zgolj s seznamom ugibanih ID. Kontakt se uporablja tik pred pošiljanjem; ne kopira se v splošno evidenco M1/M2. M2 kontaktov za dostavo ne potrebuje. Oznake za prikaz (C02) vrne samo predogled avtorjevega oddelka; zgodovinski posnetek oznak določi D07.
 
 ## Zahteve M2 za dostavo v M1
 
@@ -83,29 +83,29 @@ Klicoči modul vidi le svoje zahteve. Primer spodaj uporablja en `scope_ref` na 
 
 Selektivni preklic je del D12 pred začetkom odvisnega razvoja I: zahteva mora omogočiti izbiro konkretnega prejemnika oziroma njegove dostave, ne avtomatskega preklica drugih prejemnikov iste zahteve. Identifikator, shema in odgovor za posameznega prejemnika se določijo v OpenAPI in pogodbenem testu.
 
-kind je notification, reminder, receipt ali change_notice. Besedilo izbere pregledana večjezična predloga `template_id`. Polje `locale` v spodnjem primeru je začasno ponazorilo; vir jezika po posameznem prejemniku in pravilo izrecnega nadomestnega jezika določi D12 ob upoštevanju D05. `params` dopušča le polja iz potrjene sheme predloge. Splošna predloga nima imen otrok ali vsebine odločitev. Vnos poljubnega besedila ni del tega predloga API.
+kind je notification, reminder, receipt ali change_notice. Besedilo izbere pregledana večjezična predloga `template_id`. Jezik je jezik prejemnika iz P0 (vrne ga razrešitev kontakta); skupnega jezika za vse prejemnike ni. Neobvezen `recipients[].locale` je izrecna preglasitev ene postavke. Če predloge v tem jeziku ni, M1 postavko zadrži (`TRANSLATION_MISSING`) in ne zamenja jezika tiho; nadomestni jezik določi D05 (C03). `params` dopušča le polja iz potrjene sheme predloge. Splošna predloga nima imen otrok ali vsebine odločitev. Vnos poljubnega besedila ni del tega predloga API.
 
 ```json
 {
   "idempotency_key":"demo-reminder-001",
+  "event_key":"form-demo-01:v1:reminder:1",
   "kind":"reminder",
-  "recipients":[{"person_id":"parent-01","scope_ref":"scope-demo-01"}],
+  "audience_ref":"au_demo",
+  "recipients":[{"person_id":"parent-01","scope_ref":"scope-demo-01","need_ref":"need-demo-001"}],
   "template_id":"m2.pending-response.v1",
-  "locale":"sl",
   "params":{},
   "target":{"module":"M2","resource_id":"form-demo-01"},
-  "need_ref":"need-demo-001",
   "expires_at":"2026-10-09T16:00:00Z"
 }
 ```
 
 M1 sestavi povezavo iz dovoljenega modula in vira. Poljubni zunanji URL ali callback niso dovoljeni. Ciljni modul ob kliku ponovno preveri pravice.
 
-M2 načrtuje opomnik in odda zahtevo šele, ko dospe. Zato send_not_before v prvem dogovoru ni potreben. M1 zahtevo po prevzemu obdeluje ob upoštevanju tihega časa, ponovnih poskusov in izteka. Če pred iztekom ni dovoljenega časa dostave, se ne pošlje; iztek ima vidno kodo DELIVERY_WINDOW_EXPIRED. Nujno pošiljanje ni samodejna pravica servisnega klicatelja.
+M2 načrtuje opomnik in odda zahtevo šele, ko dospe. Zato send_not_before v prvem dogovoru ni potreben. M1 je lastnik urnika (C10) in zahtevo po prevzemu obdeluje ob upoštevanju tihega časa, ponovnih poskusov in izteka. Osnutek urnika: delavniki 7.00–20.00 po času Europe/Ljubljana; praznike in dokončni urnik določi šola. Zunaj urnika postavka čaka (`QUIET_HOURS`). Če pred iztekom ni dovoljenega časa dostave ali je `now >= expires_at`, se ne pošlje; iztek ima vidno kodo DELIVERY_WINDOW_EXPIRED. Nujno pošiljanje ni samodejna pravica servisnega klicatelja.
 
-Stanja posamezne dostave: queued, held, handed_off, failed, cancelled, expired. handed_off pomeni predajo strežniku, ne prejema. Ponovitev obdela le neobdelane prejemnike. Agregat naj vrne število po stanju; ne skriva delnih napak.
+Stanja posamezne dostave: queued, held, handed_off, failed, cancelled, expired. handed_off pomeni predajo strežniku, ne prejema. Ponovitev obdela le neobdelane prejemnike. Agregat naj vrne število po stanju; ne skriva delnih napak. Vsaka postavka ima `reason_code` (ali null): QUIET_HOURS, DELIVERY_WINDOW_EXPIRED, NOT_ALLOWED (odvzem med čakanjem zadrži dostavo, C06), NO_CONTACT, TRANSLATION_MISSING, NO_LONGER_REQUIRED, CHECK_UNAVAILABLE, HANDOFF_UNCERTAIN. Pred predajo M1 za vsako postavko ponovno preveri rok, urnik, upravičenje in kontakt (P0) ter pri opomniku potrebo (M2). Odprte postopke M2 in čakajoče dostave M1 periodično ponovno presodita; interval določi nosilec pred pilotom (C14).
 
-Odgovor 202 sme slediti šele trajnemu zapisu zahteve, potrebnemu za obnovitev po izpadu. Pri negotovem izidu poštne predaje mora potrjena politika določiti, kdaj je ponovitev dopustna, kako se zabeleži negotovost in kaj lahko dokazujemo; logična deduplikacija ne zagotavlja enkratnega fizičnega prejema.
+Odgovor 202 sme slediti šele trajnemu zapisu zahteve in vseh postavk, potrebnemu za obnovitev po izpadu; brez njega 503 in nič delno prevzetega (C11). Pri negotovem izidu poštne predaje M1 postavko zadrži (`held`, `HANDOFF_UNCERTAIN`) in je ne ponovi sam; ponovitev je izrecna ročna odločitev, preklic pa vrne `too_late` (sporočilo je morda že predano) in ponovitev prepreči. Ob izteku postavka preide v `expired` in ohrani razlog negotovosti (C13). Logična deduplikacija ne zagotavlja enkratnega fizičnega prejema.
 
 Rezultat preklica je ločen od stanja: cancelled_now, already_cancelled, too_late ali already_terminal. Pri too_late ostane state=handed_off; pri expired/failed vrnemo already_terminal z dejanskim stanjem. failed je končno stanje po izčrpanju poskusov; začasna napaka ostane queued ali held. Neveljavna/nepooblaščena zahteva vrne običajno napako, ne uspešnega preklica.
 
@@ -121,7 +121,7 @@ POST /m2/api/v1/reminders/check:
 {"needed":false,"reason_code":"NO_LONGER_REQUIRED"}
 ```
 
-M2 preveri identiteto M1, da sklic pripada naročeni zahtevi in prejemniku, ter vrne samo REQUIRED ali NO_LONGER_REQUIRED z ustreznim needed. Ne razkrije privolitve, zavrnitve ali preklica. Napaka ni odgovor »nepotreben«. Že predane e-pošte ni mogoče priklicati; preverjanje ne zagotavlja atomarnosti z odzivom, povezava pa pokaže aktualno stanje.
+`need_ref` je sklic na eno potrebo (oseba, obseg oziroma otrok, vir in različica) in je na postavki dostave (C09). M2 preveri identiteto M1, da sklic pripada prejemniku in obsegu, ter vrne samo REQUIRED ali NO_LONGER_REQUIRED z ustreznim needed; tuj, neznan ali potekel sklic je 404. Ne razkrije privolitve, zavrnitve ali preklica. Napaka ni odgovor »nepotreben«. Že predane e-pošte ni mogoče priklicati; preverjanje ne zagotavlja atomarnosti z odzivom, povezava pa pokaže aktualno stanje.
 
 Vsaka zahteva za opomnik vsebuje najpoznejši dovoljeni čas pošiljanja (polje `expires_at`); šola s skupnim tehničnim nosilcem pred pilotom določi največji čas zadržanja. Brez tega podatka M1 zahtevo zavrne. Po izteku M1 opomnik označi kot potekel in ga ne pošlje, tudi po obnovitvi povezave; razlog je viden skrbniku in klicočemu modulu. Ponovni poskusi ne podaljšujejo veljavnosti. Preverjanje potrebe vrne samo potreben/nepotreben in dogovorjeno kodo razloga, brez vsebine ali podrobnosti odločitve. Napaka oziroma nedosegljivost je ločena od odgovora nepotreben.
 

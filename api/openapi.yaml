@@ -10,6 +10,8 @@ info:
     Splošne napake (predlog): neznana pot API vrne 404, napačna metoda 405, zavrnitev CSRF
     pri sejnem klicu 403, nepričakovana napaka 500 in nedosegljiva evidenca 503; vse z
     vsebino Error (application/json). Omejitve dolžin in števil so predlog D12.
+    Točke A (12. 11. 2026) in B (13. 11. 2026) je sprejel skupni tehnični nosilec; potrditev
+    mentorjev in zamrznitev 1.0.0 sta odprti (docs/projekt/d12-paket-za-odlocitev.md).
 servers:
   - url: http://localhost:8000
 paths:
@@ -90,10 +92,13 @@ paths:
     post:
       summary: Trajni prevzem zahteve za dostavo
       description: >
-        202 šele po zapisu, potrebnem za obnovo. Isti idempotency_key in vsebina vrneta isti
-        rezultat; drugačna vsebina 409. Predlog D12: ponovitev že prevzete zahteve vrne isti
-        prevzem tudi po expires_at (brez nove dostave in brez podaljšanja roka); nova zahteva s
-        pretečenim rokom je 400. Okno hrambe ključa po izteku še ni določeno.
+        202 šele po trajnem zapisu zahteve in vseh postavk (C11); brez njega 503. Isti
+        idempotency_key in vsebina vrneta isti prevzem 30 dni po prevzemu, tudi po expires_at
+        (brez nove dostave in brez podaljšanja roka); nato 409 replay_window_expired. Drugačna
+        vsebina istega ključa je 409 idempotency_conflict. Nova zahteva s pretečenim rokom je 400.
+        Poslovni ključ postavke je (klicatelj, event_key, person_id, scope_ref): nova zahteva,
+        ki ponovi že prevzeto postavko istega dogodka, je 409 duplicate_event in ne prevzame
+        ničesar (C08). Pri kind=reminder ima vsaka postavka need_ref, pri drugih vrstah ne (C09).
       security: [{serviceBearer: []}]
       requestBody:
         required: true
@@ -104,6 +109,7 @@ paths:
         "401": {$ref: "#/components/responses/Error"}
         "403": {$ref: "#/components/responses/Error"}
         "409": {$ref: "#/components/responses/Error"}
+        "503": {$ref: "#/components/responses/Error"}
   /m1/api/v1/delivery-requests/{id}:
     get:
       summary: Stanje lastne zahteve po prejemnikih
@@ -131,7 +137,10 @@ paths:
   /m2/api/v1/reminders/check:
     post:
       summary: Ali je opomnik še potreben (samo REQUIRED ali NO_LONGER_REQUIRED)
-      description: Napaka ali nedosegljivost ni odgovor »nepotreben«. Ne razkrije vsebine odločitve.
+      description: >
+        need_ref je sklic na eno potrebo (oseba, obseg, vir, različica) in mora pripadati
+        recipient_id in scope_ref (C09). Tuj, neznan ali potekel sklic je 404, ne »nepotreben«.
+        Napaka ali nedosegljivost ni odgovor »nepotreben«. Ne razkrije vsebine odločitve.
       security: [{serviceBearer: []}]
       requestBody:
         required: true
@@ -141,6 +150,7 @@ paths:
         "400": {$ref: "#/components/responses/Error"}
         "401": {$ref: "#/components/responses/Error"}
         "403": {$ref: "#/components/responses/Error"}
+        "404": {$ref: "#/components/responses/Error"}
 components:
   securitySchemes:
     sessionCookie: {type: apiKey, in: cookie, name: sessionid}
@@ -271,10 +281,15 @@ components:
       else: {not: {anyOf: [{required: [email]}, {required: [locale]}]}, properties: {reason_code: {const: NO_CONTACT}}}
     DeliveryRequest:
       type: object
-      required: [idempotency_key, kind, audience_ref, recipients, template_id, locale, params, target, expires_at]
+      required: [idempotency_key, event_key, kind, audience_ref, recipients, template_id, params, target, expires_at]
       additionalProperties: false
       properties:
         idempotency_key: {$ref: "#/components/schemas/Id"}
+        event_key:
+          $ref: "#/components/schemas/Id"
+          description: >
+            Poslovni ključ dogodka (vir, različica, vrsta, zaporedna številka opomnika), npr.
+            form-demo-01:v1:reminder:2. Naslednji načrtovani opomnik ima novo številko (C08).
         audience_ref: {$ref: "#/components/schemas/Id"}
         kind: {type: string, enum: [notification, reminder, receipt, change_notice]}
         recipients:
@@ -291,8 +306,17 @@ components:
             properties:
               person_id: {$ref: "#/components/schemas/Id"}
               scope_ref: {$ref: "#/components/schemas/Id"}
+              need_ref:
+                $ref: "#/components/schemas/Id"
+                description: Obvezen pri kind=reminder in samo pri njem; ena potreba (C09).
+              locale:
+                type: string
+                minLength: 2
+                maxLength: 16
+                description: >
+                  Izrecna preglasitev jezika za to postavko. Privzeto jezik prejemnika iz P0;
+                  ni skupne vrednosti za vse prejemnike (C03).
         template_id: {$ref: "#/components/schemas/Id"}
-        locale: {type: string, minLength: 2, maxLength: 16}
         params: {type: object, maxProperties: 50}
         target:
           type: object
@@ -301,11 +325,19 @@ components:
           properties:
             module: {type: string, enum: [M1, M2]}
             resource_id: {$ref: "#/components/schemas/Id"}
-        need_ref: {$ref: "#/components/schemas/Id"}
         expires_at: {type: string, format: date-time, maxLength: 64}
     RecipientState:
       type: string
       enum: [queued, held, handed_off, failed, cancelled, expired]
+    ReasonCode:
+      description: >
+        Razlog stanja postavke (C06, C09, C10, C13, C03): QUIET_HOURS (čaka na dovoljeni čas),
+        DELIVERY_WINDOW_EXPIRED (pred iztekom ni bilo dovoljenega časa), NOT_ALLOWED (odvzeto ali
+        nedovoljeno ob obdelavi; zadržano), NO_CONTACT (papirna pot), TRANSLATION_MISSING (brez
+        tihe zamenjave jezika), NO_LONGER_REQUIRED (M2), CHECK_UNAVAILABLE (preverjanje ni uspelo),
+        HANDOFF_UNCERTAIN (negotova poštna predaja; ponovitev samo z ročno odločitvijo).
+      type: [string, "null"]
+      enum: [QUIET_HOURS, DELIVERY_WINDOW_EXPIRED, NOT_ALLOWED, NO_CONTACT, TRANSLATION_MISSING, NO_LONGER_REQUIRED, CHECK_UNAVAILABLE, HANDOFF_UNCERTAIN, null]
     DeliveryStatus:
       type: object
       required: [delivery_request_id, state, recipients, counts]
@@ -316,12 +348,13 @@ components:
           type: array
           items:
             type: object
-            required: [item_id, person_id, scope_ref, state]
+            required: [item_id, person_id, scope_ref, state, reason_code]
             properties:
               item_id: {$ref: "#/components/schemas/Id"}
               person_id: {$ref: "#/components/schemas/Id"}
               scope_ref: {$ref: "#/components/schemas/Id"}
               state: {$ref: "#/components/schemas/RecipientState"}
+              reason_code: {$ref: "#/components/schemas/ReasonCode"}
         counts:
           type: object
           additionalProperties: {type: integer}

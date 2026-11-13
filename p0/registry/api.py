@@ -276,10 +276,10 @@ def delivery_contact_resolve(request, client):
     body = json_body(request)
     if not valid_request("ContactRequest", body):
         return error(400, "invalid_request")
-    member = delivery_binding(body["audience_ref"], body["recipient_id"], body["scope_ref"])
-    if member is None:
+    outcome = delivery_contact(body["audience_ref"], body["recipient_id"], body["scope_ref"])
+    if outcome is None:
         return error(403, "scope_not_allowed")
-    return _resolve_contact(member)
+    return JsonResponse(outcome)
 
 
 def delivery_binding(audience_ref, recipient_id, scope_ref, at=None):
@@ -300,22 +300,27 @@ def delivery_binding(audience_ref, recipient_id, scope_ref, at=None):
     )
 
 
-def _resolve_contact(member):
-    """Kontakt za člana posnetka, če ima aktualno upravičenje za namen posnetka."""
+def delivery_contact(audience_ref, recipient_id, scope_ref, at=None):
+    """Odgovor ContactResponse ali None, če kontakt ni dovoljen (enak 403 za vse razloge).
+
+    Kontakt samo za člana neizteklega posnetka z veljavnim sklicem in aktualnim upravičenjem
+    za namen posnetka (D12, C07). Isto pravilo uporablja nadomestek M1 ob obdelavi (C06).
+    """
+    at = at or timezone.now()
+    member = delivery_binding(audience_ref, recipient_id, scope_ref, at)
+    if member is None:
+        return None
     person, snapshot = member.person, member.snapshot
-    now = timezone.now()
     ref = m.ScopeRef.objects.filter(ref=member.scope_ref, person=person).first()
-    if ref is None or (ref.expires_at is not None and ref.expires_at <= now):
-        return error(403, "scope_not_allowed")
-    if not authz.check_grant(person, member.scope_key, snapshot.permission, now)[0]:
-        return error(403, "scope_not_allowed")
+    if ref is None or (ref.expires_at is not None and ref.expires_at <= at):
+        return None
+    if not authz.check_grant(person, member.scope_key, snapshot.permission, at)[0]:
+        return None
     if not person.contact_email:
-        return JsonResponse({"deliverable": False, "reason_code": "NO_CONTACT"})
-    return JsonResponse(
-        {
-            "deliverable": True,
-            "reason_code": "OK",
-            "email": person.contact_email,
-            "locale": person.preferred_language,
-        }
-    )
+        return {"deliverable": False, "reason_code": "NO_CONTACT"}
+    return {
+        "deliverable": True,
+        "reason_code": "OK",
+        "email": person.contact_email,
+        "locale": person.preferred_language,
+    }

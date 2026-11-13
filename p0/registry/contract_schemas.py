@@ -40,11 +40,11 @@ REQUESTS = {
         "type": "object",
         "required": [
             "idempotency_key",
+            "event_key",
             "kind",
             "audience_ref",
             "recipients",
             "template_id",
-            "locale",
             "params",
             "target",
             "expires_at",
@@ -52,6 +52,7 @@ REQUESTS = {
         "additionalProperties": False,
         "properties": {
             "idempotency_key": ID,
+            "event_key": ID,
             "audience_ref": ID,
             "kind": {
                 "type": "string",
@@ -65,11 +66,15 @@ REQUESTS = {
                     "type": "object",
                     "required": ["person_id", "scope_ref"],
                     "additionalProperties": False,
-                    "properties": {"person_id": ID, "scope_ref": ID},
+                    "properties": {
+                        "person_id": ID,
+                        "scope_ref": ID,
+                        "need_ref": ID,
+                        "locale": {"type": "string", "minLength": 2, "maxLength": 16},
+                    },
                 },
             },
             "template_id": ID,
-            "locale": {"type": "string", "minLength": 2, "maxLength": 16},
             "params": {"type": "object", "maxProperties": 50},
             "target": {
                 "type": "object",
@@ -80,7 +85,6 @@ REQUESTS = {
                     "resource_id": ID,
                 },
             },
-            "need_ref": ID,
             "expires_at": {"type": "string", "format": "date-time", "maxLength": 64},
         },
     },
