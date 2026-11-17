@@ -127,7 +127,9 @@ Posledice:
 - Pogojni sprejem **sprosti odvisni razvoj A in I**: ekipi M1 in M2 lahko razvijata proti P0 in nadomestkoma po pogodbi `1.0.0`.
 - Ne sprosti uporabe na šoli, resničnih podatkov ali produkcijskega pilota. Zanje veljajo D04, D07, D09/D14 (drugi skrbnik) in točka 9.
 - Ne spremeni D08: koda dijakov gre v `main` šele po urejeni izjavi in oznaki `avtor-urejen`.
-- Znane omejitve iz [zapisa o odpravi tretjega pregleda](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md#preostale-naloge-in-odločitve) so sprejete kot znane. Pravilo »Zascita main« trenutno ne zahteva zelenih preverb CI.
+- Znane omejitve iz [zapisa o odpravi tretjega pregleda](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md#preostale-naloge-in-odločitve) so sprejete kot znane. Omejitev, da pravilo »Zascita main« ne zahteva preverb CI, je odpravljena 17. 11. 2026 (glej spodaj).
+
+**Obvezne preverbe CI (17. 11. 2026).** Naročnik je v pravilu »Zascita main« vklopil obvezne preverbe `preverjanje`, `zamrznitev-pogodbe`, `notranje-povezave`, `dco` in `avtor`, vse iz GitHub Actions. Veja ne rabi biti posodobljena z `main` pred združitvijo; izjem ni. Pull request se ne da združiti, dokler katera od preverb ni uspešna. `dco` se za samodejne posodobitve (Dependabot) ne izvede, `avtor` jih izrecno spusti.
 - Sprememba P0 po tem sprejemu gre prek pull requesta z odobritvijo naročnika; varnostno pomembna sprememba potrebuje ponoven pregled prizadetega dela.
 
 ## Roki in sledenje

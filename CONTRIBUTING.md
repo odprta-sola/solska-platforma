@@ -4,7 +4,7 @@
 
 Vprašanje ali večji predlog odprite v issueju. Navedite problem, predlagano rešitev in vpliv na uporabnike ali obseg.
 
-Spremembe pripravite v ločeni veji in odprite pull request. Opišite namen in preverjanje. Glavna veja je zaščitena; ne prepisujte njene zgodovine.
+Spremembe pripravite v ločeni veji in odprite pull request. Opišite namen in preverjanje. Glavna veja je zaščitena; ne prepisujte njene zgodovine. Pull request se združi šele, ko so uspešne preverbe `preverjanje`, `zamrznitev-pogodbe`, `notranje-povezave`, `dco` in `avtor`.
 
 Dokumenti imajo status osnutek, za pregled ali potrjeno. Potrjen dokument vsebuje datum in odgovorno osebo. Merge sam ne pomeni odobritve šol.
 
