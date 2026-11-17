@@ -125,4 +125,4 @@ Znane omejitve:
 - **Skrbniški vmesnik:** skrbnik brez osebe v evidenci je v sledi brez imena. Vpogled se zapiše tudi ob zavrnjenem poskusu brisanja.
 - **Manjkajoča sled:** vpogledi v seznam oseb in admin pred PR #69 v sledi manjkajo.
 - **Meja modulov:** imena, sestavljena med izvajanjem, in surovi SQL ostanejo na človeškem pregledu.
-- **Zamrznitev v CI:** preverjanje `zamrznitev-pogodbe` je obvezno le, če pravilo »Zascita main« zahteva preverjanja CI. Trenutno jih ne zahteva.
+- **Zamrznitev v CI:** preverjanje `zamrznitev-pogodbe` je obvezno le, če pravilo »Zascita main« zahteva preverjanja CI. Ob pisanju jih ni zahtevalo; odpravljeno 17. 11. 2026 ([register](../projekt/odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026)).
