@@ -63,7 +63,7 @@ Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnil
 | `POST /audiences/resolve` | seja avtorja (CSRF) | `{class_id, purpose}` → predogled prejemnikov oddelka in shranjen posnetek občinstva `audience_ref` (rok 30 dni, predlog); brez kontaktov; avtor je oseba iz seje |
 | `POST /delivery-contacts/resolve` | servis (M1) | `{recipient_id, scope_ref, audience_ref}` → kontakt samo za prejemnika iz neizteklega posnetka, z aktualnim upravičenjem za namen posnetka; sicer enak 403 |
 
-`scope_ref` je neprosojen sklic, ki ga izda P0 za par (oseba, obseg); tuj ali ugiban sklic vrne `NOT_ALLOWED`. Šifrant dovoljenj: `m1.confirm`, `m2.decide`.
+`scope_ref` je neprosojen sklic, ki ga izda P0 za par (oseba, obseg); tuj ali ugiban sklic vrne `NOT_ALLOWED`. Šifrant dovoljenj v pogodbi: `m1.confirm`, `m2.decide`; v evidenci in uvozu CSV sta shranjeni notranji kodi `acknowledge` in `decide` (preslikava `PERMISSION_CODES` v `registry/authz.py`).
 
 Zahteve se preverijo proti shemam pogodbe (`registry/contract_schemas.py`, enakost s `api/openapi.yaml` preveri test): manjkajoče ali dodatno polje, napačen tip ali predolg niz je 400. Napake na poteh API so vedno JSON `{code, message, trace_id}`, tudi 400 in 403, ki jih vrne Django (npr. preveliko telo zahteve): 404 neznana pot, 405 napačna metoda (z `Allow`), 403 `csrf_failed` pri sejnem klicu brez CSRF, 503 nedosegljiva evidenca (nikoli `allowed=false`), 500 brez tehničnih podrobnosti (sled je v dnevniku strežnika `p0.api`).
 
@@ -82,7 +82,7 @@ Nadomestka M1 (`/m1/api/v1/`) in M2 (`/m2/api/v1/`) sta v `p0/stubs/` in se vklo
 
 Moduli M1 in M2 sta aplikaciji `p0/m1` in `p0/m2` (zasloni pod `/m1/`, `/m2/`, API po pogodbi v `api_urls.py`). Klice v P0 in sosednji modul delata samo prek API z `core/api_client.py` (`P0_API_URL`, žetona `M1_SERVICE_TOKEN` in `M2_SERVICE_TOKEN` iz okolja); v testih `core.testing.DjangoClientTransport` pošlje klic skozi Django brez omrežja. Navodila: [docs/razvijalci](docs/razvijalci/README.md).
 
-Pogodba `api/openapi.yaml` je zamrznjena kot `1.0.0` (D12, naročnik 13. 11. 2026). Sprememba datoteke zahteva novo različico v `info.version` in vrstico s kontrolno vsoto SHA-256 v `api/zamrznitve.txt` (`sha256sum api/openapi.yaml`); sicer pade `test_pogodba_je_zamrznjena_razlicica`. Sprememba z vplivom na ekipe potrebuje odobritev naročnika.
+Sprememba `api/openapi.yaml` zahteva novo različico v `info.version` in vrstico s kontrolno vsoto SHA-256 v `api/zamrznitve.txt` (`sha256sum api/openapi.yaml`); sicer pade `test_pogodba_je_zamrznjena_razlicica`. Sprememba z vplivom na ekipe potrebuje odobritev naročnika.
 
 Pogodbeni testi (`registry/tests/test_contract.py`, `test_robni.py`) vsak odgovor, ki gre skozi `ContractBase.call`, preverijo proti operaciji v pogodbi (neznana pot API je napaka; izvzeti sta le pomožni poti nadomestkov in `health`) (`registry/tests/contract_check.py`: status, vsebinski tip, shema s formati, pogojne sheme, `counts`). Odgovori, pridobljeni neposredno z Django odjemalcem, niso samodejno preverjeni. Nadomestka po točkah B dokazujeta tudi trajni zapis pred 202, okno ponovitve, poslovni ključ, ponovno presojo ob obdelavi, osnutek urnika in negotovo predajo (`test_d12_tocke_b.py`); ne dokazujeta prave pošte, praznikov ali razporejevalnika. Scenariji: tuj sklic, servisni klic brez seje, nepooblaščen kontaktni klic, podvojena zahteva in konflikt ključa, delna stanja, ponovljen in selektivni preklic, iztek, odsoten kontakt.
 
@@ -111,7 +111,7 @@ python manage.py import_csv ../data/testni-uvoz --source testni --actor UPORABNI
 - Meje polj izhajajo iz modelov (npr. `display_name` 200 znakov); izvorni ključi imajo največ 64 znakov. Predolgo polje ali napaka razčlenjevalnika je težava predogleda (`too_long`, `bad_csv`).
 - Gesla niso del uvoza. Predogled hrani vrsto zapisa, izvorni ključ, dejanje in imena spremenjenih polj, ne vrednosti; serija hrani vir, števila in opise težav.
 
-Predlog, ki ga mora potrditi D12: datoteka `classes` ni v prvotnem formatu, a oddelki morajo nekje nastati; šifrant dovoljenj je za zdaj `acknowledge`, `decide`; obseg upravičenj je `student:<source_student_key>`. Delni uvoz in popolna uskladitev (zaključki veljavnosti) nista narejena.
+Format uvoza ni del pogodbe `1.0.0` in ostaja predlog ([stanje paketa T](docs/projekt/stanje-prevzema-T.md)): datoteka `classes` ni v prvotnem formatu, a oddelki morajo nekje nastati; dovoljenja v `grants` uporabljajo notranji kodi `acknowledge`, `decide`; obseg upravičenj je `student:<source_student_key>`. Delni uvoz in popolna uskladitev (zaključki veljavnosti) nista narejena.
 
 ## Odvisnosti in slike
 
@@ -133,9 +133,15 @@ python manage.py test
 | Pot | Vsebina |
 | --- | --- |
 | `p0/config/` | Nastavitve in usmerjanje; vse skrivnosti iz okolja |
-| `p0/core/` | Skupne poti API pod `/p0/api/v1/` |
-| `p0/registry/` | Evidenca: osebe, računi, oddelki, povezave, upravičenja, sled sprememb |
-| `docker-compose.yml` | Razvojna zbirka PostgreSQL in prestrezni poštni predal |
+| `p0/core/` | Skupne poti API pod `/p0/api/v1/`, odjemalec API (`api_client.py`), test meja modulov |
+| `p0/registry/` | Evidenca: osebe, računi, oddelki, povezave, upravičenja, sled sprememb, uvoz CSV, zasloni |
+| `p0/stubs/` | Nadomestka M1 in M2 po pogodbi (samo razvoj) |
+| `p0/m1/`, `p0/m2/` | Ogrodji pravih modulov ([navodila ekipam](docs/razvijalci/README.md)) |
+| `p0/templates/` | Predloge prijave in zaslonov evidence |
+| `api/` | Pogodba `openapi.yaml` in zapis zamrznitev |
+| `data/testni-uvoz/` | Izmišljeni primer uvoza CSV |
+| `scripts/` | Preverjanje povezav v dokumentaciji in zamrznitve pogodbe (CI) |
+| `docker-compose.yml` | Razvojno okolje: aplikacija `p0`, zbirka PostgreSQL `db`, prestrezni poštni predal `mail`, urno čiščenje `cleanup` |
 
 ## Prispevek
 

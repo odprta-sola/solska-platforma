@@ -8,13 +8,13 @@ Projekt nastaja iz pobude za preprostejšo komunikacijo med šolo in starši ter
 
 Začnite s [predstavitvijo za mentorja in šolo](docs/mentorji/predstavitev-projekta.md). P0 zagotavlja prijavo in pravice, M1 obvestila ter izrecno seznanitev, M2 odločitve po namenih. Možnost obveščanja učencev in dijakov je predlog za šolsko in mentorsko presojo.
 
-[Razvojno naročilo](docs/projekt/razvojno-narocilo-P0-M1-M2.md) določa obseg in faze, [kratka tehnična specifikacija](docs/arhitektura/kratka-specifikacija-P0-M1-M2.md) pa model, poti API in 20 skupin prihodnjih preizkusov. [Kazalo](docs/README.md) loči delovno dokumentacijo od podrobnega podpornega gradiva in arhiva.
+[Razvojno naročilo](docs/projekt/razvojno-narocilo-P0-M1-M2.md) določa obseg in faze, [kratka tehnična specifikacija](docs/arhitektura/kratka-specifikacija-P0-M1-M2.md) pa model, poti API in 20 skupin preizkusov. Za zagon in razvoj glejte [DEVELOPER.md](DEVELOPER.md), za trenutno stanje izvedbe [stanje paketa T](docs/projekt/stanje-prevzema-T.md). [Kazalo](docs/README.md) loči delovno dokumentacijo od podrobnega podpornega gradiva in arhiva.
 
-Pobudnik osebno pripravlja skupno osnovo ob pomoči AI; dijaki po dogovoru z mentorjem razvijajo predvsem obvestila in obrazce. Delujoči P0, pogodba OpenAPI in aplikacija še niso izdelani. [Register odločitev](docs/projekt/odlocitve.md) loči sprejete osebne dogovore od preostalih institucionalnih potrditev.
+Pobudnik osebno pripravlja skupno osnovo ob pomoči AI; dijaki po dogovoru z mentorjem razvijajo predvsem obvestila in obrazce. Referenčni P0 (prijava, evidenca, pravice, uvoz CSV), nadomestka M1/M2 in ogrodji modulov so v `main`; pogodba [OpenAPI](api/openapi.yaml) je sprejeta in zamrznjena kot `1.0.0` (D12, 13. november 2026). Prava modula M1 in M2 še nista izdelana, človeški prevzem paketa T ni opravljen. [Register odločitev](docs/projekt/odlocitve.md) loči sprejete osebne dogovore od preostalih institucionalnih potrditev.
 
 ## Trenutno stanje
 
-Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Potekajo priprava dokumentacije, usklajevanje obsega prvega modula in organizacija razvoja. Aplikacija še ni na voljo za produkcijsko uporabo.
+Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo. Skupna osnova P0 je izdelana in po treh krogih pregleda z dvema sistemoma AI popravljena; pregled z AI ni potrjen kot enakovreden človeškemu prevzemu, ki še ni opravljen ([stanje paketa T](docs/projekt/stanje-prevzema-T.md)). Razvoj poteka samo na izmišljenih podatkih. Aplikacija ni na voljo za produkcijsko uporabo.
 
 Dokumentacija v repozitoriju je delovna, razen kadar je izrecno označena kot potrjena. Objava spremembe sama po sebi ne pomeni potrditve sodelujočih šol.
 
@@ -57,11 +57,13 @@ V javne razprave ne vključujte osebnih podatkov učencev, staršev ali zaposlen
 
 ## Naslednji koraki
 
-1. Predstavitev projekta in prva mentorska ter šolska ocena.
-2. Uskladitev učnega obsega, vključno s predlogom računov učencev/dijakov, individualnih izdelkov in virov.
-3. Ločeni dogovori o predaji, skrbništvu, pregledih in varnostnem nadomeščanju; izpolnitev pogojev pred prvo kodo.
-4. Potrditev razvojne pogodbe in priprava ter prevzem skupne osnove.
-5. Razvoj in demonstracije na testnih podatkih. Uporaba na šoli ima ločen prevzem.
+1. Človeški sprejem poročil pregledov in prevzem paketa T, vključno z ročnim pregledom dostopnosti z bralnikom zaslona.
+2. Uskladitev učnega obsega in individualnih izdelkov z mentorji; izjave o pravicah prispevkov dijakov (D08) pred sprejemom dijaške kode.
+3. Razvoj pravih modulov M1 in M2 po pogodbi `1.0.0`, najprej proti nadomestkoma ([navodila ekipam](docs/razvijalci/README.md)).
+4. Drugi skrbnik oziroma namestnik in odzivni roki (D09, D14) pred produkcijskim pilotom.
+5. Demonstracije na testnih podatkih. Uporaba na šoli ima ločen prevzem.
+
+Odprte točke podrobno vodi [stanje paketa T](docs/projekt/stanje-prevzema-T.md), odločitve [register](docs/projekt/odlocitve.md).
 
 CSV ostane osnovna pot uvoza. Vsaka šola ima svojo namestitev in v izvedbenem dogovoru določi skrbnike ter vzdrževanje; centralna večšolska namestitev ni predvidena. Integracija eAsistent, ArnesAAI in SI-PASS so poznejše možnosti, brez potrjenih dostopov ali rokov.
 
