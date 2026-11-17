@@ -1,6 +1,6 @@
 # M2 eSoglasja
 
-Podporno podrobno gradivo. Za prvo branje uporabite [predstavitev](../mentorji/predstavitev-projekta.md) in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Usmeritev 13. oktobra 2026: CSV ostane, vsaka šola ima svojo namestitev; računi učencev in ciljne skupine M1 so predlog za mentorsko/šolsko presojo. Podrobne zahteve niso tiho ukinjene; njihov sprejem in faze sledijo registru ter naročilu.
+Podporno podrobno gradivo. Za prvo branje uporabite [predstavitev](../mentorji/predstavitev-projekta.md) in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Velja [usmeritev 13. oktobra 2026](../projekt/odlocitve.md#usmeritev-pobudnika-13-oktobra-2026). Podrobne zahteve niso tiho ukinjene; njihov sprejem in faze sledijo registru ter naročilu.
 
 Status: osnutek za mentorjev, vsebinski in pravni pregled  
 Datum: 5. oktober 2026  

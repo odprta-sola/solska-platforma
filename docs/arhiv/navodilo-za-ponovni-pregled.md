@@ -1,6 +1,6 @@
 # Navodilo za ponovni neodvisni pregled P0
 
-Status: izvedeno (drugi krog, 12. november 2026); za naslednji krog velja [navodilo za tretji pregled](navodilo-za-tretji-pregled.md). Navodilo je za oba pregledovalca prvega pregleda (Codex/OpenAI in DeepSeek). Besedilo spodaj pobudnik prilepi vsakemu posebej; razlikujeta se le oznaka sistema v imenu veje in poročila. Pregled z AI je osebna odločitev pobudnika ([register](odlocitve.md)); ni potrjen kot enakovreden človeškemu prevzemu.
+Status: izvedeno (drugi krog, 12. november 2026); za naslednji krog velja [navodilo za tretji pregled](navodilo-za-tretji-pregled.md). Navodilo je za oba pregledovalca prvega pregleda (Codex/OpenAI in DeepSeek). Besedilo spodaj pobudnik prilepi vsakemu posebej; razlikujeta se le oznaka sistema v imenu veje in poročila. Pregled z AI je osebna odločitev pobudnika ([register](../projekt/odlocitve.md)); ni potrjen kot enakovreden človeškemu prevzemu.
 
 Opomba o neodvisnosti: kodo faz 0 do 6 je napisal Claude Sonnet 5.5, popravke po prvem pregledu Claude Opus 5.5 (oba Anthropic) po navodilih pobudnika. Pregledovalca sta v prvem krogu sama poročala ugotovitve, katerih odpravo zdaj preverjata. To mora pregledovalec razkriti v poročilu.
 
@@ -28,8 +28,8 @@ Si neodvisni pregledovalec odprtokodnega projekta »Odprta šola« (šolska plat
 - Svoje poročilo prvega kroga in poročilo drugega pregledovalca: `docs/pregledi/2026-11-prvi-pregled-P0-openai.md`, `…-deepseek.md`
 - [Zapis o odpravi](../pregledi/2026-11-odprava-prvega-pregleda-P0.md): kaj avtor popravkov trdi, da je odpravljeno, delno ali odprto
 - Objavljeni varnostni nasveti S-01 do S-04: https://github.com/odprta-sola/solska-platforma/security/advisories
-- [Kontrolni seznam](pregled-P0-kontrolni-seznam.md), [stanje T](stanje-prevzema-T.md), [register odločitev](odlocitve.md) (odločitve pobudnika 12. 11. 2026)
-- [Pregled dostopnosti](pregled-dostopnosti-P0.md), [odvisnosti in licence](odvisnosti-in-licence.md)
+- [Kontrolni seznam](../projekt/pregled-P0-kontrolni-seznam.md), [stanje T](../projekt/stanje-prevzema-T.md), [register odločitev](../projekt/odlocitve.md) (odločitve pobudnika 12. 11. 2026)
+- [Pregled dostopnosti](../projekt/pregled-dostopnosti-P0.md), [odvisnosti in licence](../projekt/odvisnosti-in-licence.md)
 - `DEVELOPER.md`, `SECURITY.md`, `api/openapi.yaml`
 
 ### Zagon
@@ -53,7 +53,7 @@ Kot v kontrolnem seznamu: `docker compose up --build -d`, `seed_test_data` z las
 3. **Testi.** Ali novi testi (`test_varovala.py`, `test_robni.py`, `test_zasloni.py`, `test_dostopnost.py`, `contract_check.py`) res padejo, če popravek odstraniš? Izberi vsaj tri popravke, jih začasno razveljavi v lastni kopiji in zapiši rezultat. Iščemo lažno zelene teste.
 4. **Devet točk in dvajset skupin.** Ponovno oceni vseh 9 točk kontrolnega seznama in 20 skupin preizkusov kratke specifikacije (pokrit / delno / nepokrit / ni v obsegu T). Primerjaj z oceno v zapisu o odpravi in pojasni vsako razliko.
 5. **Dostopnost (točka 9).** Ponovi, kar lahko preveriš brez bralnika zaslona (struktura, oznake, fokus, napake, širina 320 px). Ročni pregled z bralnikom zaslona opravi človek; ne trdi, da je izveden.
-6. **Odvisnosti.** Ponovi `pip-audit` za vse tri zaklepe in, če lahko, skeniranje slike. Primerjaj z zapisom v [odvisnostih in licencah](odvisnosti-in-licence.md).
+6. **Odvisnosti.** Ponovi `pip-audit` za vse tri zaklepe in, če lahko, skeniranje slike. Primerjaj z zapisom v [odvisnostih in licencah](../projekt/odvisnosti-in-licence.md).
 7. **Dokumentacija.** Trditve, ki jih koda ali izvedeni ukazi ne podpirajo.
 
 ### Poročilo
@@ -76,6 +76,6 @@ Commit s sporočilom `docs: ponovni neodvisni pregled P0 (<sistem>)`, pull reque
 
 ## Po pregledu (pobudnik)
 
-1. Poročili prebere človek in zabeleži sprejem ali zavrnitev v [registru](odlocitve.md).
+1. Poročili prebere človek in zabeleži sprejem ali zavrnitev v [registru](../projekt/odlocitve.md).
 2. Nove zasebne ugotovitve se obravnavajo po [SECURITY.md](../../SECURITY.md).
 3. Sprejem prevzema T ostaja odločitev pobudnika; poleg pregleda so pogoji še ročni pregled dostopnosti (točka 9), točka 8 in potrditev D12.
