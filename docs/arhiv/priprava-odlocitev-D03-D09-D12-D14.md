@@ -5,13 +5,13 @@ Datum pregleda: 9. oktober 2026
 Status: priprava odločitev z izvedbenim zapisom potrjenih osebnih sprejemov in dogovorov; institucionalne potrditve, dejanski dostopi ter preostala merila ostajajo odprti
 Preverjeni GitHub `main`: `28598e22f52799c9ec964ce8af3c8e4006d11d94`
 
-Dokument pripravi izvedljive odločitve in dokazila. Merodajna ostajata [register](odlocitve.md) in [načrt priprave P0/T](priprava-referencnega-P0.md). Združitev tega predloga ne izpolni nobenega predkodnega pogoja. Izvedbeni zapis in statusi v tabelah ločijo osebno potrjene dogovore od preostalih predlogov. Predlagana pravila in številke zahtevajo izrecno potrditev.
+Dokument pripravi izvedljive odločitve in dokazila. Merodajna ostajata [register](../projekt/odlocitve.md) in [načrt priprave P0/T](../projekt/priprava-referencnega-P0.md). Združitev tega predloga ne izpolni nobenega predkodnega pogoja. Izvedbeni zapis in statusi v tabelah ločijo osebno potrjene dogovore od preostalih predlogov. Predlagana pravila in številke zahtevajo izrecno potrditev.
 
 ## Trenutni vrstni red po usmeritvi 13. oktobra 2026
 
 Ta daljši zapis je podporna sled priprave. Za prvi pogovor uporabimo [predstavitev](../mentorji/predstavitev-projekta.md) in [spremni sporočili](../mentorji/prvi-pogovor.md), nato naročilo in [kratko specifikacijo](../arhitektura/kratka-specifikacija-P0-M1-M2.md). Mentorjeve ocene ne združimo s pozivom za prevzem skrbništva ali varnostnega nadomeščanja. Ti vlogi se dogovorita ločeno po predstavitvi, pred prvo kodo.
 
-Spodnji podatki o Admin povabilu opisujejo stanje 9. oktobra, ne današnjega. Pri dodatnem preverjanju 13. oktobra ob 21.21 Europe/Ljubljana je preverjanje računa alexlandich vrnilo permission=read; sprejem povabila in dostop do prihodnjih zasebnih prijav s tem nista potrjena. Pravice s to dokumentacijsko posodobitvijo niso dodeljene. Mitjevi osebni dogovori ostanejo, Aleksandarjevi še niso sprejeti. Formalne statuse določa [register](odlocitve.md).
+Spodnji podatki o Admin povabilu opisujejo stanje 9. oktobra, ne današnjega. Pri dodatnem preverjanju 13. oktobra ob 21.21 Europe/Ljubljana je preverjanje računa alexlandich vrnilo permission=read; sprejem povabila in dostop do prihodnjih zasebnih prijav s tem nista potrjena. Pravice s to dokumentacijsko posodobitvijo niso dodeljene. Mitjevi osebni dogovori ostanejo, Aleksandarjevi še niso sprejeti. Formalne statuse določa [register](../projekt/odlocitve.md).
 
 Predlog lokalnih učnih prototipov brez D03/D09/D14 ni sprejet. Neodvisni človeški prevzem T pred A/I ostaja do formalno potrjene spremembe merila. Daljši predlogi spodaj niso tiha izjema od teh pogojev.
 
@@ -143,7 +143,7 @@ Mitja je 9. oktobra 2026 izrecno osebno prevzel pripravo in predajo referenčneg
 
 ### Predlog spremembe prevzema T: Mitja ob pomoči AI
 
-9. oktobra 2026 je Mitja določil, da želi pregled in prevzem T opraviti osebno ob pomoči AI; Aleksandar za pregledovalca T ni predlagan. Osebna izbira izvajalca je potrjena. Sedanji [načrt P0/T na main](priprava-referencnega-P0.md#človeški-prevzem) zahteva človeka, ki ni izdelal prevzemane kode, in neodvisen človeški pregled avtorizacije, obsegov, kontaktnega klica ter CSV uvoza. Zato je sprememba merila formalnega prevzema še predlog za potrditev sodelujočih zavodov in mentorjev.
+9. oktobra 2026 je Mitja določil, da želi pregled in prevzem T opraviti osebno ob pomoči AI; Aleksandar za pregledovalca T ni predlagan. Osebna izbira izvajalca je potrjena. Sedanji [načrt P0/T na main](../projekt/priprava-referencnega-P0.md#človeški-prevzem) zahteva človeka, ki ni izdelal prevzemane kode, in neodvisen človeški pregled avtorizacije, obsegov, kontaktnega klica ter CSV uvoza. Zato je sprememba merila formalnega prevzema še predlog za potrditev sodelujočih zavodov in mentorjev.
 
 Predlagano nadomestno merilo: Mitja osebno izvede celoten človeški prevzem ob pomoči AI, vključno s samostojno svežo namestitvijo, pregledom izvorne kode in vsemi devetimi scenariji sedanjega načrta. Pregled avtorja in AI se evidentira pod tema nazivoma; ne označi se kot neodvisen človeški pregled.
 
@@ -187,7 +187,7 @@ Za vsak gradnik se v dogovoru vpiše dejanski nosilec, način ravnanja ob odsotn
 | Pregledovalec T in njegov termin | Mitja želi osebni pregled ob pomoči AI; sprememba neodvisnega človeškega merila in termin še nista potrjena |
 | Predaja ob odhodu | Potrjen seznam dokumentacije, verzij, pravic in zasebne predaje potrebnih skrivnosti |
 
-Pred prvo kodo se evidentira tudi način osebnega, nekomercialnega izvajanja pobudnika iz [načrta P0](priprava-referencnega-P0.md#projektni-pogoji-in-sled-izvora): obseg, izvor kode, uporaba AI, avtorstvo in odsotnost avtomatične zaveze podjetja. Pravice ostanejo za D08; ta zapis jih ne razreši.
+Pred prvo kodo se evidentira tudi način osebnega, nekomercialnega izvajanja pobudnika iz [načrta P0](../projekt/priprava-referencnega-P0.md#projektni-pogoji-in-sled-izvora): obseg, izvor kode, uporaba AI, avtorstvo in odsotnost avtomatične zaveze podjetja. Pravice ostanejo za D08; ta zapis jih ne razreši.
 
 ### Tehnični predlog za pregled
 
@@ -211,7 +211,7 @@ Odločitev zavodov vsebuje imenovanje in sprejem mandata, kapaciteto, sprejem za
 
 ## D12: seznam odločitev in nasprotnih primerov
 
-Opomba 13. 11. 2026: D12 je sprejel naročnik (pobudnik); mentorji so izvajalci in tehničnih odločitev ne potrjujejo ([register](odlocitve.md#vloge-naročnik-in-izvajalec-13-novembra-2026)). Spodnje besedilo je ohranjeno kot priprava.
+Opomba 13. 11. 2026: D12 je sprejel naročnik (pobudnik); mentorji so izvajalci in tehničnih odločitev ne potrjujejo ([register](../projekt/odlocitve.md#vloge-naročnik-in-izvajalec-13-novembra-2026)). Spodnje besedilo je ohranjeno kot priprava.
 
 [Pogodba P0–M1–M2](../arhitektura/vmesnik-P0-M1-M2.md) ostaja kanonični osnutek. Naslednja tabela je priprava pregleda, ne sprememba pogodbe. Tehnične odločitve potrdita skupni tehnični nosilec in mentorji; šola dodatno določi poslovna pravila po D05–D07, D11 in D16. Za učne preizkuse se uporabljajo izrecna izmišljena pravila, brez trditve o produkcijski ustreznosti.
 

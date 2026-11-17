@@ -14,8 +14,8 @@ Datum usmeritve: 13. oktober 2026; kazalo usklajeno s stanjem 13. novembra 2026 
 | Zagon, razvojno okolje in struktura kode | [DEVELOPER.md](../DEVELOPER.md) |
 | Razvijalci modulov M1 in M2 | [Navodila](razvijalci/README.md), [ekipa M1](razvijalci/ekipa-M1.md), [ekipa M2](razvijalci/ekipa-M2.md) |
 | Pregled in stanje paketa T | [Stanje prevzema T](projekt/stanje-prevzema-T.md), [kontrolni seznam pregleda](projekt/pregled-P0-kontrolni-seznam.md) in [pregled dostopnosti](projekt/pregled-dostopnosti-P0.md) |
-| Navodilo za prvi pregled z OpenAI in register prispevkov | [Navodilo](projekt/navodilo-za-pregled-OpenAI.md) in [prispevki](projekt/prispevki.md) |
-| Poročila pregledov, odprava in ponovni pregled | [Pregledi](pregledi/), zapisi o odpravi ([prvi](pregledi/2026-11-odprava-prvega-pregleda-P0.md), [ponovni](pregledi/2026-11-odprava-ponovnega-pregleda-P0.md), [tretji](pregledi/2026-11-odprava-tretjega-pregleda-P0.md)), navodili za [ponovni](projekt/navodilo-za-ponovni-pregled.md) in [tretji pregled](projekt/navodilo-za-tretji-pregled.md) |
+| Register prispevkov (avtorstvo, uporaba AI) | [Prispevki](projekt/prispevki.md) |
+| Poročila treh krogov pregleda, navodila in zapisi o odpravi | [Kazalo pregledov](pregledi/README.md) |
 | Prijava ranljivosti in varnostni postopek | [SECURITY.md](../SECURITY.md) |
 | Odvisnosti, slike in licence | [Odvisnosti in licence](projekt/odvisnosti-in-licence.md) |
 | Potrditve in formalni pogoji | [Register odločitev](projekt/odlocitve.md) in [odgovornosti](projekt/odgovornosti.md) |
@@ -25,9 +25,15 @@ Najprej razumemo namen in primere. Mentor oceni primernost, obseg in individualn
 
 Stanje 13. novembra 2026: referenčni P0 je izdelan in pogodba D12 zamrznjena kot `1.0.0`; človeški prevzem paketa T ni opravljen. Trenutno stanje in odprte točke vodi [stanje prevzema T](projekt/stanje-prevzema-T.md).
 
+## Kaj velja ob neskladju
+
+- Za trenutno stanje izvedbe in odprte točke velja [stanje prevzema T](projekt/stanje-prevzema-T.md); drugi dokumenti stanja ne ponavljajo.
+- Za vmesnike velja [OpenAPI `1.0.0`](../api/openapi.yaml), ne povzetki in razlage.
+- Za odločitve velja [register odločitev](projekt/odlocitve.md). Neskladje med podpornim gradivom in delovno ravnjo se razreši v registru in pogodbi pred izvedbo.
+
 ## Podporno gradivo in arhiv
 
-[Arhiv in pravila branja](arhiv/README.md) pojasnita drugi nivo dokumentacije. Daljši opisi [P0](moduli/P0-uporabniki.md), [M1](moduli/M1-eSporocanje.md), [M2](moduli/M2-eSoglasja.md) in [priprava odločitev](projekt/priprava-odlocitev-D03-D09-D12-D14.md) niso obvezno prvo branje.
+[Arhiv in pravila branja](arhiv/README.md) pojasnita drugi nivo dokumentacije. Daljši opisi [P0](moduli/P0-uporabniki.md), [M1](moduli/M1-eSporocanje.md), [M2](moduli/M2-eSoglasja.md) niso obvezno prvo branje. V arhivu so izvedena navodila za tri kroge pregleda in [priprava odločitev D03/D09/D12/D14](arhiv/priprava-odlocitev-D03-D09-D12-D14.md).
 
 | Podporno gradivo | Namen |
 | --- | --- |

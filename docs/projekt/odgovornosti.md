@@ -3,7 +3,7 @@
 Status: osnutek za dogovor; vloge naročnik–izvajalec od 13. 11. 2026 ([register](odlocitve.md#vloge-naročnik-in-izvajalec-13-novembra-2026))  
 Datum: 5. oktober 2026
 
-Po potrditvi pobudnika z dne 5. oktobra 2026 sta se OŠ Vojke Šmuc Izola in GEPŠ Piran odločili za sodelovanje v projektu. Pisna potrditev vodstev v repozitoriju ni evidentirana. Obseg pilota, odgovornosti, viri in pogoji uvedbe se še usklajujejo.
+Stanje sodelovanja šol in njegova dokazila vodi [register odločitev](odlocitve.md#stanje-sodelovanja).
 
 To je predlog razdelitve dela. Ne imenuje odgovornih oseb in ne ustvarja obveznosti šol. Imena, namestnike in razpoložljiv čas se potrdijo v dogovoru sodelujočih.
 

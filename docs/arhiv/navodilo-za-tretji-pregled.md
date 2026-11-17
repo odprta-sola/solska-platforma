@@ -1,6 +1,6 @@
 # Navodilo za tretji neodvisni pregled P0
 
-Status: pripravljeno 13. novembra 2026 za pregled commita `d261ace`. Navodilo je za oba pregledovalca prejšnjih krogov (Codex/OpenAI in DeepSeek). Pobudnik ga prilepi vsakemu posebej; razlikujeta se le v oznaki sistema v imenu veje in poročila. Pregled z AI je osebna odločitev pobudnika ([register](odlocitve.md)) in ni potrjen kot enakovreden človeškemu prevzemu. Prejšnje navodilo: [ponovni pregled](navodilo-za-ponovni-pregled.md).
+Status: pripravljeno 13. novembra 2026 za pregled commita `d261ace`. Navodilo je za oba pregledovalca prejšnjih krogov (Codex/OpenAI in DeepSeek). Pobudnik ga prilepi vsakemu posebej; razlikujeta se le v oznaki sistema v imenu veje in poročila. Pregled z AI je osebna odločitev pobudnika ([register](../projekt/odlocitve.md)) in ni potrjen kot enakovreden človeškemu prevzemu. Prejšnje navodilo: [ponovni pregled](navodilo-za-ponovni-pregled.md).
 
 Opomba o neodvisnosti, ki jo mora pregledovalec razkriti v poročilu:
 - Kodo faz 0 do 6 je napisal Claude Sonnet 5.5, vse poznejše popravke in dopolnitve pa Claude Opus 5.5. Oba sta modela podjetja Anthropic; delala sta po navodilih pobudnika.
@@ -43,9 +43,9 @@ Si neodvisni pregledovalec odprtokodnega projekta »Odprta šola«. To je šolsk
 
 - Poročila obeh prejšnjih krogov in zapisa o odpravi v `docs/pregledi/`.
 - Objavljeni varnostni nasveti: https://github.com/odprta-sola/solska-platforma/security/advisories
-- [Pogodba](../arhitektura/vmesnik-P0-M1-M2.md), [OpenAPI](../../api/openapi.yaml), [paket D12](d12-paket-za-odlocitev.md) (tabela B s stolpcem »Izvedba«).
-- [Register odločitev](odlocitve.md), posebej razdelek »Vloge naročnik in izvajalec«.
-- [Kontrolni seznam](pregled-P0-kontrolni-seznam.md), [stanje T](stanje-prevzema-T.md), [varstvo podatkov](varstvo-podatkov-P0.md), [pregled dostopnosti](pregled-dostopnosti-P0.md), [odvisnosti in licence](odvisnosti-in-licence.md).
+- [Pogodba](../arhitektura/vmesnik-P0-M1-M2.md), [OpenAPI](../../api/openapi.yaml), [paket D12](../projekt/d12-paket-za-odlocitev.md) (tabela B s stolpcem »Izvedba«).
+- [Register odločitev](../projekt/odlocitve.md), posebej razdelek »Vloge naročnik in izvajalec«.
+- [Kontrolni seznam](../projekt/pregled-P0-kontrolni-seznam.md), [stanje T](../projekt/stanje-prevzema-T.md), [varstvo podatkov](../projekt/varstvo-podatkov-P0.md), [pregled dostopnosti](../projekt/pregled-dostopnosti-P0.md), [odvisnosti in licence](../projekt/odvisnosti-in-licence.md).
 - [Navodila za razvijalce](../razvijalci/README.md), `DEVELOPER.md`, `SECURITY.md`.
 
 ### Zagon
@@ -95,11 +95,11 @@ Dodatno izvedi `docker compose build --no-cache p0`, po koncu `docker compose do
 
 7. **Testi.** Ali novi testi res padejo, če popravek odstraniš? Izberi vsaj pet pravil iz točk 2 do 6, jih začasno razveljavi v lastni kopiji in zapiši rezultat. Iščemo lažno zelene teste.
 
-8. **Devet točk in dvajset skupin.** Ponovno oceni vseh 9 točk kontrolnega seznama in 20 skupin preizkusov kratke specifikacije (pokrit / delno / nepokrit / ni v obsegu T). Primerjaj z zapisom o odpravi drugega kroga in s [stanjem T](stanje-prevzema-T.md) ter pojasni vsako razliko.
+8. **Devet točk in dvajset skupin.** Ponovno oceni vseh 9 točk kontrolnega seznama in 20 skupin preizkusov kratke specifikacije (pokrit / delno / nepokrit / ni v obsegu T). Primerjaj z zapisom o odpravi drugega kroga in s [stanjem T](../projekt/stanje-prevzema-T.md) ter pojasni vsako razliko.
 
 9. **Dostopnost (točka 9).** Ponovi, kar lahko preveriš brez bralnika zaslona: strukturo, oznake, fokus, napake in širino 320 px. Vključi novi gumb za izvoz in zaslona `/m1/`, `/m2/`. Ročni pregled z bralnikom zaslona opravi človek, zato ne trdi, da je izveden.
 
-10. **Odvisnosti.** Ponovi `pip-audit` za vse tri zaklepe in, če lahko, skeniranje slike. Primerjaj z [odvisnostmi in licencami](odvisnosti-in-licence.md).
+10. **Odvisnosti.** Ponovi `pip-audit` za vse tri zaklepe in, če lahko, skeniranje slike. Primerjaj z [odvisnostmi in licencami](../projekt/odvisnosti-in-licence.md).
 
 11. **Dokumentacija.** Poišči trditve, ki jih koda ali izvedeni ukazi ne podpirajo, posebej v navodilih za razvijalce in ekipi M1/M2. Po teh navodilih bodo delali dijaki.
 
@@ -123,6 +123,6 @@ Commit naj ima sporočilo `docs: tretji neodvisni pregled P0 (<sistem>)` in podp
 
 ## Po pregledu (pobudnik)
 
-1. Poročili prebere človek in zabeleži sprejem ali zavrnitev v [registru](odlocitve.md).
+1. Poročili prebere človek in zabeleži sprejem ali zavrnitev v [registru](../projekt/odlocitve.md).
 2. Nove zasebne ugotovitve se obravnavajo po [SECURITY.md](../../SECURITY.md).
 3. Sprejem prevzema T ostaja odločitev pobudnika. Poleg pregleda sta pogoja še ročni pregled dostopnosti (točka 9) in točka 8. D12 je sprejet (pogodba `1.0.0`). Za vključitev dijakov veljajo še D09/D14 (pisni sprejem namestnika) in pravni pregled obrazca D08.

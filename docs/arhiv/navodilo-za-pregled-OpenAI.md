@@ -1,6 +1,6 @@
 # Navodilo za prvi neodvisni pregled P0 (OpenAI)
 
-Status: osnutek, 12. november 2026. Navodilo je namenjeno OpenAI sistemu (npr. Codex ali ChatGPT z dostopom do repozitorija in terminala), ki izvede prvi neodvisni pregled paketa T. Spodaj je besedilo, ki ga pobudnik prilepi kot začetno navodilo. Pregled z AI je osebna odločitev pobudnika ([register](odlocitve.md)); ni potrjen kot enakovreden človeškemu prevzemu.
+Status: osnutek, 12. november 2026. Navodilo je namenjeno OpenAI sistemu (npr. Codex ali ChatGPT z dostopom do repozitorija in terminala), ki izvede prvi neodvisni pregled paketa T. Spodaj je besedilo, ki ga pobudnik prilepi kot začetno navodilo. Pregled z AI je osebna odločitev pobudnika ([register](../projekt/odlocitve.md)); ni potrjen kot enakovreden človeškemu prevzemu.
 
 Opomba o neodvisnosti: kodo in navodila faz 0 do 6 je napisal Claude (Anthropic) po navodilih pobudnika. Starejše osnutke dokumentacije je pobudnik pripravil tudi s pomočjo OpenAI. To mora pregledovalec razkriti v poročilu.
 
@@ -36,7 +36,7 @@ Sledi razdelku »Priprava« v kontrolnem seznamu (`docker compose up --build -d`
 
 ### Pregled
 
-1. Izvedi vseh **9 točk** kontrolnega seznama. Pri vsaki: izvedeno / delno / ni izvedeno, ukaz ali korak, rezultat. Točki 8 in 9 sta po [stanju prevzema](stanje-prevzema-T.md) pričakovano neizpolnjeni; potrdi ali ovrzi to s svojim preverjanjem.
+1. Izvedi vseh **9 točk** kontrolnega seznama. Pri vsaki: izvedeno / delno / ni izvedeno, ukaz ali korak, rezultat. Točki 8 in 9 sta po [stanju prevzema](../projekt/stanje-prevzema-T.md) pričakovano neizpolnjeni; potrdi ali ovrzi to s svojim preverjanjem.
 2. **Pregled kode** (točka 6): `p0/registry/authz.py`, `api.py`, `services.py`, `importer.py`, `models.py`, `p0/stubs/*`, `p0/config/settings.py`. Odgovori na vsako vprašanje iz seznama. Posebej preveri: razkrivanje obstoja tujih sklicev (vsebina, koda, čas), ločitev seje in servisnega žetona, CSRF izjeme (`csrf_exempt`), shranjevanje žetonov, vplivanje `DEBUG` in `STUBS` na produkcijo, nastavitve piškotkov in glav, `allauth` ponastavitev gesla pri računih s skupnim e-naslovom, uvoz (reference, pooblastilo, vsebina predogleda ≠ uveljavitve), surove poizvedbe, neomejen vnos.
 3. **Skladnost pogodbe in kode:** ali vsak odgovor kode ustreza `api/openapi.yaml`, ali pogodbeni testi res preverjajo, kar trdijo (iščemo tudi lažno zelene teste).
 4. **Skladnost s specifikacijo:** za vsakega od 20 preizkusov iz kratke specifikacije označi: pokrit / delno / nepokrit / ni v obsegu T.
@@ -69,4 +69,4 @@ V isti veji dodaj vrstico v tabelo `docs/projekt/prispevki.md` po navodilih tam:
 1. Poročilo prebere človek (pobudnik ali mentor) in zabeleži sprejem ali zavrnitev.
 2. Resne zasebne ugotovitve se obravnavajo po [SECURITY.md](../../SECURITY.md).
 3. Ugotovitve se vnesejo kot issue-ji ali popravki; nov pregled po popravkih.
-4. Sprejem prevzema T je odločitev pobudnika v [registru](odlocitve.md); neodvisni pregled je dokaz zanj, ne sam sprejem.
+4. Sprejem prevzema T je odločitev pobudnika v [registru](../projekt/odlocitve.md); neodvisni pregled je dokaz zanj, ne sam sprejem.
