@@ -32,4 +32,4 @@ Spodnje vrstice beležijo odziv na prejšnjo različico. Ne opisujejo trenutnega
 | P6, P7 | Aktivacijska pošta je bila ločena od M1; poznejši načrt P0 določa aktualne pogoje pred kodo in prevzemom. |
 | U1–U9 | Ločeni dodatki in navodilo, oznake primerov, primerjalna tabela, pojmovnik, izvor, ID, vloge, predlagana šola in dopolnjeni testni podatki. |
 
-OpenAPI, testni strežnik in produkcijska rešitev še niso izdelani; dokumentacija tega ne predstavlja kot zaključeno delo.
+Ob pripravi tega navodila (13. oktober 2026) OpenAPI in aplikacija še nista obstajala. Od 13. novembra 2026 sta referenčni P0 in pogodba [OpenAPI `1.0.0`](../../api/openapi.yaml) v repozitoriju ([stanje paketa T](../projekt/stanje-prevzema-T.md)); produkcijska rešitev ni izdelana in človeški prevzem ni opravljen.

@@ -1,7 +1,7 @@
 # Priprava in predaja referenčnega P0
 
 Datum: 9. oktober 2026
-Status: načrt; delujoči P0, OpenAPI, nadomestki in pogodbeni testi še niso izdelani
+Status: načrt z dne 9. oktobra 2026; izvedba je v `main` (P0, OpenAPI `1.0.0`, nadomestka, pogodbeni testi), človeški prevzem T ni opravljen. Dejansko stanje proti temu načrtu: [stanje paketa T](stanje-prevzema-T.md)
 
 Ta načrt podrobneje razdeli [razvojno naročilo](razvojno-narocilo-P0-M1-M2.md). Pobudnik osebno s pomočjo OpenAI in Claude pripravi razvojno osnovo in predlog paketa T. Pomoč AI ne pomeni človeškega tehničnega pregleda. Podjetje pobudnika s tem ni določeno za izvajalca. Pred izdelavo se zabeležijo izvajanje, obseg in način sodelovanja. Nosilec skupnih gradnikov koordinira izvedbo in predajo; prihodnje vzdrževanje se dodeli posebej.
 
