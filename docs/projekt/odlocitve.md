@@ -112,6 +112,24 @@ Pobudnik je kot naročnik 13. 11. 2026 odločil:
 
 Posledica: pogoj »drugi skrbnik oziroma namestnik pred vključitvijo dijakov« (D09/D14) pobudnik nadomesti s **priznanim tveganjem enega skrbnika** za razvojno fazo na izmišljenih podatkih. Ob pobudnikovi odsotnosti zasebne prijave čakajo; roki D14 v tem času ne tečejo zanesljivo. Drugi človeški skrbnik in namestnik sta pogoj **pred produkcijskim pilotom** oziroma pred obdelavo resničnih osebnih podatkov. Pogoja D08 (soglasje za mladoletne avtorje) to ne spremeni.
 
+## Pogojni sprejem paketa T (17. novembra 2026)
+
+Pobudnik Mitja Pirih je kot naročnik 17. 11. 2026 **pogojno sprejel paket T** (referenčni P0 na `main`, koda P0 enaka stanju po odpravi tretjega pregleda). Podlaga so poročila in zapisi o odpravi treh krogov neodvisnega pregleda ([kazalo pregledov](../pregledi/README.md)) ter devet točk iz [načrta](priprava-referencnega-P0.md#človeški-prevzem).
+
+| Točka | Odločitev |
+| --- | --- |
+| 1–5, 7 | Sprejete na podlagi avtomatskih dokazov in ponovitev pregledovalcev |
+| 6 Pregled kode | Sprejeta s trikratnim pregledom z dvema sistemoma AI namesto neodvisnega človeka. To je osebna odločitev naročnika in ni potrjeno kot enakovredno človeškemu pregledu. |
+| 8 Izpad P0 v modulih | Prenesena na prevzem pravih M1 in M2; vsaka ekipa jo dokaže v svojem modulu |
+| 9 Dostopnost | Odprta do ročnega pregleda z bralnikom zaslona (NVDA ali Orca) po [pregledu dostopnosti](pregled-dostopnosti-P0.md); pregledovalec še ni imenovan |
+
+Posledice:
+- Pogojni sprejem **sprosti odvisni razvoj A in I**: ekipi M1 in M2 lahko razvijata proti P0 in nadomestkoma po pogodbi `1.0.0`.
+- Ne sprosti uporabe na šoli, resničnih podatkov ali produkcijskega pilota. Zanje veljajo D04, D07, D09/D14 (drugi skrbnik) in točka 9.
+- Ne spremeni D08: koda dijakov gre v `main` šele po urejeni izjavi in oznaki `avtor-urejen`.
+- Znane omejitve iz [zapisa o odpravi tretjega pregleda](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md#preostale-naloge-in-odločitve) so sprejete kot znane. Pravilo »Zascita main« trenutno ne zahteva zelenih preverb CI.
+- Sprememba P0 po tem sprejemu gre prek pull requesta z odobritvijo naročnika; varnostno pomembna sprememba potrebuje ponoven pregled prizadetega dela.
+
 ## Roki in sledenje
 
 D12 je sprejet (13. 11. 2026). D07, D09 in D10 se zaključijo pred produkcijskim pilotom; drugi skrbnik iz D09 je pogoj pred produkcijskim pilotom ([vloge skrbnikov](#vloge-skrbnikov-13-novembra-2026)). D04–D06 se rešijo pred razvojem odvisnih funkcij, D08 pred sprejemom kode in D15 pred potrditvijo pogojev ponovne uporabe besedil. Koledarske roke in GitHub dodelitve določijo potrjeni nosilci; vloge niso samodejno imenovanja oseb.

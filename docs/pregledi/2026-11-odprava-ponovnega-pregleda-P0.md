@@ -11,7 +11,7 @@ Status: osnutek, 12. november 2026. Ta zapis ne spreminja poročil pregledovalce
 | Javni popravki | PR #53 (uvoz in zasloni), PR #54 (API, format časa, preverjevalnik, testi), ta PR (dokumentacija) |
 | Stanje po združitvi kode | `main` = `898ff1a` |
 | Izvedel | Claude (Anthropic), model Claude Opus 5.5, po navodilih pobudnika |
-| Odgovorni človek | Mitja Pirih; sprejem tega zapisa še ni potrjen |
+| Odgovorni človek | Mitja Pirih; zapis sprejet kot del [pogojnega sprejema T](../projekt/odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026) 17. 11. 2026 |
 
 ## Primerjava poročil
 

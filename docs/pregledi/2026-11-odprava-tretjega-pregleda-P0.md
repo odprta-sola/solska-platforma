@@ -11,7 +11,7 @@ Status: osnutek, 13. november 2026. Ta zapis ne spreminja poročil pregledovalce
 | Javni popravki | PR #69 (sled seznama in admina, zajezitev), #70 (zamrznitev, meja modulov), #71 (vloge skrbnikov), #72 (dokumentacija D12), #73 (izvor uporabniškega klica, vsebina dostave), #74 (sklic, seed, izvoz) |
 | Stanje po združitvi kode | `main` = `1f31aea` (s poročiloma) |
 | Izvedel | Claude (Anthropic), model Claude Opus 5.5, po navodilih pobudnika |
-| Odgovorni človek | Mitja Pirih; sprejem tega zapisa še ni potrjen |
+| Odgovorni človek | Mitja Pirih; zapis sprejet kot del [pogojnega sprejema T](../projekt/odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026) 17. 11. 2026 |
 
 ## Primerjava poročil
 
@@ -119,7 +119,7 @@ Skupaj **5 / 7 / 0 / 8**, enako kot Codex. Skupina 10 je zdaj pokrita tudi pri d
 | Drugi človeški skrbnik in namestnik D14 | pred produkcijskim pilotom ([vloge skrbnikov](../projekt/odlocitve.md#vloge-skrbnikov-13-novembra-2026)) |
 | Razporejevalnik čiščenja, HTTPS/HSTS v produkciji | namestitev (D04) |
 | SBOM, vgrajene knjižnice `psycopg-binary`, pravni pregled licenc | pred prvo distribucijo slike |
-| Človeški sprejem poročil in tega zapisa | pobudnik |
+| Človeški sprejem poročil in tega zapisa | pobudnik; pogojno sprejeto 17. 11. 2026 |
 
 Znane omejitve:
 - **Skrbniški vmesnik:** skrbnik brez osebe v evidenci je v sledi brez imena. Vpogled se zapiše tudi ob zavrnjenem poskusu brisanja.

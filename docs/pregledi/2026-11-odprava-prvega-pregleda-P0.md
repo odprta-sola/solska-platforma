@@ -9,7 +9,7 @@ Status: osnutek, 12. november 2026. Nadaljevanje: [odprava ponovnega pregleda](2
 | Izhodišče | `main` = `e854f60c7f2e9918b09f0b7db0108c6ab8f62b8f` |
 | Popravki | zasebni: `07e421b` (prek nasveta GHSA-8h4f-w469-mr34); javni: PR #41, #42, #43 in ta PR; poročili pregledovalcev: PR #39, #40 |
 | Izvedel | Claude (Anthropic), model Claude Opus 5.5, po navodilih pobudnika |
-| Odgovorni človek | Mitja Pirih; sprejem tega zapisa še ni potrjen |
+| Odgovorni človek | Mitja Pirih; zapis sprejet kot del [pogojnega sprejema T](../projekt/odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026) 17. 11. 2026 |
 | Okolje preverjanja | izolirana PostgreSQL 16 in slika iz `p0/Dockerfile` (Python 3.12, Django 5.2.19, django-allauth 65.22.0); ločeno od okolij pregledovalcev, po koncu odstranjeno |
 
 ## Primerjava poročil
