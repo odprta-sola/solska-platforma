@@ -1,6 +1,6 @@
 # Pregledi P0
 
-Kazalo neodvisnih pregledov referenčnega P0 (paket T). Poročila pregledovalcev so dokaz za navedeni commit in se po objavi ne spreminjajo; popravki so opisani v zapisih o odpravi. Vse tri kroge sta opravila sistema AI (Codex/OpenAI in DeepSeek). Pregled z AI je osebna odločitev pobudnika in ni potrjen kot enakovreden človeškemu prevzemu; človek poročil in zapisov še ni sprejel.
+Kazalo neodvisnih pregledov referenčnega P0 (paket T). Poročila pregledovalcev so dokaz za navedeni commit in se po objavi ne spreminjajo; popravki so opisani v zapisih o odpravi. Vse tri kroge sta opravila sistema AI (Codex/OpenAI in DeepSeek). Pregled z AI je osebna odločitev pobudnika in ni potrjen kot enakovreden človeškemu prevzemu. Naročnik je poročila in zapise 17. 11. 2026 sprejel kot podlago za [pogojni sprejem T](../projekt/odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026).
 
 Trenutno stanje in odprte točke vodi [stanje paketa T](../projekt/stanje-prevzema-T.md). To kazalo ne nadomešča poročil; ob neskladju velja poročilo oziroma zapis o odpravi.
 

@@ -1,6 +1,6 @@
 # Kontrolni seznam za neodvisni pregled P0 (paket T)
 
-Status: osnutek, 12. november 2026. Podlaga je devet točk iz [načrta priprave P0](priprava-referencnega-P0.md#človeški-prevzem). Seznam pregledovalcu olajša delo; ne nadomešča njegove presoje in ne pomeni, da je prevzem opravljen.
+Status: osnutek, 12. november 2026. Podlaga je devet točk iz [načrta priprave P0](priprava-referencnega-P0.md#človeški-prevzem). Seznam pregledovalcu olajša delo; ne nadomešča njegove presoje. Paket T je 17. 11. 2026 pogojno sprejet ([register](odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026)); odprta ostaja točka 9.
 
 ## Kdo pregleduje
 

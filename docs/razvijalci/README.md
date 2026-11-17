@@ -13,7 +13,7 @@ Status: navodila za izvajalce (mentorji in ekipe), 13. november 2026, po pogodbi
 
 | Del | Kje | Opomba |
 | --- | --- | --- |
-| P0: osebe, računi, prijava, povezave, upravičenja | `p0/registry`, `/p0/api/v1/` | Prevzem T še ni opravljen ([stanje](../projekt/stanje-prevzema-T.md)) |
+| P0: osebe, računi, prijava, povezave, upravičenja | `p0/registry`, `/p0/api/v1/` | Pogojno sprejet 17. 11. 2026; točko 8 (izpad P0) dokaže vsaka ekipa v svojem modulu ([register](../projekt/odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026)) |
 | Uvoz CSV in izmišljeni nabor | `data/testni-uvoz`, `seed_test_data` | Samo izmišljeni podatki |
 | Pogodba in sheme | `api/openapi.yaml` | Različica `1.0.0`, zamrznjena (`api/zamrznitve.txt`) |
 | Nadomestka M1 in M2 | `p0/stubs` | Referenca obnašanja po pogodbi; ne pošiljata pošte, stanje v bazi; obdelavo sproži `_stub/process` |

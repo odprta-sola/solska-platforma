@@ -1,6 +1,6 @@
 # Stanje paketa T (referenčni P0)
 
-Datum: 13. november 2026. Status: pregled dejanskega stanja proti [načrtu priprave P0](priprava-referencnega-P0.md) po tretjem neodvisnem pregledu. Izvedba faz 0 do 6 je v `main` (PR #31 do #38), popravki treh krogov pregleda pa v PR #39 do #74. Vse tri preglede sta opravila druga sistema AI, Codex (OpenAI) in DeepSeek; zadnja odprava je v [zapisu o odpravi tretjega pregleda](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md). Človek poročil in zapisov še ni sprejel; človeški prevzem ni opravljen.
+Datum: 13. november 2026. Status: pregled dejanskega stanja proti [načrtu priprave P0](priprava-referencnega-P0.md) po tretjem neodvisnem pregledu. Izvedba faz 0 do 6 je v `main` (PR #31 do #38), popravki treh krogov pregleda pa v PR #39 do #74. Vse tri preglede sta opravila druga sistema AI, Codex (OpenAI) in DeepSeek; zadnja odprava je v [zapisu o odpravi tretjega pregleda](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md). **Paket T je pogojno sprejet 17. 11. 2026** ([pogojni sprejem](odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026)): točke 1–5 in 7 sprejete, točka 6 sprejeta s pregledom z AI, točka 8 prenesena na prava M1/M2, točka 9 odprta. Sprejem sprosti razvoj A in I, ne uporabe na šoli.
 
 ## Kaj je narejeno in preizkušeno
 
@@ -16,11 +16,13 @@ Datum: 13. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | API, testni podatki, ponovljiva namestitev | Narejeno; testi so bili izmerjeni na določenem commitu (glej zapis o odpravi), gradnja brez predpomnilnika izvedena (zapisa o odpravi) |
 | Nadomestka M1/M2 in pogodbeni testi | Narejeno po pogodbi D12 `1.0.0` (`api/openapi.yaml`, `p0/stubs`); nadomestka ne dokazujeta vedenjske zamenljivosti (glej spodaj) |
 
-## Kar manjka do prevzema T
+## Kar manjka do celotnega prevzema T
+
+Po pogojnem sprejemu ostajajo odprte vrstice spodaj; za razvoj A in I niso ovira, za uporabo na šoli pa so.
 
 | Vrzel | Posledica |
 | --- | --- |
-| Neodvisni pregled (9 točk, [kontrolni seznam](pregled-P0-kontrolni-seznam.md)) | Prvi, ponovni in tretji pregled z dvema sistemoma AI izvedeni (priporočilo vsakič: ne oziroma pogojno); odprava tretjega pregleda je v [zapisu](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md) (299 testov, 0 preskočenih); človeški sprejem ni izveden |
+| Neodvisni pregled (9 točk, [kontrolni seznam](pregled-P0-kontrolni-seznam.md)) | Prvi, ponovni in tretji pregled z dvema sistemoma AI izvedeni (priporočilo vsakič: ne oziroma pogojno); odprava tretjega pregleda je v [zapisu](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md) (299 testov, 0 preskočenih); poročila in zapise je pogojno sprejel naročnik 17. 11. 2026 |
 | Zasebne varnostne ugotovitve | Ugotovitve vseh treh krogov odpravljene; osem objavljenih varnostnih nasvetov repozitorija |
 | Pogodba proti izvedbi (vhod, napake, formati) | Popravljeno za preizkušene poti; omejitve dolžin in splošne napake so del pogodbe `1.0.0` |
 | Zaklep odvisnosti s hashi, določene slike, popis licenc slike, HSTS/HTTPS | Zaklep, digesti in skeniranje narejeni; popis licenc delen (brez vgrajenih knjižnic psycopg-binary in SBOM); HSTS/HTTPS čaka na namestitev ([odvisnosti in licence](odvisnosti-in-licence.md)) |
@@ -30,7 +32,7 @@ Datum: 13. november 2026. Status: pregled dejanskega stanja proti [načrtu pripr
 | Potrditev strukture `p0/m1`, `p0/m2` in imen dovoljenj | Predlogi, ne odločitve (`django-allauth` potrjen 12. 11. 2026) |
 | Drugi skrbnik/namestnik (D09), namestnik in roki D14 | Priznano tveganje enega skrbnika za razvoj na izmišljenih podatkih; pogoj pred produkcijskim pilotom ([vloge skrbnikov](odlocitve.md#vloge-skrbnikov-13-novembra-2026)) |
 | Pravice prispevkov dijakov (D08), izjave | Pred sprejemom dijaške kode |
-| Imenovanje pregledovalca ter potrditev, da pregled z drugim AI zadošča | Pobudnikova osebna odločitev; formalna enakovrednost človeškemu pregledu ni potrjena |
+| Imenovanje pregledovalca ter potrditev, da pregled z drugim AI zadošča | Naročnik je pregled z AI sprejel za točko 6 (17. 11. 2026); formalna enakovrednost človeškemu pregledu ni potrjena. Pregledovalec z bralnikom zaslona (točka 9) ni imenovan |
 
 ## Pred B (ne za prvi prevzem T)
 
