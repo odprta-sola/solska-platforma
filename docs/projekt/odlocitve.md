@@ -121,16 +121,20 @@ Pobudnik Mitja Pirih je kot naročnik 17. 11. 2026 **pogojno sprejel paket T** (
 | 1–5, 7 | Sprejete na podlagi avtomatskih dokazov in ponovitev pregledovalcev |
 | 6 Pregled kode | Sprejeta s trikratnim pregledom z dvema sistemoma AI namesto neodvisnega človeka. To je osebna odločitev naročnika in ni potrjeno kot enakovredno človeškemu pregledu. |
 | 8 Izpad P0 v modulih | Prenesena na prevzem pravih M1 in M2; vsaka ekipa jo dokaže v svojem modulu |
-| 9 Dostopnost | Odprta do ročnega pregleda z bralnikom zaslona (NVDA ali Orca) po [pregledu dostopnosti](pregled-dostopnosti-P0.md); pregledovalec še ni imenovan |
+| 9 Dostopnost | Zaprta 27. 11. 2026 (glej spodaj). Prej odprta do ročnega pregleda z bralnikom zaslona |
 
 Posledice:
 - Pogojni sprejem **sprosti odvisni razvoj A in I**: ekipi M1 in M2 lahko razvijata proti P0 in nadomestkoma po pogodbi `1.0.0`.
-- Ne sprosti uporabe na šoli, resničnih podatkov ali produkcijskega pilota. Zanje veljajo D04, D07, D09/D14 (drugi skrbnik) in točka 9.
+- Ne sprosti uporabe na šoli, resničnih podatkov ali produkcijskega pilota. Zanje veljajo D04, D07 in D09/D14 (drugi skrbnik).
 - Ne spremeni D08: koda dijakov gre v `main` šele po urejeni izjavi in oznaki `avtor-urejen`.
 - Znane omejitve iz [zapisa o odpravi tretjega pregleda](../pregledi/2026-11-odprava-tretjega-pregleda-P0.md#preostale-naloge-in-odločitve) so sprejete kot znane. Omejitev, da pravilo »Zascita main« ne zahteva preverb CI, je odpravljena 17. 11. 2026 (glej spodaj).
 
 **Obvezne preverbe CI (17. 11. 2026).** Naročnik je v pravilu »Zascita main« vklopil obvezne preverbe `preverjanje`, `zamrznitev-pogodbe`, `notranje-povezave`, `dco` in `avtor`, vse iz GitHub Actions. Veja ne rabi biti posodobljena z `main` pred združitvijo; izjem ni. Pull request se ne da združiti, dokler katera od preverb ni uspešna. `dco` se za samodejne posodobitve (Dependabot) ne izvede, `avtor` jih izrecno spusti.
 - Sprememba P0 po tem sprejemu gre prek pull requesta z odobritvijo naročnika; varnostno pomembna sprememba potrebuje ponoven pregled prizadetega dela.
+
+**Zaprtje točke 9 (27. 11. 2026).** Naročnik je zaprl točko 9 na podlagi ročnega pregleda z bralnikom zaslona Orca 46.1, ki ga je opravila oseba, ki kode ni pisala (ime pri naročniku), na začasnem testnem okolju z izmišljenimi podatki ([rezultat](pregled-dostopnosti-P0.md#rezultat-ročnega-pregleda-27-11-2026)). Vsi koraki 1–9 so uspešni ali odpravljeni, vključno z razumljivostjo pri dejanskem staršu. Najdene napake (odjava na stran 404, oznaka ročnega zavrženja, opis napake glave CSV) so odpravljene v PR #81 in preverjene z avtomatskimi testi; ponovna človeška potrditev popravkov ni izvedena. Zaprtje velja za dogovorjeni obseg zaslonov P0; vsak nov zaslon (M1, M2) dobi lasten pregled dostopnosti ob svojem prevzemu.
+
+Od devetih točk prevzema T s tem ostaja odprta le točka 8, prenesena na prevzem pravih M1 in M2.
 
 ## Roki in sledenje
 
