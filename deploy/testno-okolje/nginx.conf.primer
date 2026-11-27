@@ -1,0 +1,31 @@
+# Primer posrednika HTTPS za testno okolje. Zamenjajte ime strežnika in pot do certifikata.
+# Basic Auth (dodatno geslo pred aplikacijo): htpasswd -c /etc/nginx/odprta-sola-test.htpasswd <ime>
+server {
+    listen 80;
+    listen [::]:80;
+    server_name test-sola.example.invalid;
+    location /.well-known/acme-challenge/ { root /var/www/html; }
+    location / { return 301 https://$host$request_uri; }
+}
+
+server {
+    listen 443 ssl http2;        # nginx >= 1.25: listen 443 ssl; in http2 on;
+    listen [::]:443 ssl http2;
+    server_name test-sola.example.invalid;
+    ssl_certificate     /etc/letsencrypt/live/test-sola.example.invalid/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/test-sola.example.invalid/privkey.pem;
+
+    add_header X-Robots-Tag "noindex, nofollow" always;
+    client_max_body_size 10m;
+
+    auth_basic "Odprta šola – testno okolje";
+    auth_basic_user_file /etc/nginx/odprta-sola-test.htpasswd;
+
+    location / {
+        proxy_pass http://127.0.0.1:8200;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;   # vedno nastavi posrednik, ne odjemalec
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Authorization "";          # geslo Basic Auth ne gre v aplikacijo
+    }
+}

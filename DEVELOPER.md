@@ -67,6 +67,10 @@ Celotna pogodba (P0, M1, M2) je v [api/openapi.yaml](api/openapi.yaml), pojasnil
 
 Zahteve se preverijo proti shemam pogodbe (`registry/contract_schemas.py`, enakost s `api/openapi.yaml` preveri test): manjkajoče ali dodatno polje, napačen tip ali predolg niz je 400. Napake na poteh API so vedno JSON `{code, message, trace_id}`, tudi 400 in 403, ki jih vrne Django (npr. preveliko telo zahteve): 404 neznana pot, 405 napačna metoda (z `Allow`), 403 `csrf_failed` pri sejnem klicu brez CSRF, 503 nedosegljiva evidenca (nikoli `allowed=false`), 500 brez tehničnih podrobnosti (sled je v dnevniku strežnika `p0.api`).
 
+### Testno okolje za oddaljeni pregled
+
+Za pregled na daljavo (npr. dostopnost z bralnikom zaslona) je v [deploy/testno-okolje](deploy/testno-okolje/README.md) produkcijski način za posrednikom HTTPS, samo z izmišljenimi podatki. Nastavitvi `DJANGO_CSRF_TRUSTED_ORIGINS` (seznam izvorov, ločen z vejico) in `DJANGO_BEHIND_HTTPS_PROXY=1` (zaupaj glavi `X-Forwarded-Proto` posrednika) sta namenjeni takšni namestitvi.
+
 ### Servisne identitete in nadomestka M1/M2
 
 Servisni klic uporablja `Authorization: Bearer <žeton>`, nikoli seje. Žeton se hrani zgoščen. Neveljaven žeton je 401 in ne preide na sejo.

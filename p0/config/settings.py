@@ -22,6 +22,11 @@ DEBUG = env("DJANGO_DEBUG", "0") == "1"
 SECRET_KEY = env("DJANGO_SECRET_KEY", "razvoj-ni-za-produkcijo" if DEBUG else None, required=True)
 
 ALLOWED_HOSTS = [h for h in env("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h]
+# Za posrednikom HTTPS (npr. nginx): zunanji izvor za CSRF in shema iz glave posrednika.
+# Glavo X-Forwarded-Proto mora posrednik vedno nastaviti sam (ne prepustiti odjemalcu).
+CSRF_TRUSTED_ORIGINS = [o for o in env("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",") if o]
+if env("DJANGO_BEHIND_HTTPS_PROXY", "0") == "1":
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
     "django.contrib.admin",

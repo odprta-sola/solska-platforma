@@ -1,0 +1,61 @@
+# Testno okolje P0 na izmišljenih podatkih za oddaljeni pregled (npr. dostopnost z bralnikom).
+# Produkcijski način (DJANGO_DEBUG=0, gunicorn, slika brez razvojnih paketov, brez nadomestkov),
+# vezan samo na 127.0.0.1; zunaj ga objavi posrednik HTTPS (primer: nginx.conf.primer).
+# Skrivnosti so v .env ob tej datoteki (ni v repozitoriju; primer: env.primer).
+# Ni produkcijska namestitev za šolo (D04) in ni za resnične podatke.
+name: odprta-sola-test
+
+x-p0-env: &p0-env
+  DJANGO_DEBUG: "0"
+  POSTGRES_HOST: db
+  DJANGO_BEHIND_HTTPS_PROXY: "1"
+  P0_API_URL: http://127.0.0.1:8000  # moduli kličejo P0 znotraj vsebnika
+  EMAIL_HOST: 127.0.0.1  # brez poštnega strežnika: pošta se ne pošilja
+  EMAIL_PORT: "9"
+
+services:
+  db:
+    image: postgres:16@sha256:f9a7b9ebf6f56201f949db745e47bc423c0f0f8294bafe991cc10bf74b029657  # 16.15
+    environment:
+      POSTGRES_DB: p0
+      POSTGRES_USER: p0
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?manjka v .env}
+    volumes: ["dbdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U p0 -d p0"]
+      interval: 3s
+      retries: 20
+    restart: unless-stopped
+
+  p0:
+    build: {context: ../../p0, args: {INSTALL_DEV: "0"}}
+    # Več delavcev: zaslona /m1/ in /m2/ kličeta P0 po HTTP v isti namestitvi.
+    command: sh -c "python manage.py migrate --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --access-logfile -"
+    environment:
+      <<: *p0-env
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?manjka v .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?manjka v .env}
+      DJANGO_ALLOWED_HOSTS: ${PUBLIC_HOST:?manjka v .env},127.0.0.1
+      DJANGO_CSRF_TRUSTED_ORIGINS: https://${PUBLIC_HOST}
+    ports: ["127.0.0.1:${PORT:-8200}:8000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/p0/api/v1/health')"]
+      interval: 5s
+      retries: 40
+    depends_on:
+      db: {condition: service_healthy}
+    restart: unless-stopped
+
+  cleanup:
+    build: {context: ../../p0, args: {INSTALL_DEV: "0"}}
+    command: sh -c "while true; do python manage.py purge_import_uploads; python manage.py purge_audience_snapshots; sleep 3600; done"
+    environment:
+      <<: *p0-env
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?manjka v .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?manjka v .env}
+    depends_on:
+      p0: {condition: service_healthy}
+    restart: unless-stopped
+
+volumes:
+  dbdata:
