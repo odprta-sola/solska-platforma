@@ -16,13 +16,13 @@ django==5.2.19 \
     # via
     #   -r requirements.txt
     #   django-allauth
-django-allauth==65.22.0 \
-    --hash=sha256:5ea1501ff5d3c56bffd4bfbf2e7b88e010960ec1baa7c75b6257d51ca13064b5 \
-    --hash=sha256:cdef61e0e12460d331074072d84702184df4f5a989ad005bec2bd1629efd9b4b
+django-allauth==65.23.0 \
+    --hash=sha256:5e8ca636ef95bd8dc50d715f1f803b79f8121381eb96d243926e0a407c39283c \
+    --hash=sha256:f6459e4497cda2ef2401bc8e88a7519f7fd496e008d2895c216ef3c350260670
     # via -r requirements.txt
-gunicorn==27.0.0 \
-    --hash=sha256:1380f2f520abc3beb9e72cd2e728bd2d08a19b3ff6ac03ebd8da71d1798a4008 \
-    --hash=sha256:88d52e7c60b3af07bc8db431fbb450a94780f2cbe7c420c7cf1891392661c591
+gunicorn==27.0.1 \
+    --hash=sha256:378b26b9a38adcf4592f28828233c1716acc55e833ea06bf48719782efaa0d10 \
+    --hash=sha256:b1514965361c8b7e8107a80aa2a92636878df1ccfac6dd204a676426e04d9e3e
     # via -r requirements.txt
 psycopg==3.3.9 \
     --hash=sha256:87c1d85c3e0e88e811d3c0b3808f947bd967c6faf34af6cd86fd021f77793d6c \

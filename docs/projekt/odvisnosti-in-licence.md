@@ -65,6 +65,8 @@ Ni preverjeno: knjižnice, ki jih prinaša `psycopg-binary` (`psycopg_binary.lib
 
 Paketi Python v produkcijski sliki: 0 zadetkov. Preostala opozorila nimajo popravka v Debianu.
 
+Isti dan v ločenem PR: django-allauth 65.22.0 → 65.23.0, gunicorn 27.0.0 → 27.0.1, ruff 0.17.4 → 0.17.6, PyYAML 6.0.3 → 6.0.4 (izdaje brez varnostnih popravkov; `pip-compile --upgrade-package`, druge različice nespremenjene; `pip-audit` brez zadetkov).
+
 ## Licence
 
 Paketi Python v produkcijski sliki (iz metapodatkov paketov):
@@ -74,12 +76,12 @@ Paketi Python v produkcijski sliki (iz metapodatkov paketov):
 | Django | 5.2.19 | BSD-3-Clause |
 | asgiref | 3.13.0 | BSD-3-Clause |
 | sqlparse | 0.6.1 | BSD-3-Clause |
-| django-allauth | 65.22.0 | MIT |
-| gunicorn | 27.0.0 | MIT |
+| django-allauth | 65.23.0 | MIT |
+| gunicorn | 27.0.1 | MIT |
 | psycopg, psycopg-binary | 3.3.9 | LGPL-3.0-only |
 | typing_extensions | 4.16.0 | PSF-2.0 |
 
-Samo razvoj in CI: ruff 0.17.4, jsonschema 4.26.0, jsonschema-specifications 2025.9.1, referencing 0.37.0, rpds-py 2026.9.1, attrs 26.1.0 (MIT), PyYAML 6.0.3 (MIT), rfc3339-validator 0.1.4 (MIT), six 1.17.0 (MIT); orodje pip 26.3 (MIT).
+Samo razvoj in CI: ruff 0.17.6, jsonschema 4.26.0, jsonschema-specifications 2025.9.1, referencing 0.37.0, rpds-py 2026.9.1, attrs 26.1.0 (MIT), PyYAML 6.0.4 (MIT), rfc3339-validator 0.1.4 (MIT), six 1.17.0 (MIT); orodje pip 26.3 (MIT).
 
 `psycopg-binary` vključuje binarne knjižnice z lastnimi licencami (med njimi PostgreSQL License, Apache-2.0 za OpenSSL 3, MIT za Kerberos, OpenLDAP Public License, licenco Cyrus SASL, LGPL za libcrypt in keyutils); točne različice in besedila niso popisani. Pri distribuciji je treba izpolniti obveznosti LGPL (besedilo licence, dostop do izvora, možnost zamenjave knjižnice).
 
