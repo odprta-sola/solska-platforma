@@ -9,9 +9,8 @@ server {
 }
 
 server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    http2 on;
+    listen 443 ssl http2;        # nginx >= 1.25: listen 443 ssl; in http2 on;
+    listen [::]:443 ssl http2;
     server_name test-sola.example.invalid;
     ssl_certificate     /etc/letsencrypt/live/test-sola.example.invalid/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/test-sola.example.invalid/privkey.pem;
