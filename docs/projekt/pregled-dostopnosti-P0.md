@@ -1,6 +1,6 @@
 # Pregled dostopnosti P0 (točka 9)
 
-Status: 27. november 2026, ročni pregled izveden (rezultat spodaj). Točka 9 [kontrolnega seznama](pregled-P0-kontrolni-seznam.md) ostaja **odprta**, dokler človek ne opravi ročnega pregleda spodaj. Dogovorjeni zasloni za osnovna opravila obstajajo (glej spodaj). Avtomatski preizkusi in pregled HTML ročnega preizkusa ne nadomestijo.
+Status: 27. november 2026, ročni pregled izveden, vsi koraki uspešni ali odpravljeni (rezultat spodaj). Točka 9 [kontrolnega seznama](pregled-P0-kontrolni-seznam.md) je bila odprta do ročnega pregleda spodaj. Dogovorjeni zasloni za osnovna opravila obstajajo (glej spodaj). Avtomatski preizkusi in pregled HTML ročnega preizkusa ne nadomestijo.
 
 ## Kaj je narejeno
 
@@ -66,9 +66,9 @@ Izvedla oseba, ki kode ni pisala (ime pri pobudniku). Okolje: testna namestitev 
 | 6b | uspešno z opombo, odpravljeno | izbira osmih datotek s tipkovnico, predogled, uveljavitev; ročno zavrženje je bilo v zgodovini označeno kot »Zavrnjeno (napake ali konflikti)« (zdaj »Zavrženo na zahtevo uporabnika«); opis napake glave je vseboval kodo `bad_header` in `[]` (zdaj »Manjkajoča polja: …« brez kode) |
 | 7 | uspešno | 200 % in 400 %: brez vodoravnega drsenja strani; pri 400 % in 320 px se tabela predogleda drsi znotraj svoje regije s fokusom (dovoljeno za podatkovne tabele) |
 | 8 | uspešno | najnižji kontrast besedila 4,61 : 1 (namig v polju), obroba polja 8,86 : 1 |
-| 9 | odprto | preizkus razumljivosti z dejanskim staršem ni izveden |
+| 9 | uspešno | starš je razumel, da se prijavi z uporabniškim imenom od šole; pri praznem obrazcu, da mora vnesti ime in geslo; pri napačni prijavi, da je napačen eden ali oba podatka. Najprej bi preveril vnos, za novo geslo bi se obrnil na šolo |
 
-Popravki 6 in 6b so preverjeni z avtomatskimi testi (`test_dostopnost`, `test_zasloni`) in mutacijami; ponovna človeška potrditev ni izvedena. Točka 9 kontrolnega seznama ostaja **odprta** do preizkusa razumljivosti z dejanskim staršem (vrstica 9).
+Vsi koraki ročnega pregleda so izvedeni. Popravki 6 in 6b so preverjeni z avtomatskimi testi (`test_dostopnost`, `test_zasloni`) in mutacijami; ponovna človeška potrditev popravkov ni izvedena. S tem je točka 9 kontrolnega seznama izpolnjena za dogovorjeni obseg zaslonov; zaprtje potrdi naročnik.
 
 ## Obseg zaslonov za T
 
