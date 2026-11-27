@@ -30,10 +30,10 @@ Pri vsaki točki zapišite: izvedeno / ni izvedeno, ugotovitev, ponovljiv ukaz a
 | 5 | Servisni klic za kontakt samo za evidentirano zahtevo in prejemnika; tuj obseg zavrnjen | Kot `staff-01` (seja) `POST /p0/api/v1/audiences/resolve`; s servisnim žetonom `p0.contacts.resolve` kontakt za prejemnika iz posnetka; poskusite tuj ali izmišljen `audience_ref`, tujega prejemnika, potekel posnetek in odvzem po posnetku | `ContactContract`, `AudiencesContract`, `AuthorizationCheckContract.test_servisni_klic_*` |
 | 6 | Neodvisen pregled izvorne kode | Preberite `registry/authz.py`, `registry/api.py`, `registry/services.py`, `registry/importer.py`; vprašanja spodaj | Ni (človeška presoja) |
 | 7 | Po ponastavitvi podatkov pogodbeni testi proti nadomestkoma | `down -v`, ponovna priprava, `test registry.tests.test_contract registry.tests.test_robni` | `test_contract.py`, `test_robni.py`, preverjevalnik `contract_check.py` |
-| 8 | Ob izpadu P0 moduli ne dovolijo zaščitenega dejanja in ne pošljejo na slepo | Za zdaj nepreverljivo: pravi M1/M2 še ne obstajata; nadomestki ne kličejo P0 | Ni |
+| 8 | Ob izpadu P0 moduli ne dovolijo zaščitenega dejanja in ne pošljejo na slepo | Ob prevzemu pravih M1/M2 po pogoju v navodilih ekipama ([M1](../razvijalci/ekipa-M1.md#pogoj-za-sprejem-izpad-p0-točka-8-in-dostopnost), [M2](../razvijalci/ekipa-M2.md#pogoj-za-sprejem-izpad-p0-točka-8-in-dostopnost)): test z `Unavailable` in ročni zagon z nedosegljivim `P0_API_URL` | Za začetni zaslon `HomeTests` v `p0/m1`, `p0/m2`; za dejanja modula ga napiše ekipa |
 | 9 | Prijava in osnovna opravila s tipkovnico, fokus, razumljive napake, bralnik zaslona | Ročno po [pregledu dostopnosti](pregled-dostopnosti-P0.md): prijava, osebe, odvzem, kontakt, uvoz pod `/p0/evidenca/` | `test_dostopnost.py`, `test_zasloni.py` (struktura); ročni pregled z Orco 27. 11. 2026, točka zaprta ([register](odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026)) |
 
-Točke 8 in 9 trenutno ne morejo biti izpolnjene; to je ugotovitev, ne napaka pregledovalca ([stanje](stanje-prevzema-T.md)).
+Točka 9 je zaprta 27. 11. 2026. Točke 8 ni mogoče izpolniti, dokler prava M1 in M2 ne obstajata; to je ugotovitev, ne napaka pregledovalca ([stanje](stanje-prevzema-T.md)).
 
 ## Vprašanja za pregled kode (točka 6)
 

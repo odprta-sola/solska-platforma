@@ -42,6 +42,22 @@ Vsak razrez vključuje svoje teste, dostopnost in navodila.
 
 Mejnik A: učitelj objavi → pravi starš se prijavi → vidi samo svoje → potrdi; druga družina nima dostopa; dostopnost s tipkovnico. Mejnik I: M1 prevzame zahtevo M2 po pogodbi; ob izpadu M1 odločitev M2 ostane, dostava se nadaljuje; dvojna zahteva se ne podvoji. Poleg teh sodijo v pregled specifikacijski preizkusi 11, 12, 17, 18 in 19 iz [kratke specifikacije](../arhitektura/kratka-specifikacija-P0-M1-M2.md).
 
+## Pogoj za sprejem: izpad P0 (točka 8) in dostopnost
+
+Ob prevzemu M1 preverimo, kaj modul naredi, ko P0 ni dosegljiv. Pogoj je enak za vse ekipe in velja poleg mejnikov zgoraj.
+
+**1. Test v kodi modula.** Za vsako zaščiteno dejanje (objavo obvestila, potrditev seznanitve in oddajo dostave) obstaja test, v katerem odjemalec API vrne `Unavailable`. Pričakovano: dejanje je zavrnjeno, uporabnik vidi razumljivo sporočilo (vzorec: `p0/templates/m1/nedosegljivo.html`, odgovor 503), v tabelah modula ni novega zapisa in nobena dostava ni oddana. Zgled je `HomeTests` v `p0/m1/tests/`.
+
+**2. Ročni preizkus ob prevzemu.** Ob tekočem razvojnem okolju zaženite drugi primerek, ki P0 ne doseže (vrata 9 ne poslušajo):
+
+```bash
+docker compose run --rm -e P0_API_URL=http://127.0.0.1:9 -p 127.0.0.1:8001:8000 p0 python manage.py runserver 0.0.0.0:8000
+```
+
+Na `http://localhost:8001/` se prijavite kot učitelj oziroma starš in poskusite objavo obvestila, potrditev seznanitve in oddajo dostave. Pričakovano: odgovor 503 s sporočilom »Storitev trenutno ni na voljo«; število zapisov v tabelah modula pred in po poskusu je enako. Na `http://localhost:8000/` (P0 dosegljiv) isto dejanje uspe.
+
+**3. Dostopnost.** Novi zasloni modula dobijo enake avtomatske preizkuse kot zasloni P0 (`registry/tests/test_dostopnost.py`) in ročni pregled po [pregledu dostopnosti](../projekt/pregled-dostopnosti-P0.md#ročni-pregled-za-človeka) ob prevzemu modula.
+
 ## Odprto (ne rešujte po svoje)
 
 D12 je sprejet (pogodba `1.0.0`): tihi čas (osnutek delavniki 7–20), negotova predaja, okno ključev 30 dni, vir jezika in oznak ter postavke po otrocih so določeni v [pogodbi](../arhitektura/vmesnik-P0-M1-M2.md). Odprti ostajajo prazniki in urnik šole, največje zadržanje in nadomestni jezik (D05); predloge oddajte v issueju.

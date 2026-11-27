@@ -42,6 +42,22 @@ Zahteva za dostavo (pogodba `1.0.0`): `event_key` je poslovni ključ dogodka (np
 
 Mejnik I: odločitev se shrani, zahteva za dostavo gre v M1 po pogodbi; ob izpadu M1 odločitev ostane; dvojna zahteva se ne podvoji; preklic ene od dveh dostav ustavi samo izbranega prejemnika. Mejnik B: več namenov in več odločevalcev, preklic pri zaključenem obrazcu. Poleg teh sodijo v pregled specifikacijski preizkusi 13 do 18 iz [kratke specifikacije](../arhitektura/kratka-specifikacija-P0-M1-M2.md).
 
+## Pogoj za sprejem: izpad P0 (točka 8) in dostopnost
+
+Ob prevzemu M2 preverimo, kaj modul naredi, ko P0 ni dosegljiv. Pogoj je enak za vse ekipe in velja poleg mejnikov zgoraj.
+
+**1. Test v kodi modula.** Za vsako zaščiteno dejanje (objavo obrazca, oddajo odločitve in zahtevo za opomnik) obstaja test, v katerem odjemalec API vrne `Unavailable`. Pričakovano: dejanje je zavrnjeno, uporabnik vidi razumljivo sporočilo (vzorec: `p0/templates/m2/nedosegljivo.html`, odgovor 503), v tabelah modula ni novega zapisa in nobena dostava ni oddana. Zgled je `HomeTests` v `p0/m2/tests/`.
+
+**2. Ročni preizkus ob prevzemu.** Ob tekočem razvojnem okolju zaženite drugi primerek, ki P0 ne doseže (vrata 9 ne poslušajo):
+
+```bash
+docker compose run --rm -e P0_API_URL=http://127.0.0.1:9 -p 127.0.0.1:8001:8000 p0 python manage.py runserver 0.0.0.0:8000
+```
+
+Na `http://localhost:8001/` se prijavite kot učitelj oziroma starš in poskusite objavo obrazca, oddajo odločitve in zahtevo za opomnik. Pričakovano: odgovor 503 s sporočilom »Storitev trenutno ni na voljo«; število zapisov v tabelah modula pred in po poskusu je enako. Na `http://localhost:8000/` (P0 dosegljiv) isto dejanje uspe.
+
+**3. Dostopnost.** Novi zasloni modula dobijo enake avtomatske preizkuse kot zasloni P0 (`registry/tests/test_dostopnost.py`) in ročni pregled po [pregledu dostopnosti](../projekt/pregled-dostopnosti-P0.md#ročni-pregled-za-človeka) ob prevzemu modula.
+
 ## Odprto (ne rešujte po svoje)
 
 Besedilo obrazca in pravila odločanja (D11), polnoletni dijaki (D16), politika opomnikov po odvzemu pravice in interval periodične ponovne presoje odprtih postopkov (C14). Več otrok je več postavk (ena na `scope_ref`), vstop uporabnika je skupna seja P0 (glej [README](README.md#povezava-z-drugimi-deli)). Predlagajte v issueju; šolske in pravne odločitve niso tehnične.
