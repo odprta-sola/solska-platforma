@@ -1,12 +1,13 @@
-# Osnovna slika je pripeta na digest (python 3.12.16, Debian 13). Posodobitev: DEVELOPER.md.
-FROM python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+# Osnovna slika je pripeta na digest (python 3.12.16, Debian 13.8). Posodobitev: DEVELOPER.md.
+FROM python:3.12-slim@sha256:191083cdf6c7bda8c76158983163ead5d5cf7b77cf3033e805bb0f5296f51b4b
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /app
 ARG INSTALL_DEV=0
-# Varnostni popravek Debiana, ki ga pripeta osnovna slika še nima (CVE-2026-76844,
-# CVE-2026-85091, CVE-2026-27171). Ob novejšem digestu osnovne slike ta korak odstranimo.
+# Varnostni popravki Debiana, ki jih pripeta osnovna slika še nima (CVE-2026-124851 v libzstd1,
+# CVE-2026-135901 v passwd/login.defs). Ob novejšem digestu osnovne slike ta korak odstranimo.
 RUN apt-get update \
- && apt-get install -y --no-install-recommends --only-upgrade "zlib1g=1:1.3.dfsg+really1.3.1-1+deb13u1" \
+ && apt-get install -y --no-install-recommends --only-upgrade \
+      "libzstd1=1.5.7+dfsg-1+deb13u1" "passwd=1:4.17.4-2+deb13u1" "login.defs=1:4.17.4-2+deb13u1" \
  && rm -rf /var/lib/apt/lists/*
 COPY requirements-build.lock requirements.lock requirements-dev.lock ./
 # Samo zaklenjene različice s preverjenimi hashi; najprej posodobljen pip iz zaklepa.
