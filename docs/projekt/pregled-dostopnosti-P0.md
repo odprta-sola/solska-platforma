@@ -1,6 +1,6 @@
 # Pregled dostopnosti P0 (točka 9)
 
-Status: osnutek, 12. november 2026. Točka 9 [kontrolnega seznama](pregled-P0-kontrolni-seznam.md) ostaja **odprta**, dokler človek ne opravi ročnega pregleda spodaj. Dogovorjeni zasloni za osnovna opravila obstajajo (glej spodaj). Avtomatski preizkusi in pregled HTML ročnega preizkusa ne nadomestijo.
+Status: 27. november 2026, ročni pregled izveden (rezultat spodaj). Točka 9 [kontrolnega seznama](pregled-P0-kontrolni-seznam.md) ostaja **odprta**, dokler človek ne opravi ročnega pregleda spodaj. Dogovorjeni zasloni za osnovna opravila obstajajo (glej spodaj). Avtomatski preizkusi in pregled HTML ročnega preizkusa ne nadomestijo.
 
 ## Kaj je narejeno
 
@@ -49,6 +49,26 @@ Priprava: `docker compose up --build -d --wait`, `seed_test_data` z lastnim `SEE
 | 7 | Povečava 200 % in 400 % | Vsebina ostane berljiva, brez vodoravnega drsenja pri 320 px širine |
 | 8 | Kontrast | Besedilo in obrobe polj ustrezajo WCAG 2.2 AA |
 | 9 | Razumljivost | Testni uporabnik (npr. starš) razume navodilo in napake |
+
+## Rezultat ročnega pregleda 27. 11. 2026
+
+Izvedla oseba, ki kode ni pisala (ime pri pobudniku). Okolje: testna namestitev v produkcijskem načinu za HTTPS (`deploy/testno-okolje`), izmišljeni podatki. Google Chrome 158.0.8127.88, Ubuntu 24.04.5, Orca 46.1 (preverjen zapis besedila, pripravljenega za govor). Vloge: tajništvo (`staff-03`) in starš (`parent-01`). Ocena se začne na prijavni strani, po dodatnem geslu strežnika.
+
+| # | Rezultat | Opomba |
+| --- | --- | --- |
+| 1 | uspešno | »Preskoči na vsebino« prvi; šest elementov z vidno obrobo fokusa |
+| 2 | delno | Orca zazna naslov, glavno navigacijo in glavno vsebino; jezik `sl` |
+| 3 | uspešno | oznake polj in pomoč pri geslu |
+| 4 | uspešno | fokus na povzetku napak, povezava premakne v polje, napaka pri polju prebrana |
+| 5 | uspešno | isto sporočilo za obstoječe in neobstoječe uporabniško ime |
+| 6 | napaka, odpravljeno | po odjavi angleška stran 404 na `/`; zdaj prijavna stran s »Odjavili ste se.«, `/` vodi na začetno stran |
+| 6a | uspešno | iskanje, podrobnosti, izvoz JSON, popravek kontakta (napaka prebrana), odvzem in sled |
+| 6b | uspešno z opombo, odpravljeno | izbira osmih datotek s tipkovnico, predogled, uveljavitev; ročno zavrženje je bilo v zgodovini označeno kot »Zavrnjeno (napake ali konflikti)« (zdaj »Zavrženo na zahtevo uporabnika«); opis napake glave je vseboval kodo `bad_header` in `[]` (zdaj »Manjkajoča polja: …« brez kode) |
+| 7 | uspešno | 200 % in 400 %: brez vodoravnega drsenja strani; pri 400 % in 320 px se tabela predogleda drsi znotraj svoje regije s fokusom (dovoljeno za podatkovne tabele) |
+| 8 | uspešno | najnižji kontrast besedila 4,61 : 1 (namig v polju), obroba polja 8,86 : 1 |
+| 9 | odprto | preizkus razumljivosti z dejanskim staršem ni izveden |
+
+Popravki 6 in 6b so preverjeni z avtomatskimi testi (`test_dostopnost`, `test_zasloni`) in mutacijami; ponovna človeška potrditev ni izvedena. Točka 9 kontrolnega seznama ostaja **odprta** do preizkusa razumljivosti z dejanskim staršem (vrstica 9).
 
 ## Obseg zaslonov za T
 

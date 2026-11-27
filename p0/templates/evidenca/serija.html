@@ -17,10 +17,10 @@
       <h2 id="napake-naslov">Težave: {{ batch.problems|length }}</h2>
       <div class="tablewrap" role="region" tabindex="0" aria-label="Težave (tabela)"><table>
         <caption class="visually-hidden">Težave po datotekah in vrsticah</caption>
-        <thead><tr><th scope="col">Datoteka</th><th scope="col">Vrstica</th><th scope="col">Koda</th><th scope="col">Opis</th></tr></thead>
+        <thead><tr><th scope="col">Datoteka</th><th scope="col">Vrstica</th><th scope="col">Opis</th></tr></thead>
         <tbody>
           {% for p in batch.problems %}
-            <tr><td>{{ p.file|default:"—" }}</td><td>{{ p.row|default:"—" }}</td><td>{{ p.code }}</td><td>{{ p.message }}</td></tr>
+            <tr><td>{{ p.file|default:"—" }}</td><td>{{ p.row|default:"—" }}</td><td>{{ p.message }}</td></tr>
           {% endfor %}
         </tbody>
       </table></div>

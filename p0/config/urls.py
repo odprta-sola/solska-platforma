@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.http import Http404
 from django.urls import include, path, re_path
+from django.views.generic import RedirectView
 
 
 def closed(request, *args, **kwargs):
@@ -17,6 +18,7 @@ urlpatterns = [
     path("p0/api/v1/", include("core.urls")),
     path("p0/api/v1/", include("registry.urls")),
     path("p0/", include("registry.ui_urls")),
+    path("", RedirectView.as_view(url="/p0/", permanent=False)),  # začetna stran
 ]
 
 # API modula: nadomestek (razvoj in pogodbeni testi, nikoli v produkciji), dokler ga ekipa ne

@@ -117,6 +117,8 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_ADAPTER = "registry.adapters.ClosedAccountAdapter"
 ACCOUNT_LOGOUT_ON_GET = False
 LOGIN_REDIRECT_URL = "/p0/"
+# Po odjavi na prijavo (s sporočilom allauth), ne na korensko pot.
+ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

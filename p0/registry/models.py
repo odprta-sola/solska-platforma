@@ -221,6 +221,7 @@ class ImportBatch(models.Model):
     class Status(models.TextChoices):
         PREVIEWED = "previewed", "Predogled"
         REJECTED = "rejected", "Zavrnjeno (napake ali konflikti)"
+        DISCARDED = "discarded", "Zavrženo na zahtevo uporabnika"
         APPLIED = "applied", "Uveljavljeno"
         FAILED = "failed", "Neuspelo"
 
