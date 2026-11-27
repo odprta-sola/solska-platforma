@@ -57,7 +57,7 @@ Izvedla oseba, ki kode ni pisala (ime pri pobudniku). Okolje: testna namestitev 
 | # | Rezultat | Opomba |
 | --- | --- | --- |
 | 1 | uspešno | »Preskoči na vsebino« prvi; šest elementov z vidno obrobo fokusa |
-| 2 | delno | Orca zazna naslov, glavno navigacijo in glavno vsebino; jezik `sl` |
+| 2 | uspešno | Orca zazna naslov, glavno navigacijo in glavno vsebino; jezik `sl`. Prvotno »delno«, ker je bil preverjen le zapis govora; pri naknadnem poslušanju je bil slovenski izgovor razumljiv (pojasnilo preizkuševalca, 27. 11. 2026) |
 | 3 | uspešno | oznake polj in pomoč pri geslu |
 | 4 | uspešno | fokus na povzetku napak, povezava premakne v polje, napaka pri polju prebrana |
 | 5 | uspešno | isto sporočilo za obstoječe in neobstoječe uporabniško ime |
