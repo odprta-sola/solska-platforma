@@ -17,10 +17,10 @@ Pripete reference:
 
 | Komponenta | Referenca |
 | --- | --- |
-| Osnovna slika P0 | `python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b` (Python 3.12.16, Debian 13.7) |
-| Popravek Debiana v sliki | `zlib1g=1:1.3.dfsg+really1.3.1-1+deb13u1` (dokler ga osnovna slika nima) |
-| PostgreSQL (razvoj, CI) | `postgres:16@sha256:f9a7b9ebf6f56201f949db745e47bc423c0f0f8294bafe991cc10bf74b029657` (16.15) |
-| Mailpit (razvoj) | `axllent/mailpit:v1.33.1@sha256:aef2aacc11f075ec0fb6874275ee4a421e688e11a96ebb296134d1735c7761ce` |
+| Osnovna slika P0 | `python:3.12-slim@sha256:191083cdf6c7bda8c76158983163ead5d5cf7b77cf3033e805bb0f5296f51b4b` (Python 3.12.16, Debian 13.8) |
+| Popravki Debiana v sliki | `libzstd1=1.5.7+dfsg-1+deb13u1`, `passwd` in `login.defs=1:4.17.4-2+deb13u1` (dokler jih osnovna slika nima) |
+| PostgreSQL (razvoj, CI) | `postgres:16@sha256:ce81150802644ddfac1db4da9e63be6f2a3818aa6ee98a7a28838aeea65dc37a` (16.16) |
+| Mailpit (razvoj) | `axllent/mailpit:v1.34.0@sha256:23a2ef85bc50853ab3093645d1d64679afd8887e89da5e48a88940c172591a4e` |
 | GitHub Actions | `p0.yml`: `actions/checkout@11d5960a…` (v4.4.0), `actions/setup-python@a26af69b…` (v5.6.0), Python 3.12.16; `docs-links.yml`: `actions/checkout@d23441a4…` (v6) |
 
 ## Postopek posodobitve
@@ -28,7 +28,7 @@ Pripete reference:
 Najmanj mesečno in ob objavi varnostnega opozorila za uporabljeno komponento; vsaka posodobitev je ločen pull request s pregledom diffa zaklepa.
 
 1. Python: v osnovni sliki zaženite `pip-compile --generate-hashes --strip-extras --no-emit-index-url` za `requirements.txt`, nato `requirements-dev.txt`, in z `--allow-unsafe` za `requirements-build.txt` (ukazi in izhodne datoteke kot v tabeli zgoraj). Posamezen paket: `--upgrade-package IME`.
-2. Slike: `docker pull` oznake, `docker inspect --format '{{index .RepoDigests 0}}'`, zamenjajte digest v `p0/Dockerfile`, `docker-compose.yml` in `.github/workflows/p0.yml`; preverite različice (`python --version`, `postgres --version`, `mailpit version`). Ko nova osnovna slika vsebuje popravljeni `zlib1g`, odstranite korak `apt-get` v Dockerfile.
+2. Slike: `docker pull` oznake, `docker inspect --format '{{index .RepoDigests 0}}'`, zamenjajte digest v `p0/Dockerfile`, `docker-compose.yml` in `.github/workflows/p0.yml`; preverite različice (`python --version`, `postgres --version`, `mailpit version`). Ko nova osnovna slika vsebuje popravljene pakete iz koraka `apt-get` v Dockerfile, ta korak odstranite.
 3. Actions: oznako razrešite v commit (`gh api repos/<repo>/commits/<oznaka>`) in pripnite SHA z oznako v komentarju.
 4. Preverite: gradnja brez predpomnilnika, celotna zbirka testov, `pip-audit` za vse tri zaklepe, Trivy za sliko P0; rezultate zapišite v pull request.
 5. Licence: ob novem ali zamenjanem paketu dopolnite popis spodaj.
@@ -52,6 +52,18 @@ Presoja uporabnosti: preostalih opozoril sistemskih paketov ni mogoče odpraviti
 Razvojna slika (`INSTALL_DEV=1`) obdrži pip 26.3, ki ima vgrajen `pkg_resources` iz setuptools 70.3.0; Trivy zato v njej prijavi tri opozorila setuptools (ponovni pregled DeepSeek). Zadevajo `package_index`, gradnjo sdist in poti v Windows, ki jih `pkg_resources` ne uporablja; produkcijska slika pip nima. Opomba, ne ugotovitev.
 
 Ni preverjeno: knjižnice, ki jih prinaša `psycopg-binary` (`psycopg_binary.libs`: libpq, OpenSSL, Kerberos, OpenLDAP, Cyrus SASL, libcrypt, keyutils, com_err), ker jih Trivy kot nepaketirane datoteke ne prepozna zanesljivo; njihove različice niso popisane.
+
+## Posodobitev 27. 11. 2026
+
+`pip-audit` 2.10.1 za vse tri zaklepe: brez znanih ranljivosti; paketi Python niso spremenjeni (Django 5.2.19 je zadnja izdaja 5.2 LTS). Posodobljene so slike: osnovna `python:3.12-slim` (Debian 13.8; vsebuje popravljeni `zlib1g`, zato je ta korak odstranjen), PostgreSQL 16.16 in Mailpit 1.34.0. Trivy 0.76.2 za produkcijsko sliko P0 (sveža baza, isti dan):
+
+| Slika | Visoke | Srednje | Nizke | Neznane | Skupaj | S popravkom |
+| --- | --- | --- | --- | --- | --- | --- |
+| Prejšnja (`main` pred posodobitvijo) | 54 | 105 | 79 | 15 | 253 | 31 |
+| Nova osnovna slika | 54 | 79 | 77 | 15 | 225 | 3 |
+| Nova + popravki Debiana v Dockerfile | 53 | 79 | 77 | 13 | 222 | 0 |
+
+Paketi Python v produkcijski sliki: 0 zadetkov. Preostala opozorila nimajo popravka v Debianu.
 
 ## Licence
 

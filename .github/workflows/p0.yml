@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 10
     services:
       postgres:
-        image: postgres:16@sha256:f9a7b9ebf6f56201f949db745e47bc423c0f0f8294bafe991cc10bf74b029657  # 16.15
+        image: postgres:16@sha256:ce81150802644ddfac1db4da9e63be6f2a3818aa6ee98a7a28838aeea65dc37a  # 16.16
         env:
           POSTGRES_DB: p0
           POSTGRES_USER: p0
