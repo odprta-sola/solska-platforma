@@ -23,7 +23,7 @@ Datum usmeritve: 13. oktober 2026; kazalo usklajeno s stanjem 13. novembra 2026 
 
 Najprej razumemo namen in primere. Mentor oceni primernost, obseg in individualne izdelke; šola preveri postopke in pravila. Šele nato se z ustreznimi ljudmi dogovorijo izvedba, skrbništvo in varnostno nadomeščanje, pri čemer so formalni pogoji veljali pred prvo kodo. Nov splošni krog AI pregledov dolge priloge ni naslednji korak.
 
-Stanje 17. novembra 2026: referenčni P0 je izdelan in pogodba D12 zamrznjena kot `1.0.0`; paket T je 17. novembra 2026 pogojno sprejet ([register](projekt/odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026)), točka 9 (dostopnost) ostaja odprta. Trenutno stanje in odprte točke vodi [stanje prevzema T](projekt/stanje-prevzema-T.md).
+Stanje 17. novembra 2026: referenčni P0 je izdelan in pogodba D12 zamrznjena kot `1.0.0`; paket T je 17. novembra 2026 pogojno sprejet ([register](projekt/odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026)), točka 9 (dostopnost) je zaprta 27. novembra 2026 po ročnem pregledu z bralnikom zaslona; odprta ostaja le točka 8 (prava M1/M2). Trenutno stanje in odprte točke vodi [stanje prevzema T](projekt/stanje-prevzema-T.md).
 
 ## Kaj velja ob neskladju
 

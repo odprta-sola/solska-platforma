@@ -57,11 +57,10 @@ V javne razprave ne vključujte osebnih podatkov učencev, staršev ali zaposlen
 
 ## Naslednji koraki
 
-1. Ročni pregled dostopnosti z bralnikom zaslona (točka 9 prevzema T); pregledovalec še ni imenovan.
-2. Uskladitev učnega obsega in individualnih izdelkov z mentorji; izjave o pravicah prispevkov dijakov (D08) pred sprejemom dijaške kode.
-3. Razvoj pravih modulov M1 in M2 po pogodbi `1.0.0`, najprej proti nadomestkoma ([navodila ekipam](docs/razvijalci/README.md)).
-4. Drugi skrbnik oziroma namestnik in odzivni roki (D09, D14) pred produkcijskim pilotom.
-5. Demonstracije na testnih podatkih. Uporaba na šoli ima ločen prevzem.
+1. Uskladitev učnega obsega in individualnih izdelkov z mentorji; izjave o pravicah prispevkov dijakov (D08) pred sprejemom dijaške kode.
+2. Razvoj pravih modulov M1 in M2 po pogodbi `1.0.0`, najprej proti nadomestkoma ([navodila ekipam](docs/razvijalci/README.md)).
+3. Drugi skrbnik oziroma namestnik in odzivni roki (D09, D14) pred produkcijskim pilotom.
+4. Demonstracije na testnih podatkih. Uporaba na šoli ima ločen prevzem.
 
 Odprte točke podrobno vodi [stanje paketa T](docs/projekt/stanje-prevzema-T.md), odločitve [register](docs/projekt/odlocitve.md).
 

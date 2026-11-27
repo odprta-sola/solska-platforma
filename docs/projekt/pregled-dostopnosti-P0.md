@@ -68,7 +68,7 @@ Izvedla oseba, ki kode ni pisala (ime pri pobudniku). Okolje: testna namestitev 
 | 8 | uspešno | najnižji kontrast besedila 4,61 : 1 (namig v polju), obroba polja 8,86 : 1 |
 | 9 | uspešno | starš je razumel, da se prijavi z uporabniškim imenom od šole; pri praznem obrazcu, da mora vnesti ime in geslo; pri napačni prijavi, da je napačen eden ali oba podatka. Najprej bi preveril vnos, za novo geslo bi se obrnil na šolo |
 
-Vsi koraki ročnega pregleda so izvedeni. Popravki 6 in 6b so preverjeni z avtomatskimi testi (`test_dostopnost`, `test_zasloni`) in mutacijami; ponovna človeška potrditev popravkov ni izvedena. S tem je točka 9 kontrolnega seznama izpolnjena za dogovorjeni obseg zaslonov; zaprtje potrdi naročnik.
+Vsi koraki ročnega pregleda so izvedeni. Popravki 6 in 6b so preverjeni z avtomatskimi testi (`test_dostopnost`, `test_zasloni`) in mutacijami; ponovna človeška potrditev popravkov ni izvedena. Naročnik je na tej podlagi 27. 11. 2026 zaprl točko 9 kontrolnega seznama za dogovorjeni obseg zaslonov ([register](odlocitve.md#pogojni-sprejem-paketa-t-17-novembra-2026)).
 
 ## Obseg zaslonov za T
 
