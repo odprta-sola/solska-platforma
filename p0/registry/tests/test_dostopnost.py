@@ -111,3 +111,20 @@ class LoginAccessibilityTests(TestCase):
         self.assertEqual(p.all("html")[0].get("lang"), "sl")
         self.assertEqual(len(p.all("main")), 1)
         self.assertEqual(len(p.all("h1")), 1)
+
+    def test_po_odjavi_prijavna_stran_s_potrditvijo(self):
+        # Pregled dostopnosti 27. 11. 2026: po odjavi je bila stran 404 na korenski poti.
+        for username in ("staff-03", "parent-01"):
+            with self.subTest(username=username):
+                self.client.force_login(m.Account.objects.get(username=username))
+                r = self.client.post("/accounts/logout/", follow=True)
+                self.assertEqual(r.redirect_chain[-1][0], "/accounts/login/")
+                self.assertEqual(r.status_code, 200)
+                p = self.page(r)
+                self.assertEqual(p.all("html")[0].get("lang"), "sl")
+                self.assertContains(r, "Odjavili ste se")
+
+    def test_korenska_pot_ni_404(self):
+        r = self.client.get("/", follow=True)
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.redirect_chain[-1][0].split("?")[0], "/accounts/login/")

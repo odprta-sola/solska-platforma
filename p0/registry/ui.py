@@ -344,7 +344,7 @@ def import_discard(request, actor, batch_id):
         batch = get_object_or_404(m.ImportBatch.objects.select_for_update(), pk=batch_id)
         previewed = batch.status == m.ImportBatch.Status.PREVIEWED
         if previewed:
-            batch.status = m.ImportBatch.Status.REJECTED
+            batch.status = m.ImportBatch.Status.DISCARDED
             batch.problems = [
                 {
                     "kind": "error",

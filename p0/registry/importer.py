@@ -183,7 +183,14 @@ def parse_files(files, problems):
                     name,
                     1,
                     "bad_header",
-                    f"Manjkajoča polja: {missing}; neznana polja: {unknown}.",
+                    " ".join(
+                        part
+                        for part in (
+                            f"Manjkajoča polja: {', '.join(missing)}." if missing else "",
+                            f"Neznana polja: {', '.join(unknown)}." if unknown else "",
+                        )
+                        if part
+                    ),
                 )
             )
             continue

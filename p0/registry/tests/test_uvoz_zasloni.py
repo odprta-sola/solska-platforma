@@ -65,7 +65,7 @@ class ScreenErrorTests(ScreenBase):
         f = [SimpleUploadedFile("persons.csv", HEADER + b"x;" + b"x" * 131073 + b";\n")]
         r = self.login().post(f"{BASE}/uvoz/", {"source": "dolg", "files": f}, follow=True)
         self.assertEqual(r.status_code, 200)
-        self.assertContains(r, "too_long")
+        self.assertContains(r, "Polje display_name je daljše od 200.")
         self.assertNotContains(r, "Uveljavi serijo")
 
 

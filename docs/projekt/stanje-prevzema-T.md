@@ -27,12 +27,12 @@ Po pogojnem sprejemu ostajajo odprte vrstice spodaj; za razvoj A in I niso ovira
 | Pogodba proti izvedbi (vhod, napake, formati) | Popravljeno za preizkušene poti; omejitve dolžin in splošne napake so del pogodbe `1.0.0` |
 | Zaklep odvisnosti s hashi, določene slike, popis licenc slike, HSTS/HTTPS | Zaklep, digesti in skeniranje narejeni; popis licenc delen (brez vgrajenih knjižnic psycopg-binary in SBOM); HSTS/HTTPS čaka na namestitev ([odvisnosti in licence](odvisnosti-in-licence.md)) |
 | Točka 8: obnašanje modulov ob izpadu P0 | Delno: ogrodji `p0/m1`, `p0/m2` zavrneta ob nedosegljivosti P0 (503); celota nepreverljiva, dokler pravi M1/M2 ne obstajata |
-| Točka 9: zasloni in dostopnost | Prijava in odjava imata dostopni predlogi z avtomatskimi preizkusi; ročni pregled z bralnikom ni narejen; zasloni za osnovna opravila (obseg sprejet 12. 11. 2026) so narejeni in preizkušeni s tipkovnico, ne z bralnikom ([pregled dostopnosti](pregled-dostopnosti-P0.md)) |
+| Točka 9: zasloni in dostopnost | Ročni pregled z Orco 27. 11. 2026 izveden: vsi koraki uspešni ali odpravljeni (odjava, oznaka zavrženja, opis napake glave), tudi razumljivost z dejanskim staršem; zaprtje točke 9 potrdi naročnik ([pregled dostopnosti](pregled-dostopnosti-P0.md#rezultat-ročnega-pregleda-27-11-2026)) |
 | Potrditev D12 (sheme, šifranti, servisni mehanizem, topologija) | Izpolnjeno: sprejeto 13. 11. 2026, pogodba `1.0.0` zamrznjena; ekipe se vežejo nanjo |
 | Potrditev strukture `p0/m1`, `p0/m2` in imen dovoljenj | Predlogi, ne odločitve (`django-allauth` potrjen 12. 11. 2026) |
 | Drugi skrbnik/namestnik (D09), namestnik in roki D14 | Priznano tveganje enega skrbnika za razvoj na izmišljenih podatkih; pogoj pred produkcijskim pilotom ([vloge skrbnikov](odlocitve.md#vloge-skrbnikov-13-novembra-2026)) |
 | Pravice prispevkov dijakov (D08), izjave | Pred sprejemom dijaške kode |
-| Imenovanje pregledovalca ter potrditev, da pregled z drugim AI zadošča | Naročnik je pregled z AI sprejel za točko 6 (17. 11. 2026); formalna enakovrednost človeškemu pregledu ni potrjena. Pregledovalec z bralnikom zaslona (točka 9) ni imenovan |
+| Imenovanje pregledovalca ter potrditev, da pregled z drugim AI zadošča | Naročnik je pregled z AI sprejel za točko 6 (17. 11. 2026); formalna enakovrednost človeškemu pregledu ni potrjena. Ročni pregled z bralnikom zaslona (točka 9) je opravila oseba, ki jo je določil pobudnik (27. 11. 2026) |
 
 ## Pred B (ne za prvi prevzem T)
 

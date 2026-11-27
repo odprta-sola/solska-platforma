@@ -250,7 +250,11 @@ class ImportScreenTests(ScreenBase):
         batch = self.preview()
         self.client.post(f"{BASE}/uvoz/{batch.pk}/zavrzi/")
         batch.refresh_from_db()
-        self.assertEqual(batch.status, m.ImportBatch.Status.REJECTED)
+        # Ročno zavrženje ni zavrnitev zaradi napak (pregled dostopnosti 27. 11. 2026).
+        self.assertEqual(batch.status, m.ImportBatch.Status.DISCARDED)
+        history = self.client.get(f"{BASE}/uvoz/").content.decode()
+        self.assertIn("Zavrženo na zahtevo uporabnika", history)
+        self.assertNotIn("Zavrnjeno (napake ali konflikti)", history)
         self.assertFalse(batch.uploads.exists())
         self.assertFalse(m.SourceMapping.objects.filter(source="zaslon-test").exists())
 
@@ -259,7 +263,12 @@ class ImportScreenTests(ScreenBase):
         self.assertEqual(batch.status, m.ImportBatch.Status.REJECTED)
         self.assertFalse(batch.uploads.exists())
         r = self.client.get(f"{BASE}/uvoz/{batch.pk}/")
-        self.assertContains(r, "bad_header")
+        # Razumljiv opis brez kode in brez zapisa seznama (pregled dostopnosti 27. 11. 2026).
+        self.assertContains(r, "Manjkajoča polja: source_person_key, display_name.")
+        self.assertContains(r, "Neznana polja: napacna, glava.")
+        self.assertNotContains(r, "bad_header")
+        self.assertNotContains(r, "[]")
+        self.assertNotContains(r, "['")
         self.assertNotContains(r, "Uveljavi serijo")
         p = self.assert_accessible(r)
         self.assertEqual(len([a for t, a in p.tags if a.get("role") == "alert"]), 1)
